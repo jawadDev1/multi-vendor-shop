@@ -31,9 +31,9 @@ export default {
 
       fontSize: {
         heading: [
-          "40px",
+          "50px",
           {
-            lineHeight: "54px",
+            lineHeight: "67px",
 
             fontWeight: "700",
           },
@@ -72,6 +72,20 @@ export default {
           {
             lineHeight: "30px",
             fontWeight: "600",
+          },
+        ],
+        subtitle2: [
+          "18px",
+          {
+            lineHeight: "30px",
+            fontWeight: "400",
+          },
+        ],
+        "subtitle2-sm": [
+          "16px",
+          {
+            lineHeight: "20px",
+            fontWeight: "400",
           },
         ],
         content: [
