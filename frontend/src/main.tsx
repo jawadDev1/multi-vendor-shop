@@ -7,34 +7,17 @@ import HomePage from "./components/ui/pages/Home/index.tsx";
 import LoginPage from "@/components/ui/pages/User/Auth/Login/index.tsx";
 import SignupPage from "@/components/ui/pages/User/Auth/Signup/index.tsx";
 import ActivateAccout from "./components/ui/pages/User/Auth/Activate/index.tsx";
+import { Provider } from "react-redux";
+import { store } from "./app/store.ts";
+import { routes } from "./constants/routes.tsx";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    children: [
-      {
-        index: true,
-        element: <HomePage />,
-      },
-      {
-        path: "/login",
-        element: <LoginPage />,
-      },
-      {
-        path: "/signup",
-        element: <SignupPage />,
-      },
-      {
-        path: "/activate/:token",
-        element: <ActivateAccout />,
-      },
-    ],
-  },
-]);
+
+const router = createBrowserRouter(routes);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </StrictMode>
 );
