@@ -1,0 +1,67 @@
+{
+  "name": "node_typescript_setup",
+  "version": "1.0.0",
+  "type": "module",
+  "imports": {
+    "#*": "./src/*"
+  },
+  "scripts": {
+    "dev": "tsx --watch --env-file .env src/server.ts",
+    "start": "node --env-file .env dist/server.js",
+    "build": "tsc -p tsconfig.build.json`",
+    "test": "vitest",
+    "test:run": "vitest --run",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "eslint",
+      "prettier --check"
+    ],
+    "*.{json,yml,yaml,md}": [
+      "prettier --check"
+    ]
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/nodemailer": "^6.4.17",
+    "bcrypt": "^6.0.0",
+    "body-parser": "^2.2.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.15.2",
+    "nodemailer": "^7.0.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.28.0",
+    "@tsconfig/node22": "^22.0.2",
+    "@types/bcrypt": "^5.0.2",
+    "@types/body-parser": "^1.19.6",
+    "@types/cookie-parser": "^1.4.9",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/node": "^22.15.29",
+    "@vitest/coverage-v8": "^3.2.0",
+    "@vitest/eslint-plugin": "^1.2.1",
+    "eslint": "^9.28.0",
+    "eslint-plugin-perfectionist": "^4.13.0",
+    "prettier": "^3.5.3",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.33.0",
+    "vitest": "^3.2.0"
+  }
+}
