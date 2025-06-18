@@ -10,7 +10,7 @@ import { uploadImageToAppwrite } from "@/utils/uploadFile";
 import { useState } from "react";
 import Spinner from "../../atoms/extra/Spinner";
 import { notifyError, notifySuccess } from "@/utils/toast";
-import { API_URL } from "@/constants/static";
+import { API_URL } from "@/constants/index";
 import ActivateAccountModal from "../../organisms/Modals/ActivateAccoutModal";
 
 const SignupPageTemplate: React.FC = () => {

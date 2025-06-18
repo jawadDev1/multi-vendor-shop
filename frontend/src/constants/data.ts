@@ -1,9 +1,3 @@
-import Cart from "@/components/icons/Cart";
-import RepeatArrow from "@/components/icons/RepeatArrow";
-import SecurePaymentIcon from "@/components/icons/SecurePayment";
-import Trophy from "@/components/icons/Trophy";
-
-
 interface NavItems {
   title: string;
   link: string;
@@ -32,27 +26,45 @@ export const NAV_ITEMS: NavItems[] = [
   },
 ];
 
+export const COMPANY_LINKS = [
+  {
+    title: "About Us",
+    to: "/about-us",
+  },
+  {
+    title: "Careers",
+    to: "/careers",
+  },
+  {
+    title: "Store Locations",
+    to: "/store-locations",
+  },
+  {
+    title: "Our Blog",
+    to: "/blogs",
+  },
+  {
+    title: "Reviews",
+    to: "/reviews",
+  },
+];
 
-export const FEATURES = [
+export const SUPPORT_LINKS = [
   {
-    title: "Free Shipping",
-    subtitle: "From all orders over 100$",
-    icon: Cart,
+    title: "FAQs",
+    to: "/faqs",
   },
   {
-    title: "Daily Surprise Offers",
-    subtitle: "Save upto 25% off",
-    icon: RepeatArrow,
+    title: "Contact Us",
+    to: "/contact-us",
   },
   {
-    title: "Affordable Prices",
-    subtitle: "Get factory direct price",
-    icon: Trophy,
-  },
-  {
-    title: "Secure Payments",
-    subtitle: "100% protected payments",
-    icon: SecurePaymentIcon,
+    title: "Shipping",
+    to: "/shipping",
   },
 
-]
+  {
+    title: "Reviews",
+    to: "/reviews",
+  },
+];

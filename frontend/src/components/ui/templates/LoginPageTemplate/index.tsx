@@ -43,7 +43,9 @@ const LoginPageTemplate: React.FC = () => {
 
     notifySuccess(result?.message);
 
-    // navigate("/");
+    navigate("/");
+
+    window.location.reload();
   };
 
   return (

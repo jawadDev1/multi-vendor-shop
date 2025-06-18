@@ -4,3 +4,12 @@ export interface IAPIUser {
   profile: string;
   verified?: boolean;
 }
+
+export interface IAPIResponse {
+  success: boolean;
+  message: string;
+}
+
+export interface IAPIUserResponse extends IAPIResponse {
+  data: IAPIUser
+}

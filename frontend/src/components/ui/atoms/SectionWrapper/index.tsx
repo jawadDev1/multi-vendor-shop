@@ -4,7 +4,7 @@ import cn from "@/utils/cn";
 
 const SectionWrapper = ({ className, children, ...props }: BaseProps) => {
   return (
-    <section className={cn("max-w-[1200px] mx-auto ", className)} {...props}>
+    <section className={cn("max-w-[1200px] mx-auto w-full ", className)} {...props}>
       {children}
     </section>
   );

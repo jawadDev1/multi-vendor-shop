@@ -27,6 +27,7 @@ export default {
         "tomato-red": "#F64545",
         "steel-gray": "#52525B",
         "ghost-white": "#F7F7F7",
+        "dark-yellow": "#efe909",
       },
 
       fontSize: {
@@ -86,6 +87,34 @@ export default {
           {
             lineHeight: "20px",
             fontWeight: "400",
+          },
+        ],
+        subtitle3: [
+          "14px",
+          {
+            lineHeight: "20px",
+            fontWeight: "400",
+          },
+        ],
+        "subtitle3-sm": [
+          "13px",
+          {
+            lineHeight: "20px",
+            fontWeight: "400",
+          },
+        ],
+        "card-title": [
+          "17px",
+          {
+            lineHeight: "22px",
+            fontWeight: "500",
+          },
+        ],
+        "card-title-sm": [
+          "16px",
+          {
+            lineHeight: "20px",
+            fontWeight: "500",
           },
         ],
         content: [

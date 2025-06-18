@@ -1,9 +1,10 @@
 import type { ICATEGORIES } from "@/constants/static";
-import  { useState } from "react";
+import { useState } from "react";
 import Subtitle2 from "../../atoms/typography/Subtitle2";
 import { IoIosArrowDown } from "react-icons/io";
 import Image from "../../atoms/common/Image";
 import cn from "@/utils/cn";
+import { Link } from "react-router";
 
 interface DropDownMenuProps {
   categories: ICATEGORIES[];
@@ -25,14 +26,17 @@ const DropDownMenu = ({ categories }: DropDownMenuProps) => {
       {isOpen && categories && categories.length > 0 && (
         <div className="z-10 absolute py-3 px-2 top-full space-y-4 left-0 w-full bg-blue-50/50 max-h-48 overflow-y-auto">
           {categories.map((category) => (
-            <div className="flex items-center gap-x-2 cursor-pointer">
+            <Link
+              to={`/products?category=${category.category}`}
+              className="flex items-center gap-x-2 cursor-pointer"
+            >
               <div className="size-7">
                 <Image src={category.image} />
               </div>
               <Subtitle2 className="hover:text-azure-blue">
                 {category.category}
               </Subtitle2>
-            </div>
+            </Link>
           ))}
         </div>
       )}

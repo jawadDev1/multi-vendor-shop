@@ -1,10 +1,10 @@
-import Subtitle2 from "../../atoms/typography/Subtitle2";
-import LinkButton from "../../atoms/buttons/LinkButton";
+import Subtitle2 from "../../../atoms/typography/Subtitle2";
+import LinkButton from "../../../atoms/buttons/LinkButton";
 
 const HeroSection = () => {
   return (
     <div
-      className="relative w-full flex items-center min-h-[70vh] lg:min-h-[80vh] bg-no-repeat bg-cover bg-center"
+      className="relative w-full flex items-center min-h-[70vh] lg:min-h-[87vh] bg-no-repeat bg-cover bg-center"
       style={{ backgroundImage: "url(/images/hero.jpg)" }}
     >
       <div className="max-w-[800px] mx-auto px-5 lg:px-0">

@@ -20,7 +20,7 @@ const userSlice = createSlice({
       })
       .addCase(loadUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload;
+        state.user = action.payload.data;
         state.isAuthenticated = true;
       })
       .addCase(loadUser.rejected, (state, action) => {

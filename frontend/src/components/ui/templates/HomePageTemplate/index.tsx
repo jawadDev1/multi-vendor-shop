@@ -1,29 +1,25 @@
-import { AiOutlineShopping, AiOutlineShoppingCart } from "react-icons/ai";
-import SectionWrapper from "../../atoms/SectionWrapper";
-import HeroSection from "../../organisms/HeroSection";
-import Subtitle from "../../atoms/typography/Subtitle";
-import Content from "../../atoms/typography/Content";
-import { IoMdArrowDropupCircle, IoMdArrowRoundBack, IoMdClock } from "react-icons/io";
-import RepeatArrow from "@/components/icons/RepeatArrow";
-import Cart from "@/components/icons/Cart";
+import BestDealsSection from "../../organisms/home/BestDealsSection";
+import CategoriesSection from "../../organisms/home/CategoriesSection";
+import FeaturedProductsSection from "../../organisms/home/FeaturedProductsSection";
+import FeaturesSection from "../../organisms/home/FeturesSection";
+import HeroSection from "../../organisms/home/HeroSection";
+import PopularEvents from "../../organisms/home/PopularEvents";
 
 const HomePageTemplate = () => {
   return (
-    <>
+    <main className="max-w-[1200px mx-auto bg-gray-50  flex flex-col gap-y-11 lg:gap-y-20">
       <HeroSection />
+      <div className="px-5 lg:px-2 flex flex-col gap-y-11 lg:gap-y-20">
+        <FeaturesSection />
 
-      <SectionWrapper className="mt-7 pb-96">
-        <div className="bg-white rounded-md px-5  py-3 shadow grid grid-cols-2 md:grid-cols-4">
-          <div className="flex gap-x-3">
-            <Cart color="yellow" className={"size-12"} />
-            <div>
-              <Subtitle>Free Shipping</Subtitle>
-              <Content>From all orders over 100$</Content>
-            </div>
-          </div>
-        </div>
-      </SectionWrapper>
-    </>
+        <CategoriesSection />
+
+        <BestDealsSection />
+        <PopularEvents />
+
+        <FeaturedProductsSection />
+      </div>
+    </main>
   );
 };
 

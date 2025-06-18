@@ -1,4 +1,4 @@
-import { API_URL } from "@/constants/static";
+import { API_URL } from "@/constants/index";
 
 export const postApiRequest = async (
   endpoint: string,

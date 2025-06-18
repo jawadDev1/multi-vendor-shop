@@ -1,16 +1,19 @@
-export const API_URL = import.meta.env.VITE_API_URL!;
+import Cart from "@/components/icons/Cart";
+import RepeatArrow from "@/components/icons/RepeatArrow";
+import SecurePaymentIcon from "@/components/icons/SecurePayment";
+import Trophy from "@/components/icons/Trophy";
 
 export interface Product {
-    id: number;
-    title: string;
-    price: number;
-    description: string;
-    category: string;
-    image: string;
-    rating: {
-        rate: number;
-        count: number;
-    };
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+  rating: {
+    rate: number;
+    count: number;
+  };
 }
 
 export const PRODUCTS_DATA: Product[] = [
@@ -282,10 +285,10 @@ export const PRODUCTS_DATA: Product[] = [
   },
 ];
 
-export interface ICATEGORIES{
-    id: number;
-    category: string;
-    image: string;
+export interface ICATEGORIES {
+  id: number;
+  category: string;
+  image: string;
 }
 
 export const CATEGORIES = [
@@ -308,5 +311,134 @@ export const CATEGORIES = [
     id: 4,
     category: "women's clothing",
     image: "https://fakestoreapi.com/img/51Y5NI-I5jL._AC_UX679_.jpg",
+  },
+];
+
+export const FEATURES = [
+  {
+    title: "Free Shipping",
+    subtitle: "From all orders over 100$",
+    Icon: Cart,
+  },
+  {
+    title: "Daily Surprise Offers",
+    subtitle: "Save upto 25% off",
+    Icon: RepeatArrow,
+  },
+  {
+    title: "Affordable Prices",
+    subtitle: "Get factory direct price",
+    Icon: Trophy,
+  },
+  {
+    title: "Secure Payments",
+    subtitle: "100% protected payments",
+    Icon: SecurePaymentIcon,
+  },
+];
+
+/**
+ * Categories
+ *
+ */
+export const HOME_CATEGORIES = [
+  {
+    id: 1,
+    title: "Electronics",
+    image:
+      "https://plus.unsplash.com/premium_photo-1679079456083-9f288e224e96?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    id: 2,
+    title: "Fashion",
+    image:
+      "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZmFzaGlvbnxlbnwwfHwwfHx8MA%3D%3D",
+  },
+  {
+    id: 3,
+    title: "Home & Kitchen",
+    image:
+      "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=640&q=80",
+  },
+  {
+    id: 4,
+    title: "Sports & Outdoors",
+    image:
+      "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=640&q=80",
+  },
+  {
+    id: 5,
+    title: "Health & Beauty",
+    image:
+      "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=640&q=80",
+  },
+  {
+    id: 6,
+    title: "Books & Stationery",
+    image:
+      "https://images.unsplash.com/photo-1516972810927-80185027ca84?auto=format&fit=crop&w=640&q=80",
+  },
+  {
+    id: 7,
+    title: "Toys & Games",
+    image:
+      "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dG95c3xlbnwwfHwwfHx8MA%3D%3D",
+  },
+  {
+    id: 8,
+    title: "Others",
+    image:
+      "https://plus.unsplash.com/premium_photo-1744202819813-245c8a189754?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fGVjb21lcmNlJTIwc3RvcmV8ZW58MHx8MHx8fDA%3D",
+  },
+] as const;
+
+export const FAQS = [
+  {
+    id: 1,
+    question: "What is your return policy?",
+    answer:
+      "We accept returns within 30 days of purchase. The product must be unused and in its original packaging. Shipping fees are non-refundable.",
+  },
+  {
+    id: 2,
+    question: "How long does shipping take?",
+    answer:
+      "Standard shipping typically takes 5–7 business days. Expedited options are available at checkout.",
+  },
+  {
+    id: 3,
+    question: "Do you offer international shipping?",
+    answer:
+      "Yes, we ship worldwide. International shipping times vary depending on the destination country.",
+  },
+  {
+    id: 4,
+    question: "How can I track my order?",
+    answer:
+      "Once your order has shipped, you'll receive a confirmation email with a tracking link to monitor your shipment's progress.",
+  },
+  {
+    id: 5,
+    question: "Can I modify or cancel my order after placing it?",
+    answer:
+      "Orders can be modified or canceled within 1 hour of placing the order. Please contact our support team immediately.",
+  },
+  {
+    id: 6,
+    question: "What payment methods do you accept?",
+    answer:
+      "We accept Visa, MasterCard, American Express, Discover, PayPal, and Apple Pay.",
+  },
+  {
+    id: 7,
+    question: "Is my personal information secure?",
+    answer:
+      "Absolutely. We use industry-standard encryption and security protocols to ensure your data remains safe and confidential.",
+  },
+  {
+    id: 8,
+    question: "Do you offer customer support?",
+    answer:
+      "Yes, our support team is available 24/7 via live chat, email, or phone. We're here to help!",
   },
 ];

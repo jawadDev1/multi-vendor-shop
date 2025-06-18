@@ -1,14 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import axios from "axios";
-import { API_URL } from "@/constants/static";
-import type { IAPIUser } from "@/types/api";
+import { API_URL } from "@/constants/index";
+import type { IAPIUserResponse } from "@/types/api";
 
-export const loadUser = createAsyncThunk<IAPIUser>(
+export const loadUser = createAsyncThunk<IAPIUserResponse>(
   "user/load",
   async (_, thunkAPI) => {
     try {
-      const res = await axios.get<IAPIUser>(`${API_URL}/user/getuser`, {
+      const res = await axios.get<IAPIUserResponse>(`${API_URL}/user/getuser`, {
         withCredentials: true,
       });
 
