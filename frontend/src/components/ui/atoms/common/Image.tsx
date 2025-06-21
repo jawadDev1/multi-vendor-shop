@@ -10,7 +10,7 @@ const Image = ({ className, src, ...props }: ImageProps) => {
   return (
     <img
       src={src}
-      className={cn("w-full h-full object-cover", className)}
+      className={cn("w-full h-full object-fill", className)}
       {...props}
     />
   );

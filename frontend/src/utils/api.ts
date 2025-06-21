@@ -21,3 +21,15 @@ export const postApiRequest = async (
     return { success: false, message: error };
   }
 };
+
+export const getApiRequest = async (endpoint: string) => {
+  try {
+    const res = await fetch(`${API_URL}/${endpoint}`, {
+      credentials: "include",
+    });
+
+    return await res.json();
+  } catch (error) {
+    return { success: false, message: error };
+  }
+};

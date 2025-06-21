@@ -1,4 +1,3 @@
-import React from "react";
 import Subtitle2 from "../../atoms/typography/Subtitle2";
 import { CgChevronDown } from "react-icons/cg";
 import Content from "../../atoms/typography/Content";

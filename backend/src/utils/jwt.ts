@@ -50,8 +50,6 @@ export const sendToken = async (
     httpOnly: true,
   };
 
-  console.log("t =========+> ", token, options)
-
   return res.status(statusCode).cookie("token", token, options).json({
     success: true,
     verified: true,

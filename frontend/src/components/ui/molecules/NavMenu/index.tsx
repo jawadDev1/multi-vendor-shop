@@ -4,11 +4,11 @@ import { Link } from "react-router";
 
 const NavMenu = () => {
   return (
-    <ul className="flex items-center justify-center gap-x-7">
+    <ul className="flex flex-col md:flex-row lg:items-center justify-center gap-7">
       {NAV_ITEMS.map((item) => (
         <li key={item.link}>
           <Link
-            className="text-subtitle2 text-white hover:text-green-400 font-[500]"
+            className="text-subtitle2-sm lg:text-subtitle2 text-primary lg:text-white hover:text-green-400 font-[500]"
             to={item.link}
           >
             {item.title}

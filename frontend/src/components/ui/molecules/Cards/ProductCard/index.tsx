@@ -10,6 +10,7 @@ import GenerateRatingStar from "@/components/ui/atoms/GenerateRatingStars";
 import type { Product } from "@/constants/static";
 import cn from "@/utils/cn";
 import type { HTMLAttributes } from "react";
+import { Link } from "react-router";
 
 type ProductCardProps = {
   product: Product;
@@ -52,7 +53,9 @@ const ProductCard = ({
       </div>
       <div className="mt-3 ">
         <Subtitle3 className="text-blue-400">{category}</Subtitle3>
-        <CardTitle className="line-clamp-2 mt-3 mb-2">{title}</CardTitle>
+        <Link to={`/products/${title}`}>
+          <CardTitle className="line-clamp-2 mt-3 mb-2">{title}</CardTitle>
+        </Link>
 
         <GenerateRatingStar rating={Math.floor(rating.rate)} />
 

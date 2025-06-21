@@ -1,12 +1,16 @@
 import App from "@/App";
+import ProtectedRoute from "@/components/ui/molecules/ProtectedRoute";
 import BestSellingPage from "@/components/ui/pages/BestSellingPage";
 import EventsPage from "@/components/ui/pages/EventsPage";
 import FAQsPage from "@/components/ui/pages/FAQsPage";
 import HomePage from "@/components/ui/pages/Home";
+import ProductDetialPage from "@/components/ui/pages/ProductDetailPage";
 import ProductsPage from "@/components/ui/pages/ProductsPage";
+import ProfilePage from "@/components/ui/pages/ProfilePage";
 import ActivateAccout from "@/components/ui/pages/User/Auth/Activate";
 import LoginPage from "@/components/ui/pages/User/Auth/Login";
 import SignupPage from "@/components/ui/pages/User/Auth/Signup";
+import ProfileLayout from "@/ProfileLayout";
 import type { RouteObject } from "react-router";
 
 export const routes: RouteObject[] = [
@@ -45,6 +49,24 @@ export const routes: RouteObject[] = [
       {
         path: "/faqs",
         element: <FAQsPage />,
+      },
+      {
+        path: "/products/:slug",
+        element: <ProductDetialPage />,
+      },
+    ],
+  },
+  {
+    path: "/profile",
+    element: <ProfileLayout />,
+    children: [
+      {
+        index: true,
+        element: (
+          <ProtectedRoute>
+            <ProfilePage />
+          </ProtectedRoute>
+        ),
       },
     ],
   },

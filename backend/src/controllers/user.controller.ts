@@ -68,8 +68,6 @@ const handleActivate = asyncHandler(
 
       const data = verifyToken(token);
 
-      console.log("dat =====> ", data, token);
-
       const user = await UserModel.findByIdAndUpdate(data.id, {
         verified: true,
       });
@@ -91,8 +89,6 @@ const handleSignin = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const body = req.body;
-
-      console.log("coming =========>")
 
       if (!body?.email || !body.password)
         next(new ErrorHandler("All fields are required", 400));
@@ -155,4 +151,25 @@ const handleGetUser = asyncHandler(
   }
 );
 
-export { handleSignup, handleActivate, handleSignin, handleGetUser };
+const handleLogout = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const options = { expires: new Date(Date.now()), httpOnly: true };
+
+      return res.status(200).cookie("token", null, options).json({
+        success: true,
+        message: "Logout successfully",
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error as string, 500));
+    }
+  }
+);
+
+export {
+  handleSignup,
+  handleActivate,
+  handleSignin,
+  handleGetUser,
+  handleLogout,
+};

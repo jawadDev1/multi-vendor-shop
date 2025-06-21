@@ -1,3 +1,8 @@
+import AddressIcon from "@/components/icons/AddressIcon";
+import RefundIcon from "@/components/icons/RefuncIcon";
+import { CgCreditCard, CgShoppingBag, CgTrack } from "react-icons/cg";
+import { IoIosChatboxes, IoMdPerson } from "react-icons/io";
+
 interface NavItems {
   title: string;
   link: string;
@@ -66,5 +71,43 @@ export const SUPPORT_LINKS = [
   {
     title: "Reviews",
     to: "/reviews",
+  },
+];
+
+export const PROFILE_MENU = [
+  {
+    id: "profile",
+    Icon: IoMdPerson,
+    title: "Profile",
+  },
+  {
+    id: "orders",
+    Icon: CgShoppingBag,
+    title: "Orders",
+  },
+  {
+    id: "refunds",
+    Icon: RefundIcon,
+    title: "Refunds",
+  },
+  {
+    id: "inbox",
+    Icon: IoIosChatboxes,
+    title: "Inbox",
+  },
+  {
+    id: "track_orders",
+    Icon: CgTrack,
+    title: "Track Order",
+  },
+  {
+    id: "payment_methods",
+    Icon: CgCreditCard,
+    title: "Payment Methods",
+  },
+  {
+    id: "address",
+    Icon: AddressIcon,
+    title: "Address",
   },
 ];

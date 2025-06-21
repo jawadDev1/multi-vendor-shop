@@ -18,12 +18,12 @@ const UserProfile = () => {
   if (loading) return null;
 
   return user && isAuthenticated ? (
-    <Link className="size-[34px] rounded-full overflow-hidden" to={"/profile"}>
+    <Link className=" size-[26px] lg:size-[34px] rounded-full overflow-hidden" to={"/profile"}>
       <Image src={user?.profile} />
     </Link>
   ) : (
     <Link to={"/login"}>
-      <CgProfile size={28} color="white" />
+      <CgProfile className="size-[26px] lg:size-7" color="white" />
     </Link>
   );
 };
