@@ -9,9 +9,10 @@ import FileInputWithPreview from "../../molecules/form/FileInputWithPreview";
 import { uploadImageToAppwrite } from "@/utils/uploadFile";
 import { useState } from "react";
 import Spinner from "../../atoms/extra/Spinner";
-import { notifyError, notifySuccess } from "@/utils/toast";
-import { API_URL } from "@/constants/index";
+import { notifyError } from "@/utils/toast";
+
 import ActivateAccountModal from "../../organisms/Modals/ActivateAccoutModal";
+import { postApiRequest } from "@/utils/api";
 
 const SignupPageTemplate: React.FC = () => {
   const {
@@ -32,15 +33,10 @@ const SignupPageTemplate: React.FC = () => {
     try {
       const url = await uploadImageToAppwrite(file);
 
-      const res = await fetch(`${API_URL}/user/signup`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...data, profile: url }),
+      const result = await postApiRequest(`user/signup`, {
+        ...data,
+        profile: url,
       });
-
-      const result = await res.json();
 
       if (!result?.success) {
         notifyError(result?.message);

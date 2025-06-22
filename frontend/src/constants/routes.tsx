@@ -7,6 +7,7 @@ import HomePage from "@/components/ui/pages/Home";
 import ProductDetialPage from "@/components/ui/pages/ProductDetailPage";
 import ProductsPage from "@/components/ui/pages/ProductsPage";
 import ProfilePage from "@/components/ui/pages/ProfilePage";
+import RegisterSeller from "@/components/ui/pages/RegisterSellerPage";
 import ActivateAccout from "@/components/ui/pages/User/Auth/Activate";
 import LoginPage from "@/components/ui/pages/User/Auth/Login";
 import SignupPage from "@/components/ui/pages/User/Auth/Signup";
@@ -53,6 +54,14 @@ export const routes: RouteObject[] = [
       {
         path: "/products/:slug",
         element: <ProductDetialPage />,
+      },
+      {
+        path: "/become-seller",
+        element: (
+          <ProtectedRoute>
+            <RegisterSeller />
+          </ProtectedRoute>
+        ),
       },
     ],
   },

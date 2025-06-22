@@ -3,13 +3,11 @@ import type {
   FieldError,
   FieldValues,
   Path,
-  SetFieldValue,
   UseFormRegister,
   UseFormSetValue,
 } from "react-hook-form";
 import FileInput from "@/components/ui/atoms/form/FileInput/Index";
 import previewAavatar from "@/assets/avatar-preview.png";
-import { uploadImageToAppwrite } from "@/utils/uploadFile";
 
 type InputWithLabelProps<TFieldValues extends FieldValues> = {
   className?: string;
@@ -18,6 +16,7 @@ type InputWithLabelProps<TFieldValues extends FieldValues> = {
   required?: boolean;
   error: FieldError | undefined;
   setValue: UseFormSetValue<TFieldValues>;
+  defaultPreview?: string;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 const FileInputWithPreview = <TFieldValues extends FieldValues>({
@@ -27,9 +26,12 @@ const FileInputWithPreview = <TFieldValues extends FieldValues>({
   register,
   setValue,
   error,
+  defaultPreview,
   ...props
 }: InputWithLabelProps<TFieldValues>) => {
-  const [preview, setPreview] = useState<string | undefined>(previewAavatar);
+  const [preview, setPreview] = useState<string | undefined>(
+    defaultPreview ?? previewAavatar
+  );
 
   const handleAvatar = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target?.files && e.target.files[0];

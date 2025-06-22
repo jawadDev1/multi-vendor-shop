@@ -1,24 +1,22 @@
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import { loadUser } from "@/features/user/userThunks";
-import  { useEffect } from "react";
 import { CgProfile } from "react-icons/cg";
 import { Link } from "react-router";
 import Image from "../../atoms/common/Image";
+import type { IAPIUser } from "@/types/api";
 
-const UserProfile = () => {
-  const dispatch = useAppDispatch();
-  const { user, loading, isAuthenticated } = useAppSelector(
-    (state) => state.user
-  );
+interface UserProfileProps {
+  user: IAPIUser | null;
+  loading: boolean;
+  isAuthenticated: boolean;
+}
 
-  useEffect(() => {
-    dispatch(loadUser());
-  }, []);
-
+const UserProfile = ({ isAuthenticated, loading, user }: UserProfileProps) => {
   if (loading) return null;
 
   return user && isAuthenticated ? (
-    <Link className=" size-[26px] lg:size-[34px] rounded-full overflow-hidden" to={"/profile"}>
+    <Link
+      className=" size-[26px] lg:size-[34px] rounded-full overflow-hidden"
+      to={"/profile"}
+    >
       <Image src={user?.profile} />
     </Link>
   ) : (

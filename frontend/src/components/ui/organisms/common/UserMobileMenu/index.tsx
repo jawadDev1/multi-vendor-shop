@@ -4,11 +4,22 @@ import UserCart from "@/components/ui/molecules/UserCart";
 import UserMobileNav from "@/components/ui/molecules/UserMobileNav";
 import UserProfile from "@/components/ui/molecules/UserProfile";
 import Wishlist from "@/components/ui/molecules/Wishlist";
+import type { IAPIUser } from "@/types/api";
 
-const UserMobileMenu = () => {
+interface UserMobileMenuProps {
+  user: IAPIUser | null;
+  loading: boolean;
+  isAuthenticated: boolean;
+}
+
+const UserMobileMenu = ({
+  isAuthenticated,
+  loading,
+  user,
+}: UserMobileMenuProps) => {
   return (
     <header className="flex items-center justify-between px-4 py-1 bg-gray-50 shadow sticky top-0 z-20 md:hidden">
-      <UserMobileNav />
+      <UserMobileNav {...{ isAuthenticated, user }} />
 
       <div className="w-[5rem] h-[3rem] overflow-hidden">
         <Image src={logo} className="object-cover" />
@@ -17,7 +28,7 @@ const UserMobileMenu = () => {
       <div className="flex items-center gap-x-3">
         <UserCart />
         <Wishlist />
-        <UserProfile />
+        <UserProfile {...{ isAuthenticated, user, loading }} />
       </div>
     </header>
   );

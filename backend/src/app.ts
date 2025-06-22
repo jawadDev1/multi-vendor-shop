@@ -2,7 +2,7 @@ import handleError from "#middleware/error.js";
 import express from "express";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
-import { userRouter } from "#routers/route.js";
+import { shopRouter, userRouter } from "#routers/route.js";
 import cors from "cors";
 
 const app = express();
@@ -19,6 +19,7 @@ app.use(
 );
 
 app.use("/api/v1/user", userRouter);
+app.use("/api/v1/shop", shopRouter);
 
 app.use(handleError);
 

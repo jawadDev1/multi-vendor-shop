@@ -1,8 +1,5 @@
 import Image from "@/components/ui/atoms/common/Image";
-
 import logo from "@/assets/logo2.png";
-import Button from "@/components/ui/atoms/buttons/Button";
-
 import DropDownMenu from "@/components/ui/molecules/DropDownMenu";
 import NavMenu from "@/components/ui/molecules/NavMenu";
 import UserProfile from "@/components/ui/molecules/UserProfile";
@@ -13,8 +10,21 @@ import { IoIosArrowForward } from "react-icons/io";
 import { CATEGORIES } from "@/constants/static";
 import UserMobileMenu from "../UserMobileMenu";
 import SearchProducts from "@/components/ui/molecules/SearchProducts";
+import LinkButton from "@/components/ui/atoms/buttons/LinkButton";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { loadUser } from "@/features/user/userThunks";
+import { useEffect } from "react";
 
 const Header = () => {
+  const dispatch = useAppDispatch();
+  const { user, loading, isAuthenticated } = useAppSelector(
+    (state) => state.user
+  );
+
+  useEffect(() => {
+    dispatch(loadUser());
+  }, []);
+
   return (
     <>
       <header className=" hidden md:block">
@@ -26,9 +36,22 @@ const Header = () => {
               </div>
               <SearchProducts />
               <div>
-                <Button className="flex items-center">
-                  Become Seller <IoIosArrowForward size={20} />
-                </Button>
+                {isAuthenticated &&
+                  (user?.role === "SELLER" ? (
+                    <LinkButton
+                      to="/shop"
+                      className="flex items-center bg-primary "
+                    >
+                      Shop <IoIosArrowForward size={20} />
+                    </LinkButton>
+                  ) : (
+                    <LinkButton
+                      to="/become-seller"
+                      className="flex items-center bg-primary "
+                    >
+                      Become Seller <IoIosArrowForward size={20} />
+                    </LinkButton>
+                  ))}
               </div>
             </div>
           </div>
@@ -42,12 +65,12 @@ const Header = () => {
           <div className="flex items-center gap-x-4">
             <Wishlist />
             <UserCart />
-            <UserProfile />
+            <UserProfile {...{ isAuthenticated, user, loading }} />
           </div>
         </div>
       </div>
 
-      <UserMobileMenu />
+      <UserMobileMenu {...{ isAuthenticated, user, loading }} />
     </>
   );
 };

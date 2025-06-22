@@ -40,7 +40,22 @@ export default {
           },
         ],
         "heading-sm": [
-          "22px",
+          "26px",
+          {
+            lineHeight: "32px",
+
+            fontWeight: "600",
+          },
+        ],
+        subheading: [
+          "40px",
+          {
+            lineHeight: "55px",
+            fontWeight: "700",
+          },
+        ],
+        "subheading-sm": [
+          "28px",
           {
             lineHeight: "32px",
 

@@ -1,26 +1,19 @@
 import cn from "@/utils/cn";
 import { useEffect, useState } from "react";
-import { CgClose, CgShoppingBag } from "react-icons/cg";
-import Subtitle from "../../atoms/typography/Subtitle";
-import CartItem from "../../atoms/extra/CartItem";
-import Button from "../../atoms/buttons/Button";
+import { CgClose } from "react-icons/cg";
 import { CgMenu } from "react-icons/cg";
-import type { Product } from "@/constants/static";
-import Subtitle2 from "../../atoms/typography/Subtitle2";
-import Image from "../../atoms/common/Image";
-import { AiOutlineSearch } from "react-icons/ai";
 import SearchProducts from "../SearchProducts";
 import NavMenu from "../NavMenu";
 import LinkButton from "../../atoms/buttons/LinkButton";
+import type { IAPIUser } from "@/types/api";
 
 export interface UserMobileNavProps {
-  searchData: Product[] | null;
-  searchTerm: string;
-  handleSearchTerm: () => void;
+  user: IAPIUser | null;
+  isAuthenticated: boolean;
 }
 
-const UserMobileNav = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+const UserMobileNav = ({ user, isAuthenticated }: UserMobileNavProps) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleNav = () => {
     setIsOpen(!isOpen);
@@ -60,12 +53,19 @@ const UserMobileNav = () => {
 
             <NavMenu />
 
-            <LinkButton
-              to="/become-seller"
-              className="bg-primary max-w-[200px]"
-            >
-              Become Seller
-            </LinkButton>
+            {isAuthenticated &&
+              (user?.role === "SELLER" ? (
+                <LinkButton to="/shop" className="bg-primary max-w-[200px]">
+                  Shop
+                </LinkButton>
+              ) : (
+                <LinkButton
+                  to="/become-seller"
+                  className="bg-primary max-w-[200px]"
+                >
+                  Become Seller
+                </LinkButton>
+              ))}
           </div>
         </div>
       </div>
