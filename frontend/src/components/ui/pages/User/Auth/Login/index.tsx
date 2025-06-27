@@ -1,4 +1,5 @@
 import { useAppSelector } from "@/app/hooks";
+import Loader from "@/components/ui/atoms/extra/Loader";
 import PageWrapper from "@/components/ui/atoms/PageWrapper";
 import LoginPageTemplate from "@/components/ui/templates/LoginPageTemplate";
 import React, { useEffect } from "react";
@@ -16,7 +17,7 @@ const LoginPage: React.FC = () => {
     }
   }, [isAuthenticated]);
 
-  if (loading || isAuthenticated) return null;
+  if (loading) return <Loader />;
 
   return (
     <PageWrapper className="min-h-[70vh] flex items-center justify-center bg-page-bg">

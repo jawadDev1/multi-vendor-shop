@@ -7,3 +7,7 @@ export const sanitizeUser = (user: Document) => {
 export const validateBody = (body: { [key: string]: any }) => {
   return Object.values(body).every((val) => val !== undefined && val !== null);
 };
+
+export const generateSlug = (text: string) => {
+  return text.replaceAll(/[&,%,$,-,(,)]/g, "").replaceAll(/\s+/g, "-").trim();
+};

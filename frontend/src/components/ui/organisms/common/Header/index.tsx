@@ -39,7 +39,7 @@ const Header = () => {
                 {isAuthenticated &&
                   (user?.role === "SELLER" ? (
                     <LinkButton
-                      to="/shop"
+                      to="/seller"
                       className="flex items-center bg-primary "
                     >
                       Shop <IoIosArrowForward size={20} />

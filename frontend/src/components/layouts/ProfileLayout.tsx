@@ -1,6 +1,6 @@
 
 import { Toaster } from "sonner";
-import Header from "./components/ui/organisms/common/Header";
+import Header from "../ui/organisms/common/Header";
 import { Outlet } from "react-router";
 
 const ProfileLayout = () => {

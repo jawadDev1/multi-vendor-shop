@@ -55,7 +55,7 @@ const UserMobileNav = ({ user, isAuthenticated }: UserMobileNavProps) => {
 
             {isAuthenticated &&
               (user?.role === "SELLER" ? (
-                <LinkButton to="/shop" className="bg-primary max-w-[200px]">
+                <LinkButton to="/seller" className="bg-primary max-w-[200px]">
                   Shop
                 </LinkButton>
               ) : (

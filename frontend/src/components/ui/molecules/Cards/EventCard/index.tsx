@@ -52,10 +52,14 @@ const EventCard = () => {
 
         <div className="text-end">
           <Link
-            className="text-dim-gray flex items-center gap-x-2 w-fit text-end self-end ml-auto "
+            className="group text-dim-gray flex items-center gap-x-2 w-fit text-end self-end ml-auto hover:text-green-600 "
             to={"/events"}
           >
-            See more Events <AiOutlineArrowRight size={20} color="#787878" />
+            See more Events{" "}
+            <AiOutlineArrowRight
+              size={20}
+              className="text-dim-gray group-hover:text-green-600"
+            />
           </Link>
         </div>
       </div>

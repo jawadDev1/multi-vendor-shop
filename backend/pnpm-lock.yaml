@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@types/nodemailer':
-        specifier: ^6.4.17
-        version: 6.4.17
       bcrypt:
         specifier: ^6.0.0
         version: 6.0.0
@@ -66,6 +63,9 @@ importers:
       '@types/node':
         specifier: ^22.15.29
         version: 22.15.31
+      '@types/nodemailer':
+        specifier: ^6.4.17
+        version: 6.4.17
       '@vitest/coverage-v8':
         specifier: ^3.2.0
         version: 3.2.3(vitest@3.2.3(@types/node@22.15.31)(tsx@4.20.3)(yaml@2.8.0))

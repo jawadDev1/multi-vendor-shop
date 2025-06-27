@@ -22,3 +22,31 @@ export interface IShop extends Document {
   address: string;
   owner: ObjectId;
 }
+
+export interface IProduct extends Document {
+  title: string;
+  slug: string;
+  description: string;
+  images: string[];
+  tags: string[];
+  originalPrice: number;
+  discount?: number;
+  stock: number;
+  shop: ObjectId;
+  category: ObjectId;
+  created_by: string;
+}
+
+export interface ICategory extends Document {
+  title: string;
+  slug: string;
+  description: string;
+  image: string;
+}
+
+export interface IEvent extends Document {
+  product: ObjectId;
+  start_date: Date;
+  end_date: Date;
+  status: string;
+}

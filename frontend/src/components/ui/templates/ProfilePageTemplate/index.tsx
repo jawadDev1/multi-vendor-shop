@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import PageWrapper from "../../atoms/PageWrapper";
 import Subtitle2 from "../../atoms/typography/Subtitle2";
 
@@ -112,12 +112,12 @@ const ProfilePageTemplate = ({ user }: ProfilePageTemplateProps) => {
             className="flex group items-center gap-x-3 cursor-pointer "
           >
             <Icon
-              className={cn("size-[28px] group-hover:text-azure-blue ", {
+              className={cn("size-[28px] text-charcoal-gray group-hover:text-azure-blue ", {
                 "text-azure-blue": activeSection === id,
               })}
             />
             <Subtitle2
-              className={cn("hidden md:block group-hover:text-azure-blue", {
+              className={cn("hidden md:block text-charcoal-gray group-hover:text-azure-blue", {
                 "text-azure-blue": activeSection === id,
               })}
             >
@@ -130,9 +130,9 @@ const ProfilePageTemplate = ({ user }: ProfilePageTemplateProps) => {
           className=" hidden md:flex group items-center gap-x-3 cursor-pointer "
         >
           <CgLogOut
-            className={cn("size-[28px] group-hover:text-azure-blue ")}
+            className={cn("size-[28px] text-charcoal-gray group-hover:text-azure-blue ")}
           />
-          <Subtitle2 className={cn("group-hover:text-azure-blue")}>
+          <Subtitle2 className={cn("text-charcoal-gray group-hover:text-azure-blue")}>
             Logout
           </Subtitle2>
         </div>

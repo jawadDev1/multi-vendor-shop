@@ -2,6 +2,13 @@ import AddressIcon from "@/components/icons/AddressIcon";
 import RefundIcon from "@/components/icons/RefuncIcon";
 import { CgCreditCard, CgShoppingBag, CgTrack } from "react-icons/cg";
 import { IoIosChatboxes, IoMdPerson } from "react-icons/io";
+import { RxDashboard } from "react-icons/rx";
+import { FiPackage, FiShoppingBag } from "react-icons/fi";
+import { AiOutlineFolderAdd, AiOutlineGift } from "react-icons/ai";
+import { VscNewFile } from "react-icons/vsc";
+import { CiMoneyBill, CiSettings } from "react-icons/ci";
+import { BiMessageSquareDetail } from "react-icons/bi";
+import { HiOutlineReceiptRefund } from "react-icons/hi";
 
 interface NavItems {
   title: string;
@@ -109,5 +116,68 @@ export const PROFILE_MENU = [
     id: "address",
     Icon: AddressIcon,
     title: "Address",
+  },
+];
+
+export const SHOP_SIDEBAR_ITEMS = [
+  {
+    title: "Dashboard",
+    slug: "dashboard",
+    link: "/seller",
+    Icon: RxDashboard,
+  },
+  {
+    title: "All Orders",
+    slug: "orders",
+    link: "/seller/orders",
+    Icon: FiPackage,
+  },
+  {
+    title: "All Products",
+    slug: "products",
+    link: "/seller/products",
+    Icon: FiShoppingBag,
+  },
+  {
+    title: "Create Product",
+    slug: "create-product",
+    link: "/seller/create-product",
+    Icon: AiOutlineFolderAdd,
+  },
+  {
+    title: "Events",
+    slug: "events",
+    link: "/seller/events",
+    Icon: VscNewFile,
+  },
+  {
+    title: "Withdraw Money",
+    slug: "withdraw-money",
+    link: "/seller/withdraw-money",
+    Icon: CiMoneyBill,
+  },
+  {
+    title: "Shop Inbox",
+    slug: "inbox",
+    link: "/seller/inbox",
+    Icon: BiMessageSquareDetail,
+  },
+  {
+    title: "Discount Codes",
+    slug: "coupouns",
+    link: "/seller/coupouns",
+    Icon: AiOutlineGift,
+  },
+  {
+    title: "Refunds",
+    slug: "refunds",
+    link: "/seller/refunds",
+    Icon: HiOutlineReceiptRefund,
+  },
+  {
+    title: "Settings",
+    slug: "settings",
+    link: "/seller/settings",
+    Icon: CiSettings,
   },
 ];

@@ -1,0 +1,57 @@
+.tag-container {
+  /* height: 50px; */
+  display: flex;
+  margin-top: 0.4rem;
+  justify-content: start;
+  /* align-items: center; */
+  flex-direction: column-reverse;
+  gap: 0.5rem;
+}
+
+.tag-input {
+  padding: 0.3rem 0.4rem;
+  border: 1px solid #c4c4c4;
+  border-radius: 6px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.tag-input input,
+.tag-input input:focus {
+  border: none;
+  background: transparent;
+  outline: none;
+  width: 100%;
+}
+
+.tag {
+  background: #3874ff;
+  color: white;
+  padding: 0.3rem 0.4rem;
+  margin: 0.3rem;
+  border-radius: 6px;
+  display: flex;
+  white-space: nowrap;
+}
+
+.tag button {
+  margin: 0 0.4rem;
+}
+
+.clear-all {
+  display: none;
+}
+
+.ReactTags__error {
+  display: none;
+}
+
+.selectedClass {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+}

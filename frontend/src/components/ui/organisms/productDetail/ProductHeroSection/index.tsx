@@ -5,8 +5,6 @@ import Content from "@/components/ui/atoms/typography/Content";
 import Subtitle from "@/components/ui/atoms/typography/Subtitle";
 import Subtitle2 from "@/components/ui/atoms/typography/Subtitle2";
 import Subtitle3 from "@/components/ui/atoms/typography/Subtitle3";
-import type { Product } from "@/constants/static";
-import React from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 
 interface Props {
@@ -18,7 +16,14 @@ interface Props {
   price: number;
 }
 
-const ProductHeroSection = ({ title, image, description, price, category, rating }: Props) => {
+const ProductHeroSection = ({
+  title,
+  image,
+  description,
+  price,
+  category,
+  rating,
+}: Props) => {
   return (
     <SectionWrapper className="grid grid-cols-1 md:grid-cols-[45%,55%] gap-x-7 gap-y-5">
       <div className="">
@@ -60,25 +65,16 @@ const ProductHeroSection = ({ title, image, description, price, category, rating
         <Button className="bg-primary max-w-[300px]">Add to cart</Button>
 
         <div className="flex gap-x-3 items-center mt-5 lg:mt-10">
-            <div className="size-12 rounded-full overflow-hidden">
-                <Image src={image} />
-            </div>
-            <div>
-            <Subtitle2 className="text-azure-blue">
-                {category}
-            </Subtitle2>
-            <Subtitle3>
-                ({rating}) Rating
-            </Subtitle3>
-            </div>
-            <Button className="max-w-[300px] bg-dark-azure">
-                Send message
-            </Button>
+          <div className="size-12 rounded-full overflow-hidden">
+            <Image src={image} />
+          </div>
+          <div>
+            <Subtitle2 className="text-azure-blue">{category}</Subtitle2>
+            <Subtitle3>({rating}) Rating</Subtitle3>
+          </div>
+          <Button className="max-w-[300px] bg-dark-azure">Send message</Button>
         </div>
       </div>
-
-        
-
     </SectionWrapper>
   );
 };

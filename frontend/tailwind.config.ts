@@ -135,14 +135,14 @@ export default {
         content: [
           "16px",
           {
-            lineHeight: "28px",
+            lineHeight: "26px",
             fontWeight: "400",
           },
         ],
         "content-sm": [
           "15px",
           {
-            lineHeight: "26px",
+            lineHeight: "24px",
             fontWeight: "400",
           },
         ],

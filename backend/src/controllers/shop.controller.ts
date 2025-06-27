@@ -30,4 +30,20 @@ const handleRegisterShop = asyncHandler(
   }
 );
 
-export { handleRegisterShop };
+const handleGetShop = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const id = req.user?.id;
+
+    const shop = await ShopModel.findOne({ owner: id });
+
+    if (!shop) return next(new ErrorHandler("shop not found", 404));
+
+    return res.status(200).json({
+      success: true,
+      message: "shop get successfully",
+      data: shop,
+    });
+  }
+);
+
+export { handleRegisterShop, handleGetShop };

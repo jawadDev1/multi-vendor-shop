@@ -11,8 +11,15 @@ import RegisterSeller from "@/components/ui/pages/RegisterSellerPage";
 import ActivateAccout from "@/components/ui/pages/User/Auth/Activate";
 import LoginPage from "@/components/ui/pages/User/Auth/Login";
 import SignupPage from "@/components/ui/pages/User/Auth/Signup";
-import ProfileLayout from "@/ProfileLayout";
+import ProfileLayout from "@/components/layouts/ProfileLayout";
 import type { RouteObject } from "react-router";
+import SellerLayout from "@/components/layouts/SellerLayout";
+import DashboardPage from "@/components/ui/pages/seller/Dashboard";
+import ShopDetailPage from "@/components/ui/pages/shop/ShopDetailPage";
+import CreateProductPage from "@/components/ui/pages/seller/CreateProductPage";
+import NotFountPage from "@/components/ui/pages/NotFoundPage";
+import AllProductsPage from "@/components/ui/pages/seller/AllProducts";
+import UpdateProductPage from "@/components/ui/pages/seller/UpdateProductPage";
 
 export const routes: RouteObject[] = [
   {
@@ -63,6 +70,10 @@ export const routes: RouteObject[] = [
           </ProtectedRoute>
         ),
       },
+      {
+        path: "shop/:slug",
+        element: <ShopDetailPage />,
+      },
     ],
   },
   {
@@ -78,5 +89,31 @@ export const routes: RouteObject[] = [
         ),
       },
     ],
+  },
+  {
+    path: "/seller",
+    element: <SellerLayout />,
+    children: [
+      {
+        index: true,
+        element: <DashboardPage />,
+      },
+      {
+        path: "create-product",
+        element: <CreateProductPage />,
+      },
+      {
+        path: "products",
+        element: <AllProductsPage />,
+      },
+      {
+        path: "update-product/:id",
+        element: <UpdateProductPage />,
+      },
+    ],
+  },
+  {
+    path: "*",
+    element: <NotFountPage />,
   },
 ];

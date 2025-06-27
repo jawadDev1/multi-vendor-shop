@@ -33,7 +33,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@types/nodemailer": "^6.4.17",
     "bcrypt": "^6.0.0",
     "body-parser": "^2.2.0",
     "cookie-parser": "^1.4.7",
@@ -54,6 +53,7 @@
     "@types/express": "^5.0.2",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.15.29",
+    "@types/nodemailer": "^6.4.17",
     "@vitest/coverage-v8": "^3.2.0",
     "@vitest/eslint-plugin": "^1.2.1",
     "eslint": "^9.28.0",

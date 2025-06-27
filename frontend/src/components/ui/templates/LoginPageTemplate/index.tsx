@@ -77,7 +77,7 @@ const LoginPageTemplate: React.FC = () => {
             <div>
               <InputWithLabel
                 type="password"
-                placeholder="*****"
+                placeholder="********"
                 label="Password"
                 name="password"
                 error={errors?.password}
