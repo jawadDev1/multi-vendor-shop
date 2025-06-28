@@ -137,10 +137,46 @@ const handleGetSingleProduct = asyncHandler(
   }
 );
 
+const handleGetProductsForForm = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    // const userId = mongoose.Types.ObjectId.createFromHexString(req.user?.id);
+    const userId = req.user?.id;
+    const pipeline = [
+      {
+        $match: {
+          created_by: userId,
+        },
+      },
+      {
+        $addFields: {
+          label: "$title",
+          value: "$_id",
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          label: 1,
+          value: 1,
+        },
+      },
+    ];
+
+    const products = await ProductModel.aggregate(pipeline);
+
+    return res.status(200).json({
+      success: true,
+      message: "products get successfully",
+      data: products,
+    });
+  }
+);
+
 export {
   handleCreateProduct,
   handleGetShopProducts,
   handleDeleteProduct,
   handleUpdateProduct,
   handleGetSingleProduct,
+  handleGetProductsForForm,
 };

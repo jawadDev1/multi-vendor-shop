@@ -7,7 +7,7 @@ import TagsInputWithLabel from "@/components/ui/molecules/form/TagsInputWithLabe
 import TextareaWithLabel from "@/components/ui/molecules/form/TextareaWithLabel";
 import { productSchema, type ProductFormData } from "@/schemas/product.schema";
 
-import { postApiRequest, putApiRequest } from "@/utils/api";
+import { apiRequest } from "@/utils/api";
 import { notifyError, notifySuccess } from "@/utils/toast";
 import { uploadImageToAppwrite } from "@/utils/uploadFile";
 import { DevTool } from "@hookform/devtools";
@@ -81,17 +81,29 @@ const ProductForm = ({
         images = await Promise.all(
           productImages.map((img) => uploadImageToAppwrite(img))
         );
+
+        if (!images) {
+          notifyError("Image upload failed");
+          return;
+        }
       }
 
-      const result = slug
-        ? await putApiRequest(`product/update/${slug}`, {
+      const body = slug
+        ? {
             ...data,
             images: [...defaultImages, ...images],
-          })
-        : await postApiRequest(`product/create-product`, {
+          }
+        : {
             ...data,
             images,
-          });
+          };
+      const route = slug ? `product/update/${slug}` : `product/create-product`;
+
+      const result = await apiRequest({
+        endpoint: route,
+        body: body,
+        method: slug ? "PUT" : "POST",
+      });
 
       if (!result?.success) {
         notifyError(result?.message);

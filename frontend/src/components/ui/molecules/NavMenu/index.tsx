@@ -8,7 +8,7 @@ const NavMenu = () => {
       {NAV_ITEMS.map((item) => (
         <li key={item.link}>
           <Link
-            className="text-subtitle2-sm lg:text-subtitle2 text-primary lg:text-white hover:text-green-400 font-[500]"
+            className="text-subtitle2-sm lg:text-subtitle2 text-primary md:text-white hover:text-green-400 font-[500]"
             to={item.link}
           >
             {item.title}

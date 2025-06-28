@@ -30,7 +30,7 @@ const Header = () => {
       <header className=" hidden md:block">
         <div className="bg-gray-50">
           <div className="max-w-[1200px] mx-auto">
-            <div className="flex justify-between items-center py-2 px-5 lg:px-2  ">
+            <div className=" justify-between items-center py-2 px-5 lg:px-2 grid grid-cols-[12%,1fr,10%] gap-5  ">
               <div className="w-[9rem] h-[4rem] overflow-hidden">
                 <Image src={logo} className="object-cover" />
               </div>
@@ -40,14 +40,14 @@ const Header = () => {
                   (user?.role === "SELLER" ? (
                     <LinkButton
                       to="/seller"
-                      className="flex items-center bg-primary "
+                      className="flex items-center justify-center bg-primary text-sm lg:text-[16px] py-3"
                     >
                       Shop <IoIosArrowForward size={20} />
                     </LinkButton>
                   ) : (
                     <LinkButton
                       to="/become-seller"
-                      className="flex items-center bg-primary "
+                      className="flex items-center justify-center bg-primary text-sm lg:text-[16px] "
                     >
                       Become Seller <IoIosArrowForward size={20} />
                     </LinkButton>

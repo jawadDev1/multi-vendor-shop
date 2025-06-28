@@ -1,3 +1,4 @@
+import TableDate from "@/components/Tables/elements/common/TableDate";
 import TableSr from "@/components/Tables/elements/common/TableSr";
 import TableTitle from "@/components/Tables/elements/common/TableTitle";
 import TableProductImage from "@/components/Tables/elements/products/ProductImage";
@@ -14,4 +15,24 @@ export const PRODUCTS_ELEMENTS = {
   title: TableTitle,
   originalPrice: TableTitle,
   images: TableProductImage,
+};
+
+export const Event_FIELDS = {
+  _id: "Sr#",
+  productTitle: "Title",
+  productOriginalPrice: "Price",
+  productImages: "Image",
+  start_date: "Starting",
+  end_date: "End Date",
+  status: "Status",
+};
+
+export const Event_ELEMENTS = {
+  _id: TableSr,
+  productTitle: TableTitle,
+  productOriginalPrice: TableTitle,
+  productImages: TableProductImage,
+  start_date: TableDate,
+  end_date: TableDate,
+  status: TableTitle,
 };

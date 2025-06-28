@@ -28,7 +28,7 @@ const UserCart = ({}: UserCartProps) => {
   return (
     <>
       <CountIconWrapper onClick={handleCart} count={0}>
-        <AiOutlineShoppingCart className="size-[22px]   lg:size-[28px] text-primary lg:text-white" />
+        <AiOutlineShoppingCart className="size-[22px]   lg:size-[28px] text-primary md:text-white" />
       </CountIconWrapper>
       <div
         className={cn(

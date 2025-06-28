@@ -7,7 +7,7 @@ interface Props {
 }
 
 const TableProductImage = ({ value }: Props) => {
-  const image = value[0];
+  const image = value[value?.length - 1];
   return (
     <TD className="size-16 rounded overflow-hidden">
       <Image src={image} />

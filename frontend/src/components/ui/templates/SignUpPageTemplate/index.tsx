@@ -12,7 +12,7 @@ import Spinner from "../../atoms/extra/Spinner";
 import { notifyError } from "@/utils/toast";
 
 import ActivateAccountModal from "../../organisms/Modals/ActivateAccoutModal";
-import { postApiRequest } from "@/utils/api";
+import { apiRequest } from "@/utils/api";
 
 const SignupPageTemplate: React.FC = () => {
   const {
@@ -33,9 +33,12 @@ const SignupPageTemplate: React.FC = () => {
     try {
       const url = await uploadImageToAppwrite(file);
 
-      const result = await postApiRequest(`user/signup`, {
-        ...data,
-        profile: url,
+      const result = await apiRequest({
+        endpoint: `user/signup`,
+        body: {
+          ...data,
+          profile: url,
+        },
       });
 
       if (!result?.success) {

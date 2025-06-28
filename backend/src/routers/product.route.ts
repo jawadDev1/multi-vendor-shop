@@ -1,6 +1,7 @@
 import {
   handleCreateProduct,
   handleDeleteProduct,
+  handleGetProductsForForm,
   handleGetShopProducts,
   handleGetSingleProduct,
   handleUpdateProduct,
@@ -16,7 +17,10 @@ router.use(isAuthenticated);
 router.post("/create-product", handleCreateProduct);
 
 router.get("/get-shop-products", handleGetShopProducts);
+
 router.get("/get-single/:id", handleGetSingleProduct);
+
+router.get("/get-form-products", handleGetProductsForForm);
 
 router.put("/update/:slug", handleUpdateProduct);
 

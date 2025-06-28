@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { shopSchema, type ShopSchemaData } from "@/schemas/shop.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router";
-import { postApiRequest } from "@/utils/api";
+import { apiRequest } from "@/utils/api";
 import { notifyError, notifySuccess } from "@/utils/toast";
 import InputWithLabel from "../../molecules/form/InputWithLabel";
 import Button from "../../atoms/buttons/Button";
@@ -34,10 +34,14 @@ const RegisterSellerPageTemplate = () => {
 
     const url = await uploadImageToAppwrite(file);
 
-    const result = await postApiRequest(`shop/register`, {
-      ...data,
-      logo: url,
+    const result = await apiRequest({
+      endpoint: `shop/register`,
+      body: {
+        ...data,
+        logo: url,
+      },
     });
+
     if (!result?.success) {
       notifyError(result?.message);
 
@@ -48,6 +52,7 @@ const RegisterSellerPageTemplate = () => {
     notifySuccess(result?.message);
     navigate("/");
     setIsLoading(false);
+    window.location.reload();
   };
 
   return (

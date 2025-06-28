@@ -48,5 +48,5 @@ export interface IEvent extends Document {
   product: ObjectId;
   start_date: Date;
   end_date: Date;
-  status: string;
+  status?: string;
 }

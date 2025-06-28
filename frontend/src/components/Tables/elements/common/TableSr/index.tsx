@@ -1,16 +1,11 @@
-import React from 'react'
-import TD from '../../../TableLayout/TD';
+import TD from "../../../TableLayout/TD";
 
 interface SrProps {
-    index: number
+  index: number;
 }
 
-const TableSr = ({index}: SrProps) => {
-  return (
-    <TD>
-        {index + 1}
-    </TD>
-  )
-}
+const TableSr = ({ index }: SrProps) => {
+  return <TD>{index + 1}</TD>;
+};
 
 export default TableSr;

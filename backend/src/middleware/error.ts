@@ -19,6 +19,7 @@ const handleError = (
   // duplicate key error
   if (err?.code == 11000) {
     const message = "Duplicate key error ";
+    console.log("err =======+> ", err);
     err = new ErrorHandler(message, 400);
   }
 

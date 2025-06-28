@@ -23,8 +23,8 @@ const SearchProducts = () => {
   };
 
   return (
-    <div className="relative lg:max-w-[700px] w-full">
-      <div className=" grid w-full overflow-hidden rounded-md  grid-cols-[85%,15%] lg:grid-cols-[95%,5%] max-h-[50px] border border-light-gray focus:border-azure-blue bg-white items-center">
+    <div className="relative  w-full">
+      <div className=" grid w-full overflow-hidden rounded-md  grid-cols-[85%,15%] md:grid-cols-[95%,6%] max-h-[50px] border border-light-gray focus:border-azure-blue bg-white items-center">
         <input
           onChange={handleSearchTerm}
           type="text"

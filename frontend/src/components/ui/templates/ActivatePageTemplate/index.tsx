@@ -1,14 +1,17 @@
 import Button from "../../atoms/buttons/Button";
 import { useNavigate, useParams } from "react-router";
 import { notifyError, notifySuccess } from "@/utils/toast";
-import { postApiRequest } from "@/utils/api";
+import { apiRequest } from "@/utils/api";
 
 const ActivatePageTemplate = () => {
   const { token } = useParams();
   const navigate = useNavigate();
 
   const handleVerify = async () => {
-    const result = await postApiRequest("user/activate", { token });
+    const result = await apiRequest({
+      endpoint: "user/activate",
+      body: { token },
+    });
     if (!result?.success) {
       notifyError(result?.message);
       navigate("/login");

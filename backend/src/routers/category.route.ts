@@ -5,7 +5,7 @@ import { Router } from "express";
 
 const router = Router();
 
-// router.use(isAuthenticated);
+router.use(isAuthenticated);
 
 router.get("/get-form-categories", handleGetCategoriesForForm);
 

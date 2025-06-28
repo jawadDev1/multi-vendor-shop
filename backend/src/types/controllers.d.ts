@@ -25,3 +25,9 @@ export interface IProductBody {
   stock: number;
   tags: string[];
 }
+
+export interface IEventBody {
+  start_date: Date;
+  end_date: Date;
+  product: ObjectId;
+}

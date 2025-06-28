@@ -9,7 +9,7 @@ import {
 import InputWithLabel from "../../molecules/form/InputWithLabel";
 import Button from "../../atoms/buttons/Button";
 import { Link, useNavigate } from "react-router";
-import { postApiRequest } from "@/utils/api";
+import { apiRequest } from "@/utils/api";
 import { notifyError, notifySuccess } from "@/utils/toast";
 import ActivateAccountModal from "../../organisms/Modals/ActivateAccoutModal";
 import Spinner from "../../atoms/extra/Spinner";
@@ -29,10 +29,10 @@ const LoginPageTemplate: React.FC = () => {
 
   const onSubmit = async (data: LoginFormData) => {
     setIsLoading(true);
-    const result = await postApiRequest("user/login", data);
+    const result = await apiRequest({ endpoint: "user/login", body: data });
     setIsLoading(false);
     if (!result.success) {
-      notifyError("something went wrong");
+      notifyError(result?.message);
       return;
     }
 

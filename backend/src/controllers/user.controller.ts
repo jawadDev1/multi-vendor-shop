@@ -20,8 +20,7 @@ const handleSignup = asyncHandler(
       if (!valid) {
         next(new ErrorHandler("all fields are required", 400));
       }
-
-      const alreadyExists = await UserModel.find({ email: body.email });
+      const alreadyExists = await UserModel.findOne({ email: body.email });
 
       if (alreadyExists) {
         next(new ErrorHandler("Account already exists", 400));
@@ -90,7 +89,7 @@ const handleSignin = asyncHandler(
     try {
       const body = req.body;
 
-      if (!body?.email || !body.password)
+      if (!body?.email || !body?.password)
         next(new ErrorHandler("All fields are required", 400));
 
       const user = await UserModel.findOne({ email: body.email });

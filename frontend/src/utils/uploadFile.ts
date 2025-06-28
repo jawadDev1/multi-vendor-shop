@@ -10,6 +10,7 @@ export const uploadImageToAppwrite = async (file: File): Promise<string> => {
 
     return url.toString();
   } catch (error) {
+    console.log("Error uploadImageToAppwrite :: ", error);
     return "";
   }
 };

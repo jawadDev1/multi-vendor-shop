@@ -28,15 +28,15 @@ const userSchema = new Schema<IUser>(
     },
     address: {
       type: String,
-      required: [true, "address is required"],
+      default: null,
     },
     zip_code: {
       type: Number,
-      required: [true, "zip code is required"],
+      default: null,
     },
     contact: {
       type: Number,
-      required: [true, "contact is required"],
+      default: null,
     },
     verified: {
       type: Boolean,

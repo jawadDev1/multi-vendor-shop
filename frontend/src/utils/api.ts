@@ -1,35 +1,21 @@
 import { API_URL } from "@/constants/index";
 
-export const postApiRequest = async (
-  endpoint: string,
-  body: { [key: string]: any },
-  headers?: { [key: string]: any }
-) => {
+interface API_REQUEST_PARAMS {
+  endpoint: string;
+  body: { [key: string]: any };
+  headers?: { [key: string]: any };
+  method?: string;
+}
+
+export const apiRequest = async ({
+  endpoint,
+  body,
+  headers,
+  method = "POST",
+}: API_REQUEST_PARAMS) => {
   try {
     const res = await fetch(`${API_URL}/${endpoint}`, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        ...headers,
-      },
-      body: JSON.stringify(body),
-    });
-
-    return await res.json();
-  } catch (error) {
-    return { success: false, message: error };
-  }
-};
-
-export const putApiRequest = async (
-  endpoint: string,
-  body: { [key: string]: any },
-  headers?: { [key: string]: any }
-) => {
-  try {
-    const res = await fetch(`${API_URL}/${endpoint}`, {
-      method: "PUT",
+      method,
       credentials: "include",
       headers: {
         "Content-Type": "application/json",

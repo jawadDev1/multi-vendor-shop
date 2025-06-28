@@ -9,5 +9,9 @@ export const validateBody = (body: { [key: string]: any }) => {
 };
 
 export const generateSlug = (text: string) => {
-  return text.replaceAll(/[&,%,$,-,(,)]/g, "").replaceAll(/\s+/g, "-").trim();
+  return text
+    .replaceAll(/[&,%,$,-,(,)]/g, "")
+    .replaceAll(/\s+/g, "-")
+    .trim();
 };
+

@@ -8,3 +8,11 @@ export const getTimeLeft = (targetDate: Date | string) => {
 
   return { total, days, hours, minutes, seconds };
 };
+
+export const formateDate = (date: string) => {
+  return new Date(date)?.toDateString() || new Date(Date.now()).toDateString();
+};
+
+export const convertStringToDate = (date: string) => {
+  return new Date(date).toISOString().slice(0, 10);
+};

@@ -8,7 +8,7 @@ import { AiOutlineFolderAdd, AiOutlineGift } from "react-icons/ai";
 import { VscNewFile } from "react-icons/vsc";
 import { CiMoneyBill, CiSettings } from "react-icons/ci";
 import { BiMessageSquareDetail } from "react-icons/bi";
-import { HiOutlineReceiptRefund } from "react-icons/hi";
+import { HiOutlineReceiptRefund, HiOutlineTag } from "react-icons/hi";
 
 interface NavItems {
   title: string;
@@ -145,9 +145,15 @@ export const SHOP_SIDEBAR_ITEMS = [
     Icon: AiOutlineFolderAdd,
   },
   {
-    title: "Events",
+    title: "All Events",
     slug: "events",
     link: "/seller/events",
+    Icon: HiOutlineTag,
+  },
+  {
+    title: "Create Event",
+    slug: "create-event",
+    link: "/seller/create-event",
     Icon: VscNewFile,
   },
   {
