@@ -32,6 +32,7 @@ export interface IProduct extends Document {
   originalPrice: number;
   discount?: number;
   stock: number;
+  sold_out: number;
   shop: ObjectId;
   category: ObjectId;
   created_by: string;
@@ -49,4 +50,15 @@ export interface IEvent extends Document {
   start_date: Date;
   end_date: Date;
   status?: string;
+}
+
+export interface ICoupoun extends Document {
+  type: string;
+  name: string;
+  value: number;
+  min_amount: number;
+  max_amount: number;
+  products: ObjectId[];
+  created_by: string;
+  limit: number;
 }

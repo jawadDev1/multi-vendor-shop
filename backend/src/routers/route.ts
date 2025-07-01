@@ -7,3 +7,5 @@ export { default as productRouter } from "./product.route.js";
 export { default as categoryRouter } from "./category.route.js";
 
 export { default as eventRouter } from "./event.route.js";
+
+export { default as coupounRouter } from "./coupoun.route.js";

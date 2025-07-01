@@ -1,6 +1,8 @@
 import {
   handleCreateProduct,
   handleDeleteProduct,
+  handleGetBestDealProducts,
+  handleGetFeaturedProducts,
   handleGetProductsForForm,
   handleGetShopProducts,
   handleGetSingleProduct,
@@ -8,11 +10,15 @@ import {
 } from "#controllers/product.controller.js";
 
 import { isAuthenticated } from "#middleware/isAuthenticated.js";
+import { isSeller } from "#middleware/isSeller.js";
 import { Router } from "express";
 
 const router = Router();
 
-router.use(isAuthenticated);
+router.get("/best-deals", handleGetBestDealProducts);
+router.get("/featured", handleGetFeaturedProducts);
+
+router.use(isSeller);
 
 router.post("/create-product", handleCreateProduct);
 

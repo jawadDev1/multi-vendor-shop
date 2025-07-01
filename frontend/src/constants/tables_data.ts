@@ -36,3 +36,25 @@ export const Event_ELEMENTS = {
   end_date: TableDate,
   status: TableTitle,
 };
+
+export const COUPOUN_FIELDS = {
+  _id: "Sr#",
+  name: "Name",
+  type: "Type",
+  value: "Discount",
+  min_amount: "Min amount",
+  max_amount: "Max amount",
+  limit: "Limit",
+  createdAt: "Created on",
+};
+
+export const COUPOUN_ELEMENTS = {
+  _id: TableSr,
+  name: TableTitle,
+  type: TableTitle,
+  value: TableTitle,
+  min_amount: TableTitle,
+  max_amount: TableTitle,
+  limit: TableTitle,
+  createdAt: TableDate,
+};

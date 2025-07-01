@@ -61,3 +61,60 @@ export interface IAPISellerEvent {
 export interface IAPISellerEventsResponse extends IAPIResponse {
   data: IAPISellerEvent[];
 }
+
+export interface IAPICoupoun {
+  _id?: string | null;
+  name: string;
+  value: number;
+  min_amount: number;
+  max_amount: number;
+  type: string;
+  limit: number;
+  products: string[];
+}
+
+export interface IAPISellerCoupounResponse extends IAPIResponse {
+  data: IAPICoupoun[];
+}
+
+export interface IAPICoupoun {
+  _id?: string | null;
+  type: string;
+  name: string;
+  value: number;
+  min_amount: number;
+  max_amount: number;
+  products: string[];
+  limit: number;
+}
+
+export interface IAPICategory {
+  _id?: string | null;
+  title: string;
+  slug: string;
+}
+
+// ======================= {{ Front end  Types }} ============================================================================
+
+export interface IAPIUserCategory {
+  title: string;
+  slug: string;
+  description: string;
+  image: string[];
+}
+
+export interface IAPIUserProduct {
+  title: string;
+  slug: string;
+  description: string;
+  images: string[];
+  originalPrice: number;
+  discount?: number;
+  tags: string[];
+  category: IAPIUserCategory;
+  stock: number;
+}
+
+export interface IAPIUserProductResponse extends IAPIResponse {
+  data: IAPIUserProduct[];
+}

@@ -23,6 +23,8 @@ import UpdateProductPage from "@/components/ui/pages/seller/UpdateProductPage";
 import CreateEventPage from "@/components/ui/pages/seller/CreateEventPage";
 import SellerEventPage from "@/components/ui/pages/seller/SellerEvents";
 import UpdateSellerEventPage from "@/components/ui/pages/seller/UpdateSellerEventPage";
+import CoupounPage from "@/components/ui/pages/seller/CoupounPage";
+import UpdateCoupounPage from "@/components/ui/pages/seller/UpdateCoupounPage";
 
 export const routes: RouteObject[] = [
   {
@@ -124,6 +126,14 @@ export const routes: RouteObject[] = [
       {
         path: "events",
         element: <SellerEventPage />,
+      },
+      {
+        path: "coupouns",
+        element: <CoupounPage />,
+      },
+      {
+        path: "coupoun/update/:id",
+        element: <UpdateCoupounPage />,
       },
     ],
   },

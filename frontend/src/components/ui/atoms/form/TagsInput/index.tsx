@@ -22,7 +22,7 @@ const TagsInput = <TFieldValues extends FieldValues>({
     setTags(newTags);
 
     let filteredTags = newTags.map((tag) => tag.text);
-    setValue(name, filteredTags as any, {
+    setValue(name, filteredTags as TFieldValues[typeof name], {
       shouldValidate: filteredTags.length > 0,
     });
   };
@@ -33,7 +33,7 @@ const TagsInput = <TFieldValues extends FieldValues>({
 
     let filteredTags = newTags.map((tag) => tag.text);
 
-    setValue(name, filteredTags as any, {
+    setValue(name, filteredTags as TFieldValues[typeof name], {
       shouldValidate: true,
     });
   };

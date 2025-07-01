@@ -7,12 +7,11 @@ import {
   loginSchema,
 } from "../../../../schemas/login.schema";
 import InputWithLabel from "../../molecules/form/InputWithLabel";
-import Button from "../../atoms/buttons/Button";
 import { Link, useNavigate } from "react-router";
 import { apiRequest } from "@/utils/api";
 import { notifyError, notifySuccess } from "@/utils/toast";
 import ActivateAccountModal from "../../organisms/Modals/ActivateAccoutModal";
-import Spinner from "../../atoms/extra/Spinner";
+import SpinnerButton from "../../atoms/buttons/SpinnerButton";
 
 const LoginPageTemplate: React.FC = () => {
   const {
@@ -106,9 +105,7 @@ const LoginPageTemplate: React.FC = () => {
               </Link>
             </div>
 
-            <Button>
-              {isLoading ? <Spinner className="border-white" /> : "Login"}
-            </Button>
+            <SpinnerButton isLoading={isLoading}>Login</SpinnerButton>
           </form>
 
           <div className="mt-5 text-center">

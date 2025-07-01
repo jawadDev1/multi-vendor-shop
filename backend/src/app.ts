@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import {
   categoryRouter,
+  coupounRouter,
   eventRouter,
   productRouter,
   shopRouter,
@@ -31,7 +32,7 @@ app.use("/api/v1/shop", shopRouter);
 app.use("/api/v1/product", productRouter);
 app.use("/api/v1/event", eventRouter);
 app.use("/api/v1/category", categoryRouter);
-
+app.use("/api/v1/coupoun", coupounRouter);
 
 // Error handler
 app.use(handleError);

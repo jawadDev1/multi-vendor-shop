@@ -7,16 +7,17 @@ import CardTitle from "@/components/ui/atoms/typography/CardTitle";
 import Cart from "@/components/icons/Cart";
 import Image from "@/components/ui/atoms/common/Image";
 import GenerateRatingStar from "@/components/ui/atoms/GenerateRatingStars";
-import type { Product } from "@/constants/static";
 import cn from "@/utils/cn";
 import { useState, type HTMLAttributes } from "react";
 import { Link } from "react-router";
 import ProductDetailsModal from "@/components/ui/organisms/Modals/ProductDetailsModal";
+import type { IAPIUserProduct } from "@/types/api";
+import { calculatePriceAfterDiscount } from "@/utils";
 
 type ProductCardProps = {
-  product: Product;
+  product: IAPIUserProduct;
   className?: string;
-  handleProductView?: (product: Product) => void;
+  handleProductView?: (product: IAPIUserProduct) => void;
 } & HTMLAttributes<HTMLDivElement>;
 
 const ProductCard = ({
@@ -25,8 +26,12 @@ const ProductCard = ({
   handleProductView,
   ...props
 }: ProductCardProps) => {
-  const { category, title, image, rating, price } = product;
+  const { category, title, images, originalPrice, slug, discount } = product;
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const price = discount
+    ? calculatePriceAfterDiscount(originalPrice, discount)
+    : originalPrice;
 
   return (
     <>
@@ -41,7 +46,7 @@ const ProductCard = ({
       >
         <div className="relative py-2">
           <div className="w-[90%] mx-auto h-[250px] ">
-            <Image src={image} className="object-fill" />
+            <Image src={images[0]} className="object-fill" />
           </div>
           <div className="absolute bg-white px-1 py-2 rounded right-1 top-3 grid grid-cols-1 gap-3">
             <AiOutlineHeart
@@ -60,20 +65,25 @@ const ProductCard = ({
             <Cart className="size-[24px] cursor-pointer" />
           </div>
         </div>
-        <div className="mt-3 ">
-          <Subtitle3 className="text-blue-400">{category}</Subtitle3>
-          <Link to={`/products/${title}`}>
+        <div className="mt-3 flex flex-col lg:min-h-[150px] ">
+          <Subtitle3 className="text-blue-400">{category?.title}</Subtitle3>
+          <Link to={`/products/${slug}`}>
             <CardTitle className="line-clamp-2 mt-3 mb-2">{title}</CardTitle>
           </Link>
 
-          <GenerateRatingStar rating={Math.floor(rating.rate)} />
+          <GenerateRatingStar rating={Math.floor(4)} />
+          {/* <GenerateRatingStar rating={Math.floor(rating.rate)} /> */}
 
-          <div className="flex justify-between items-center mt-3">
+          <div className="flex justify-between items-center mt-auto">
             <div className="flex items-center gap-2">
               <Subtitle2 className="!font-semibold">{price}</Subtitle2>
-              <Subtitle3 className="line-through text-tomato-red mb-1">
-                3224$
-              </Subtitle3>
+              {discount ? (
+                <Subtitle3 className="line-through text-tomato-red mb-1">
+                  {originalPrice}$
+                </Subtitle3>
+              ) : (
+                ""
+              )}
             </div>
             <Subtitle2 className="text-green-500">32 sold</Subtitle2>
           </div>

@@ -31,3 +31,13 @@ export interface IEventBody {
   end_date: Date;
   product: ObjectId;
 }
+
+export interface ICoupounBody {
+  name: string;
+  value: number;
+  min_amount: number;
+  max_amount: number;
+  limit: number;
+  type: string;
+  products?: ObjectId[];
+}

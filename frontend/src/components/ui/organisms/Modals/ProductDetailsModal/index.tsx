@@ -6,13 +6,14 @@ import Subtitle2 from "@/components/ui/atoms/typography/Subtitle2";
 import Subtitle3 from "@/components/ui/atoms/typography/Subtitle3";
 import ModalWrapper from "@/components/ui/molecules/ModalWrapper";
 import type { Product } from "@/constants/static";
+import type { IAPIProduct, IAPIUserProduct } from "@/types/api";
 import { AiOutlineHeart } from "react-icons/ai";
 import { CgClose, CgCross } from "react-icons/cg";
 
 interface ProductDetailsModalProps {
   isOpen: boolean;
   handleModal: () => void;
-  product: Product | null;
+  product: IAPIUserProduct | null;
 }
 
 const ProductDetailsModal = ({
@@ -22,7 +23,7 @@ const ProductDetailsModal = ({
 }: ProductDetailsModalProps) => {
   if (!product) return null;
 
-  const { image, title, price, description, rating, category } = product;
+  const { images, title, originalPrice, description, category } = product;
 
   return (
     <ModalWrapper
@@ -40,16 +41,19 @@ const ProductDetailsModal = ({
       <div className="grid grid-cols-1 lg:grid-cols-[40%,60%] gap-x-3 py-3 ">
         <div>
           <div className="w-[90%] mx-auto h-[300px] lg:h-[400px]">
-            <Image src={image} className="object-fill" />
+            <Image src={images[0]} className="object-fill" />
           </div>
           <div className="mt-7 lg:mt-92">
             <div className="flex gap-x-3">
               <div className="size-10 rounded-full">
-                <Image src={image} />
+                <Image src={images[0]} />
               </div>
               <div>
-                <Subtitle2 className="text-blue-500">{category}</Subtitle2>
-                <Subtitle3>{rating.rate} Rating</Subtitle3>
+                <Subtitle2 className="text-blue-500">
+                  {category.title}
+                </Subtitle2>
+                <Subtitle3>4.5 Rating</Subtitle3>
+                {/* <Subtitle3>{rating.rate} Rating</Subtitle3> */}
               </div>
             </div>
 
@@ -58,11 +62,9 @@ const ProductDetailsModal = ({
         </div>
         <div className="space-y-3 px-2 mt-4 lg:mt-0">
           <Subtitle className="!font-semibold">{title}</Subtitle>
-          <Content>
-            {description}
-          </Content>
+          <Content>{description}</Content>
 
-          <Subtitle2>${price}</Subtitle2>
+          <Subtitle2>${originalPrice}</Subtitle2>
 
           {/* Quantity */}
           <div className="flex justify-between pr-3 items-center mt-3 lg:pt-4">

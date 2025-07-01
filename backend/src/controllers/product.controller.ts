@@ -126,7 +126,7 @@ const handleGetSingleProduct = asyncHandler(
     });
 
     if (!product) {
-      return next(new ErrorHandler("Unauthorized", 403));
+      return next(new ErrorHandler("Product not found", 403));
     }
 
     return res.status(200).json({
@@ -137,9 +137,46 @@ const handleGetSingleProduct = asyncHandler(
   }
 );
 
+const handleGetBestDealProducts = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const products = await ProductModel.find({})
+      .populate("category")
+      .select(
+        "title originalPrice images category slug discount sold_out stock description"
+      )
+      .sort({ createdAt: -1 })
+      .limit(5);
+
+    if (products.length === 0) {
+      return next(new ErrorHandler("Product not found", 404));
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "products fetched successfully",
+      data: products,
+    });
+  }
+);
+
+const handleGetFeaturedProducts = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const products = await ProductModel.find({}).limit(5);
+
+    if (products.length === 0) {
+      return next(new ErrorHandler("Product not found", 404));
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "products fetched successfully",
+      data: products,
+    });
+  }
+);
+
 const handleGetProductsForForm = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    // const userId = mongoose.Types.ObjectId.createFromHexString(req.user?.id);
     const userId = req.user?.id;
     const pipeline = [
       {
@@ -179,4 +216,6 @@ export {
   handleUpdateProduct,
   handleGetSingleProduct,
   handleGetProductsForForm,
+  handleGetBestDealProducts,
+  handleGetFeaturedProducts,
 };

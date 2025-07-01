@@ -1,5 +1,4 @@
 import cn from "@/utils/cn";
-import React from "react";
 import { BiEdit } from "react-icons/bi";
 import { Link } from "react-router";
 

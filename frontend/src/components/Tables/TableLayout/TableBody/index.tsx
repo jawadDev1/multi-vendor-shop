@@ -1,10 +1,11 @@
 import type { ITableData } from "@/types/common";
 import type React from "react";
+import type { ActionProps } from "../..";
 
 interface TableBodyProps extends ITableData {
   fields: { [key: string]: string };
   elements: { [key: string]: React.ComponentType<any> };
-  actions?: React.ComponentType<{ id: string }>;
+  actions?: React.ComponentType<ActionProps>;
 }
 
 const TableBody = ({
@@ -26,7 +27,7 @@ const TableBody = ({
               const TD = elements[key];
               return <TD key={key} value={item[key]} index={i} />;
             })}
-            {Actions && <Actions id={item["_id"]} />}
+            {Actions && <Actions id={item["_id"]} record={item} />}
           </tr>
         ))}
     </tbody>

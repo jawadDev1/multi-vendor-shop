@@ -15,7 +15,7 @@ const AllProductsPage = () => {
     if (error) {
       notifyError(error);
     }
-  }, [error]);
+  }, []);
 
   if (loading) {
     return <Loader />;

@@ -10,3 +10,8 @@ export interface ITableData<
 > {
   data: T[];
 }
+
+export interface ISelectOptions {
+  label: string;
+  value: string;
+}

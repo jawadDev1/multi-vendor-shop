@@ -16,3 +16,10 @@ export const formateDate = (date: string) => {
 export const convertStringToDate = (date: string) => {
   return new Date(date).toISOString().slice(0, 10);
 };
+
+export const calculatePriceAfterDiscount = (
+  originalPrice: number,
+  discount: number
+) => {
+  return originalPrice - (1 - discount / 100);
+};

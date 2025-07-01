@@ -2,11 +2,16 @@ import TableHeader from "./TableLayout/TableHeader";
 import TableBody from "./TableLayout/TableBody";
 import type { ITableData } from "@/types/common";
 
+export interface ActionProps {
+  id: string;
+  record?: { [key: string]: unknown };
+}
+
 interface TableShellProps extends ITableData {
   fields: { [key: string]: string };
 
   elements: { [key: string]: React.ComponentType<any> };
-  actions?: React.ComponentType<{ id: string }>;
+  actions?: React.ComponentType<ActionProps>;
 }
 
 const TableShell = ({ fields, data, elements, actions }: TableShellProps) => {

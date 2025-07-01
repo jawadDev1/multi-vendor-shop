@@ -1,4 +1,4 @@
-import { IProduct, IShop } from "#types/models.js";
+import { IProduct } from "#types/models.js";
 import mongoose, { model, Schema } from "mongoose";
 
 const productSchema = new Schema<IProduct>(
@@ -27,6 +27,10 @@ const productSchema = new Schema<IProduct>(
       default: 0,
     },
     stock: {
+      type: Number,
+      default: 0,
+    },
+    sold_out: {
       type: Number,
       default: 0,
     },

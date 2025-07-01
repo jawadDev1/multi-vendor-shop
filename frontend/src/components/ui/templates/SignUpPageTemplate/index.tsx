@@ -3,16 +3,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import SectionTitle from "@/components/ui/atoms/typography/SectionTitle/index";
 import InputWithLabel from "../../molecules/form/InputWithLabel";
-import Button from "../../atoms/buttons/Button";
 import { Link, useNavigate } from "react-router";
 import FileInputWithPreview from "../../molecules/form/FileInputWithPreview";
 import { uploadImageToAppwrite } from "@/utils/uploadFile";
 import { useState } from "react";
-import Spinner from "../../atoms/extra/Spinner";
 import { notifyError } from "@/utils/toast";
 
 import ActivateAccountModal from "../../organisms/Modals/ActivateAccoutModal";
 import { apiRequest } from "@/utils/api";
+import SpinnerButton from "../../atoms/buttons/SpinnerButton";
 
 const SignupPageTemplate: React.FC = () => {
   const {
@@ -119,9 +118,7 @@ const SignupPageTemplate: React.FC = () => {
               />
             </div>
 
-            <Button>
-              {isLoading ? <Spinner className="border-white" /> : "Signup"}
-            </Button>
+            <SpinnerButton isLoading={isLoading}>Signup</SpinnerButton>
           </form>
 
           <div className="mt-5 text-center">
