@@ -1,12 +1,19 @@
+import type { IAPIUserEvent } from "@/types/api";
 import PageWrapper from "../../atoms/PageWrapper";
 import EventCard from "../../molecules/Cards/EventCard";
 
-const EventsPageTemplate = () => {
+interface EventsPageTemplateProps {
+  events: IAPIUserEvent[] | null;
+}
+
+const EventsPageTemplate = ({ events }: EventsPageTemplateProps) => {
   return (
     <PageWrapper className="flex flex-col gap-y-10 lg:gap-y-20">
-      <EventCard />
-      <EventCard />
-      <EventCard />
+      {events &&
+        events.length > 0 &&
+        events.map((event) => (
+          <EventCard key={event.product.slug} event={event} />
+        ))}
     </PageWrapper>
   );
 };

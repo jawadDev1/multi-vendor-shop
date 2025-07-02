@@ -1,13 +1,13 @@
-
 import SectionWrapper from "../../atoms/SectionWrapper";
 import type { Product } from "@/constants/static";
 import ProductCard from "../../molecules/Cards/ProductCard";
 import Content from "../../atoms/typography/Content";
 import useHandleProductModal from "@/hooks/useHandleProductModal";
 import ProductDetailsModal from "../../organisms/Modals/ProductDetailsModal";
+import type { IAPIUserProduct } from "@/types/api";
 
 interface BestSellingPageTemplateProps {
-  products: Product[];
+  products: IAPIUserProduct[];
 }
 
 const BestSellingPageTemplate = ({
@@ -29,7 +29,7 @@ const BestSellingPageTemplate = ({
             products.length > 0 &&
             products.map((product) => (
               <ProductCard
-                key={product.id}
+                key={product.slug}
                 product={product}
                 handleProductView={handleProduct}
               />

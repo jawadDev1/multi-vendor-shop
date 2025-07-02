@@ -260,6 +260,47 @@ const handleGetProductDetails = asyncHandler(
   }
 );
 
+const handleGetBestSellingProducts = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const products = await ProductModel.find({})
+      .populate([
+        { path: "category", select: "-_id title slug description image" },
+      ])
+      .select(
+        "title originalPrice images category slug discount sold_out stock description"
+      )
+      .sort({ createdAt: -1 });
+
+    return res.status(200).json({
+      success: true,
+      message: "best selling products fetched successfully",
+      data: products,
+    });
+  }
+);
+
+const handleGetProducts = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { category } = req.query;
+    const query = category ? { category } : {};
+
+    const products = await ProductModel.find(query)
+      .populate([
+        { path: "category", select: "-_id title slug description image" },
+      ])
+      .select(
+        "title originalPrice images category slug discount sold_out stock description"
+      )
+      .sort({ createdAt: -1 });
+
+    return res.status(200).json({
+      success: true,
+      message: "products fetched successfully",
+      data: products,
+    });
+  }
+);
+
 export {
   handleCreateProduct,
   handleGetShopProducts,
@@ -269,5 +310,7 @@ export {
   handleGetProductsForForm,
   handleGetBestDealProducts,
   handleGetFeaturedProducts,
+  handleGetBestSellingProducts,
   handleGetProductDetails,
+  handleGetProducts,
 };

@@ -141,7 +141,7 @@ const handleGetPopularEvent = asyncHandler(
       .sort({ createdAt: -1 })
       .limit(1)
       .select("-_id");
-      
+
     if (!event) {
       return next(new ErrorHandler("Unauthorized", 403));
     }
@@ -154,6 +154,21 @@ const handleGetPopularEvent = asyncHandler(
   }
 );
 
+const handleGetEvents = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const events = await EventModel.find({})
+      .populate("product")
+      .sort({ createdAt: -1 })
+      .select("-_id");
+
+    return res.status(200).json({
+      success: true,
+      message: "event fetched successfully",
+      data: events,
+    });
+  }
+);
+
 export {
   handleCreateEvent,
   handleUpdateEvent,
@@ -161,4 +176,5 @@ export {
   handleGetSellerEvents,
   handleGetSingleEvent,
   handleGetPopularEvent,
+  handleGetEvents,
 };

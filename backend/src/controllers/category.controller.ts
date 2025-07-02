@@ -33,4 +33,16 @@ const handleGetCategoriesForForm = asyncHandler(
   }
 );
 
-export { handleGetCategoriesForForm };
+const handleGetCategories = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const categories = await CategoryModel.find({}).select("title _id image");
+
+    return res.status(200).json({
+      success: true,
+      message: "categories get successfully",
+      data: categories,
+    });
+  }
+);
+
+export { handleGetCategoriesForForm, handleGetCategories };

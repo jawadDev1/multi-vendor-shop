@@ -1,28 +1,31 @@
-import React, { useEffect, useState } from "react";
 import ProductsPageTemplate from "../../templates/ProductsPageTemplate";
 import { useSearchParams } from "react-router";
-import { PRODUCTS_DATA, type Product } from "@/constants/static";
+import useGetData from "@/hooks/useGetData";
+import type { IAPIUserProduct } from "@/types/api";
+import Loader from "../../atoms/extra/Loader";
 
 const ProductsPage = () => {
   const [searchParams] = useSearchParams();
   const category = searchParams.get("category");
+  const endpoint = category
+    ? `product/all-products?category=${category}`
+    : `product/all-products`;
+  const { data, loading, error } = useGetData<IAPIUserProduct[]>({
+    endpoint,
+    dependencies: [category],
+  });
 
-  const [products, setProducts] = useState<Product[]>([]);
+  if (loading) {
+    return <Loader />;
+  }
 
-  useEffect(() => {
-    if (category) {
-      const data = PRODUCTS_DATA.filter(
-        (product) => product.category === category
-      );
-      setProducts(data);
-    } else {
-      setProducts(PRODUCTS_DATA);
-    }
-  }, [category]);
+  if (!data || error) {
+    return null;
+  }
 
   return (
     <>
-      <ProductsPageTemplate products={products} />
+      <ProductsPageTemplate products={data} />
     </>
   );
 };

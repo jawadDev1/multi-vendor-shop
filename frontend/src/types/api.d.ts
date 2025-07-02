@@ -102,10 +102,15 @@ export interface IAPICategory {
 // ======================= {{ Front end  Types }} ============================================================================
 
 export interface IAPIUserCategory {
+  _id?: string;
   title: string;
   slug: string;
   description: string;
   image: string;
+}
+
+export interface IAPICategoryResponse extends IAPIResponse {
+  data: IAPIUserCategory[];
 }
 
 export interface IAPIUserShop {

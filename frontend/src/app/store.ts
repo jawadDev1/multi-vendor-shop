@@ -4,6 +4,7 @@ import shopSlice from "@/features/shop/shopSlice";
 import sellerSlice from "@/features/seller/sellerSlice";
 import eventSlice from "@/features/event/eventSlice";
 import productSlice from "@/features/product/productSlice";
+import categorySlice from "@/features/category/categorySlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     seller: sellerSlice,
     event: eventSlice,
     product: productSlice,
+    category: categorySlice,
   },
 });
 

@@ -14,15 +14,18 @@ import LinkButton from "@/components/ui/atoms/buttons/LinkButton";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { loadUser } from "@/features/user/userThunks";
 import { useEffect } from "react";
+import { loadCategories } from "@/features/category/categoryThunk";
 
 const Header = () => {
   const dispatch = useAppDispatch();
-  const { user, loading, isAuthenticated } = useAppSelector(
-    (state) => state.user
-  );
+  const { user: userState, category } = useAppSelector((state) => state);
+
+  const { user, loading, isAuthenticated } = userState;
+  const { categories } = category;
 
   useEffect(() => {
     dispatch(loadUser());
+    dispatch(loadCategories());
   }, []);
 
   return (
@@ -60,7 +63,9 @@ const Header = () => {
       {/* Second Nav  */}
       <div className="bg-azure-blue sticky top-0 z-20 hidden md:block">
         <div className="h-[60px] px-5 max-w-[1200px] mx-auto  flex justify-between items-center">
-          <DropDownMenu categories={CATEGORIES} />
+          {categories && categories.length > 0 && (
+            <DropDownMenu categories={categories} />
+          )}
           <NavMenu />
           <div className="flex items-center gap-x-4">
             <Wishlist />

@@ -3,9 +3,13 @@ import { useEffect, useState } from "react";
 
 interface UseGetDataProps<T> {
   endpoint: string;
+  dependencies?: unknown[];
 }
 
-const useGetData = <T,>({ endpoint }: UseGetDataProps<T>) => {
+const useGetData = <T,>({
+  endpoint,
+  dependencies = [],
+}: UseGetDataProps<T>) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setDate] = useState<T | null>(null);
   const [error, setError] = useState<string>("");
@@ -22,7 +26,7 @@ const useGetData = <T,>({ endpoint }: UseGetDataProps<T>) => {
 
       setDate(result?.data);
     })();
-  }, []);
+  }, dependencies);
 
   return { loading, data, error };
 };

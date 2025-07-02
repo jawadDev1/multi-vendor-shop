@@ -2,8 +2,10 @@ import {
   handleCreateProduct,
   handleDeleteProduct,
   handleGetBestDealProducts,
+  handleGetBestSellingProducts,
   handleGetFeaturedProducts,
   handleGetProductDetails,
+  handleGetProducts,
   handleGetProductsForForm,
   handleGetShopProducts,
   handleGetSingleProduct,
@@ -17,7 +19,13 @@ import { Router } from "express";
 const router = Router();
 
 router.get("/best-deals", handleGetBestDealProducts);
+
+router.get("/all-products", handleGetProducts);
+
+router.get("/best-selling", handleGetBestSellingProducts);
+
 router.get("/featured", handleGetFeaturedProducts);
+
 router.get("/product-details/:slug", handleGetProductDetails);
 
 router.use(isSeller);

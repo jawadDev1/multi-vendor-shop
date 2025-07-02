@@ -1,6 +1,7 @@
 import {
   handleCreateEvent,
   handleDeleteEvent,
+  handleGetEvents,
   handleGetPopularEvent,
   handleGetSellerEvents,
   handleGetSingleEvent,
@@ -13,6 +14,7 @@ import { Router } from "express";
 const router = Router();
 
 router.get("/popular", handleGetPopularEvent);
+router.get("/all-events", handleGetEvents);
 
 router.use(isSeller);
 
