@@ -3,6 +3,7 @@ import {
   handleDeleteProduct,
   handleGetBestDealProducts,
   handleGetFeaturedProducts,
+  handleGetProductDetails,
   handleGetProductsForForm,
   handleGetShopProducts,
   handleGetSingleProduct,
@@ -17,6 +18,7 @@ const router = Router();
 
 router.get("/best-deals", handleGetBestDealProducts);
 router.get("/featured", handleGetFeaturedProducts);
+router.get("/product-details/:slug", handleGetProductDetails);
 
 router.use(isSeller);
 

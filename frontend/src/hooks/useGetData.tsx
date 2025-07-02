@@ -1,14 +1,14 @@
 import { getApiRequest } from "@/utils/api";
-import { notifyError } from "@/utils/toast";
 import { useEffect, useState } from "react";
 
-interface Props {
+interface UseGetDataProps<T> {
   endpoint: string;
 }
 
-const useGetData = ({ endpoint }: Props) => {
+const useGetData = <T,>({ endpoint }: UseGetDataProps<T>) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [data, setDate] = useState<{ [key: string]: unknown }[]>([]);
+  const [data, setDate] = useState<T | null>(null);
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     (async () => {
@@ -16,7 +16,7 @@ const useGetData = ({ endpoint }: Props) => {
       const result = await getApiRequest(endpoint);
       setLoading(false);
       if (!result.success) {
-        notifyError(result?.message || "Something went wrong");
+        setError(result?.message);
         return;
       }
 
@@ -24,7 +24,7 @@ const useGetData = ({ endpoint }: Props) => {
     })();
   }, []);
 
-  return { loading, data };
+  return { loading, data, error };
 };
 
 export default useGetData;

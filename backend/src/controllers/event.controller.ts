@@ -134,10 +134,31 @@ const handleGetSingleEvent = asyncHandler(
   }
 );
 
+const handleGetPopularEvent = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const event = await EventModel.findOne({})
+      .populate("product")
+      .sort({ createdAt: -1 })
+      .limit(1)
+      .select("-_id");
+      
+    if (!event) {
+      return next(new ErrorHandler("Unauthorized", 403));
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "event fetched successfully",
+      data: event,
+    });
+  }
+);
+
 export {
   handleCreateEvent,
   handleUpdateEvent,
   handleDeleteEvent,
   handleGetSellerEvents,
-  handleGetSingleEvent
+  handleGetSingleEvent,
+  handleGetPopularEvent,
 };

@@ -1,32 +1,36 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ProductDetailPageTemplate from "../../templates/ProductDetailPageTemplate";
-import { useParams } from "react-router";
-import { PRODUCTS_DATA, type Product } from "@/constants/static";
+import { useNavigate, useParams } from "react-router";
+import { loadProductDetails } from "@/features/product/productThunk";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import Loader from "../../atoms/extra/Loader";
 
 const ProductDetialPage = () => {
   const { slug } = useParams();
-  const [product, setProduct] = useState<Product | null>(null);
-  const [relatedProducts, setRelatedProducts] = useState<Product[] | null>(
-    null
+  const navigate = useNavigate();
+
+  const { productDetails, loading, relatedProducts } = useAppSelector(
+    (state) => state.product
   );
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    let p = PRODUCTS_DATA.find((product) => product.title == slug);
-    if (p) setProduct(p);
-
-    let r = PRODUCTS_DATA.filter((product) => product.category == p?.category);
-
-    setRelatedProducts(r);
+    (async () => {
+      const result = await dispatch(loadProductDetails(slug!)).unwrap();
+      if (!result?.success) {
+        navigate("/not-found");
+      }
+    })();
   }, [slug]);
 
-  if (!product) {
-    return null;
+  if (!productDetails || loading) {
+    return <Loader />;
   }
 
   return (
     <>
       <ProductDetailPageTemplate
-        product={product}
+        product={productDetails}
         relatedProducts={relatedProducts}
       />
     </>

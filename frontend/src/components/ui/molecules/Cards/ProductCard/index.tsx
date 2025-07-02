@@ -1,8 +1,6 @@
 import Subtitle2 from "@/components/ui/atoms/typography/Subtitle2";
 import Subtitle3 from "@/components/ui/atoms/typography/Subtitle3";
-
 import { AiOutlineEye, AiOutlineHeart } from "react-icons/ai";
-
 import CardTitle from "@/components/ui/atoms/typography/CardTitle";
 import Cart from "@/components/icons/Cart";
 import Image from "@/components/ui/atoms/common/Image";
@@ -67,7 +65,7 @@ const ProductCard = ({
         </div>
         <div className="mt-3 flex flex-col lg:min-h-[150px] ">
           <Subtitle3 className="text-blue-400">{category?.title}</Subtitle3>
-          <Link to={`/products/${slug}`}>
+          <Link to={`/products/${encodeURIComponent(slug)}`}>
             <CardTitle className="line-clamp-2 mt-3 mb-2">{title}</CardTitle>
           </Link>
 
@@ -76,7 +74,7 @@ const ProductCard = ({
 
           <div className="flex justify-between items-center mt-auto">
             <div className="flex items-center gap-2">
-              <Subtitle2 className="!font-semibold">{price}</Subtitle2>
+              <Subtitle2 className="!font-semibold">{price}$</Subtitle2>
               {discount ? (
                 <Subtitle3 className="line-through text-tomato-red mb-1">
                   {originalPrice}$

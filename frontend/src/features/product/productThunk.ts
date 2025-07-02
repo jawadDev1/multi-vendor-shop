@@ -1,4 +1,7 @@
-import type { IAPIProductResponse, IAPIUserProductResponse } from "@/types/api";
+import type {
+  IAPIUserProductDetailsResponse,
+  IAPIUserProductResponse,
+} from "@/types/api";
 import { getApiRequest } from "@/utils/api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -15,7 +18,7 @@ export const loadBestDeals = createAsyncThunk<IAPIUserProductResponse>(
   }
 );
 
-export const loadFeaturedProducts = createAsyncThunk<IAPIProductResponse>(
+export const loadFeaturedProducts = createAsyncThunk<IAPIUserProductResponse>(
   "product/featured_products",
   async (_, thunkAPI) => {
     try {
@@ -27,3 +30,14 @@ export const loadFeaturedProducts = createAsyncThunk<IAPIProductResponse>(
     }
   }
 );
+
+export const loadProductDetails = createAsyncThunk<
+  IAPIUserProductDetailsResponse,
+  string
+>("product/details", async (slug, thunkAPI) => {
+  try {
+    return await getApiRequest(`product/product-details/${slug}`);
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(error?.response?.data?.message || "Failed");
+  }
+});

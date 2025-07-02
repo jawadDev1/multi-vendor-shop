@@ -1,10 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PRODUCT_STATE } from "./productTypes";
-import { loadBestDeals, loadFeaturedProducts } from "./productThunk";
+import {
+  loadBestDeals,
+  loadFeaturedProducts,
+  loadProductDetails,
+} from "./productThunk";
 
 const initialState: PRODUCT_STATE = {
   best_deals: null,
   featured_products: null,
+  relatedProducts: null,
   loading: false,
   error: null,
 };
@@ -34,6 +39,18 @@ const productSlice = createSlice({
         state.featured_products = action.payload.data;
       })
       .addCase(loadFeaturedProducts.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(loadProductDetails.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(loadProductDetails.fulfilled, (state, action) => {
+        state.loading = false;
+        state.productDetails = action.payload.data.product;
+        state.relatedProducts = action.payload.data.relatedProducts;
+      })
+      .addCase(loadProductDetails.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });

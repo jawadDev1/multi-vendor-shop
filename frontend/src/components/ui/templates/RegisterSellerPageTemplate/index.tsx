@@ -13,6 +13,7 @@ import Spinner from "../../atoms/extra/Spinner";
 
 import FileInputWithPreview from "../../molecules/form/FileInputWithPreview";
 import { uploadImageToAppwrite } from "@/utils/uploadFile";
+import TextareaWithLabel from "../../molecules/form/TextareaWithLabel";
 
 const RegisterSellerPageTemplate = () => {
   const navigate = useNavigate();
@@ -107,6 +108,17 @@ const RegisterSellerPageTemplate = () => {
             name="address"
             register={register}
             error={errors?.address}
+            required
+          />
+        </div>
+
+        <div>
+          <TextareaWithLabel
+            placeholder="Write about your shop"
+            label="About"
+            name="about"
+            register={register}
+            error={errors?.about}
             required
           />
         </div>

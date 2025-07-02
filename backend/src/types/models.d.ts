@@ -17,8 +17,10 @@ export interface IUser extends Document {
 export interface IShop extends Document {
   shop_name: string;
   logo: string;
+  slug: string;
   zip_code: number;
   contact: number;
+  about: string;
   address: string;
   owner: ObjectId;
 }

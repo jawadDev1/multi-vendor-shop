@@ -7,9 +7,18 @@ const shopSchema = new Schema<IShop>(
       type: String,
       default: null,
     },
+    slug: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",
+    },
+    about: {
+      type: String,
+      required: true,
     },
     logo: {
       type: String,

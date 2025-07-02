@@ -41,3 +41,18 @@ export interface ICoupounBody {
   type: string;
   products?: ObjectId[];
 }
+
+export interface ICategoryBody {
+  _id?: ObjectId;
+  title: string;
+  description: number;
+  slug: number;
+  image: string;
+}
+
+I;
+
+export type IPopulatedProduct = Omit<IProduct, "category" | "shop"> & {
+  category: ICategoryBody;
+  shop: IShop;
+};

@@ -4,9 +4,10 @@ import Subtitle from "../../atoms/typography/Subtitle";
 
 interface CountdownProps {
   targetDate: Date | string;
+  start_date?: Date | string;
 }
 
-const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
+const Countdown: React.FC<CountdownProps> = ({ targetDate, start_date }) => {
   const [timeLeft, setTimeLeft] = useState(getTimeLeft(targetDate));
 
   useEffect(() => {

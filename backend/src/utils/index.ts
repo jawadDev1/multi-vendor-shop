@@ -10,8 +10,8 @@ export const validateBody = (body: { [key: string]: any }) => {
 
 export const generateSlug = (text: string) => {
   return text
+    .toLowerCase()
     .replaceAll(/[&,%,$,-,(,)]/g, "")
     .replaceAll(/\s+/g, "-")
     .trim();
 };
-

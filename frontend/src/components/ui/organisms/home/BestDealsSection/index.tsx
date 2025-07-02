@@ -1,12 +1,8 @@
 import SectionWrapper from "@/components/ui/atoms/SectionWrapper";
-
 import SectionTitle from "@/components/ui/atoms/typography/SectionTitle";
 import ProductCard from "@/components/ui/molecules/Cards/ProductCard";
-import { PRODUCTS_DATA } from "@/constants/static";
-
 import ProductDetailsModal from "../../Modals/ProductDetailsModal";
 import useHandleProductModal from "@/hooks/useHandleProductModal";
-import useGetData from "@/hooks/useGetData";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { loadBestDeals } from "@/features/product/productThunk";
@@ -22,8 +18,6 @@ const BestDealsSection = () => {
       dispatch(loadBestDeals());
     }
   }, []);
-
-  console.log("b ======> ", best_deals);
 
   return (
     <>

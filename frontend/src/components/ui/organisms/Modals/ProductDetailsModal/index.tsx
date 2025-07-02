@@ -5,10 +5,9 @@ import Subtitle from "@/components/ui/atoms/typography/Subtitle";
 import Subtitle2 from "@/components/ui/atoms/typography/Subtitle2";
 import Subtitle3 from "@/components/ui/atoms/typography/Subtitle3";
 import ModalWrapper from "@/components/ui/molecules/ModalWrapper";
-import type { Product } from "@/constants/static";
-import type { IAPIProduct, IAPIUserProduct } from "@/types/api";
+import type { IAPIUserProduct } from "@/types/api";
 import { AiOutlineHeart } from "react-icons/ai";
-import { CgClose, CgCross } from "react-icons/cg";
+import { CgClose } from "react-icons/cg";
 
 interface ProductDetailsModalProps {
   isOpen: boolean;

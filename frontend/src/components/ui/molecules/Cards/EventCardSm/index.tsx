@@ -8,14 +8,12 @@ import Countdown from "@/components/ui/molecules/Countdown";
 import type { IAPIUserEvent } from "@/types/api";
 import { calculatePriceAfterDiscount } from "@/utils";
 
-import { AiOutlineArrowRight } from "react-icons/ai";
-import { Link } from "react-router";
 
 interface EventCardProps {
   event: IAPIUserEvent;
 }
 
-const EventCard = ({ event }: EventCardProps) => {
+const EventCardSm = ({ event }: EventCardProps) => {
   const { product, start_date, end_date } = event;
   const {
     title,
@@ -33,20 +31,22 @@ const EventCard = ({ event }: EventCardProps) => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[50%,50%] gap-x-3 py-8 lg:py-10 px-5 h-fit bg-white shadow-md hover:shadow-lg rounded-md">
-      <div className="w-[70%] max-h-[400px] mx-auto">
+      <div className="w-[70%] max-h-[300px] mx-auto">
         <Image src={images[0]} className="object-fill" />
       </div>
 
       <div className="space-y-3 h-fit mt-3 lg:mt-0">
         <Subtitle>{title}</Subtitle>
-        <Content>{description}</Content>
+        <Content className="line-clamp-2 lg:line-clamp-3">
+          {description}
+        </Content>
 
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-x-2">
-            <Subtitle2>{price}$</Subtitle2>
+            <Subtitle2 className="!font-semibold">{price}$</Subtitle2>
             {discount ? (
               <Subtitle3 className="line-through text-tomato-red mb-1">
-                {originalPrice}
+                {originalPrice}$
               </Subtitle3>
             ) : (
               ""
@@ -68,22 +68,9 @@ const EventCard = ({ event }: EventCardProps) => {
             Buy Now
           </LinkButton>
         </div>
-
-        <div className="text-end">
-          <Link
-            className="group text-dim-gray flex items-center gap-x-2 w-fit text-end self-end ml-auto hover:text-green-600 "
-            to={"/events"}
-          >
-            See more Events{" "}
-            <AiOutlineArrowRight
-              size={20}
-              className="text-dim-gray group-hover:text-green-600"
-            />
-          </Link>
-        </div>
       </div>
     </div>
   );
 };
 
-export default EventCard;
+export default EventCardSm;

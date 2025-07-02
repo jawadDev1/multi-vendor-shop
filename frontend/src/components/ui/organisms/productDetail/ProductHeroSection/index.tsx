@@ -4,41 +4,63 @@ import SectionWrapper from "@/components/ui/atoms/SectionWrapper";
 import Content from "@/components/ui/atoms/typography/Content";
 import Subtitle from "@/components/ui/atoms/typography/Subtitle";
 import Subtitle2 from "@/components/ui/atoms/typography/Subtitle2";
-import Subtitle3 from "@/components/ui/atoms/typography/Subtitle3";
+import type { IAPIUserCategory, IAPIUserShop } from "@/types/api";
+import { calculatePriceAfterDiscount } from "@/utils";
+import { useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
+import { Link } from "react-router";
 
 interface Props {
   title: string;
   description: string;
-  image: string;
-  category: string;
-  rating: number;
-  price: number;
+  images: string[];
+  category: IAPIUserCategory;
+  rating?: number;
+  originalPrice: number;
+  discount?: number;
+  shop?: IAPIUserShop;
 }
 
 const ProductHeroSection = ({
   title,
-  image,
+  images,
   description,
-  price,
-  category,
-  rating,
+  originalPrice,
+  discount,
+  shop,
 }: Props) => {
+  const [slectedImage, setSlectedImage] = useState<number>(0);
+  const price = discount
+    ? calculatePriceAfterDiscount(originalPrice, discount)
+    : originalPrice;
+
+  const handleImageChange = (index: number) => {
+    setSlectedImage(index);
+  };
+
   return (
     <SectionWrapper className="grid grid-cols-1 md:grid-cols-[45%,55%] gap-x-7 gap-y-5">
       <div className="">
         <div className="w-[80%] mx-auto max-h-[300px] lg:max-h-[400px] h-full">
-          <Image src={image} />
+          <Image src={images[slectedImage]} />
         </div>
 
-        <div className="grid grid-cols-2 gap-3 mt-6 lg:mt-7 ">
-          <div className="w-full h-full border border-dim-gray/40 rounded-md p-6 max-h-[200px] lg:max-h-[240px]">
-            <Image src={image} />
+        {images && images.length > 1 && (
+          <div className="grid grid-cols-2 gap-3 mt-6 lg:mt-7 ">
+            {images.map(
+              (src, i) =>
+                i !== slectedImage && (
+                  <div
+                    key={i}
+                    onClick={() => handleImageChange(i)}
+                    className="w-full h-full border border-dim-gray/40 rounded-md p-6 max-h-[200px] lg:max-h-[240px] cursor-pointer "
+                  >
+                    <Image src={src} />
+                  </div>
+                )
+            )}
           </div>
-          <div className="w-full h-full border border-dim-gray/40 rounded-md p-6 max-h-[200px] lg:max-h-[240px] ">
-            <Image src={image} />
-          </div>
-        </div>
+        )}
       </div>
 
       <div>
@@ -48,9 +70,13 @@ const ProductHeroSection = ({
 
         <div className="flex items-center gap-x-2">
           <Subtitle>${price}</Subtitle>
-          <Subtitle2 className="text-tomato-red line-through mb-2">
-            $832
-          </Subtitle2>
+          {discount ? (
+            <Subtitle2 className="text-tomato-red line-through mb-2">
+              {originalPrice}$
+            </Subtitle2>
+          ) : (
+            ""
+          )}
         </div>
 
         <div className="flex justify-between pr-3 items-center my-3 lg:py-4">
@@ -66,11 +92,15 @@ const ProductHeroSection = ({
 
         <div className="flex gap-x-3 items-center mt-5 lg:mt-10">
           <div className="size-12 rounded-full overflow-hidden">
-            <Image src={image} />
+            <Image src={shop?.logo!} />
           </div>
           <div>
-            <Subtitle2 className="text-azure-blue">{category}</Subtitle2>
-            <Subtitle3>({rating}) Rating</Subtitle3>
+            <Link to={`/shop/${shop?.slug}`}>
+              <Subtitle2 className="text-azure-blue">
+                {shop?.shop_name}
+              </Subtitle2>
+            </Link>
+            {/* <Subtitle3>({rating}) Rating</Subtitle3> */}
           </div>
           <Button className="max-w-[300px] bg-dark-azure">Send message</Button>
         </div>

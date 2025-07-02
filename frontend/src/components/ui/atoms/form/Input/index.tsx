@@ -11,6 +11,7 @@ type InputProps<TFieldValues extends FieldValues> = {
 const INPUT_TYPES: { [key: string]: { [key: string]: boolean } } = {
   number: { valueAsNumber: true },
   date: { valueAsDate: true },
+  "datetime-local": { valueAsDate: true },
   default: {},
   string: {},
 };

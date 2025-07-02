@@ -1,7 +1,7 @@
 import asyncHandler from "#middleware/asyncHandler.js";
 import { ProductModel } from "#models/product.model.js";
 import { ShopModel } from "#models/shop.model.js";
-import { IProductBody } from "#types/controllers.js";
+import { IProductBody, IPopulatedProduct } from "#types/controllers.js";
 import { ErrorHandler } from "#utils/ErrorHandle.js";
 import { generateSlug, validateBody } from "#utils/index.js";
 import { Request, Response, NextFunction } from "express";
@@ -140,7 +140,9 @@ const handleGetSingleProduct = asyncHandler(
 const handleGetBestDealProducts = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const products = await ProductModel.find({})
-      .populate("category")
+      .populate([
+        { path: "category", select: "-_id title slug description image" },
+      ])
       .select(
         "title originalPrice images category slug discount sold_out stock description"
       )
@@ -161,7 +163,15 @@ const handleGetBestDealProducts = asyncHandler(
 
 const handleGetFeaturedProducts = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const products = await ProductModel.find({}).limit(5);
+    const products = await ProductModel.find({})
+      .populate([
+        { path: "category", select: "-_id title slug description image" },
+      ])
+      .select(
+        "title originalPrice images category slug discount sold_out stock description"
+      )
+      .sort({ createdAt: -1 })
+      .limit(5);
 
     if (products.length === 0) {
       return next(new ErrorHandler("Product not found", 404));
@@ -209,6 +219,47 @@ const handleGetProductsForForm = asyncHandler(
   }
 );
 
+const handleGetProductDetails = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { slug } = req.params;
+
+      const product = await ProductModel.findOne({ slug })
+        .populate([
+          { path: "category", select: "_id title slug description image" },
+          {
+            path: "shop",
+            select: "-_id shop_name logo about createdAt slug description",
+          },
+        ])
+        .select(
+          "title originalPrice images category slug discount sold_out stock description "
+        )
+        .lean<IPopulatedProduct>();
+
+      if (!product) {
+        return next(new ErrorHandler("Product not found", 404));
+      }
+
+      const relatedProducts = await ProductModel.find({
+        category: product?.category?._id,
+        slug: { $ne: product.slug },
+      })
+        .sort({ createdAt: -1 })
+        .limit(5);
+
+      return res.status(200).json({
+        success: true,
+        message: "product fetched successfully",
+        data: { product, relatedProducts },
+      });
+    } catch (error) {
+      console.log("Error in handleGetProductDetails :: ", error);
+      return next(new ErrorHandler("Something went wrong", 500));
+    }
+  }
+);
+
 export {
   handleCreateProduct,
   handleGetShopProducts,
@@ -218,4 +269,5 @@ export {
   handleGetProductsForForm,
   handleGetBestDealProducts,
   handleGetFeaturedProducts,
+  handleGetProductDetails,
 };

@@ -1,4 +1,5 @@
 export interface IAPIUser {
+  _id?: string;
   name: string;
   email: string;
   profile: string;
@@ -8,11 +9,15 @@ export interface IAPIUser {
 
 export interface IAPIShop {
   _id?: string | null;
+  slug: string;
   shop_name: string;
   contact: number;
   logo: string;
+  owner?: string;
   zip_code: number;
   address?: string;
+  products?: IAPIUserProduct[];
+  createdAt?: string;
 }
 
 export interface IAPIProduct {
@@ -100,7 +105,15 @@ export interface IAPIUserCategory {
   title: string;
   slug: string;
   description: string;
-  image: string[];
+  image: string;
+}
+
+export interface IAPIUserShop {
+  shop_name: string;
+  slug: string;
+  about: string;
+  logo: string;
+  createdAt?: string;
 }
 
 export interface IAPIUserProduct {
@@ -113,8 +126,30 @@ export interface IAPIUserProduct {
   tags: string[];
   category: IAPIUserCategory;
   stock: number;
+  sold_out?: number;
+  shop?: IAPIUserShop;
 }
 
 export interface IAPIUserProductResponse extends IAPIResponse {
   data: IAPIUserProduct[];
+}
+
+export interface IAPIUserProductDetailsResponse extends IAPIResponse {
+  data: { product: IAPIUserProduct; relatedProducts: IAPIUserProduct[] };
+}
+
+export interface IAPIUserEvent {
+  product: IAPIUserProduct;
+  start_date: string;
+  end_date: string;
+  status: string;
+}
+
+export interface IAPIUserPopularEventResponse extends IAPIResponse {
+  data: IAPIUserEvent;
+}
+
+export interface IAPIShopDetailsData {
+  shop: IAPIShop;
+  events: IAPIUserEvent[];
 }

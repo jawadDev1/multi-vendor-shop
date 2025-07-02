@@ -1,16 +1,20 @@
 import {
   handleCreateEvent,
   handleDeleteEvent,
+  handleGetPopularEvent,
   handleGetSellerEvents,
   handleGetSingleEvent,
   handleUpdateEvent,
 } from "#controllers/event.controller.js";
 import { isAuthenticated } from "#middleware/isAuthenticated.js";
+import { isSeller } from "#middleware/isSeller.js";
 import { Router } from "express";
 
 const router = Router();
 
-router.use(isAuthenticated);
+router.get("/popular", handleGetPopularEvent);
+
+router.use(isSeller);
 
 router.post("/create-event", handleCreateEvent);
 

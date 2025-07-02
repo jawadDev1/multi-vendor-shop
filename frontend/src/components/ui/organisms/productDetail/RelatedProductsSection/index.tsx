@@ -1,13 +1,12 @@
 import SectionWrapper from "@/components/ui/atoms/SectionWrapper";
 import SectionTitle from "@/components/ui/atoms/typography/SectionTitle";
 import ProductCard from "@/components/ui/molecules/Cards/ProductCard";
-import type { Product } from "@/constants/static";
 import useHandleProductModal from "@/hooks/useHandleProductModal";
-import React from "react";
 import ProductDetailsModal from "../../Modals/ProductDetailsModal";
+import type { IAPIUserProduct } from "@/types/api";
 
 interface RelatedProductsSectionProps {
-  products: Product[] | null;
+  products: IAPIUserProduct[] | null;
 }
 
 const RelatedProductsSection = ({ products }: RelatedProductsSectionProps) => {

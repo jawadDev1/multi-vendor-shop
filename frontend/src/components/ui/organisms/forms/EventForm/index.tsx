@@ -36,11 +36,21 @@ const EventForm = ({ products, defaultValues = initialState, id }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit: SubmitHandler<EventFormData> = async (data) => {
+    console.log("data ======> ", data);
+
     setIsLoading(true);
     try {
       const route = id ? `event/update/${id}` : `event/create-event`;
       const method = id ? "PUT" : "POST";
-      const result = await apiRequest({ endpoint: route, body: data, method });
+      const result = await apiRequest({
+        endpoint: route,
+        body: {
+          ...data,
+          start_date: data?.start_date.toISOString(),
+          end_date: data?.end_date.toISOString(),
+        },
+        method,
+      });
 
       if (!result?.success) {
         notifyError(result?.message);
@@ -78,7 +88,7 @@ const EventForm = ({ products, defaultValues = initialState, id }: Props) => {
 
           <div>
             <InputWithLabel
-              type="date"
+              type="datetime-local"
               label="Start Date"
               name="start_date"
               register={register}
@@ -89,7 +99,7 @@ const EventForm = ({ products, defaultValues = initialState, id }: Props) => {
 
           <div>
             <InputWithLabel
-              type="date"
+              type="datetime-local"
               label="End Date"
               name="end_date"
               register={register}
