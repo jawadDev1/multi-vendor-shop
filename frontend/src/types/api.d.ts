@@ -122,6 +122,7 @@ export interface IAPIUserShop {
 }
 
 export interface IAPIUserProduct {
+  _id: string;
   title: string;
   slug: string;
   description: string;

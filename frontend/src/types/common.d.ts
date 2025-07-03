@@ -15,3 +15,14 @@ export interface ISelectOptions {
   label: string;
   value: string;
 }
+
+export interface ICartItem {
+  id: string;
+  title: string;
+  slug?: string;
+  price: number;
+  qty: number;
+  stock: number;
+  image: string;
+  discount: number;
+}

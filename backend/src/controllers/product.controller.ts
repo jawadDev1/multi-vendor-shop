@@ -140,9 +140,7 @@ const handleGetSingleProduct = asyncHandler(
 const handleGetBestDealProducts = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const products = await ProductModel.find({})
-      .populate([
-        { path: "category", select: "-_id title slug description image" },
-      ])
+      .populate([{ path: "category", select: " title slug description image" }])
       .select(
         "title originalPrice images category slug discount sold_out stock description"
       )
@@ -164,9 +162,7 @@ const handleGetBestDealProducts = asyncHandler(
 const handleGetFeaturedProducts = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const products = await ProductModel.find({})
-      .populate([
-        { path: "category", select: "-_id title slug description image" },
-      ])
+      .populate([{ path: "category", select: " title slug description image" }])
       .select(
         "title originalPrice images category slug discount sold_out stock description"
       )
@@ -229,7 +225,7 @@ const handleGetProductDetails = asyncHandler(
           { path: "category", select: "_id title slug description image" },
           {
             path: "shop",
-            select: "-_id shop_name logo about createdAt slug description",
+            select: " shop_name logo about createdAt slug description",
           },
         ])
         .select(
@@ -263,9 +259,7 @@ const handleGetProductDetails = asyncHandler(
 const handleGetBestSellingProducts = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const products = await ProductModel.find({})
-      .populate([
-        { path: "category", select: "-_id title slug description image" },
-      ])
+      .populate([{ path: "category", select: " title slug description image" }])
       .select(
         "title originalPrice images category slug discount sold_out stock description"
       )
@@ -285,9 +279,7 @@ const handleGetProducts = asyncHandler(
     const query = category ? { category } : {};
 
     const products = await ProductModel.find(query)
-      .populate([
-        { path: "category", select: "-_id title slug description image" },
-      ])
+      .populate([{ path: "category", select: " title slug description image" }])
       .select(
         "title originalPrice images category slug discount sold_out stock description"
       )

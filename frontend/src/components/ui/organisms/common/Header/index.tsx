@@ -5,9 +5,7 @@ import NavMenu from "@/components/ui/molecules/NavMenu";
 import UserProfile from "@/components/ui/molecules/UserProfile";
 import UserCart from "@/components/ui/molecules/UserCart";
 import Wishlist from "@/components/ui/molecules/Wishlist";
-
 import { IoIosArrowForward } from "react-icons/io";
-import { CATEGORIES } from "@/constants/static";
 import UserMobileMenu from "../UserMobileMenu";
 import SearchProducts from "@/components/ui/molecules/SearchProducts";
 import LinkButton from "@/components/ui/atoms/buttons/LinkButton";

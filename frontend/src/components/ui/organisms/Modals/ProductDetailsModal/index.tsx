@@ -5,6 +5,7 @@ import Subtitle from "@/components/ui/atoms/typography/Subtitle";
 import Subtitle2 from "@/components/ui/atoms/typography/Subtitle2";
 import Subtitle3 from "@/components/ui/atoms/typography/Subtitle3";
 import ModalWrapper from "@/components/ui/molecules/ModalWrapper";
+import useHandleProductInfo from "@/hooks/useHandleProductInfo";
 import type { IAPIUserProduct } from "@/types/api";
 import { AiOutlineHeart } from "react-icons/ai";
 import { CgClose } from "react-icons/cg";
@@ -21,8 +22,12 @@ const ProductDetailsModal = ({
   product,
 }: ProductDetailsModalProps) => {
   if (!product) return null;
+  const { handleAddCart, handleQty, price, qty } = useHandleProductInfo({
+    item: product,
+  });
 
-  const { images, title, originalPrice, description, category } = product;
+  const { images, title, originalPrice, discount, description, category } =
+    product;
 
   return (
     <ModalWrapper
@@ -63,19 +68,40 @@ const ProductDetailsModal = ({
           <Subtitle className="!font-semibold">{title}</Subtitle>
           <Content>{description}</Content>
 
-          <Subtitle2>${originalPrice}</Subtitle2>
+          <div className="flex items-center gap-x-2">
+            <Subtitle>${price}</Subtitle>
+            {discount ? (
+              <Subtitle2 className="text-tomato-red line-through mb-2">
+                {originalPrice}$
+              </Subtitle2>
+            ) : (
+              ""
+            )}
+          </div>
 
           {/* Quantity */}
           <div className="flex justify-between pr-3 items-center mt-3 lg:pt-4">
             <div className="flex items-center rounded overflow-hidden">
-              <button className="bg-green-400 px-2 py-1">-</button>
-              <div className="bg-white px-2 py-1">1</div>
-              <button className="bg-green-400 px-2 py-1">+</button>
+              <button
+                onClick={() => handleQty("dec")}
+                className="bg-green-400 px-2 py-1"
+              >
+                -
+              </button>
+              <div className="bg-white px-2 py-1">{qty}</div>
+              <button
+                onClick={() => handleQty("inc")}
+                className="bg-green-400 px-2 py-1"
+              >
+                +
+              </button>
             </div>
 
             <AiOutlineHeart size={26} />
           </div>
-          <Button className="bg-primary">Add to cart</Button>
+          <Button onClick={handleAddCart} className="bg-primary">
+            Add to cart
+          </Button>
         </div>
       </div>
     </ModalWrapper>

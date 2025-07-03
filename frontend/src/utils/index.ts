@@ -32,6 +32,6 @@ export const convertStringToDate = (date: string) => {
 export const calculatePriceAfterDiscount = (
   originalPrice: number,
   discount: number
-) => {
-  return (originalPrice - (1 - discount / 100)).toFixed(0);
+): number => {
+  return originalPrice - (1 - discount / 100);
 };

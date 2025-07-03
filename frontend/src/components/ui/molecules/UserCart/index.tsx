@@ -6,11 +6,13 @@ import { CgClose, CgShoppingBag } from "react-icons/cg";
 import Subtitle from "../../atoms/typography/Subtitle";
 import CartItem from "../../atoms/extra/CartItem";
 import Button from "../../atoms/buttons/Button";
+import { useAppSelector } from "@/app/hooks";
 
 interface UserCartProps {}
 
 const UserCart = ({}: UserCartProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { cart, totalAmount } = useAppSelector((state) => state.cart);
 
   const handleCart = () => {
     setIsOpen(!isOpen);
@@ -27,7 +29,7 @@ const UserCart = ({}: UserCartProps) => {
 
   return (
     <>
-      <CountIconWrapper onClick={handleCart} count={0}>
+      <CountIconWrapper onClick={handleCart} count={cart?.length ?? 0}>
         <AiOutlineShoppingCart className="size-[22px]   lg:size-[28px] text-primary md:text-white" />
       </CountIconWrapper>
       <div
@@ -48,18 +50,22 @@ const UserCart = ({}: UserCartProps) => {
 
           <div className="flex items-center gap-x-2">
             <CgShoppingBag size={24} />
-            <Subtitle>3 Items</Subtitle>
+            <Subtitle> {cart.length} Items</Subtitle>
           </div>
 
-          <div className="mt-8 space-y-3 max-h-full overflow-x-hidden overflow-y-auto px-5 lg:px-3">
-            <CartItem />
-            <CartItem />
-            <CartItem />
+          <div className="mt-8 space-y-3 max-h-full overflow-x-hidden overflow-y-auto ">
+            {cart &&
+              cart.length > 0 &&
+              cart.map((item) => <CartItem key={item.id} item={item} />)}
           </div>
 
-          <div className="mt-auto">
-            <Button className="bg-green-500">Check out Now ($892)</Button>
-          </div>
+          {cart.length > 0 && (
+            <div className="mt-auto">
+              <Button className="bg-green-500">
+                Check out Now (${totalAmount})
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </>
