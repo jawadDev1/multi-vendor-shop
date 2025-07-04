@@ -1,10 +1,10 @@
-import { useAppDispatch } from "@/app/hooks";
-import { addToCart } from "@/features/cart/cartSlice";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { addToCart, toggleWishlist } from "@/features/cart/cartSlice";
 import type { IAPIUserProduct } from "@/types/api";
-import type { ICartItem } from "@/types/common";
+import type { ICartItem, IWishlistItem } from "@/types/common";
 import { calculatePriceAfterDiscount } from "@/utils";
 import { notifySuccess } from "@/utils/toast";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface UseHandleProductInfoProps {
   item: IAPIUserProduct;
@@ -12,11 +12,15 @@ interface UseHandleProductInfoProps {
 
 const useHandleProductInfo = ({ item }: UseHandleProductInfoProps) => {
   const [qty, setQty] = useState<number>(1);
+  const [wishlistExists, setWishlistExists] = useState<boolean>(false);
   const { originalPrice, discount, stock, _id: id, title, images } = item;
+
+  const dispatch = useAppDispatch();
+  const { wishlist } = useAppSelector((state) => state.cart);
+
   const price = discount
     ? calculatePriceAfterDiscount(originalPrice, discount)
     : originalPrice;
-  const dispatch = useAppDispatch();
 
   const handleQty = (type: "inc" | "dec") => {
     if (type == "inc") {
@@ -43,7 +47,36 @@ const useHandleProductInfo = ({ item }: UseHandleProductInfoProps) => {
     notifySuccess("Product added to cart successfully");
   };
 
-  return { handleAddCart, handleQty, price, qty };
+  const handleToggleWishlist = () => {
+    const item: IWishlistItem = {
+      id,
+      title,
+      discount: discount ?? 0,
+      image: images[0],
+      price: Number(price),
+    };
+    dispatch(toggleWishlist(item));
+
+    notifySuccess("Wishlist toggled successfully");
+  };
+
+  useEffect(() => {
+    if (wishlist) {
+      const exists = !!wishlist.find(
+        (wishlistItem) => wishlistItem.id === item._id
+      );
+      setWishlistExists(exists);
+    }
+  }, [wishlist]);
+
+  return {
+    handleAddCart,
+    handleQty,
+    price,
+    qty,
+    handleToggleWishlist,
+    wishlistExists,
+  };
 };
 
 export default useHandleProductInfo;

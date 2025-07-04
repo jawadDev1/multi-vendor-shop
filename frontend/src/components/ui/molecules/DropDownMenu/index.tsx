@@ -29,6 +29,7 @@ const DropDownMenu = ({ categories }: DropDownMenuProps) => {
             <Link
               to={`/products?category=${category?._id}`}
               className="flex items-center gap-x-2 cursor-pointer"
+              key={category?._id}
             >
               <div className="size-7">
                 <Image src={category.image} />

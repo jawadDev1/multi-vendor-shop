@@ -26,3 +26,12 @@ export interface ICartItem {
   image: string;
   discount: number;
 }
+
+export interface IWishlistItem {
+  id: string;
+  title: string;
+  slug?: string;
+  price: number;
+  image: string;
+  discount: number;
+}

@@ -1,11 +1,14 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { CART_STATE } from "./cartTypes";
-import type { ICartItem } from "@/types/common";
+import type { ICartItem, IWishlistItem } from "@/types/common";
 import { calculatePriceAfterDiscount } from "@/utils";
 
 const initialState: CART_STATE = {
   cart: localStorage.getItem("cartItems")
     ? JSON.parse(localStorage.getItem("cartItems") ?? "")
+    : [],
+  wishlist: localStorage.getItem("wishlistItems")
+    ? JSON.parse(localStorage.getItem("wishlistItems") ?? "")
     : [],
   totalAmount: Number(localStorage.getItem("totalAmount")) ?? 0,
   loading: false,
@@ -60,9 +63,25 @@ const cartSlice = createSlice({
       localStorage.setItem("cartItems", JSON.stringify(state.cart));
       localStorage.setItem("totalAmount", JSON.stringify(state.totalAmount));
     },
+    toggleWishlist(state, action: PayloadAction<IWishlistItem>) {
+      const wishlistItem = action.payload;
+      const alreadyExists = state.wishlist?.find(
+        (item) => item.id === wishlistItem.id
+      );
+
+      if (alreadyExists) {
+        state.wishlist = state.wishlist?.filter(
+          (item) => item.id !== wishlistItem.id
+        )!;
+      } else {
+        state.wishlist = [...state.wishlist, wishlistItem];
+      }
+
+      localStorage.setItem("wishlistItems", JSON.stringify(state.wishlist));
+    },
   },
 });
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, toggleWishlist } = cartSlice.actions;
 
 export default cartSlice.reducer;

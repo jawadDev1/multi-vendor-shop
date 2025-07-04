@@ -7,8 +7,9 @@ import Subtitle3 from "@/components/ui/atoms/typography/Subtitle3";
 import ModalWrapper from "@/components/ui/molecules/ModalWrapper";
 import useHandleProductInfo from "@/hooks/useHandleProductInfo";
 import type { IAPIUserProduct } from "@/types/api";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { CgClose } from "react-icons/cg";
+import { Link } from "react-router";
 
 interface ProductDetailsModalProps {
   isOpen: boolean;
@@ -22,12 +23,18 @@ const ProductDetailsModal = ({
   product,
 }: ProductDetailsModalProps) => {
   if (!product) return null;
-  const { handleAddCart, handleQty, price, qty } = useHandleProductInfo({
+  const {
+    handleAddCart,
+    handleQty,
+    price,
+    qty,
+    handleToggleWishlist,
+    wishlistExists,
+  } = useHandleProductInfo({
     item: product,
   });
 
-  const { images, title, originalPrice, discount, description, category } =
-    product;
+  const { images, title, originalPrice, discount, description, shop } = product;
 
   return (
     <ModalWrapper
@@ -50,12 +57,14 @@ const ProductDetailsModal = ({
           <div className="mt-7 lg:mt-92">
             <div className="flex gap-x-3">
               <div className="size-10 rounded-full">
-                <Image src={images[0]} />
+                <Image src={shop?.logo!} />
               </div>
               <div>
-                <Subtitle2 className="text-blue-500">
-                  {category.title}
-                </Subtitle2>
+                <Link to={`/shop/${shop?.slug}`}>
+                  <Subtitle2 className="text-blue-500">
+                    {shop?.shop_name}
+                  </Subtitle2>
+                </Link>
                 <Subtitle3>4.5 Rating</Subtitle3>
                 {/* <Subtitle3>{rating.rate} Rating</Subtitle3> */}
               </div>
@@ -97,7 +106,13 @@ const ProductDetailsModal = ({
               </button>
             </div>
 
-            <AiOutlineHeart size={26} />
+            <div onClick={handleToggleWishlist} className="cursor-pointer">
+              {wishlistExists ? (
+                <AiFillHeart size={26} color="red" />
+              ) : (
+                <AiOutlineHeart size={26} />
+              )}
+            </div>
           </div>
           <Button onClick={handleAddCart} className="bg-primary">
             Add to cart

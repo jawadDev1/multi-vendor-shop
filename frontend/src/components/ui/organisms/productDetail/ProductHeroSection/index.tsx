@@ -6,8 +6,9 @@ import Subtitle from "@/components/ui/atoms/typography/Subtitle";
 import Subtitle2 from "@/components/ui/atoms/typography/Subtitle2";
 import useHandleProductInfo from "@/hooks/useHandleProductInfo";
 import type { IAPIUserProduct } from "@/types/api";
+import cn from "@/utils/cn";
 import { useState } from "react";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { Link } from "react-router";
 
 interface Props {
@@ -17,7 +18,14 @@ interface Props {
 const ProductHeroSection = ({ product }: Props) => {
   const { title, images, description, originalPrice, discount, shop } = product;
 
-  const { handleAddCart, handleQty, price, qty } = useHandleProductInfo({
+  const {
+    handleAddCart,
+    handleQty,
+    price,
+    qty,
+    handleToggleWishlist,
+    wishlistExists,
+  } = useHandleProductInfo({
     item: product,
   });
 
@@ -86,7 +94,13 @@ const ProductHeroSection = ({ product }: Props) => {
             </button>
           </div>
 
-          <AiOutlineHeart size={30} />
+          <div className="cursor-pointer" onClick={handleToggleWishlist}>
+            {wishlistExists ? (
+              <AiFillHeart size={30} color="red" />
+            ) : (
+              <AiOutlineHeart size={30} />
+            )}
+          </div>
         </div>
         <Button onClick={handleAddCart} className="bg-primary max-w-[300px]">
           Add to cart

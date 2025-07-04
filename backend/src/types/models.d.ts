@@ -1,5 +1,13 @@
 import { Document, ObjectId } from "mongoose";
 
+interface Address {
+  country: string;
+  city: string;
+  address1: string;
+  address2: string;
+  zip_code: number;
+  address_type: string;
+}
 export interface IUser extends Document {
   name: string;
   email: string;
@@ -7,9 +15,8 @@ export interface IUser extends Document {
   profile: string;
   role: string;
   verified: boolean;
-  zip_code: number;
   contact: number;
-  address: string;
+  addresses: Address;
   reset_password_token: string;
   reset_password_time: Date;
 }

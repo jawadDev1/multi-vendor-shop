@@ -3,7 +3,11 @@ import { ProductModel } from "#models/product.model.js";
 import { ShopModel } from "#models/shop.model.js";
 import { IProductBody, IPopulatedProduct } from "#types/controllers.js";
 import { ErrorHandler } from "#utils/ErrorHandle.js";
-import { generateSlug, validateBody } from "#utils/index.js";
+import {
+  generateRandomString,
+  generateSlug,
+  validateBody,
+} from "#utils/index.js";
 import { Request, Response, NextFunction } from "express";
 
 const handleCreateProduct = asyncHandler(
@@ -16,6 +20,13 @@ const handleCreateProduct = asyncHandler(
     const shop = await ShopModel.findOne({ owner: req.user?.id });
 
     if (!shop) return next(new ErrorHandler("Invalid shop", 400));
+
+    let slug = generateSlug(body.title);
+    const productExists = await ProductModel.findOne({ slug });
+
+    if (productExists) {
+      slug = `${slug}-${generateRandomString()}`;
+    }
 
     const product = await ProductModel.create({
       ...body,
@@ -140,7 +151,12 @@ const handleGetSingleProduct = asyncHandler(
 const handleGetBestDealProducts = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const products = await ProductModel.find({})
-      .populate([{ path: "category", select: " title slug description image" }])
+      .populate([
+        {
+          path: "shop",
+          select: " shop_name logo about createdAt slug description",
+        },
+      ])
       .select(
         "title originalPrice images category slug discount sold_out stock description"
       )
@@ -162,7 +178,12 @@ const handleGetBestDealProducts = asyncHandler(
 const handleGetFeaturedProducts = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const products = await ProductModel.find({})
-      .populate([{ path: "category", select: " title slug description image" }])
+      .populate([
+        {
+          path: "shop",
+          select: " shop_name logo about createdAt slug description",
+        },
+      ])
       .select(
         "title originalPrice images category slug discount sold_out stock description"
       )
@@ -241,6 +262,12 @@ const handleGetProductDetails = asyncHandler(
         category: product?.category?._id,
         slug: { $ne: product.slug },
       })
+        .populate([
+          {
+            path: "shop",
+            select: " shop_name logo about createdAt slug description",
+          },
+        ])
         .sort({ createdAt: -1 })
         .limit(5);
 
@@ -259,7 +286,12 @@ const handleGetProductDetails = asyncHandler(
 const handleGetBestSellingProducts = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const products = await ProductModel.find({})
-      .populate([{ path: "category", select: " title slug description image" }])
+      .populate([
+        {
+          path: "shop",
+          select: " shop_name logo about createdAt slug description",
+        },
+      ])
       .select(
         "title originalPrice images category slug discount sold_out stock description"
       )
@@ -273,13 +305,19 @@ const handleGetBestSellingProducts = asyncHandler(
   }
 );
 
+// For main Products page
 const handleGetProducts = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { category } = req.query;
     const query = category ? { category } : {};
 
     const products = await ProductModel.find(query)
-      .populate([{ path: "category", select: " title slug description image" }])
+      .populate([
+        {
+          path: "shop",
+          select: " shop_name logo about createdAt slug description",
+        },
+      ])
       .select(
         "title originalPrice images category slug discount sold_out stock description"
       )

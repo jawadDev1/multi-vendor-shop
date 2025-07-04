@@ -5,11 +5,13 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { CgClose } from "react-icons/cg";
 import Subtitle from "../../atoms/typography/Subtitle";
 import WishlistItem from "../../atoms/extra/WishlistItem";
+import { useAppSelector } from "@/app/hooks";
 
 interface WishlistProps {}
 
 const Wishlist = ({}: WishlistProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { wishlist } = useAppSelector((state) => state.cart);
 
   const handleWishlist = () => {
     setIsOpen(!isOpen);
@@ -26,7 +28,7 @@ const Wishlist = ({}: WishlistProps) => {
 
   return (
     <>
-      <CountIconWrapper onClick={handleWishlist} count={0}>
+      <CountIconWrapper onClick={handleWishlist} count={wishlist.length}>
         <AiOutlineHeart className="size-[22px]   lg:size-[28px] text-primary md:text-white" />
       </CountIconWrapper>
       <div
@@ -47,11 +49,15 @@ const Wishlist = ({}: WishlistProps) => {
 
           <div className="flex items-center gap-x-2">
             <AiOutlineHeart size={24} />
-            <Subtitle>3 Items</Subtitle>
+            <Subtitle>{wishlist.length} Items</Subtitle>
           </div>
 
           <div className="mt-8 space-y-3 max-h-full overflow-x-hidden overflow-y-auto px-5 lg:px-3">
-            <WishlistItem />
+            {wishlist &&
+              wishlist.length > 0 &&
+              wishlist.map((item) => (
+                <WishlistItem item={item} key={item.id} />
+              ))}
           </div>
         </div>
       </div>

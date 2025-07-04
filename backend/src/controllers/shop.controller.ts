@@ -68,14 +68,15 @@ const handleGetShopDetails = asyncHandler(
           pipeline: [
             {
               $lookup: {
-                from: "categories",
-                localField: "category",
+                from: "shops",
+                localField: "shop",
                 foreignField: "_id",
-                as: "category",
+                as: "shop",
                 pipeline: [
                   {
                     $project: {
-                      title: 1,
+                      shop_name: 1,
+                      slug: 1,
                     },
                   },
                 ],
@@ -83,7 +84,7 @@ const handleGetShopDetails = asyncHandler(
             },
             {
               $addFields: {
-                category: { $arrayElemAt: ["$category", 0] },
+                shop: { $arrayElemAt: ["$shop", 0] },
               },
             },
             {
@@ -94,7 +95,7 @@ const handleGetShopDetails = asyncHandler(
                 originalPrice: 1,
                 discount: 1,
                 images: 1,
-                category: 1,
+                shop: 1,
               },
             },
           ],
@@ -107,6 +108,7 @@ const handleGetShopDetails = asyncHandler(
       },
     ];
 
+    // Events Pipeline
     const eventsPipeline = [
       { $match: { slug } },
       {
