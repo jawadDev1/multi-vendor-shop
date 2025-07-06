@@ -11,19 +11,20 @@ import SectionWrapper from "../../atoms/SectionWrapper";
 import type { IAPIUser } from "@/types/api";
 import RefundsSection from "../../organisms/userProfile/Refunds";
 import TrackOrderSection from "../../organisms/userProfile/TrackOrder";
-import PaymentMethodsSection from "../../organisms/userProfile/PaymentMethodsSection";
+
 import AddressSection from "../../organisms/userProfile/Address";
 import { CgLogOut } from "react-icons/cg";
 import { getApiRequest } from "@/utils/api";
 import { notifyError, notifySuccess } from "@/utils/toast";
 import { useNavigate } from "react-router";
+import ChangePasswordSection from "../../organisms/userProfile/ChangePasswordSection";
 
 enum ALLOWED_MENU_ITEMS {
   profile = "profile",
   orders = "orders",
   refunds = "refunds",
   track_orders = "track_orders",
-  payment_methods = "payment_methods",
+  change_password = "change_password",
   address = "address",
 }
 
@@ -55,8 +56,8 @@ const getActiveSection = (
       Tab: TrackOrderSection,
       props: {},
     },
-    payment_methods: {
-      Tab: PaymentMethodsSection,
+    change_password: {
+      Tab: ChangePasswordSection,
       props: {},
     },
     address: {
@@ -112,14 +113,20 @@ const ProfilePageTemplate = ({ user }: ProfilePageTemplateProps) => {
             className="flex group items-center gap-x-3 cursor-pointer "
           >
             <Icon
-              className={cn("size-[28px] text-charcoal-gray group-hover:text-azure-blue ", {
-                "text-azure-blue": activeSection === id,
-              })}
+              className={cn(
+                "size-[28px] text-charcoal-gray group-hover:text-azure-blue ",
+                {
+                  "text-azure-blue": activeSection === id,
+                }
+              )}
             />
             <Subtitle2
-              className={cn("hidden md:block text-charcoal-gray group-hover:text-azure-blue", {
-                "text-azure-blue": activeSection === id,
-              })}
+              className={cn(
+                "hidden md:block text-charcoal-gray group-hover:text-azure-blue",
+                {
+                  "text-azure-blue": activeSection === id,
+                }
+              )}
             >
               {title}
             </Subtitle2>
@@ -130,9 +137,13 @@ const ProfilePageTemplate = ({ user }: ProfilePageTemplateProps) => {
           className=" hidden md:flex group items-center gap-x-3 cursor-pointer "
         >
           <CgLogOut
-            className={cn("size-[28px] text-charcoal-gray group-hover:text-azure-blue ")}
+            className={cn(
+              "size-[28px] text-charcoal-gray group-hover:text-azure-blue "
+            )}
           />
-          <Subtitle2 className={cn("text-charcoal-gray group-hover:text-azure-blue")}>
+          <Subtitle2
+            className={cn("text-charcoal-gray group-hover:text-azure-blue")}
+          >
             Logout
           </Subtitle2>
         </div>

@@ -1,5 +1,6 @@
 import {
   handleActivate,
+  handleChangePassword,
   handleCreateAddress,
   handleDeleteAddress,
   handleGetUser,
@@ -31,5 +32,7 @@ router.post("/create-address", isAuthenticated, handleCreateAddress);
 router.put("/update-address/:id", isAuthenticated, handleUpdateAddress);
 
 router.delete("/delete-address/:id", isAuthenticated, handleDeleteAddress);
+
+router.put("/change-password", isAuthenticated, handleChangePassword);
 
 export default router;

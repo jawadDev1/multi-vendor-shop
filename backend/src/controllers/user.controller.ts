@@ -97,7 +97,10 @@ const handleSignin = asyncHandler(
 
       if (!user) return next(new ErrorHandler("Account not found", 400));
 
-      const isCorrectPassword = bcrypt.compare(body.password, user.password);
+      const isCorrectPassword = await bcrypt.compare(
+        body.password,
+        user.password
+      );
 
       if (!isCorrectPassword)
         return next(new ErrorHandler("Invalid Credentials", 400));
@@ -332,6 +335,42 @@ const handleDeleteAddress = asyncHandler(
   }
 );
 
+const handleChangePassword = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const body = req.body;
+
+      const isCorrectPassword = await bcrypt.compare(
+        body.old_password,
+        req.user?.password!
+      );
+
+      if (!isCorrectPassword) {
+        return next(new ErrorHandler("Invalid password", 400));
+      }
+
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(body.new_password, salt);
+
+      const user = await UserModel.findByIdAndUpdate(
+        req.user?.id,
+        {
+          password: hashedPassword,
+        },
+        { new: true }
+      ).select("-password -reset_password_time -reset_password_token");
+
+      return res.status(200).json({
+        success: true,
+        message: "password updated successfully",
+        data: user,
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error as string, 500));
+    }
+  }
+);
+
 export {
   handleSignup,
   handleActivate,
@@ -342,4 +381,5 @@ export {
   handleCreateAddress,
   handleDeleteAddress,
   handleUpdateAddress,
+  handleChangePassword,
 };

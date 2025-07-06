@@ -9,6 +9,7 @@ import { VscNewFile } from "react-icons/vsc";
 import { CiMoneyBill, CiSettings } from "react-icons/ci";
 import { BiMessageSquareDetail } from "react-icons/bi";
 import { HiOutlineReceiptRefund, HiOutlineTag } from "react-icons/hi";
+import { RiLockPasswordLine } from "react-icons/ri";
 
 interface NavItems {
   title: string;
@@ -108,9 +109,9 @@ export const PROFILE_MENU = [
     title: "Track Order",
   },
   {
-    id: "payment_methods",
-    Icon: CgCreditCard,
-    title: "Payment Methods",
+    id: "change_password",
+    Icon: RiLockPasswordLine,
+    title: "Change Password",
   },
   {
     id: "address",
