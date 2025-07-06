@@ -1,4 +1,3 @@
-import Button from "@/components/ui/atoms/buttons/Button";
 import Image from "@/components/ui/atoms/common/Image";
 
 import InputWithLabel from "@/components/ui/molecules/form/InputWithLabel";
@@ -7,35 +6,73 @@ import {
   type UserProfileData,
 } from "@/schemas/user_profile.shcema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { DevTool } from "@hookform/devtools";
 import { useForm } from "react-hook-form";
 import { AiOutlineEdit } from "react-icons/ai";
 import { useState } from "react";
 import type { IAPIUser } from "@/types/api";
+import { notifyError, notifySuccess } from "@/utils/toast";
+import { uploadImageToAppwrite } from "@/utils/uploadFile";
+import { apiRequest } from "@/utils/api";
+import { useAppDispatch } from "@/app/hooks";
+import { updateUser } from "@/features/user/userSlice";
+import SpinnerButton from "@/components/ui/atoms/buttons/SpinnerButton";
 
 interface ProfileInfoProps {
   user: IAPIUser;
 }
 
 const ProfileInfo = ({ user }: ProfileInfoProps) => {
-  const defaultValues = user ? { name: user.name, email: user.email } : {};
+  const defaultValues = user
+    ? { name: user.name, email: user.email, contact: user.contact }
+    : {};
+  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useAppDispatch();
 
   const {
     register,
     handleSubmit,
-    control,
-    setValue,
     formState: { errors },
   } = useForm<UserProfileData>({
     resolver: zodResolver(userProfileSchema),
     defaultValues,
   });
-  const [preview, setPreview] = useState<string>(
-    user?.profile ?? "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg"
-  );
+  const [preview, setPreview] = useState<string>(user.profile);
+  const [newProfile, setNewProfile] = useState<File | null>(null);
 
-  const onSubmit = (data: UserProfileData) => {
-    console.log("Data ==================> ", data);
+  const onSubmit = async (data: UserProfileData) => {
+    setIsLoading(true);
+    try {
+      let payload: {
+        profile?: string;
+        email: string;
+        name: string;
+        contact: number;
+      } = { ...data, email: user.email };
+
+      if (newProfile) {
+        const url = await uploadImageToAppwrite(newProfile);
+        payload["profile"] = url;
+      }
+
+      const result = await apiRequest({
+        endpoint: `user/update-profile`,
+        body: payload,
+      });
+
+      if (!result?.success) {
+        notifyError(result?.message);
+        setIsLoading(false);
+        return;
+      }
+
+      setIsLoading(false);
+
+      dispatch(updateUser(result?.data));
+      notifySuccess("profile updated successfully");
+    } catch (err) {
+      setIsLoading(false);
+      console.error("Upload failed:", err);
+    }
   };
 
   const handleProfileChange = async (
@@ -43,8 +80,7 @@ const ProfileInfo = ({ user }: ProfileInfoProps) => {
   ) => {
     const file = e.target?.files && e.target.files[0];
     if (!file) return;
-
-    setValue("profile", file);
+    setNewProfile(file);
     setPreview(URL.createObjectURL(file));
   };
 
@@ -60,7 +96,6 @@ const ProfileInfo = ({ user }: ProfileInfoProps) => {
         >
           <input
             id="profile"
-            {...register("profile")}
             type="file"
             className="hidden"
             onChange={handleProfileChange}
@@ -92,6 +127,7 @@ const ProfileInfo = ({ user }: ProfileInfoProps) => {
             register={register}
             error={errors?.email}
             required
+            disabled
           />
         </div>
         <div>
@@ -105,43 +141,11 @@ const ProfileInfo = ({ user }: ProfileInfoProps) => {
             required
           />
         </div>
-        <div>
-          <InputWithLabel
-            type="number"
-            placeholder="28932"
-            label="Zip Code"
-            name="zip_code"
-            register={register}
-            error={errors?.zip_code}
-            required
-          />
-        </div>
-        <div>
-          <InputWithLabel
-            type="text"
-            placeholder="address"
-            label="Address 1"
-            name="address1"
-            register={register}
-            error={errors?.address1}
-            required
-          />
-        </div>
-        <div>
-          <InputWithLabel
-            type="text"
-            placeholder="address"
-            label="Address 2"
-            name="address2"
-            register={register}
-            error={errors?.address2}
-          />
-        </div>
 
         {/* <DevTool control={control} /> */}
 
         <div className="col-span-full">
-          <Button>Update</Button>
+          <SpinnerButton isLoading={isLoading}>Update</SpinnerButton>
         </div>
       </form>
     </>

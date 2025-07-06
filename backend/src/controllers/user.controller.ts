@@ -4,9 +4,10 @@ import { NextFunction, Request, Response } from "express";
 import bcrypt from "bcrypt";
 import { IUserBody } from "#types/controllers.js";
 import { UserModel } from "#models/user.meodel.js";
-import { sanitizeUser } from "#utils/index.js";
+import { sanitizeUser, validateBody } from "#utils/index.js";
 import { generateActivationToken, sendToken, verifyToken } from "#utils/jwt.js";
 import { sendMail } from "#utils/sendmail.js";
+import mongoose from "mongoose";
 
 const handleSignup = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -135,7 +136,9 @@ const handleGetUser = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const id = req.user?.id;
-      const user = await UserModel.findById(id).select("-password");
+      const user = await UserModel.findById(id).select(
+        "-password -reset_password_time -reset_password_token"
+      );
 
       if (!user) return next(new ErrorHandler("User deos not exists", 404));
 
@@ -165,10 +168,178 @@ const handleLogout = asyncHandler(
   }
 );
 
+const handleUpdateUserProfile = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const body = req.body;
+      const isValid = validateBody(body);
+
+      if (!isValid) {
+        return next(new ErrorHandler("Invalid field values", 400));
+      }
+
+      const user = await UserModel.findOneAndUpdate(
+        { email: body.email },
+        body,
+        { new: true }
+      ).select("-password");
+
+      if (!user) {
+        return next(new ErrorHandler("Invalid user", 400));
+      }
+
+      return res.status(200).json({
+        success: true,
+        message: "profile updated successfully",
+        data: user,
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error as string, 500));
+    }
+  }
+);
+
+// Handle Create the user address
+const handleCreateAddress = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const body = req.body;
+      const isValid = validateBody(body);
+
+      if (!isValid) {
+        return next(new ErrorHandler("Invalid field values", 400));
+      }
+
+      if (!req.user) {
+        return next(new ErrorHandler("Unauthorized", 401));
+      }
+
+      const alreadyExists = req.user.addresses.find(
+        (addr) => addr.address_type === body.address_type
+      );
+
+      if (alreadyExists) {
+        return next(new ErrorHandler("Address already exists", 400));
+      }
+
+      req.user.addresses.push(body);
+
+      await req.user.save();
+
+      return res.status(200).json({
+        success: true,
+        message: "address created successfully",
+        data: req.user,
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error as string, 500));
+    }
+  }
+);
+
+// Handle Update the user address
+const handleUpdateAddress = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { id } = req.params;
+      const body = req.body;
+      const isValid = validateBody(body);
+
+      if (!isValid) {
+        return next(new ErrorHandler("Invalid field values", 400));
+      }
+
+      if (!req.user) {
+        return next(new ErrorHandler("Unauthorized", 401));
+      }
+
+      const address = req.user.addresses.find(
+        (addr) => addr._id && addr._id.equals(id)
+      );
+
+      if (!address) {
+        return next(new ErrorHandler("Address not found", 404));
+      }
+
+      const { country, city, address1, address2, zip_code, address_type } =
+        body;
+
+      const user = await UserModel.findOneAndUpdate(
+        { _id: req.user.id },
+        {
+          $set: {
+            "addresses.$[elem].country": country,
+            "addresses.$[elem].city": city,
+            "addresses.$[elem].address1": address1,
+            "addresses.$[elem].address2": address2,
+            "addresses.$[elem].address_type": address_type,
+            "addresses.$[elem].zip_code": zip_code,
+          },
+        },
+        {
+          arrayFilters: [{ "elem._id": new mongoose.Types.ObjectId(id) }],
+          new: true,
+        }
+      ).select("-password -reset_password_time -reset_password_token");
+
+      return res.status(200).json({
+        success: true,
+        message: "address updated successfully",
+        data: user,
+      });
+    } catch (error) {
+      console.log("Error handleUpdateAddress :: ", error);
+      return next(new ErrorHandler("something went wrong", 500));
+    }
+  }
+);
+
+const handleDeleteAddress = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { id } = req.params;
+
+      if (!req.user) {
+        return next(new ErrorHandler("Unauthorized", 401));
+      }
+
+      const address = req.user.addresses.find(
+        (addr) => addr._id && addr._id.equals(id)
+      );
+
+      if (!address) {
+        return next(new ErrorHandler("Address not found", 404));
+      }
+
+      const user = await UserModel.findByIdAndUpdate(
+        { _id: req.user.id },
+        {
+          $pull: {
+            addresses: { _id: new mongoose.Types.ObjectId(id) },
+          },
+        },
+        { new: true }
+      ).select("-password -reset_password_time -reset_password_token");
+
+      return res.status(200).json({
+        success: true,
+        message: "address deleted successfully",
+        data: user,
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error as string, 500));
+    }
+  }
+);
+
 export {
   handleSignup,
   handleActivate,
   handleSignin,
   handleGetUser,
   handleLogout,
+  handleUpdateUserProfile,
+  handleCreateAddress,
+  handleDeleteAddress,
+  handleUpdateAddress,
 };

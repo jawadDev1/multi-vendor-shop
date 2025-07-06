@@ -1,4 +1,3 @@
-import React from "react";
 import ProfilePageTemplate from "../../templates/ProfilePageTemplate";
 import { useAppSelector } from "@/app/hooks";
 

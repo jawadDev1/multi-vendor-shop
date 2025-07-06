@@ -1,3 +1,12 @@
+export interface IAddress {
+  _id?: string;
+  country: string;
+  city: string;
+  address1: string;
+  address2: string;
+  zip_code: number;
+  address_type: string;
+}
 export interface IAPIUser {
   _id?: string;
   name: string;
@@ -5,6 +14,9 @@ export interface IAPIUser {
   profile: string;
   verified?: boolean;
   role?: string;
+  contact: number;
+  addresses?: IAddress[];
+  updatedAt?: string;
 }
 
 export interface IAPIShop {

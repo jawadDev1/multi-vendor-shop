@@ -1,6 +1,7 @@
-import { Document, ObjectId } from "mongoose";
+import { Document, ObjectId, Types } from "mongoose";
 
 interface Address {
+  _id?: Types.ObjectId;
   country: string;
   city: string;
   address1: string;
@@ -16,7 +17,7 @@ export interface IUser extends Document {
   role: string;
   verified: boolean;
   contact: number;
-  addresses: Address;
+  addresses: Address[];
   reset_password_token: string;
   reset_password_time: Date;
 }

@@ -26,33 +26,34 @@ const userSchema = new Schema<IUser>(
       enum: ["USER", "SELLER"],
       default: "USER",
     },
-    addresses: {
-      country: {
-        type: String,
-        default: null,
+    addresses: [
+      {
+        country: {
+          type: String,
+          default: null,
+        },
+        city: {
+          type: String,
+          default: null,
+        },
+        address1: {
+          type: String,
+          default: null,
+        },
+        address2: {
+          type: String,
+          default: null,
+        },
+        address_type: {
+          type: String,
+          default: null,
+        },
+        zip_code: {
+          type: Number,
+          default: null,
+        },
       },
-      city: {
-        type: String,
-        default: null,
-      },
-      address1: {
-        type: String,
-        default: null,
-      },
-      address2: {
-        type: String,
-        default: null,
-      },
-      address_type: {
-        type: String,
-        default: null,
-      },
-      zip_code: {
-        type: Number,
-        default: null,
-      },
-    },
-
+    ],
     contact: {
       type: Number,
       default: null,

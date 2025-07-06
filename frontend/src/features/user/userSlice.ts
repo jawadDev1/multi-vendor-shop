@@ -1,6 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { UserState } from "./userTypes";
 import { loadUser } from "./userThunks";
+import type { IAPIUser } from "@/types/api";
 
 const initialState: UserState = {
   isAuthenticated: false,
@@ -12,7 +13,14 @@ const initialState: UserState = {
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    updateUser(state, action: PayloadAction<IAPIUser>) {
+      if (action.payload?._id) {
+        console.log("ad =========> ", action.payload);
+        state.user = action.payload;
+      }
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(loadUser.pending, (state) => {
@@ -32,6 +40,6 @@ const userSlice = createSlice({
   },
 });
 
-export const {} = userSlice.actions;
+export const { updateUser } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -1,9 +1,13 @@
 import {
   handleActivate,
+  handleCreateAddress,
+  handleDeleteAddress,
   handleGetUser,
   handleLogout,
   handleSignin,
   handleSignup,
+  handleUpdateAddress,
+  handleUpdateUserProfile,
 } from "#controllers/user.controller.js";
 import { isAuthenticated } from "#middleware/isAuthenticated.js";
 import { Router } from "express";
@@ -19,5 +23,13 @@ router.get("/getuser", isAuthenticated, handleGetUser);
 router.post("/activate", handleActivate);
 
 router.get("/logout", isAuthenticated, handleLogout);
+
+router.post("/update-profile", isAuthenticated, handleUpdateUserProfile);
+
+router.post("/create-address", isAuthenticated, handleCreateAddress);
+
+router.put("/update-address/:id", isAuthenticated, handleUpdateAddress);
+
+router.delete("/delete-address/:id", isAuthenticated, handleDeleteAddress);
 
 export default router;
