@@ -1,3 +1,4 @@
+import { useAppSelector } from "@/app/hooks";
 import SpinnerButton from "@/components/ui/atoms/buttons/SpinnerButton";
 import Checkbox from "@/components/ui/atoms/form/Checkbox";
 import Label from "@/components/ui/atoms/form/Label";
@@ -13,7 +14,7 @@ import cn from "@/utils/cn";
 import { notifyError, notifySuccess } from "@/utils/toast";
 import { DevTool } from "@hookform/devtools";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { CgClose } from "react-icons/cg";
 
@@ -31,6 +32,7 @@ const intialState = {
   name: "",
   value: 0,
   type: "",
+  shop: "",
 };
 
 const CoupounModal = ({
@@ -45,6 +47,7 @@ const CoupounModal = ({
     setValue,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm<CoupounFormData>({
     resolver: zodResolver(coupounSchema),
@@ -58,6 +61,7 @@ const CoupounModal = ({
   });
 
   const [isLoading, setIsLoading] = useState(false);
+  const { shop } = useAppSelector((state) => state.shop);
 
   const onSubmit = async (data: CoupounFormData) => {
     setIsLoading(true);
@@ -81,6 +85,14 @@ const CoupounModal = ({
     handleModal();
     window.location.reload();
   };
+
+  useEffect(() => {
+    setValue("shop", shop?._id!);
+    
+    return () => {
+      reset();
+    };
+  }, [shop?._id]);
 
   return (
     <ModalWrapper

@@ -9,7 +9,6 @@ export interface ActionProps {
 
 interface TableShellProps extends ITableData {
   fields: { [key: string]: string };
-
   elements: { [key: string]: React.ComponentType<any> };
   actions?: React.ComponentType<ActionProps>;
 }

@@ -71,6 +71,7 @@ const ProductCard = ({
       stock,
       title,
       slug,
+      shop: shop?._id!,
     };
 
     dispatch(addToCart(item));

@@ -13,7 +13,7 @@ interface UseHandleProductInfoProps {
 const useHandleProductInfo = ({ item }: UseHandleProductInfoProps) => {
   const [qty, setQty] = useState<number>(1);
   const [wishlistExists, setWishlistExists] = useState<boolean>(false);
-  const { originalPrice, discount, stock, _id: id, title, images } = item;
+  const { originalPrice, discount, stock, _id: id, title, images, shop } = item;
 
   const dispatch = useAppDispatch();
   const { wishlist } = useAppSelector((state) => state.cart);
@@ -41,6 +41,7 @@ const useHandleProductInfo = ({ item }: UseHandleProductInfoProps) => {
       discount: discount ?? 0,
       image: images[0],
       price: Number(price),
+      shop: shop?._id!,
     };
     dispatch(addToCart(item));
 

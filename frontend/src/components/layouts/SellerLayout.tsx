@@ -3,7 +3,7 @@ import { Navigate, Outlet } from "react-router";
 import { useAppSelector } from "@/app/hooks";
 
 import SellerSidebar from "../ui/organisms/seller/SellerSidebar";
-import Loader from "../ui/atoms/extra/Loader";
+import Loader from "../ui/atoms/extra/OrderSuccess";
 import SellerHeader from "../ui/organisms/seller/SellerHeader";
 
 const ShopLayout = () => {

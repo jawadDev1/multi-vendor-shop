@@ -1,4 +1,4 @@
-import Loader from "@/components/ui/atoms/extra/Loader";
+import Loader from "@/components/ui/atoms/extra/OrderSuccess";
 import UpdateSellerEventPageTemplate from "@/components/ui/templates/seller/UpdateEventPageTemplate";
 
 import { getApiRequest } from "@/utils/api";

@@ -126,6 +126,7 @@ export interface IAPICategoryResponse extends IAPIResponse {
 }
 
 export interface IAPIUserShop {
+  _id?: string;
   shop_name: string;
   slug: string;
   about: string;

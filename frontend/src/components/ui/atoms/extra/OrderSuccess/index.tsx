@@ -1,9 +1,9 @@
 import Lottie from "react-lottie";
-import animation from "@/assets/loader.json";
+import animation from "@/assets/order-success.json";
 
-const Loader = () => {
+const OrderSuccess = () => {
   return (
-    <div className="w-full h-screen flex justify-center items-center">
+    <div className="w-full h-[50vh] flex justify-center items-center">
       <Lottie
         options={{
           loop: true,
@@ -18,4 +18,4 @@ const Loader = () => {
   );
 };
 
-export default Loader;
+export default OrderSuccess;

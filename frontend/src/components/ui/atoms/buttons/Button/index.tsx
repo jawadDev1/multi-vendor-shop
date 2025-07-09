@@ -1,7 +1,7 @@
-import type { BaseProps } from "../../../../../types/common";
+import type { BaseButtonProps } from "../../../../../types/common";
 import cn from "../../../../../utils/cn";
 
-const Button = ({ children, className, ...props }: BaseProps) => {
+const Button = ({ children, className, ...props }: BaseButtonProps) => {
   return (
     <button
       className={cn(

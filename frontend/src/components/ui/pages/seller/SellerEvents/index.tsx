@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import Loader from "@/components/ui/atoms/extra/Loader";
+import Loader from "@/components/ui/atoms/extra/OrderSuccess";
 import SellerEventPageTemplate from "@/components/ui/templates/seller/EventsPageTemplate";
 import { loadSellerEvents } from "@/features/event/eventThunk";
 import { notifyError } from "@/utils/toast";

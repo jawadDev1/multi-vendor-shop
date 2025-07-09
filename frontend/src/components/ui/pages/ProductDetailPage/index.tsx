@@ -3,7 +3,7 @@ import ProductDetailPageTemplate from "../../templates/ProductDetailPageTemplate
 import { useNavigate, useParams } from "react-router";
 import { loadProductDetails } from "@/features/product/productThunk";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import Loader from "../../atoms/extra/Loader";
+import Loader from "../../atoms/extra/OrderSuccess";
 
 const ProductDetialPage = () => {
   const { slug } = useParams();

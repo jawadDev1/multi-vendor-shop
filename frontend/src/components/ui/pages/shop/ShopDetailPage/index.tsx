@@ -1,4 +1,4 @@
-import Loader from "@/components/ui/atoms/extra/Loader";
+import Loader from "@/components/ui/atoms/extra/OrderSuccess";
 import ShopDetailPageTemplate from "@/components/ui/templates/shop/ShopDetailPageTemplate";
 import useGetData from "@/hooks/useGetData";
 import type { IAPIShopDetailsData } from "@/types/api";

@@ -1,9 +1,14 @@
-import type { HTMLAttributes, ReactNode } from "react";
+import type { ButtonHTMLAttributes, HTMLAttributes, ReactNode } from "react";
 
 export type BaseProps = {
   children: React.ReactNode | string;
   className?: string;
 } & HTMLAttributes<HTMLDivElement | HTMLButtonElement>;
+
+export type BaseButtonProps = {
+  children: React.ReactNode | string;
+  className?: string;
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export interface ITableData<
   T extends Record<string, unknown> = Record<string, unknown>
@@ -19,6 +24,7 @@ export interface ISelectOptions {
 export interface ICartItem {
   id: string;
   title: string;
+  shop: string;
   slug?: string;
   price: number;
   qty: number;

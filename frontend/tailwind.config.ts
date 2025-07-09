@@ -21,7 +21,7 @@ export default {
         "charcoal-gray": "#4f4f4f",
         "cyan-blue": "#F4F8FB",
         "deep-black": "#161D1A",
-        "gunmetal-green": "#3D4842",
+        "primary-green": "#22c55e",
         "light-gray": "#C4C4C4",
         "deep-navy": "#003366",
         "tomato-red": "#F64545",

@@ -1,4 +1,4 @@
-import Loader from "@/components/ui/atoms/extra/Loader";
+import Loader from "@/components/ui/atoms/extra/OrderSuccess";
 import UpdateProductPageTemplate from "@/components/ui/templates/seller/UpdateProductPageTemplate";
 import { getApiRequest } from "@/utils/api";
 import { notifyError } from "@/utils/toast";

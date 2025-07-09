@@ -25,6 +25,7 @@ import SellerEventPage from "@/components/ui/pages/seller/SellerEvents";
 import UpdateSellerEventPage from "@/components/ui/pages/seller/UpdateSellerEventPage";
 import CoupounPage from "@/components/ui/pages/seller/CoupounPage";
 import UpdateCoupounPage from "@/components/ui/pages/seller/UpdateCoupounPage";
+import CheckoutPage from "@/components/ui/pages/CheckoutPage";
 
 export const routes: RouteObject[] = [
   {
@@ -78,6 +79,14 @@ export const routes: RouteObject[] = [
       {
         path: "shop/:slug",
         element: <ShopDetailPage />,
+      },
+      {
+        path: "checkout",
+        element: (
+          <ProtectedRoute>
+            <CheckoutPage />
+          </ProtectedRoute>
+        ),
       },
     ],
   },

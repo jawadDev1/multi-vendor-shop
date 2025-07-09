@@ -7,6 +7,7 @@ import Subtitle from "../../atoms/typography/Subtitle";
 import CartItem from "../../atoms/extra/CartItem";
 import Button from "../../atoms/buttons/Button";
 import { useAppSelector } from "@/app/hooks";
+import LinkButton from "../../atoms/buttons/LinkButton";
 
 interface UserCartProps {}
 
@@ -61,9 +62,13 @@ const UserCart = ({}: UserCartProps) => {
 
           {cart.length > 0 && (
             <div className="mt-auto">
-              <Button className="bg-green-500">
+              <LinkButton
+                onClick={handleCart}
+                to="/checkout"
+                className="bg-green-500"
+              >
                 Check out Now (${totalAmount})
-              </Button>
+              </LinkButton>
             </div>
           )}
         </div>

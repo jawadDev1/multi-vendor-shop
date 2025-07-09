@@ -1,5 +1,5 @@
 import { useAppSelector } from "@/app/hooks";
-import Loader from "@/components/ui/atoms/extra/Loader";
+import Loader from "@/components/ui/atoms/extra/OrderSuccess";
 import PageWrapper from "@/components/ui/atoms/PageWrapper";
 import LoginPageTemplate from "@/components/ui/templates/LoginPageTemplate";
 import React, { useEffect } from "react";

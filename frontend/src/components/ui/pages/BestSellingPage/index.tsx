@@ -4,7 +4,7 @@ import { PRODUCTS_DATA, type Product } from "@/constants/static";
 import BestSellingPageTemplate from "../../templates/BestSellingPageTemplate";
 import type { IAPIUserProduct } from "@/types/api";
 import useGetData from "@/hooks/useGetData";
-import Loader from "../../atoms/extra/Loader";
+import Loader from "../../atoms/extra/OrderSuccess";
 
 const BestSellingPage = () => {
   const { data, loading, error } = useGetData<IAPIUserProduct[]>({
