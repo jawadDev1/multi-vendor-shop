@@ -7,11 +7,14 @@ import {
   categoryRouter,
   coupounRouter,
   eventRouter,
+  orderRouter,
+  paymentRouter,
   productRouter,
   shopRouter,
   userRouter,
 } from "#routers/route.js";
 import cors from "cors";
+import mongoSanitize from "express-mongo-sanitize";
 
 const app = express();
 
@@ -26,6 +29,13 @@ app.use(
   })
 );
 
+// // Prevent from mongo injection
+// app.use(
+//   mongoSanitize({
+//     replaceWith: "_",
+//   })
+// );
+
 // Routes
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/shop", shopRouter);
@@ -33,6 +43,8 @@ app.use("/api/v1/product", productRouter);
 app.use("/api/v1/event", eventRouter);
 app.use("/api/v1/category", categoryRouter);
 app.use("/api/v1/coupoun", coupounRouter);
+app.use("/api/v1/payment", paymentRouter);
+app.use("/api/v1/order", orderRouter);
 
 // Error handler
 app.use(handleError);

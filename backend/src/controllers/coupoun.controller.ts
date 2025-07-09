@@ -1,7 +1,5 @@
 import asyncHandler from "#middleware/asyncHandler.js";
 import { CoupounModel } from "#models/coupoun.model.js";
-
-import { ProductModel } from "#models/product.model.js";
 import { ICoupounBody } from "#types/controllers.js";
 import { ErrorHandler } from "#utils/ErrorHandle.js";
 import { validateBody } from "#utils/index.js";
@@ -99,10 +97,33 @@ const handleGetSingleCoupoun = asyncHandler(
   }
 );
 
+const handleGetCoupounByName = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const name = req.params.name;
+
+    const coupoun = await CoupounModel.findOne({ name: name }).select("-_id");
+
+    if (!coupoun) {
+      return next(new ErrorHandler("coupoun code does not exists", 404));
+    }
+
+    if (coupoun.limit === 0) {
+      return next(new ErrorHandler("coupoun code is expired", 404));
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "coupoun fetched successfully",
+      data: coupoun,
+    });
+  }
+);
+
 export {
   handleCreateCoupoun,
   handleDeleteCoupoun,
   handleGetSellerCoupouns,
   handleGetSingleCoupoun,
   handleUpdateCoupoun,
+  handleGetCoupounByName,
 };

@@ -1,74 +1,112 @@
 import { Document, ObjectId, Types } from "mongoose";
 
-interface Address {
-  _id?: Types.ObjectId;
-  country: string;
-  city: string;
-  address1: string;
-  address2: string;
-  zip_code: number;
-  address_type: string;
-}
-export interface IUser extends Document {
-  name: string;
-  email: string;
-  password: string;
-  profile: string;
-  role: string;
-  verified: boolean;
-  contact: number;
-  addresses: Address[];
-  reset_password_token: string;
-  reset_password_time: Date;
-}
-
-export interface IShop extends Document {
-  shop_name: string;
-  logo: string;
-  slug: string;
-  zip_code: number;
-  contact: number;
-  about: string;
-  address: string;
-  owner: ObjectId;
-}
-
-export interface IProduct extends Document {
-  title: string;
-  slug: string;
-  description: string;
-  images: string[];
-  tags: string[];
-  originalPrice: number;
-  discount?: number;
-  stock: number;
-  sold_out: number;
-  shop: ObjectId;
-  category: ObjectId;
-  created_by: string;
-}
-
 export interface ICategory extends Document {
-  title: string;
-  slug: string;
   description: string;
   image: string;
-}
-
-export interface IEvent extends Document {
-  product: ObjectId;
-  start_date: Date;
-  end_date: Date;
-  status?: string;
+  slug: string;
+  title: string;
 }
 
 export interface ICoupoun extends Document {
-  type: string;
-  name: string;
-  value: number;
-  min_amount: number;
-  max_amount: number;
-  products: ObjectId[];
   created_by: string;
   limit: number;
+  max_amount: number;
+  min_amount: number;
+  name: string;
+  products: ObjectId[];
+  shop: ObjectId;
+  type: string;
+  value: number;
+}
+
+export interface IEvent extends Document {
+  end_date: Date;
+  product: ObjectId;
+  start_date: Date;
+  status?: string;
+}
+
+export interface IOrder {
+  cart: [
+    {
+      discount: number;
+      price: number;
+      product: string;
+      qty: number;
+      shop: string;
+      title: string;
+    },
+  ];
+  shipping_address: IShippingAddress;
+  payment_info: {
+    id: string;
+    status: string;
+    type: string;
+  };
+  user: ObjectId;
+  totalPrice: number;
+  status: string;
+  paid_at: Date;
+  delieverd_at: Date,
+  shop: ObjectId
+}
+
+export interface IProduct extends Document {
+  category: ObjectId;
+  created_by: string;
+  description: string;
+  discount?: number;
+  images: string[];
+  originalPrice: number;
+  shop: ObjectId;
+  slug: string;
+  sold_out: number;
+  stock: number;
+  tags: string[];
+  title: string;
+}
+
+export interface IShippingAddress {
+  address1: string;
+  address2: string;
+  city: string;
+  contact: number;
+  country: string;
+  email: string;
+  name: string;
+  zip_code: number;
+}
+
+export interface IShop extends Document {
+  about: string;
+  address: string;
+  contact: number;
+  logo: string;
+  owner: ObjectId;
+  shop_name: string;
+  slug: string;
+  zip_code: number;
+}
+
+export interface IUser extends Document {
+  addresses: Address[];
+  contact: number;
+  email: string;
+  name: string;
+  password: string;
+  profile: string;
+  reset_password_time: Date;
+  reset_password_token: string;
+  role: string;
+  verified: boolean;
+}
+
+interface Address {
+  _id?: Types.ObjectId;
+  address1: string;
+  address2: string;
+  address_type: string;
+  city: string;
+  country: string;
+  zip_code: number;
 }

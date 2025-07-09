@@ -154,7 +154,7 @@ const handleGetBestDealProducts = asyncHandler(
       .populate([
         {
           path: "shop",
-          select: " shop_name logo about createdAt slug description",
+          select: " _id shop_name logo about createdAt slug description",
         },
       ])
       .select(
@@ -181,7 +181,7 @@ const handleGetFeaturedProducts = asyncHandler(
       .populate([
         {
           path: "shop",
-          select: " shop_name logo about createdAt slug description",
+          select: "_id shop_name logo about createdAt slug description",
         },
       ])
       .select(
@@ -246,7 +246,7 @@ const handleGetProductDetails = asyncHandler(
           { path: "category", select: "_id title slug description image" },
           {
             path: "shop",
-            select: " shop_name logo about createdAt slug description",
+            select: "_id shop_name logo about createdAt slug description",
           },
         ])
         .select(
@@ -265,7 +265,7 @@ const handleGetProductDetails = asyncHandler(
         .populate([
           {
             path: "shop",
-            select: " shop_name logo about createdAt slug description",
+            select: "_id shop_name logo about createdAt slug description",
           },
         ])
         .sort({ createdAt: -1 })
@@ -289,7 +289,7 @@ const handleGetBestSellingProducts = asyncHandler(
       .populate([
         {
           path: "shop",
-          select: " shop_name logo about createdAt slug description",
+          select: " _id shop_name logo about createdAt slug description",
         },
       ])
       .select(
@@ -315,7 +315,7 @@ const handleGetProducts = asyncHandler(
       .populate([
         {
           path: "shop",
-          select: " shop_name logo about createdAt slug description",
+          select: "_id shop_name logo about createdAt slug description",
         },
       ])
       .select(

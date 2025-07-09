@@ -56,3 +56,12 @@ export type IPopulatedProduct = Omit<IProduct, "category" | "shop"> & {
   category: ICategoryBody;
   shop: IShop;
 };
+
+export interface CartItem {
+  discount: number;
+  price: number;
+  product: string;
+  qty: number;
+  shop: string;
+  title: string;
+}

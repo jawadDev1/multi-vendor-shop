@@ -9,3 +9,7 @@ export { default as categoryRouter } from "./category.route.js";
 export { default as eventRouter } from "./event.route.js";
 
 export { default as coupounRouter } from "./coupoun.route.js";
+
+export { default as paymentRouter } from "./payment.route.js";
+
+export { default as orderRouter } from "./order.route.js";

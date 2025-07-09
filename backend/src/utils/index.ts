@@ -8,6 +8,7 @@ export const validateBody = (body: { [key: string]: any }) => {
   return Object.values(body).every((val) => val !== undefined && val !== null);
 };
 
+// Generate Slug from title
 export const generateSlug = (text: string) => {
   return text
     .toLowerCase()
@@ -16,6 +17,7 @@ export const generateSlug = (text: string) => {
     .trim();
 };
 
+// Generate Random string for unique slug
 export const generateRandomString = (length: number = 5) => {
   let str = "a1b2cdefgh3ij4klmn456op78qrs90t23uv2w9x9y239z";
   let randomStr = "";
@@ -26,4 +28,14 @@ export const generateRandomString = (length: number = 5) => {
   }
 
   return randomStr;
+};
+
+export const validateOrderBody = (body: { [key: string]: unknown }) => {
+  if (!Array.isArray(body.cart) || body.cart.length === 0) {
+    return false;
+  } else if (!body.shipping_address) {
+    return false;
+  }
+
+  return Object.values(body).every((val) => val !== undefined && val !== null);
 };

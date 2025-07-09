@@ -1,6 +1,7 @@
 import {
   handleCreateCoupoun,
   handleDeleteCoupoun,
+  handleGetCoupounByName,
   handleGetSellerCoupouns,
   handleGetSingleCoupoun,
   handleUpdateCoupoun,
@@ -21,5 +22,7 @@ router.delete("/coupoun/:id", handleDeleteCoupoun);
 router.get("/get-seller-coupouns", handleGetSellerCoupouns);
 
 router.get("/get-single/:id", handleGetSingleCoupoun);
+
+router.get("/get-coupoun/:name", handleGetCoupounByName);
 
 export default router;

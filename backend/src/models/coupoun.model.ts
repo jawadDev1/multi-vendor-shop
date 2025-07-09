@@ -21,6 +21,10 @@ const coupounModel = new Schema<ICoupoun>(
       type: String,
       required: true,
     },
+    shop: {
+      type: String,
+      required: true,
+    },
     limit: {
       type: Number,
       default: -1,
