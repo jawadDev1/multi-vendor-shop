@@ -1,4 +1,13 @@
+import TableShell from "@/components/Tables";
+import UserOrderActions from "@/components/Tables/elements/userOrder/OrderActions";
+import Loader from "@/components/ui/atoms/extra/Loader";
 import Table from "@/components/ui/molecules/Table";
+import {
+  USER_ORDER_ELEMENTS,
+  USER_ORDER_FIELDS,
+} from "@/constants/user_tables_data";
+import useGetData from "@/hooks/useGetData";
+import type { IUserOrderTable } from "@/types/user_profile";
 
 const FIELDS = [
   { title: "Order ID" },
@@ -23,9 +32,20 @@ const DATA = [
 ];
 
 const OrdersSection = () => {
+  const { data, error, loading } = useGetData<IUserOrderTable>({
+    endpoint: "order/get-user-orders",
+  });
+
+  if (loading) return <Loader />;
+
   return (
     <>
-      <Table fields={FIELDS} data={DATA} />
+      <TableShell
+        fields={USER_ORDER_FIELDS}
+        elements={USER_ORDER_ELEMENTS}
+        data={data ?? []}
+        actions={UserOrderActions}
+      />
     </>
   );
 };

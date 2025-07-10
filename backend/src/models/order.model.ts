@@ -5,8 +5,8 @@ const orderModel = new Schema<IOrder>(
   {
     cart: [
       {
-        discount: {
-          type: Number,
+        image: {
+          type: String,
           required: true,
         },
         price: {

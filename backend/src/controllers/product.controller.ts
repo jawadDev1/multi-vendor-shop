@@ -331,6 +331,26 @@ const handleGetProducts = asyncHandler(
   }
 );
 
+const handleAddProductReview = asyncHandler(async(req: Request, res: Response , next: NextFunction) => {
+  try {
+    const {productId} = req.params;
+    const body = req.body;
+    const isValid = validateBody(body);
+
+    if(!productId || !isValid) return next(new ErrorHandler("Invalid fields", 400));
+
+    const product = await ProductModel.findById(productId);
+
+    if(!product) return next(new ErrorHandler("Product not found", 404));
+
+    
+
+  } catch (error) {
+    console.log("Error in handleAddProductReview :: ", error) ;
+    return next(new ErrorHandler("Something went wrong", 500));
+  }
+})
+
 export {
   handleCreateProduct,
   handleGetShopProducts,

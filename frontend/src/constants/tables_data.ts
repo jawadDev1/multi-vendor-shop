@@ -1,7 +1,10 @@
 import TableDate from "@/components/Tables/elements/common/TableDate";
+import TableDateTime from "@/components/Tables/elements/common/TableDateTime";
 import TableSr from "@/components/Tables/elements/common/TableSr";
 import TableTitle from "@/components/Tables/elements/common/TableTitle";
 import TableProductImage from "@/components/Tables/elements/products/ProductImage";
+import OrderId from "@/components/Tables/elements/userOrder/OrderId";
+import OrderProduct from "@/components/Tables/elements/userOrder/OrderProducts";
 
 export const PRODUCTS_FIELDS = {
   _id: "Sr#",
@@ -32,8 +35,8 @@ export const Event_ELEMENTS = {
   productTitle: TableTitle,
   productOriginalPrice: TableTitle,
   productImages: TableProductImage,
-  start_date: TableDate,
-  end_date: TableDate,
+  start_date: TableDateTime,
+  end_date: TableDateTime,
   status: TableTitle,
 };
 
@@ -56,5 +59,21 @@ export const COUPOUN_ELEMENTS = {
   min_amount: TableTitle,
   max_amount: TableTitle,
   limit: TableTitle,
+  createdAt: TableDateTime,
+};
+
+export const ORDER_FIELDS = {
+  _id: "Order Id",
+  status: "Status",
+  cart: "Products",
+  totalPrice: "Total Price",
+  createdAt: "Placed On",
+};
+
+export const ORDER_ELEMENTS = {
+  _id: OrderId,
+  status: TableTitle,
+  cart: OrderProduct,
+  totalPrice: TableTitle,
   createdAt: TableDate,
 };

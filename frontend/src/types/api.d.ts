@@ -172,3 +172,52 @@ export interface IAPIShopDetailsData {
   shop: IAPIShop;
   events: IAPIUserEvent[];
 }
+
+export type IAPIOrder = {
+  _id: string;
+  status: string;
+  cart: [];
+  totalAmount: number;
+  createdAt: string;
+};
+
+export interface IAPIOrdersResponse extends IAPIResponse {
+  data: IAPIOrder[];
+}
+
+export interface IShippingAddress {
+  address1: string;
+  address2: string;
+  city: string;
+  contact: number;
+  country: string;
+  email: string;
+  name: string;
+  zip_code: number;
+}
+
+export interface IOrderDetail {
+  cart: [
+    {
+      image: string;
+      price: number;
+      product: string;
+      qty: number;
+      shop: string;
+      title: string;
+    }
+  ];
+  shipping_address: IShippingAddress;
+  payment_info: {
+    id: string;
+    status: string;
+    type: string;
+  };
+  user: string;
+  totalPrice: number;
+  status: string;
+  paid_at: string;
+  delieverd_at: string;
+  shop: string;
+  createdAt: string;
+}

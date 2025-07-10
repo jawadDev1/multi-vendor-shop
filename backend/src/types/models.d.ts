@@ -29,7 +29,7 @@ export interface IEvent extends Document {
 export interface IOrder {
   cart: [
     {
-      discount: number;
+      image: string;
       price: number;
       product: string;
       qty: number;
@@ -47,8 +47,8 @@ export interface IOrder {
   totalPrice: number;
   status: string;
   paid_at: Date;
-  delieverd_at: Date,
-  shop: ObjectId
+  delieverd_at: Date;
+  shop: ObjectId;
 }
 
 export interface IProduct extends Document {
@@ -64,6 +64,13 @@ export interface IProduct extends Document {
   stock: number;
   tags: string[];
   title: string;
+  reviews: [
+    {
+      rating: number;
+      comment: string;
+      user: ObjectId;
+    },
+  ];
 }
 
 export interface IShippingAddress {

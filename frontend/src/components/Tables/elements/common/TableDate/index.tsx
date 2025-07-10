@@ -1,5 +1,5 @@
 import TD from "../../../TableLayout/TD";
-import { formateDateTime } from "@/utils/index";
+import { formateDate } from "@/utils/index";
 
 interface SrProps {
   index: number;
@@ -7,7 +7,7 @@ interface SrProps {
 }
 
 const TableDate = ({ value }: SrProps) => {
-  return <TD>{formateDateTime(value)}</TD>;
+  return <TD>{formateDate(value)}</TD>;
 };
 
 export default TableDate;

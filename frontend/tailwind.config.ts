@@ -62,6 +62,20 @@ export default {
             fontWeight: "600",
           },
         ],
+        title: [
+          "22px",
+          {
+            lineHeight: "36px",
+            fontWeight: "500",
+          },
+        ],
+        "title-sm": [
+          "18px",
+          {
+            lineHeight: "27px",
+            fontWeight: "500",
+          },
+        ],
         "section-title": [
           "32px",
           {

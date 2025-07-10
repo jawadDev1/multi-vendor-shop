@@ -46,6 +46,22 @@ const productSchema = new Schema<IProduct>(
       type: String,
       default: "",
     },
+    reviews: [
+      {
+        rating: {
+          type: Number,
+          required: true,
+        },
+        comment: {
+          type: String,
+          default: null,
+        },
+        user: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "users",
+        },
+      },
+    ],
   },
   { timestamps: true }
 );

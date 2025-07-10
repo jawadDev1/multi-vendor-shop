@@ -15,7 +15,7 @@ interface TableShellProps extends ITableData {
 
 const TableShell = ({ fields, data, elements, actions }: TableShellProps) => {
   return (
-    <table className="max-w-[1200px] overflow-x-auto mx-auto bg-white shadow w-full text-start px-5 py-3">
+    <table className="max-w-[1500px] overflow-x-auto mx-auto bg-white shadow w-full text-start px-5 py-3">
       <TableHeader fields={fields} actions={actions} />
       <TableBody
         data={data}

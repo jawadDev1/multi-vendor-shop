@@ -23,7 +23,7 @@ const ShopLayout = () => {
       <SellerHeader />
       <main className="grid grid-cols-[16%,1fr]">
         <SellerSidebar />
-        <div className="max-h-[calc(100vh-88px)] overflow-y-auto">
+        <div className="max-h-[calc(100vh-88px)] overflow-y-auto py-5 md:py-11 px-5 md:px-7">
         <Outlet />
         </div>
       </main>

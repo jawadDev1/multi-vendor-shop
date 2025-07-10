@@ -2,7 +2,8 @@ import ProductsPageTemplate from "../../templates/ProductsPageTemplate";
 import { useSearchParams } from "react-router";
 import useGetData from "@/hooks/useGetData";
 import type { IAPIUserProduct } from "@/types/api";
-import Loader from "../../atoms/extra/OrderSuccess";
+import Loader from "../../atoms/extra/Loader";
+
 
 const ProductsPage = () => {
   const [searchParams] = useSearchParams();

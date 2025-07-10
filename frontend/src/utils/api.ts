@@ -4,7 +4,7 @@ interface API_REQUEST_PARAMS {
   endpoint: string;
   body: { [key: string]: any };
   headers?: { [key: string]: any };
-  method?: string;
+  method?: "POST" | "PUT";
 }
 
 export const apiRequest = async ({

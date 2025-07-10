@@ -145,7 +145,9 @@ const ProductCard = ({
                 ""
               )}
             </div>
-            <Subtitle2 className="text-green-500">32 sold</Subtitle2>
+            <Subtitle2 className="text-green-500">
+              {product.sold_out} sold
+            </Subtitle2>
           </div>
         </div>
       </div>

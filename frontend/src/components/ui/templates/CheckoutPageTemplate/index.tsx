@@ -71,11 +71,11 @@ const CheckoutPageTemplate = () => {
   };
 
   const handleCashOnDelivery = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
     const order = {
       cart: cartItems.map(
-        ({ discount, price, id: product, qty, shop, title }) => ({
-          discount,
+        ({ image, price, id: product, qty, shop, title }) => ({
+          image,
           price,
           product,
           shop,
@@ -110,8 +110,8 @@ const CheckoutPageTemplate = () => {
     const amount = Math.round(totalAmount * 100);
     const order = {
       cart: cartItems.map(
-        ({ discount, price, id: product, qty, shop, title }) => ({
-          discount,
+        ({ image, price, id: product, qty, shop, title }) => ({
+          image,
           price,
           product,
           shop,

@@ -8,6 +8,7 @@ const initialState: UserState = {
   user: null,
   loading: false,
   error: null,
+  userLoaded: false,
 };
 
 const userSlice = createSlice({
@@ -16,7 +17,6 @@ const userSlice = createSlice({
   reducers: {
     updateUser(state, action: PayloadAction<IAPIUser>) {
       if (action.payload?._id) {
-        console.log("ad =========> ", action.payload);
         state.user = action.payload;
       }
     },
@@ -30,12 +30,14 @@ const userSlice = createSlice({
         state.loading = false;
         state.user = action.payload.data;
         state.isAuthenticated = true;
+        state.userLoaded = true;
       })
       .addCase(loadUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
         state.isAuthenticated = false;
         state.user = null;
+        state.userLoaded = true;
       });
   },
 });
