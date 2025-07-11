@@ -47,7 +47,7 @@ const SellerHeader = () => {
         {shop && (
           <Link
             className=" size-[26px] lg:size-[34px] rounded-full overflow-hidden"
-            to={"/shop/slug"}
+            to={`/shop/${shop.slug}`}
           >
             <Image src={shop.logo} />
           </Link>

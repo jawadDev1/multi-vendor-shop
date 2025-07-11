@@ -1,4 +1,5 @@
 import {
+  handleAddProductReview,
   handleCreateProduct,
   handleDeleteProduct,
   handleGetBestDealProducts,
@@ -27,6 +28,8 @@ router.get("/best-selling", handleGetBestSellingProducts);
 router.get("/featured", handleGetFeaturedProducts);
 
 router.get("/product-details/:slug", handleGetProductDetails);
+
+router.put("/add-review/:productId", isAuthenticated, handleAddProductReview);
 
 router.use(isSeller);
 

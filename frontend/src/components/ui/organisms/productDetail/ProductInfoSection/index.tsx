@@ -3,7 +3,7 @@ import CardTitle from "@/components/ui/atoms/typography/CardTitle";
 import ProductDetailsTab from "@/components/ui/molecules/productDetail/ProductDetailsTab";
 import ProductReviewTab from "@/components/ui/molecules/productDetail/ProductReviewTab";
 import SellerInfoTab from "@/components/ui/molecules/productDetail/SellerInfoTab";
-import type { IAPIUserShop } from "@/types/api";
+import type { IAPIUserShop, IReview } from "@/types/api";
 
 import cn from "@/utils/cn";
 import React, { useState } from "react";
@@ -16,7 +16,7 @@ enum ALLOWED_TABS {
 
 type TabComponentPropsMap = {
   [ALLOWED_TABS.details]: { description: string };
-  [ALLOWED_TABS.reviews]: {};
+  [ALLOWED_TABS.reviews]: { reviews: IReview[] };
   [ALLOWED_TABS.info]: { shop: IAPIUserShop | null };
 };
 
@@ -32,6 +32,7 @@ const getActiveTab = <T extends ALLOWED_TABS>(
   data: {
     description?: string;
     shop?: IAPIUserShop;
+    reviews: IReview[];
   }
 ): {
   Tab: React.ComponentType<TabComponentPropsMap[T]>;
@@ -44,7 +45,7 @@ const getActiveTab = <T extends ALLOWED_TABS>(
     },
     [ALLOWED_TABS.reviews]: {
       Tab: ProductReviewTab,
-      props: {},
+      props: { reviews: data.reviews },
     },
     [ALLOWED_TABS.info]: {
       Tab: SellerInfoTab,
@@ -61,14 +62,23 @@ const getActiveTab = <T extends ALLOWED_TABS>(
 interface ProductInfoSectionProps {
   description: string;
   shop: IAPIUserShop;
+  reviews: IReview[];
 }
 
-const ProductInfoSection = ({ description, shop }: ProductInfoSectionProps) => {
+const ProductInfoSection = ({
+  description,
+  shop,
+  reviews,
+}: ProductInfoSectionProps) => {
   const [activeTab, setActiveTab] = useState<ALLOWED_TABS>(
     ALLOWED_TABS.details
   );
 
-  const { Tab, props } = getActiveTab(activeTab, { description, shop });
+  const { Tab, props } = getActiveTab(activeTab, {
+    description,
+    shop,
+    reviews,
+  });
 
   return (
     <SectionWrapper className="py-7 lg:py-10 bg-blue-50 rounded shadow px-5">

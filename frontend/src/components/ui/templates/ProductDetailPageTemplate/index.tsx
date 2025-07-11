@@ -16,9 +16,13 @@ const ProductDetailPageTemplate = ({
   const { description, shop } = product;
 
   return (
-    <PageWrapper className="flex flex-col gap-y-[50px] lg:gap-y-20 px-5 lg:px-0">
+    <PageWrapper className="flex flex-col gap-y-[50px] lg:gap-y-20 px-5 lg:px-0 lg:py-20">
       <ProductHeroSection product={product} />
-      <ProductInfoSection description={description} shop={shop!} />
+      <ProductInfoSection
+        description={description}
+        shop={shop!}
+        reviews={product.reviews}
+      />
       {relatedProducts && relatedProducts?.length > 0 && (
         <RelatedProductsSection products={relatedProducts} />
       )}

@@ -13,6 +13,7 @@ import { useAppSelector } from "@/app/hooks";
 import { Link } from "react-router";
 import { apiRequest } from "@/utils/api";
 import { notifyError, notifySuccess } from "@/utils/toast";
+import ReviewModal from "../../organisms/Modals/ReviewModal";
 
 interface OrderDetailPageTemplateProps {
   order: IOrderDetail;
@@ -47,7 +48,7 @@ const OrderDetailPageTemplate = ({
   };
 
   return (
-    <PageWrapper className="flex flex-col gap-y-7 md:gap-y-8">
+    <PageWrapper className="flex flex-col gap-y-7 md:gap-y-8 max-w-[1200px] mx-auto">
       <div className="flex items-center gap-x-4">
         <BsFillBagCheckFill size={30} className="text-azure-blue" />
         <Subtitle className="!font-[500]">Order Details</Subtitle>
@@ -63,16 +64,25 @@ const OrderDetailPageTemplate = ({
         {cart &&
           cart.length > 0 &&
           cart.map((item) => (
-            <div className="flex gap-x-2 items-center">
-              <div className="size-[60px] md:size-[70px]">
-                <Image src={item?.image ?? ""} />
+            <div className="flex items-center justify-between">
+              <div className="flex gap-x-2 items-center">
+                <div className="size-[60px] md:size-[70px]">
+                  <Image src={item?.image ?? ""} />
+                </div>
+                <div>
+                  <Title>{item.title}</Title>
+                  <Content className="mt-1">
+                    ${item.price} x {item.qty}
+                  </Content>
+                </div>
               </div>
-              <div>
-                <Title>{item.title}</Title>
-                <Content className="mt-1">
-                  ${item.price} x {item.qty}
-                </Content>
-              </div>
+              {order.status === "Delivered" && !isSeller && (
+                <ReviewModal
+                  id={item.product}
+                  image={item.image}
+                  title={item.title}
+                />
+              )}
             </div>
           ))}
       </div>
@@ -138,7 +148,12 @@ const OrderDetailPageTemplate = ({
             <option value="Delivered">Delivered</option>
           </select>
 
-          <Button onClick={handleUpdateOrderStatus} className="mt-3 max-w-[200px]">Update</Button>
+          <Button
+            onClick={handleUpdateOrderStatus}
+            className="mt-3 max-w-[200px]"
+          >
+            Update
+          </Button>
         </div>
       )}
     </PageWrapper>

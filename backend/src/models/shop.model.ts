@@ -36,6 +36,18 @@ const shopSchema = new Schema<IShop>(
       type: Number,
       required: [true, "contact is required"],
     },
+    rating: {
+      type: Number,
+      default: 0,
+    },
+    totalProducts: {
+      type: Number,
+      default: 0,
+    },
+    totalReviews: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );

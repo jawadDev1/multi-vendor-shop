@@ -160,11 +160,7 @@ export const routes: RouteObject[] = [
       },
       {
         path: "order/:id",
-        element: (
-          <ProtectedRoute>
-            <OrderDetailPage />
-          </ProtectedRoute>
-        ),
+        element: <OrderDetailPage />,
       },
     ],
   },

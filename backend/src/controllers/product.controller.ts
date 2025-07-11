@@ -35,6 +35,9 @@ const handleCreateProduct = asyncHandler(
       created_by: req.user?.id,
     });
 
+    shop.totalProducts += 1;
+    await shop.save();
+
     return res.status(200).json({
       success: true,
       message: "product created successfully",
@@ -118,6 +121,10 @@ const handleDeleteProduct = asyncHandler(
       return next(new ErrorHandler("Unauthorized", 403));
     }
 
+    await ShopModel.findByIdAndUpdate(product.shop, {
+      $inc: { totalProducts: -1 },
+    });
+
     return res.status(200).json({
       success: true,
       message: "product deleted successfully",
@@ -158,7 +165,7 @@ const handleGetBestDealProducts = asyncHandler(
         },
       ])
       .select(
-        "title originalPrice images category slug discount sold_out stock description"
+        "title originalPrice images category rating reviews slug discount sold_out stock description"
       )
       .sort({ createdAt: -1 })
       .limit(5);
@@ -185,7 +192,7 @@ const handleGetFeaturedProducts = asyncHandler(
         },
       ])
       .select(
-        "title originalPrice images category slug discount sold_out stock description"
+        "title originalPrice images category rating reviews slug discount sold_out stock description"
       )
       .sort({ createdAt: -1 })
       .limit(5);
@@ -246,11 +253,15 @@ const handleGetProductDetails = asyncHandler(
           { path: "category", select: "_id title slug description image" },
           {
             path: "shop",
-            select: "_id shop_name logo about createdAt slug description",
+            select: "_id shop_name logo about totalProducts totalReviews rating createdAt slug description",
+          },
+          {
+            path: "reviews.user",
+            select: "name email profile -_id",
           },
         ])
         .select(
-          "title originalPrice images category slug discount sold_out stock description "
+          "title originalPrice images category rating reviews slug discount sold_out stock description "
         )
         .lean<IPopulatedProduct>();
 
@@ -293,7 +304,7 @@ const handleGetBestSellingProducts = asyncHandler(
         },
       ])
       .select(
-        "title originalPrice images category slug discount sold_out stock description"
+        "title originalPrice images rating reviews category slug discount sold_out stock description"
       )
       .sort({ createdAt: -1 });
 
@@ -319,7 +330,7 @@ const handleGetProducts = asyncHandler(
         },
       ])
       .select(
-        "title originalPrice images category slug discount sold_out stock description"
+        "title originalPrice images category rating reviews slug discount sold_out stock description"
       )
       .sort({ createdAt: -1 });
 
@@ -331,25 +342,69 @@ const handleGetProducts = asyncHandler(
   }
 );
 
-const handleAddProductReview = asyncHandler(async(req: Request, res: Response , next: NextFunction) => {
-  try {
-    const {productId} = req.params;
-    const body = req.body;
-    const isValid = validateBody(body);
+const handleAddProductReview = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { productId } = req.params;
+      const body = req.body;
+      const isValid = validateBody(body);
 
-    if(!productId || !isValid) return next(new ErrorHandler("Invalid fields", 400));
+      if (!productId || !isValid)
+        return next(new ErrorHandler("Invalid fields", 400));
 
-    const product = await ProductModel.findById(productId);
+      const product = await ProductModel.findById(productId);
 
-    if(!product) return next(new ErrorHandler("Product not found", 404));
+      if (!product) return next(new ErrorHandler("Product not found", 404));
 
-    
+      const alreadyReviewed = product.reviews.find(
+        (rev) => rev.user == req.user?.id
+      );
 
-  } catch (error) {
-    console.log("Error in handleAddProductReview :: ", error) ;
-    return next(new ErrorHandler("Something went wrong", 500));
+      if (alreadyReviewed)
+        return next(new ErrorHandler("Already reviewed the product", 400));
+
+      product.reviews.push({
+        rating: body?.rating,
+        comment: body?.comment,
+        user: req.user?.id,
+      });
+
+      const average = Math.floor(
+        product.reviews.reduce((acc, curr) => acc + curr.rating, 0) /
+          product.reviews.length
+      );
+
+      product.rating = average;
+
+      await product.save();
+
+      const products = await ProductModel.find({ shop: product.shop });
+      const shop = await ShopModel.findById(product.shop);
+
+      let totalReviews = 0;
+      let rating = 0;
+      for (let product of products) {
+        totalReviews += product.reviews.length;
+        rating += product.reviews.reduce((acc, curr) => acc + curr.rating, 0);
+      }
+
+      rating = rating / totalReviews;
+      shop!.totalReviews = totalReviews;
+      shop!.rating = rating;
+
+      await shop?.save();
+
+      return res.status(201).json({
+        success: true,
+        message: "Product reviewd successfully",
+        data: product,
+      });
+    } catch (error) {
+      console.log("Error in handleAddProductReview :: ", error);
+      return next(new ErrorHandler("Something went wrong", 500));
+    }
   }
-})
+);
 
 export {
   handleCreateProduct,
@@ -363,4 +418,5 @@ export {
   handleGetBestSellingProducts,
   handleGetProductDetails,
   handleGetProducts,
+  handleAddProductReview,
 };

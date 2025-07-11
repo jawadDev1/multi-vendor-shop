@@ -11,7 +11,16 @@ const SellerInfoTab = ({ shop }: { shop: IAPIUserShop | null }) => {
     return <Content>Shop info not found</Content>;
   }
 
-  const { shop_name, logo, createdAt, about, slug } = shop;
+  const {
+    shop_name,
+    logo,
+    createdAt,
+    about,
+    slug,
+    totalProducts,
+    totalReviews,
+    rating,
+  } = shop;
 
   return (
     <div className="flex flex-col gap-5 lg:flex-row lg:justify-between">
@@ -22,7 +31,7 @@ const SellerInfoTab = ({ shop }: { shop: IAPIUserShop | null }) => {
           </div>
           <div>
             <Subtitle2 className="text-azure-blue">{shop_name}</Subtitle2>
-            <Subtitle3>(4.5) Rating</Subtitle3>
+            <Subtitle3>({rating}/5) Rating</Subtitle3>
           </div>
         </div>
 
@@ -36,11 +45,11 @@ const SellerInfoTab = ({ shop }: { shop: IAPIUserShop | null }) => {
         </Subtitle2>
         <Subtitle2>
           <span className="font-semibold">Total Products :</span>
-          1292
+          {totalProducts}
         </Subtitle2>
         <Subtitle2>
           <span className="font-semibold">Total Reviews :</span>
-          141
+          {totalReviews}
         </Subtitle2>
 
         <LinkButton to={`/shop/${slug}`} className="bg-primary text-white">

@@ -78,7 +78,7 @@ const ShopDetailPageTemplate = ({
   };
 
   return (
-    <PageWrapper className="grid grid-cols-1 lg:grid-cols-[30%,1fr] gap-5 ">
+    <PageWrapper className="grid grid-cols-1 lg:grid-cols-[30%,1fr] gap-5 max-w-[1200px] mx-auto">
       <ShopAbout
         {...{
           shop_name,

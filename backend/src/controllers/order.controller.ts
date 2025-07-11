@@ -172,6 +172,7 @@ const handleUpdateOrderStatus = asyncHandler(
       }
 
       if (body.status === "Delivered") {
+        order.payment_info.status = "Succeeded";
         order.delieverd_at = new Date(Date.now());
       }
 

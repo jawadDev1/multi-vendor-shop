@@ -100,7 +100,7 @@ const ProfilePageTemplate = ({ user }: ProfilePageTemplateProps) => {
   };
 
   return (
-    <PageWrapper className="grid grid-cols-1 md:grid-cols-[20%,1fr] px-5 lg:px-0">
+    <PageWrapper className="grid grid-cols-1 md:grid-cols-[20%,1fr] px-5 lg:px-0 max-w-[1200px] mx-auto">
       <div
         className="bg-white rounded-md w-full py-3 lg:py-4 px-2 lg:px-3 shadow
       flex items-center md:items-start  md:flex-col lg:gap-6 justify-between h-fit mt-5 lg:mt-0

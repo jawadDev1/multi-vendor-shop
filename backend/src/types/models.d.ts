@@ -49,6 +49,11 @@ export interface IOrder {
   paid_at: Date;
   delieverd_at: Date;
   shop: ObjectId;
+  refund: {
+    requested: boolean;
+    status: string;
+    auto_refund_amount: boolean;
+  };
 }
 
 export interface IProduct extends Document {
@@ -71,6 +76,7 @@ export interface IProduct extends Document {
       user: ObjectId;
     },
   ];
+  rating: number;
 }
 
 export interface IShippingAddress {
@@ -93,6 +99,9 @@ export interface IShop extends Document {
   shop_name: string;
   slug: string;
   zip_code: number;
+  rating: number;
+  totalReviews: number;
+  totalProducts: number;
 }
 
 export interface IUser extends Document {

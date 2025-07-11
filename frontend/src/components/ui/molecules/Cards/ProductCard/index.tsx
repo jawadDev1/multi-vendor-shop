@@ -131,7 +131,7 @@ const ProductCard = ({
             <CardTitle className="line-clamp-2 mt-3 mb-2">{title}</CardTitle>
           </Link>
 
-          <GenerateRatingStar rating={Math.floor(4)} />
+          <GenerateRatingStar rating={product.rating ?? 0} />
           {/* <GenerateRatingStar rating={Math.floor(rating.rate)} /> */}
 
           <div className="flex justify-between items-center mt-auto">

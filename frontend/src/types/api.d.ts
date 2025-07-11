@@ -132,6 +132,15 @@ export interface IAPIUserShop {
   about: string;
   logo: string;
   createdAt?: string;
+  rating: number;
+  totalProducts: number;
+  totalReviews: number;
+}
+
+interface IReview {
+  rating: number;
+  comment: string;
+  user: { name: string; email?: string; profile: string };
 }
 
 export interface IAPIUserProduct {
@@ -147,6 +156,8 @@ export interface IAPIUserProduct {
   stock: number;
   sold_out?: number;
   shop?: IAPIUserShop;
+  rating: number;
+  reviews: IReview[];
 }
 
 export interface IAPIUserProductResponse extends IAPIResponse {
