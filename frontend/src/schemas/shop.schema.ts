@@ -22,3 +22,14 @@ export const shopSchema = z.object({
 });
 
 export type ShopSchemaData = z.infer<typeof shopSchema>;
+
+export const shopUpdateSchema = z.object({
+  shop_name: z.string().min(3, "shop name must be atleast 3 characters"),
+  about: z.string().min(50, "shop about must be atleast 50 characters"),
+  contact: z.number().min(11, "enter a valid number"),
+  zip_code: z.number().min(11, "enter a valid number"),
+  address: z.string().min(1, "address is required"),
+});
+
+
+export type ShopUpdateSchemaData = z.infer<typeof shopUpdateSchema>;

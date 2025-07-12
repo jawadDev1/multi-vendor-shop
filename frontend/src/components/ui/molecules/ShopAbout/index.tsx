@@ -13,6 +13,8 @@ interface ShopAboutProps {
   contact: number;
   createdAt: string;
   owner: string;
+  rating: number,
+  totalProducts: number
 }
 
 const ShopAbout = ({
@@ -22,6 +24,8 @@ const ShopAbout = ({
   contact,
   createdAt,
   owner,
+  rating,
+  totalProducts
 }: ShopAboutProps) => {
   const { user } = useAppSelector((state) => state.user);
 
@@ -47,13 +51,15 @@ const ShopAbout = ({
           <Content className="!font-semibold text-primary">
             Total Products
           </Content>
-          <Content>10</Content>
+          <Content>
+            {totalProducts}
+          </Content>
         </div>
         <div>
           <Content className="!font-semibold text-primary">
             Shop Ratings
           </Content>
-          <Content>4/5</Content>
+          <Content>{rating}/5</Content>
         </div>
         <div>
           <Content className="!font-semibold text-primary">Joined On</Content>

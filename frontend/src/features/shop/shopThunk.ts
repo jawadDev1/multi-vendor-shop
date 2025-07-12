@@ -1,8 +1,8 @@
-import type { IAPIShopResponse } from "@/types/api";
+import type { IAPIShopDetailsResponse } from "@/types/api";
 import { getApiRequest } from "@/utils/api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const loadShop = createAsyncThunk<IAPIShopResponse>(
+export const loadShop = createAsyncThunk<IAPIShopDetailsResponse>(
   "shop/load",
   async (_, thunkAPI) => {
     try {

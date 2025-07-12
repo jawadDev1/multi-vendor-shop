@@ -13,7 +13,7 @@ export default {
       },
       colors: {
         "dark-gray": "#313131",
-        "dark-azure": "#254A7C",
+        "gray-bg": "#f6f6f5",
         "taupe-gray": "#8F8F8F",
         "azure-blue": "#3874FF",
         "primary": "#231F20",

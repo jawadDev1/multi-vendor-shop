@@ -23,7 +23,7 @@ const SellerHeader = () => {
   }, []);
 
   return (
-    <header className="bg-gray-100/70 py-3 px-4 flex justify-between items-center shadow">
+    <header className="bg-white py-3 px-4 flex justify-between items-center shadow-md z-10 relative">
       <div className=" w-[5rem] h-[3rem] lg:w-[9rem] lg:h-[4rem] overflow-hidden">
         <Image src={logo} className="object-cover" />
       </div>

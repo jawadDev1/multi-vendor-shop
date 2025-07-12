@@ -19,6 +19,22 @@ export interface IAPIUser {
   updatedAt?: string;
 }
 
+export interface IAPIShopDetails {
+  _id: string;
+  slug: string;
+  about: string;
+  shop_name: string;
+  contact: number;
+  logo: string;
+  owner?: string;
+  zip_code: number;
+  address: string;
+  products?: IAPIUserProduct[];
+  createdAt: string;
+  totalProducts: number;
+  totalOrders: number;
+  rating: number
+}
 export interface IAPIShop {
   _id?: string | null;
   slug: string;
@@ -56,6 +72,10 @@ export interface IAPIUserResponse extends IAPIResponse {
 
 export interface IAPIShopResponse extends IAPIResponse {
   data: IAPIShop;
+}
+
+export interface IAPIShopDetailsResponse extends IAPIResponse {
+  data: IAPIShopDetails;
 }
 
 export interface IAPIProductResponse extends IAPIResponse {
@@ -180,7 +200,7 @@ export interface IAPIUserPopularEventResponse extends IAPIResponse {
 }
 
 export interface IAPIShopDetailsData {
-  shop: IAPIShop;
+  shop: IAPIShopDetails;
   events: IAPIUserEvent[];
 }
 
@@ -231,4 +251,11 @@ export interface IOrderDetail {
   delieverd_at: string;
   shop: string;
   createdAt: string;
+}
+
+export interface IAPIReviews {
+  name: string;
+  profile: string;
+  rating: number;
+  comment: string;
 }

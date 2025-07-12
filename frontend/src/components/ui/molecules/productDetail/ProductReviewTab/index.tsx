@@ -3,6 +3,7 @@ import GenerateRatingStar from "@/components/ui/atoms/GenerateRatingStars";
 import Content from "@/components/ui/atoms/typography/Content";
 import Subtitle2 from "@/components/ui/atoms/typography/Subtitle2";
 import type { IReview } from "@/types/api";
+import ReviewCard from "../../Cards/ReviewCard";
 
 interface ProductReviewTabProps {
   reviews: IReview[];
@@ -14,16 +15,14 @@ const ProductReviewTab = ({ reviews }: ProductReviewTabProps) => {
       {reviews && reviews.length > 0 && (
         <div className="space-y-5 max-h-[400px] overflow-y-auto">
           {reviews.map((rev) => (
-            <div className="flex  gap-x-2">
-              <div className=" rounded-full size-16 overflow-hidden">
-                <Image src={rev.user.profile} />
-              </div>
-              <div>
-                <Subtitle2>{rev.user.name}</Subtitle2>
-                <GenerateRatingStar rating={rev.rating} size={20} />
-                <Content>{rev.comment}</Content>
-              </div>
-            </div>
+            <ReviewCard
+              {...{
+                comment: rev.comment,
+                rating: rev.rating,
+                name: rev.user.name,
+                profile: rev.user.name,
+              }}
+            />
           ))}
         </div>
       )}

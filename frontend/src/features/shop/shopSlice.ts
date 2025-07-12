@@ -1,6 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { SHOP_STATE } from "./shopTypes";
 import { loadShop } from "./shopThunk";
+import type { IAPIShopDetails } from "@/types/api";
 
 const initialState: SHOP_STATE = {
   shop: null,
@@ -11,7 +12,11 @@ const initialState: SHOP_STATE = {
 const shopSlice = createSlice({
   name: "shop",
   initialState,
-  reducers: {},
+  reducers: {
+    updateShop(state, action: PayloadAction<IAPIShopDetails>) {
+      state.shop = action.payload;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(loadShop.pending, (state) => {
@@ -27,5 +32,7 @@ const shopSlice = createSlice({
       });
   },
 });
+
+export const { updateShop } = shopSlice.actions;
 
 export default shopSlice.reducer;

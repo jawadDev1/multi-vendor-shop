@@ -11,7 +11,7 @@ const initialState: SELLER_STATE = {
 };
 
 const sellerSlice = createSlice({
-  name: "shop",
+  name: "seller",
   initialState,
   reducers: {},
   extraReducers(builder) {

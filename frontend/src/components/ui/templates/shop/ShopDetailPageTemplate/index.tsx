@@ -5,7 +5,11 @@ import ShopAbout from "@/components/ui/molecules/ShopAbout";
 import ShopEvents from "@/components/ui/organisms/shopDetail/ShopEvents";
 import ShopProductsSection from "@/components/ui/organisms/shopDetail/ShopProducts";
 import ShopReviewsSection from "@/components/ui/organisms/shopDetail/ShopReviews";
-import type { IAPIShop, IAPIUserEvent, IAPIUserProduct } from "@/types/api";
+import type {
+  IAPIShopDetails,
+  IAPIUserEvent,
+  IAPIUserProduct,
+} from "@/types/api";
 import cn from "@/utils/cn";
 import { useState } from "react";
 
@@ -24,7 +28,11 @@ type MENU_ITEMS = {
 
 const getActiveSection = (
   section: ALLOWED_MENU_ITEMS,
-  { products, events }: { products: IAPIUserProduct[]; events: IAPIUserEvent[] }
+  {
+    products,
+    events,
+    slug,
+  }: { products: IAPIUserProduct[]; events: IAPIUserEvent[]; slug: string }
 ) => {
   const menu: MENU_ITEMS = {
     products: {
@@ -37,7 +45,7 @@ const getActiveSection = (
     },
     reviews: {
       Section: ShopReviewsSection,
-      props: {},
+      props: { slug },
     },
   };
 
@@ -45,7 +53,7 @@ const getActiveSection = (
 };
 
 interface ShopDetailPageTemplateProps {
-  shop: IAPIShop;
+  shop: IAPIShopDetails;
   events: IAPIUserEvent[];
 }
 
@@ -66,11 +74,14 @@ const ShopDetailPageTemplate = ({
     owner,
     products,
     slug,
+    rating,
+    totalProducts,
   } = shop;
 
   const { Section, props } = getActiveSection(activeSection, {
     products: products!,
     events,
+    slug,
   });
 
   const handleActiveSection = (section: ALLOWED_MENU_ITEMS) => {
@@ -87,6 +98,8 @@ const ShopDetailPageTemplate = ({
           contact,
           createdAt: createdAt!,
           owner: owner!,
+          rating,
+          totalProducts,
         }}
       />
 

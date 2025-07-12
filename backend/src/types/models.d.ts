@@ -53,6 +53,7 @@ export interface IOrder {
     requested: boolean;
     status: string;
     auto_refund_amount: boolean;
+    reason: string;
   };
 }
 
