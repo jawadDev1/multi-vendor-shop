@@ -21,9 +21,9 @@ const ShopLayout = () => {
     <>
       <Toaster closeButton={true} richColors={true} position="top-right" />
       <SellerHeader />
-      <main className="grid grid-cols-[16%,1fr] bg-gray-bg">
+      <main className="grid grid-cols-[16%,1fr] bg-gray-bg ">
         <SellerSidebar />
-        <div className="max-h-[calc(100vh-88px)] overflow-y-auto py-5 md:py-11 px-5 md:px-7">
+        <div className="max-h-[calc(100vh-88px)] overflow-y-auto bg-white mx-5 mt-5 rounded ">
         <Outlet />
         </div>
       </main>

@@ -33,7 +33,7 @@ export interface IAPIShopDetails {
   createdAt: string;
   totalProducts: number;
   totalOrders: number;
-  rating: number
+  rating: number;
 }
 export interface IAPIShop {
   _id?: string | null;
@@ -178,6 +178,7 @@ export interface IAPIUserProduct {
   shop?: IAPIUserShop;
   rating: number;
   reviews: IReview[];
+  created_by: string;
 }
 
 export interface IAPIUserProductResponse extends IAPIResponse {
@@ -211,6 +212,21 @@ export type IAPIOrder = {
   totalAmount: number;
   createdAt: string;
 };
+
+export type IAPISellerConversations = {
+  last_message: string | null;
+  user: {
+    _id: string;
+    name: string;
+    email: string;
+    profile: string;
+  };
+  group_title: string;
+};
+
+export interface IAPISellerConversatoinResponse extends IAPIResponse {
+  data: IAPISellerConversations[];
+}
 
 export interface IAPIOrdersResponse extends IAPIResponse {
   data: IAPIOrder[];

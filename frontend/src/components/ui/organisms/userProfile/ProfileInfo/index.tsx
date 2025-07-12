@@ -101,7 +101,7 @@ const ProfileInfo = ({ user }: ProfileInfoProps) => {
             onChange={handleProfileChange}
           />
 
-          <Image src={preview} className="rounded-full overflow-hidden" />
+          <Image src={preview} className="rounded-full overflow-hidden  object-cover" />
           <span className="absolute bg-gray-100 rounded-full right-0 bottom-0 z-10">
             <AiOutlineEdit size={28} />
           </span>

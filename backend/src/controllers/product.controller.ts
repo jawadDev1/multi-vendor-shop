@@ -261,7 +261,7 @@ const handleGetProductDetails = asyncHandler(
           },
         ])
         .select(
-          "title originalPrice images category rating reviews slug discount sold_out stock description "
+          "title originalPrice images category rating created_by reviews slug discount sold_out stock description "
         )
         .lean<IPopulatedProduct>();
 

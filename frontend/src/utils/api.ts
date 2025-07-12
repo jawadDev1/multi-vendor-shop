@@ -43,6 +43,20 @@ export const getApiRequest = async (endpoint: string) => {
   }
 };
 
+export const getReduxApiRequest = async (endpoint: string) => {
+  const res = await fetch(`${API_URL}/${endpoint}`, {
+    credentials: "include",
+  });
+
+  const result = await res.json();
+
+  if (!result?.success) {
+    throw new Error(result?.message);
+  }
+
+  return result;
+};
+
 export const deleteApiRequest = async (endpoint: string) => {
   try {
     const res = await fetch(`${API_URL}/${endpoint}`, {

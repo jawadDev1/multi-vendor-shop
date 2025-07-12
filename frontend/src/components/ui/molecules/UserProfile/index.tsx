@@ -17,7 +17,7 @@ const UserProfile = ({ isAuthenticated, loading, user }: UserProfileProps) => {
       className=" size-[26px] lg:size-[34px] rounded-full overflow-hidden"
       to={"/profile"}
     >
-      <Image src={user?.profile} />
+      <Image src={user?.profile} className="object-cover" />
     </Link>
   ) : (
     <Link to={"/login"}>

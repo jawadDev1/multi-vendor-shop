@@ -29,6 +29,7 @@ import CheckoutPage from "@/components/ui/pages/CheckoutPage";
 import OrdersPage from "@/components/ui/pages/seller/OrdersPage";
 import OrderDetailPage from "@/components/ui/pages/OrderDetailPage";
 import ShopSettingPage from "@/components/ui/pages/seller/ShopSettingsPage";
+import ShopInboxPage from "@/components/ui/pages/seller/ShopInboxPage";
 
 export const routes: RouteObject[] = [
   {
@@ -166,6 +167,10 @@ export const routes: RouteObject[] = [
       {
         path: "settings",
         element: <ShopSettingPage />,
+      },
+      {
+        path: "inbox",
+        element: <ShopInboxPage />,
       },
     ],
   },

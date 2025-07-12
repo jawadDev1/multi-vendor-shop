@@ -127,3 +127,17 @@ interface Address {
   country: string;
   zip_code: number;
 }
+
+export interface IConversation {
+  group_title: string;
+  user: ObjectId;
+  seller: ObjectId;
+  last_message: string;
+  last_message_id: string;
+}
+
+export interface IMessage {
+  conversation_id: string;
+  sender: string;
+  images: string[];
+}

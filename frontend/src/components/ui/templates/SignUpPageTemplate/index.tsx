@@ -124,7 +124,7 @@ const SignupPageTemplate: React.FC = () => {
           <div className="mt-5 text-center">
             <p className="text-sm text-charcoal-gray">
               Already have an account?{" "}
-              <Link to={"/signin"} className="text-azure-blue">
+              <Link to={"/login"} className="text-azure-blue">
                 Sign in
               </Link>
             </p>

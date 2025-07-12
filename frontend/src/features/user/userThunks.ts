@@ -6,7 +6,13 @@ export const loadUser = createAsyncThunk<IAPIUserResponse>(
   "user/load",
   async (_, thunkAPI) => {
     try {
-      return await getApiRequest("user/getuser");
+      const result = await getApiRequest("user/getuser");
+
+      if (!result?.success) {
+        throw new Error(result?.message);
+      }
+
+      return result;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(
         error?.response?.data?.message || "Failed"

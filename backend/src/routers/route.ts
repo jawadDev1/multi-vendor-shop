@@ -13,3 +13,7 @@ export { default as coupounRouter } from "./coupoun.route.js";
 export { default as paymentRouter } from "./payment.route.js";
 
 export { default as orderRouter } from "./order.route.js";
+
+export { default as conversationRouter } from "./conversation.route.js";
+
+export { default as messageRouter } from "./message.route.js";

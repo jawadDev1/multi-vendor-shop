@@ -1,12 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { getProducts, getSellerOrders } from "./sellerThunk";
+import {
+  getProducts,
+  getSellerConversations,
+  getSellerOrders,
+} from "./sellerThunk";
 import type { SELLER_STATE } from "./sellerTypes";
 
 const initialState: SELLER_STATE = {
   products: null,
   orders: null,
   loading: false,
+  conversations: null,
   error: null,
 };
 
@@ -35,6 +40,17 @@ const sellerSlice = createSlice({
         state.orders = action.payload.data;
       })
       .addCase(getSellerOrders.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(getSellerConversations.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getSellerConversations.fulfilled, (state, action) => {
+        state.loading = false;
+        state.conversations = action.payload.data;
+      })
+      .addCase(getSellerConversations.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });

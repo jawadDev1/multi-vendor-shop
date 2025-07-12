@@ -4,9 +4,11 @@ import SectionWrapper from "@/components/ui/atoms/SectionWrapper";
 import Content from "@/components/ui/atoms/typography/Content";
 import Subtitle from "@/components/ui/atoms/typography/Subtitle";
 import Subtitle2 from "@/components/ui/atoms/typography/Subtitle2";
+import Subtitle3 from "@/components/ui/atoms/typography/Subtitle3";
 import useHandleProductInfo from "@/hooks/useHandleProductInfo";
+import useSendMessage from "@/hooks/useSendMessage";
 import type { IAPIUserProduct } from "@/types/api";
-import cn from "@/utils/cn";
+
 import { useState } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { Link } from "react-router";
@@ -30,6 +32,9 @@ const ProductHeroSection = ({ product }: Props) => {
   });
 
   const [slectedImage, setSlectedImage] = useState<number>(0);
+  const { handleSendMessage } = useSendMessage({
+    created_by: product.created_by,
+  });
 
   const handleImageChange = (index: number) => {
     setSlectedImage(index);
@@ -116,9 +121,11 @@ const ProductHeroSection = ({ product }: Props) => {
                 {shop?.shop_name}
               </Subtitle2>
             </Link>
-            {/* <Subtitle3>({rating}) Rating</Subtitle3> */}
+            <Subtitle3>({shop?.rating}/5) Rating</Subtitle3>
           </div>
-          <Button className="max-w-[300px] bg-dark-azure">Send message</Button>
+          <Button onClick={handleSendMessage} className="max-w-[150px] py-2">
+            Send message
+          </Button>
         </div>
       </div>
     </SectionWrapper>

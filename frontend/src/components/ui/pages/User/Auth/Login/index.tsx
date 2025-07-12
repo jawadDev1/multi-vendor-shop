@@ -12,6 +12,7 @@ const LoginPage: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log("authenticated =========> ", isAuthenticated)
     if (isAuthenticated) {
       navigate("/");
     }
