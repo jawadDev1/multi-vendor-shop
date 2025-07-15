@@ -35,17 +35,16 @@ export const getSellerOrders = createAsyncThunk<
   }
 });
 
-export const getSellerConversations = createAsyncThunk<
-  IAPISellerConversatoinResponse,
-  void,
-  { state: RootState }
->("seller/conversations", async (_, thunkAPI) => {
-  try {
-    const state = thunkAPI.getState();
-    const sellerId = state.user.user?._id;
-
-    return await getReduxApiRequest(`conversation/seller-conversations/${sellerId}`);
-  } catch (error: any) {
-    return thunkAPI.rejectWithValue(error?.response?.data?.message || "Failed");
-  }
-});
+export const getSellerConversations =
+  createAsyncThunk<IAPISellerConversatoinResponse>(
+    "seller/conversations",
+    async (_, thunkAPI) => {
+      try {
+        return await getReduxApiRequest(`conversation/seller-conversations`);
+      } catch (error: any) {
+        return thunkAPI.rejectWithValue(
+          error?.response?.data?.message || "Failed"
+        );
+      }
+    }
+  );

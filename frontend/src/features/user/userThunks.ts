@@ -1,6 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import type { IAPIUserResponse } from "@/types/api";
-import { getApiRequest } from "@/utils/api";
+import type {
+  IAPIUserConversatoinResponse,
+  IAPIUserResponse,
+} from "@/types/api";
+import { getApiRequest, getReduxApiRequest } from "@/utils/api";
 
 export const loadUser = createAsyncThunk<IAPIUserResponse>(
   "user/load",
@@ -20,3 +23,17 @@ export const loadUser = createAsyncThunk<IAPIUserResponse>(
     }
   }
 );
+
+export const loadUserConversations =
+  createAsyncThunk<IAPIUserConversatoinResponse>(
+    "user/conversations",
+    async (_, thunkAPI) => {
+      try {
+        return await getReduxApiRequest("conversation/user-conversations");
+      } catch (error: any) {
+        return thunkAPI.rejectWithValue(
+          error?.response?.data?.message || "Failed"
+        );
+      }
+    }
+  );

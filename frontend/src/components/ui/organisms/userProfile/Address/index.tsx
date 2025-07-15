@@ -18,8 +18,6 @@ const AddressSection = () => {
 
   const addresses = user?.addresses;
 
-  console.log("up =======> ", addresses);
-
   return (
     <>
       <div className="flex justify-between items-center gap-x-4 ">

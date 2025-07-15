@@ -1,17 +1,26 @@
 import { Toaster } from "sonner";
 import { Navigate, Outlet } from "react-router";
-import { useAppSelector } from "@/app/hooks";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
 
 import SellerSidebar from "../ui/organisms/seller/SellerSidebar";
-import Loader from "../ui/atoms/extra/OrderSuccess";
 import SellerHeader from "../ui/organisms/seller/SellerHeader";
+import { useEffect } from "react";
+import { loadUser } from "@/features/user/userThunks";
+import Loader from "../ui/atoms/extra/Loader";
 
 const ShopLayout = () => {
-  const { isAuthenticated, user, loading } = useAppSelector(
+  const { isAuthenticated, user, userLoaded } = useAppSelector(
     (state) => state.user
   );
+  const dispatch = useAppDispatch();
 
-  if (loading) return <Loader />;
+  useEffect(() => {
+    if (!user) {
+      dispatch(loadUser());
+    }
+  }, []);
+
+  if (!userLoaded) return <Loader />;
 
   if (!isAuthenticated && user?.role !== "SELLER") {
     <Navigate to={"/login"} />;
@@ -24,7 +33,7 @@ const ShopLayout = () => {
       <main className="grid grid-cols-[16%,1fr] bg-gray-bg ">
         <SellerSidebar />
         <div className="max-h-[calc(100vh-88px)] overflow-y-auto bg-white mx-5 mt-5 rounded ">
-        <Outlet />
+          <Outlet />
         </div>
       </main>
     </>

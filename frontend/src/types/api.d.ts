@@ -228,6 +228,21 @@ export interface IAPISellerConversatoinResponse extends IAPIResponse {
   data: IAPISellerConversations[];
 }
 
+export type IAPIUserConversations = {
+  last_message: string | null;
+  seller: {
+    _id: string;
+    name: string;
+    email: string;
+    profile: string;
+  };
+  group_title: string;
+};
+
+export interface IAPIUserConversatoinResponse extends IAPIResponse {
+  data: IAPIUserConversations[];
+}
+
 export interface IAPIOrdersResponse extends IAPIResponse {
   data: IAPIOrder[];
 }

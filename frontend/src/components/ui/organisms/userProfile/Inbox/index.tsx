@@ -1,25 +1,25 @@
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import Content from "@/components/ui/atoms/typography/Content";
 import SectionTitle from "@/components/ui/atoms/typography/SectionTitle";
 import ChatCard from "@/components/ui/molecules/Cards/ChatCard";
-import ChatBox from "@/components/ui/organisms/ChatBox";
-import type { IAPISellerConversations } from "@/types/api";
-import { useState } from "react";
+import { loadUserConversations } from "@/features/user/userThunks";
+import type { IAPIUserConversations } from "@/types/api";
+import { notifyError } from "@/utils/toast";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import ChatBox from "../../ChatBox";
 
-interface ShopInboxPageTemplateProps {
-  conversations: IAPISellerConversations[];
-}
-
-const ShopInboxPageTemplate = ({
-  conversations,
-}: ShopInboxPageTemplateProps) => {
-  if (!conversations) return;
+const InboxSection = () => {
+  const dispatch = useAppDispatch();
+  const { conversations, error, loading } = useAppSelector(
+    (state) => state.user
+  );
 
   if (conversations.length === 0) {
     <Content className="text-center">No chats</Content>;
   }
   const navigate = useNavigate();
-  const [activeChat, setActiveChat] = useState<IAPISellerConversations | null>(
+  const [activeChat, setActiveChat] = useState<IAPIUserConversations | null>(
     conversations[0] ?? null
   );
   const [isChatOpen, setIsChatOpen] = useState<boolean>(false);
@@ -36,11 +36,19 @@ const ShopInboxPageTemplate = ({
     setIsChatOpen(false);
   };
 
+  useEffect(() => {
+    dispatch(loadUserConversations());
+
+    if (error) {
+      notifyError(error);
+    }
+  }, []);
+
   return (
     <div className=" h-full ">
       {!isChatOpen && (
         <>
-          <SectionTitle className="text-center py-5 md:py-11">
+          <SectionTitle className="text-center ">
             All Messages
           </SectionTitle>
           <div className="max-h-[70vh] overflow-y-auto mt-6 space-y-4">
@@ -48,8 +56,8 @@ const ShopInboxPageTemplate = ({
               <ChatCard
                 last_message={conv.last_message}
                 key={i}
-                name={conv.user.name}
-                profile={conv.user.profile}
+                name={conv.seller.name}
+                profile={conv.seller.profile}
                 isActive={conv.group_title === activeChat?.group_title}
                 id={conv.group_title}
                 handleClick={handleActiveChat}
@@ -66,4 +74,4 @@ const ShopInboxPageTemplate = ({
   );
 };
 
-export default ShopInboxPageTemplate;
+export default InboxSection;

@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { UserState } from "./userTypes";
-import { loadUser } from "./userThunks";
+import { loadUser, loadUserConversations } from "./userThunks";
 import type { IAPIUser } from "@/types/api";
 
 const initialState: UserState = {
@@ -9,6 +9,7 @@ const initialState: UserState = {
   loading: false,
   error: null,
   userLoaded: false,
+  conversations: [],
 };
 
 const userSlice = createSlice({
@@ -38,6 +39,17 @@ const userSlice = createSlice({
         state.isAuthenticated = false;
         state.user = null;
         state.userLoaded = true;
+      })
+      .addCase(loadUserConversations.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(loadUserConversations.fulfilled, (state, action) => {
+        state.loading = false;
+        state.conversations = action.payload.data;
+      })
+      .addCase(loadUserConversations.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
       });
   },
 });

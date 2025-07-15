@@ -18,6 +18,7 @@ import { getApiRequest } from "@/utils/api";
 import { notifyError, notifySuccess } from "@/utils/toast";
 import { useNavigate } from "react-router";
 import ChangePasswordSection from "../../organisms/userProfile/ChangePasswordSection";
+import InboxSection from "../../organisms/userProfile/Inbox";
 
 enum ALLOWED_MENU_ITEMS {
   profile = "profile",
@@ -26,6 +27,7 @@ enum ALLOWED_MENU_ITEMS {
   track_orders = "track_orders",
   change_password = "change_password",
   address = "address",
+  inbox = "inbox",
 }
 
 type MENU_ITEMS = {
@@ -62,6 +64,10 @@ const getActiveSection = (
     },
     address: {
       Tab: AddressSection,
+      props: {},
+    },
+    inbox: {
+      Tab: InboxSection,
       props: {},
     },
   };
