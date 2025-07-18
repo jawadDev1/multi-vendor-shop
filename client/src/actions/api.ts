@@ -1,0 +1,23 @@
+
+import { cookies } from "next/headers";
+import { API_URL } from "@/constants/index";
+
+export const getServerApiRequest = async (endpoint: string) => {
+  const cookieStore = cookies();
+  const token = (await cookieStore).get('token');
+
+  const res = await fetch(`${API_URL}/${endpoint}`, {
+    credentials: "include",
+    headers: {
+      Cookie: `token=${token?.value}`
+    }
+  });
+
+  const result = await res.json();
+
+  if (!result?.success) {
+    throw new Error(result?.message);
+  }
+
+  return result;
+};

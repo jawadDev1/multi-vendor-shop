@@ -1,6 +1,6 @@
 import asyncHandler from "#middleware/asyncHandler.js";
-import { ConversationModel } from "#models/conversation.meodel.js";
-import { MessageModel } from "#models/message.meodel.js";
+import { ConversationModel } from "#models/conversation.model.js";
+import { MessageModel } from "#models/message.model.js";
 import { ErrorHandler } from "#utils/ErrorHandle.js";
 import { validateBody } from "#utils/index.js";
 import { Request, Response, NextFunction } from "express";
@@ -36,4 +36,25 @@ const handleCreateMessage = asyncHandler(
   }
 );
 
-export { handleCreateMessage };
+const handleGetMessages = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { id: conversation_id } = req.params;
+
+      const messages = await MessageModel.find({
+        conversation_id,
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "messages fetched successfully",
+        data: messages,
+      });
+    } catch (error) {
+      console.log("Error in handleCreateMessage :: ", error);
+      return next(new ErrorHandler("Something went wrong", 500));
+    }
+  }
+);
+
+export { handleCreateMessage, handleGetMessages };

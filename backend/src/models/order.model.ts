@@ -88,6 +88,7 @@ const orderModel = new Schema<IOrder>(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",
+      index: true,
     },
 
     totalPrice: {

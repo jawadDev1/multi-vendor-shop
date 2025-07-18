@@ -1,5 +1,5 @@
 import asyncHandler from "#middleware/asyncHandler.js";
-import { ConversationModel } from "#models/conversation.meodel.js";
+import { ConversationModel } from "#models/conversation.model.js";
 import { ErrorHandler } from "#utils/ErrorHandle.js";
 import { generateRandomString, validateBody } from "#utils/index.js";
 import { Request, Response, NextFunction } from "express";
@@ -49,15 +49,12 @@ const handleCreateConversation = asyncHandler(
 const handleGetSellerConversations = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { sellerId } = req.params;
-
       const conversations = await ConversationModel.find({
-        seller: sellerId,
+        seller: req.user?.id,
       })
         .populate({ path: "user", select: "-_id name email profile" })
         .select("-seller -last_message_id")
         .sort({ updatedAt: -1, createdAt: -1 });
-
 
       return res.status(201).json({
         success: true,
@@ -66,13 +63,43 @@ const handleGetSellerConversations = asyncHandler(
       });
     } catch (error) {
       if (error instanceof Error) {
-        console.log("Error in handleCreateConversation :: ", error.message);
+        console.log("Error in handleGetSellerConversations :: ", error.message);
       } else {
-        console.log("Error in handleCreateConversation :: ", error);
+        console.log("Error in handleGetSellerConversations :: ", error);
       }
       return next(new ErrorHandler("Something went wrong", 500));
     }
   }
 );
 
-export { handleCreateConversation, handleGetSellerConversations };
+const handleGetUserConversations = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const conversations = await ConversationModel.find({
+        user: req.user?.id,
+      })
+        .populate({ path: "seller", select: "-_id name email profile" })
+        .select("-user -last_message_id")
+        .sort({ updatedAt: -1, createdAt: -1 });
+
+      return res.status(201).json({
+        success: true,
+        message: "user conversations fetched successfully",
+        data: conversations,
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log("Error in handleGetUserConversations :: ", error.message);
+      } else {
+        console.log("Error in handleGetUserConversations :: ", error);
+      }
+      return next(new ErrorHandler("Something went wrong", 500));
+    }
+  }
+);
+
+export {
+  handleCreateConversation,
+  handleGetSellerConversations,
+  handleGetUserConversations,
+};

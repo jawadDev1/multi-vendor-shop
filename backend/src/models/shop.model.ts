@@ -11,6 +11,7 @@ const shopSchema = new Schema<IShop>(
       type: String,
       required: true,
       unique: true,
+      index: true,
     },
     owner: {
       type: mongoose.Schema.Types.ObjectId,

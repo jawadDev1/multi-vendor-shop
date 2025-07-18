@@ -3,7 +3,7 @@ import { ShopModel } from "#models/shop.model.js";
 
 import { IShopBody } from "#types/controllers.js";
 import { ErrorHandler } from "#utils/ErrorHandle.js";
-import { generateSlug, validateBody } from "#utils/index.js";
+import { generateSlug, sanitizeMongoObject, validateBody } from "#utils/index.js";
 import { Request, Response, NextFunction } from "express";
 import mongoose from "mongoose";
 
@@ -31,7 +31,7 @@ const handleRegisterShop = asyncHandler(
     return res.status(201).json({
       success: true,
       message: "Shop registered successfully",
-      data: shop,
+      data: sanitizeMongoObject(shop),
     });
   }
 );

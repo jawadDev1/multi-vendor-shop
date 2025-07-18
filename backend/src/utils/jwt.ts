@@ -49,10 +49,14 @@ export const sendToken = async (
     expires: new Date(Date.now() + days * 24 * 60 * 60 * 1000),
     httpOnly: true,
   };
-
-  return res.status(statusCode).cookie("token", token, options).json({
-    success: true,
-    verified: true,
-    message: "Logged in successfully",
-  });
+const userObject = user?.toObject();
+  return res
+    .status(statusCode)
+    .cookie("token", token, options)
+    .json({
+      success: true,
+      verified: true,
+      message: "Logged in successfully",
+      data: { ...userObject, password: "" },
+    });
 };

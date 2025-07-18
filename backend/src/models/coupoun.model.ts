@@ -7,6 +7,7 @@ const coupounModel = new Schema<ICoupoun>(
       type: String,
       required: [true, "name is rquired"],
       unique: true,
+      index: true,
     },
     value: {
       type: Number,

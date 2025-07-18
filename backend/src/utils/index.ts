@@ -1,4 +1,4 @@
-import { Document } from "mongoose";
+import { Document,  } from "mongoose";
 
 export const sanitizeUser = (user: Document) => {
   return { ...user, password: "", _id: "" };
@@ -39,3 +39,8 @@ export const validateOrderBody = (body: { [key: string]: unknown }) => {
 
   return Object.values(body).every((val) => val !== undefined && val !== null);
 };
+
+
+export const sanitizeMongoObject = (obj: Document ) => {
+  return {...obj.toObject(), _id: "", updatedAt: ""};
+}

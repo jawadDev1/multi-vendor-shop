@@ -138,6 +138,9 @@ export interface IConversation {
 
 export interface IMessage {
   conversation_id: string;
-  sender: string;
+  sender: ObjectId;
+  text: string;
   images: string[];
+  type: string;
+  is_seen: boolean;
 }
