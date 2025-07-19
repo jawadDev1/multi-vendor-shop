@@ -23,7 +23,7 @@ const ShopInboxPageTemplate = ({
   const [activeChat, setActiveChat] = useState<IAPISellerConversations | null>(
     conversations[0] ?? null
   );
-  const [isChatOpen, setIsChatOpen] = useState<boolean>(true);
+  const [isChatOpen, setIsChatOpen] = useState<boolean>(false);
 
   const handleActiveChat = (id: string) => {
     const chat = conversations.find((conv) => conv.group_title === id);

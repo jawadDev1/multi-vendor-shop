@@ -1,14 +1,19 @@
 import cn from "@/utils/cn";
-import Image from "../../atoms/common/NextImage";
 import CardTitle from "../../atoms/typography/CardTitle";
 import { AiOutlineSend } from "react-icons/ai";
 import { GrGallery } from "react-icons/gr";
 import useSocket from "@/hooks/useSocket";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { InputEvent, useEffect, useRef, useState, type FormEvent } from "react";
 import { BiChevronLeft } from "react-icons/bi";
 import { getApiRequest } from "@/utils/api";
 import { notifyError } from "@/utils/toast";
 import MessageItem from "../../atoms/extra/MessageItem";
+import { useUserStore } from "@/stores/user-store";
+import NextImage from "../../atoms/common/NextImage";
+import { CgClose } from "react-icons/cg";
+import Button from "../../atoms/buttons/Button";
+import { uploadImageToAppwrite } from "@/utils/uploadFile";
+import SpinnerButton from "../../atoms/buttons/SpinnerButton";
 
 interface ChatBoxProps {
   chat: {
@@ -37,10 +42,11 @@ interface Message {
   text?: string;
   images?: string[];
   createdAt: string;
+  type: string;
 }
 
 const ChatBox = ({ chat, handleChatClose }: ChatBoxProps) => {
-  const { user } = useAppSelector((state) => state.user);
+  const { user } = useUserStore();
   const { isConnected, socket } = useSocket({
     email: user?.email!,
     conversation_id: chat.group_title,
@@ -48,6 +54,12 @@ const ChatBox = ({ chat, handleChatClose }: ChatBoxProps) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [text, setText] = useState<string>("");
   const [isUserOnline, setIsUserOnline] = useState<boolean>(false);
+  const [isPreviewOpen, setIsPreviewOpen] = useState<boolean>(false);
+  const [isImageLoading, setIsImageLoading] = useState<boolean>(false);
+  const [chatImage, setChatImage] = useState<{
+    file: File;
+    preview: string;
+  } | null>(null);
 
   const messageBoxRef = useRef<HTMLDivElement | null>(null);
 
@@ -68,6 +80,46 @@ const ChatBox = ({ chat, handleChatClose }: ChatBoxProps) => {
     socket.emit("send_message", payload);
 
     setText("");
+  };
+
+  // Chat Image handlers
+  const handleChatImageChange = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = e.target?.files && e.target.files[0];
+    if (!file) return;
+    setIsPreviewOpen(true);
+    setChatImage({ file: file, preview: URL.createObjectURL(file) });
+  };
+
+  const handlePreview = () => {
+    setIsPreviewOpen(!isPreviewOpen);
+    setChatImage(null)
+  };
+
+  const handleImageSend = async () => {
+    if (!chatImage) return;
+    setIsImageLoading(true);
+    const imageUrl = await uploadImageToAppwrite(chatImage.file);
+    if (!imageUrl) {
+      notifyError("Something went wrong");
+      setIsPreviewOpen(false);
+      setIsImageLoading(false);
+      return;
+    }
+    if (!socket) return;
+
+    const payload = {
+      conversation_id: chat.group_title,
+      sender_id: user?._id!,
+      type: "IMAGE",
+      images: [imageUrl],
+    };
+
+    socket.emit("send_message", payload);
+    setIsImageLoading(false);
+    setIsPreviewOpen(false);
+    setChatImage(null);
   };
 
   useEffect(() => {
@@ -131,13 +183,13 @@ const ChatBox = ({ chat, handleChatClose }: ChatBoxProps) => {
           "flex gap-x-2 items-center bg-transparent px-5 py-2 cursor-pointer bg-blue-50 "
         )}
       >
-        <div onClick={handleChatClose}>
+          <div onClick={handleChatClose}>
           <BiChevronLeft size={33} />
         </div>
 
         <div className="relative">
           <div className="size-16 rounded-full overflow-hidden ">
-           <NextImage src={chatUser.profile} className="object-cover" />
+            <NextImage src={chatUser.profile} className="object-cover" />
           </div>
           <div
             className={cn(
@@ -153,7 +205,7 @@ const ChatBox = ({ chat, handleChatClose }: ChatBoxProps) => {
 
       <div
         ref={messageBoxRef}
-        className="px-3 py-4 flex-1 flex flex-col gap-y-3 h-[30vh] overflow-y-auto max-h-full"
+        className="px-3 py-4 flex-1 flex flex-col gap-y-3 h-[30vh] overflow-y-auto max-h-full relative"
       >
         {messages &&
           messages.length > 0 &&
@@ -163,21 +215,52 @@ const ChatBox = ({ chat, handleChatClose }: ChatBoxProps) => {
                 text={msg?.text ?? ""}
                 isSender={msg.sender == user?._id}
                 date={msg.createdAt}
+                images={msg.images}
+                type={msg.type}
               />
-              {msg?.images?.map((img: string, idx: number) => (
-                <img key={idx} src={img} alt="sent" width="200" />
-              ))}
             </div>
           ))}
       </div>
 
       <form
         onSubmit={sendMessage}
-        className="px-3 pb-2 flex gap-x-3 items-center"
+        className="relative px-3 pb-2 flex gap-x-3 items-center"
       >
+        {isPreviewOpen && (
+          <div className="absolute -top-full -translate-y-[90%] left-0 w-[50vw] h-[70vh] bg-primary/90 z-20 px-5 py-3 rounded">
+            <div onClick={handlePreview} className="cursor-pointer">
+              <CgClose size={28} className="text-white ml-auto" />
+            </div>
+            <div className="flex flex-col justify-between h-[95%]">
+              {chatImage?.preview && (
+                <div className="w-[40vw] h-[45vh] overflow-hidden mx-auto">
+                  <NextImage src={chatImage.preview} className="object-cover" />
+                </div>
+              )}
+
+              {chatImage?.file && (
+                <div className="flex justify-end  w-full ">
+                  <SpinnerButton
+                    isLoading={isImageLoading}
+                    onClick={handleImageSend}
+                    className="max-w-52 bg-primary-green "
+                  >
+                    Send
+                  </SpinnerButton>
+                </div>
+              )}
+            </div>{" "}
+          </div>
+        )}
         <label htmlFor="image" className="cursor-pointer">
           <GrGallery size={22} />
-          <input type="file" name="image" id="image" className="hidden" />
+          <input
+            type="file"
+            name="image"
+            id="image"
+            className="hidden"
+            onChange={handleChatImageChange}
+          />
         </label>
         <div className="border border-dim-gray rounded-md  w-full focus:border-blue-500 relative h-fit ">
           <input

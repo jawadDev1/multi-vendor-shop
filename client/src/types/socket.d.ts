@@ -29,6 +29,7 @@ export interface ServerToClientEvents {
     text?: string;
     images?: string[];
     createdAt: string;
+    type: string
   }) => void;
   online_users: (users: string[]) => void;
   error_message: (msg: string) => void;

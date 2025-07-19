@@ -46,7 +46,7 @@ export const onChatConnection = (socket: Socket, io: Server) => {
 
   socket.on("send_message", async (data) => {
     try {
-      const { conversation_id, sender_id, text, images } = data;
+      const { conversation_id, sender_id, text, images, type } = data;
       console.log("send_message =============> ", data);
 
       const message = await MessageModel.create({
@@ -54,6 +54,7 @@ export const onChatConnection = (socket: Socket, io: Server) => {
         images,
         sender: sender_id,
         text: text || "",
+        type: type ?? "TEXT"
       });
 
       io.to(conversation_id).emit("receive_message", message);

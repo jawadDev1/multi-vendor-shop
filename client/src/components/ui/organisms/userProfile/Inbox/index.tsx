@@ -62,8 +62,8 @@ if (conversations.length === 0) {
               <ChatCard
                 last_message={conv.last_message}
                 key={i}
-                name={conv.seller.name}
-                profile={conv.seller.profile}
+                name={conv.seller?.name}
+                profile={conv.seller?.profile}
                 isActive={conv.group_title === activeChat?.group_title}
                 id={conv.group_title}
                 handleClick={handleActiveChat}
