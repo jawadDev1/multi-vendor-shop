@@ -30,7 +30,7 @@ const Input = <TFieldValues extends FieldValues>({
       {...register(name, options)}
       {...props}
       className={cn(
-        `w-full mt-1 h-[44px] placeholder:text-light-gray text-primary lg:h-[45px] px-2 py-2 border border-gray-border rounded-md focus:border-blue-500 focus:outline-0`,
+        `w-full mt-1 h-[44px] placeholder:text-light-gray text-charcoal lg:h-[45px] px-2 py-2 border border-gray-border rounded-md focus:border-blue-500 focus:outline-0`,
         className
       )}
     />

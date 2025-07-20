@@ -47,7 +47,7 @@ export const onChatConnection = (socket: Socket, io: Server) => {
   socket.on("send_message", async (data) => {
     try {
       const { conversation_id, sender_id, text, images, type } = data;
-      console.log("send_message =============> ", data);
+      // console.log("send_message =============> ", data);
 
       const message = await MessageModel.create({
         conversation_id,

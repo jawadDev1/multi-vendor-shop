@@ -9,7 +9,7 @@ interface LabelProps {
 
 const Label = ({ className, name, label, required }: LabelProps) => {
   return (
-    <label htmlFor={name} className={cn("text-primary ", className)}>
+    <label htmlFor={name} className={cn("text-charcoal ", className)}>
       {label} {required && <span className="text-tomato-red">*</span>}
     </label>
   );

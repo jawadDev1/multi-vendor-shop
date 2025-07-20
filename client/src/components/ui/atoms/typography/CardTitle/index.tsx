@@ -5,7 +5,7 @@ const CardTitle = ({ className, children, ...props }: BaseProps) => {
   return (
     <h5
       className={cn(
-        " text-card-title-sm lg:text-card-title text-primary",
+        " text-card-title-sm md:text-card-title text-charcoal",
         className
       )}
       {...props}

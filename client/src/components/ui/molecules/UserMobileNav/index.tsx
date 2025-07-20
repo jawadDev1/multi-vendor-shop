@@ -31,7 +31,7 @@ const UserMobileNav = ({ user, isAuthenticated }: UserMobileNavProps) => {
   return (
     <>
       <div className="cursor-pointer" onClick={handleNav}>
-        <CgMenu size={30} />
+        <CgMenu size={30} color="white" />
       </div>
       <div
         className={cn(
@@ -41,12 +41,12 @@ const UserMobileNav = ({ user, isAuthenticated }: UserMobileNavProps) => {
           }
         )}
       >
-        <div className="flex flex-col  h-full w-[80%] max-w-[450px] absolute top-0 left-0 bg-white py-7 lg:py-10 px-3 lg:px-4 ">
+        <div className="flex flex-col  h-full w-[80%] max-w-[450px] absolute top-0 left-0 bg-charcoal py-7 lg:py-10 px-3 lg:px-4 ">
           <span
             onClick={handleNav}
             className="absolute top-4 cursor-pointer right-5 lg:right-8"
           >
-            <CgClose size={26} />
+            <CgClose size={26} color="white" />
           </span>
           <div className="mt-5 flex flex-col gap-y-10">
             <SearchProducts />

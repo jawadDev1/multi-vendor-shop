@@ -135,7 +135,6 @@ export interface IAPICategory {
 // ======================= {{ Front end  Types }} ============================================================================
 
 export interface IAPIUserCategory {
-  _id?: string;
   title: string;
   slug: string;
   description: string;

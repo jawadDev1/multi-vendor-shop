@@ -1,15 +1,16 @@
+'use client';
 import { CgProfile } from "react-icons/cg";
 import type { IAPIUser } from "@/types/api";
 import Link from "next/link";
 import NextImage from "../../atoms/common/NextImage";
+import { useUserStore } from "@/stores/user-store";
 
 interface UserProfileProps {
-  user: IAPIUser | null;
-  loading: boolean;
-  isAuthenticated: boolean;
 }
 
-const UserProfile = ({ isAuthenticated, loading, user }: UserProfileProps) => {
+const UserProfile = ({ }: UserProfileProps) => {
+  
+  const {  isAuthenticated, user, loading } = useUserStore();
   if (loading) return null;
 
   return user && isAuthenticated ? (

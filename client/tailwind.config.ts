@@ -9,25 +9,22 @@ export default {
     extend: {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
-        nastaliq: ["Roboto", "sans-serif"],
+        roboto: ["Roboto", "sans-serif"],
+      },
+      backgroundImage: {
+        "orange-gradient": "linear-gradient(to right, #FF8A65, #F36C4F)",
       },
       colors: {
-        "dark-gray": "#313131",
-        "gray-bg": "#f6f6f5",
-        "taupe-gray": "#8F8F8F",
-        "azure-blue": "#3874FF",
-        "primary": "#231F20",
-        "dim-gray": "#787878",
+        "light-gray": "#F7F7F7",
+        "cool-gray": "#B0BEC5",
+        "blue-gray": "#455A64",
+        charcoal: "#263238",
         "charcoal-gray": "#4f4f4f",
-        "cyan-blue": "#F4F8FB",
-        "deep-black": "#161D1A",
-        "primary-green": "#22c55e",
-        "light-gray": "#C4C4C4",
-        "deep-navy": "#003366",
         "tomato-red": "#F64545",
-        "steel-gray": "#52525B",
-        "ghost-white": "#F7F7F7",
         "dark-yellow": "#efe909",
+        "ultra-light": "#e0e0e0",
+        focus: "#455A64",
+        primary: "#FF8A65",
       },
 
       fontSize: {

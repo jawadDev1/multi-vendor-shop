@@ -1,3 +1,4 @@
+'use client';
 import Button from "../../atoms/buttons/Button";
 import { notifyError, notifySuccess } from "@/utils/toast";
 import { apiRequest } from "@/utils/api";

@@ -6,7 +6,7 @@ const Subtitle2 = ({ className, children, ...props }: BaseProps) => {
   return (
     <h4
       className={cn(
-        " text-subtitle2-sm lg:text-subtitle2 text-primary",
+        " text-subtitle2-sm lg:text-subtitle2 text-charcoal",
         className
       )}
       {...props}

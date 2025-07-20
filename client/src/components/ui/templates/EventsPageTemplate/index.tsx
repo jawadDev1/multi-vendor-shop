@@ -8,7 +8,7 @@ interface EventsPageTemplateProps {
 
 const EventsPageTemplate = ({ events }: EventsPageTemplateProps) => {
   return (
-    <PageWrapper className="flex flex-col gap-y-10 lg:gap-y-20">
+    <PageWrapper className="flex flex-col gap-y-10 lg:gap-y-20 px-5 lg:px-1">
       {events &&
         events.length > 0 &&
         events.map((event) => (

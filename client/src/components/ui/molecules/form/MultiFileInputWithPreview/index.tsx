@@ -33,8 +33,8 @@ const MultiFileInputWithPreview = <TFieldValues extends FieldValues>({
   const [previewImages, setPreviewImages] = useState<string[]>(defaultImages);
 
   const handleAvatar = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (previewImages.length >= 3)
-      return notifyError("Maximum 3 images are allowed");
+    if (previewImages.length >= 4)
+      return notifyError("Maximum 4 images are allowed");
 
     const file = e.target?.files && e.target.files[0];
     if (!file) return;

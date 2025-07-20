@@ -33,7 +33,7 @@ const { totalAmount, cart} = useCartStore();
   return (
     <>
       <CountIconWrapper onClick={handleCart} count={cart?.length ?? 0}>
-        <AiOutlineShoppingCart className="size-[22px]   lg:size-[28px] text-primary md:text-white" />
+        <AiOutlineShoppingCart className="size-[22px]   lg:size-[28px] text-white" />
       </CountIconWrapper>
       <div
         className={cn(

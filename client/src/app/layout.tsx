@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Poppins } from "next/font/google";
+import {  Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import NextTopLoader from "nextjs-toploader";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+
 
 const popins = Poppins({
   weight: ["100", "400", "500", "600", "700"],
@@ -27,10 +24,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${popins.className} antialiased bg-gray-bg`}
+        className={` ${popins.className} antialiased bg-light-gray`}
       >
         <NextTopLoader
-          color="#3874FF"
+          color="#FF8A65"
           height={3}
           showSpinner={false}
           easing="ease"

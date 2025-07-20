@@ -1,12 +1,14 @@
-'use client';
+"use client";
 import Button from "@/components/ui/atoms/buttons/Button";
 import NextImage from "@/components/ui/atoms/common/NextImage";
+import GenerateRatingStar from "@/components/ui/atoms/GenerateRatingStars";
 
 import SectionWrapper from "@/components/ui/atoms/SectionWrapper";
 import Content from "@/components/ui/atoms/typography/Content";
 import Subtitle from "@/components/ui/atoms/typography/Subtitle";
 import Subtitle2 from "@/components/ui/atoms/typography/Subtitle2";
 import Subtitle3 from "@/components/ui/atoms/typography/Subtitle3";
+import ProductImages from "@/components/ui/molecules/productDetail/ProductImages";
 import useHandleProductInfo from "@/hooks/useHandleProductInfo";
 import useSendMessage from "@/hooks/useSendMessage";
 import type { IAPIUserProduct } from "@/types/api";
@@ -20,7 +22,8 @@ interface Props {
 }
 
 const ProductHeroSection = ({ product }: Props) => {
-  const { title, images, description, originalPrice, discount, shop } = product;
+  const { title, images, description, originalPrice, discount, shop, rating } =
+    product;
 
   const {
     handleAddCart,
@@ -33,74 +36,17 @@ const ProductHeroSection = ({ product }: Props) => {
     item: product,
   });
 
-  const [slectedImage, setSlectedImage] = useState<number>(0);
   const { handleSendMessage } = useSendMessage({
     created_by: product.created_by,
   });
 
-  const handleImageChange = (index: number) => {
-    setSlectedImage(index);
-  };
-
   return (
-    <SectionWrapper className="grid grid-cols-1 md:grid-cols-[45%,55%] gap-x-7 gap-y-5">
-      <div className="">
-        <div className="w-[80%] mx-auto max-h-[300px] lg:max-h-[400px] h-full">
-         <NextImage src={images[slectedImage]} />
-        </div>
-        <div className="">
-          {images && images.length > 1 && (
-            <div className="grid grid-cols-2 gap-3 mt-6 lg:mt-7 ">
-              {images.map(
-                (src, i) =>
-                  i !== slectedImage && (
-                    <div
-                      key={i}
-                      onClick={() => handleImageChange(i)}
-                      className="w-full h-full border border-dim-gray/40 rounded-md p-6 max-h-[200px] lg:max-h-[240px] cursor-pointer "
-                    >
-                     <NextImage src={src} />
-                    </div>
-                  )
-              )}
-            </div>
-          )}
-        </div>
-      </div>
-
-      <div>
-        <Subtitle>{title}</Subtitle>
-
-        <Content className="mt-2 mb-4">{description}</Content>
-
-        <div className="flex items-center gap-x-2">
-          <Subtitle>${price}</Subtitle>
-          {discount ? (
-            <Subtitle2 className="text-tomato-red line-through mb-2">
-              {originalPrice}$
-            </Subtitle2>
-          ) : (
-            ""
-          )}
-        </div>
-
-        <div className="flex justify-between pr-3 items-center my-3 lg:py-4">
-          <div className="flex items-center rounded overflow-hidden">
-            <button
-              onClick={() => handleQty("dec")}
-              className="bg-green-400 px-4 text-white py-1.5"
-            >
-              -
-            </button>
-            <div className="bg-blue-50 px-3  py-1">{qty}</div>
-            <button
-              onClick={() => handleQty("inc")}
-              className="bg-green-400 text-white px-4 py-1.5"
-            >
-              +
-            </button>
-          </div>
-
+    <SectionWrapper className="grid grid-cols-1 md:grid-cols-[45%,2%,53%]  gap-y-5 w-full ">
+      <ProductImages images={images} />
+      <div className="bg-transparent"></div>
+      <div >
+        <div className="flex items-center justify-between">
+          <Subtitle>{title}</Subtitle>
           <div className="cursor-pointer" onClick={handleToggleWishlist}>
             {wishlistExists ? (
               <AiFillHeart size={30} color="red" />
@@ -109,13 +55,50 @@ const ProductHeroSection = ({ product }: Props) => {
             )}
           </div>
         </div>
+
+        <div className="flex flex-col lg:flex-row lg:items-center gap-3 mt-3">
+          <div className="flex items-center gap-x-2">
+            <Subtitle>${price}</Subtitle>
+            {discount ? (
+              <Subtitle2 className="text-tomato-red line-through mb-2">
+                {originalPrice}$
+              </Subtitle2>
+            ) : (
+              ""
+            )}
+          </div>
+
+          <div className="h-8 w-[2px] bg-charcoal-gray/50 hidden md:block" />
+          <GenerateRatingStar rating={rating} />
+
+          <Subtitle3>({product?.reviews?.length || 0} reviews)</Subtitle3>
+        </div>
+
+
+        <Content className="mt-6 md:mt-10 mb-4">{description}</Content>
+
+          <div className="flex items-center rounded-full my-5 overflow-hidden border border-blue-gray w-fit">
+            <button
+              onClick={() => handleQty("dec")}
+              className="px-4 text-charcoal py-1.5"
+            >
+              -
+            </button>
+            <div className="bg-blue-50 px-3  py-1">{qty}</div>
+            <button
+              onClick={() => handleQty("inc")}
+              className=" text-charcoal px-4 py-1.5"
+            >
+              +
+            </button>
+          </div>
         <Button onClick={handleAddCart} className="bg-primary max-w-[300px]">
           Add to cart
         </Button>
 
-        <div className="flex gap-x-3 items-center mt-5 lg:mt-10">
+        <div className="flex gap-x-3 items-center  mt-10">
           <div className="size-12 rounded-full overflow-hidden">
-           <NextImage src={shop?.logo!} />
+            <NextImage src={shop?.logo!} />
           </div>
           <div>
             <Link href={`/shop/${shop?.slug}`}>
@@ -125,7 +108,7 @@ const ProductHeroSection = ({ product }: Props) => {
             </Link>
             <Subtitle3>({shop?.rating}/5) Rating</Subtitle3>
           </div>
-          <Button onClick={handleSendMessage} className="max-w-[150px] py-2">
+          <Button onClick={handleSendMessage} className="max-w-fit py-3 bg-blue-gray">
             Send message
           </Button>
         </div>

@@ -1,28 +1,23 @@
+'use client';
 import NextImage from "@/components/ui/atoms/common/NextImage";
 
 import UserCart from "@/components/ui/molecules/UserCart";
 import UserMobileNav from "@/components/ui/molecules/UserMobileNav";
 import UserProfile from "@/components/ui/molecules/UserProfile";
 import Wishlist from "@/components/ui/molecules/Wishlist";
-import type { IAPIUser } from "@/types/api";
+import { useUserStore } from "@/stores/user-store";
 
-interface UserMobileMenuProps {
-  user: IAPIUser | null;
-  loading: boolean;
-  isAuthenticated: boolean;
-}
+interface UserMobileMenuProps {}
 
-const UserMobileMenu = ({
-  isAuthenticated,
-  loading,
-  user,
-}: UserMobileMenuProps) => {
+const UserMobileMenu = ({}: UserMobileMenuProps) => {
+  const { isAuthenticated, user, loading } = useUserStore();
+
   return (
-    <header className="flex items-center justify-between px-4 py-1 bg-gray-50 shadow sticky top-0 z-20 md:hidden">
+    <header className="flex items-center justify-between px-4 py-2 bg-charcoal shadow sticky top-0 z-20 md:hidden">
       <UserMobileNav {...{ isAuthenticated, user }} />
 
-      <div className="w-[5rem] h-[3rem] overflow-hidden">
-       <NextImage src={"/images/logo2.png"} className="object-cover" />
+      <div className="w-[2rem]  overflow-hidden">
+        <NextImage src={"/images/logo.png"} className="object-cover" />
       </div>
 
       <div className="flex items-center gap-x-3">

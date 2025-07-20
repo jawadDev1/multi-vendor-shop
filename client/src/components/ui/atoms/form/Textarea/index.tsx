@@ -21,7 +21,7 @@ const Textarea = <TFieldValues extends FieldValues>({
       })}
       {...props}
       className={cn(
-        `w-full mt-1 h-[150px] resize-none placeholder:text-light-gray text-primary  px-2 py-2 border border-gray-border rounded-md focus:border-blue-500 focus:outline-0`,
+        `w-full mt-1 h-[150px] resize-none placeholder:text-light-gray text-charcoal  px-2 py-2 border border-gray-border rounded-md focus:border-blue-500 focus:outline-0`,
         className
       )}
     />

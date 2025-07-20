@@ -9,9 +9,9 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <footer className="mt-10 lg:mt-20">
-      <NewsLetter />
+      {/* <NewsLetter /> */}
 
-      <div className="bg-[#222222] pt-7 lg:pt-10 pb-6 px-5">
+      <div className="bg-charcoal pt-7 lg:pt-10 pb-6 px-5">
         <div className="max-w-[1200px] mx-auto flex flex-col lg:flex-row gap-x-5 lg:gap-x-20">
           <div>
             <div className="w-20">

@@ -1,13 +1,12 @@
 "use client";
 import Subtitle2 from "@/components/ui/atoms/typography/Subtitle2";
 import Subtitle3 from "@/components/ui/atoms/typography/Subtitle3";
-import { AiFillHeart, AiOutlineEye, AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart,  AiOutlineHeart } from "react-icons/ai";
 import CardTitle from "@/components/ui/atoms/typography/CardTitle";
 import Cart from "@/components/icons/Cart";
 import NextImage from "@/components/ui/atoms/common/NextImage";
 
 import GenerateRatingStar from "@/components/ui/atoms/GenerateRatingStars";
-import cn from "@/utils/cn";
 import { useEffect, useState, type HTMLAttributes } from "react";
 import ProductDetailsModal from "@/components/ui/organisms/Modals/ProductDetailsModal";
 import type { IAPIUserProduct } from "@/types/api";
@@ -16,6 +15,8 @@ import type { ICartItem, IWishlistItem } from "@/types/common";
 import { notifySuccess } from "@/utils/toast";
 import { useCartStore } from "@/stores/cart-store";
 import Link from "next/link";
+import Button from "@/components/ui/atoms/buttons/Button";
+import Content from "@/components/ui/atoms/typography/Content";
 
 type ProductCardProps = {
   product: IAPIUserProduct;
@@ -38,8 +39,9 @@ const ProductCard = ({
     discount,
     _id: id,
     stock,
+    description,
+    rating,
   } = product;
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [wishlistExists, setWishlistExists] = useState<boolean>(false);
 
   // Cart Store
@@ -88,20 +90,24 @@ const ProductCard = ({
 
   return (
     <>
-      <ProductDetailsModal
-        isOpen={isModalOpen}
-        handleModal={() => setIsModalOpen(false)}
-        product={product}
-      />
-      <div
-        className={cn("bg-white py-2 px-2 shadow rounded-md", className)}
-        {...props}
-      >
-        <div className="relative py-2">
-          <div className="w-[90%] mx-auto h-[250px] ">
-            {images[0] && <NextImage src={images[0]} className="object-fill" />}
-          </div>
-          <div className="absolute bg-white px-1 py-2 rounded right-1 top-3 grid grid-cols-1 gap-3">
+      
+      <div className="rounded-3xl hover:shadow-xl group transition-all duration-200 shadow-md overflow-hidden shrink-0 min-h-[422px] h-full relative">
+        <div className="w-full h-[55%] group-hover:scale-105 transition-all duration-300">
+          <NextImage src={images[0]} className="object-fill" />
+        </div>
+
+        <div className="absolute -bbottom-[10%] -translate-y-[10%]  z-10 left-0 flex flex-col w-full h-[50%] gap-y-3 bg-white px-3 py-4 rounded-3xl">
+          <div className="flex justify-between items-center">
+            <div>
+              <Link href={`/shop/${shop?.slug}`}>
+                <Subtitle3 className="mb-1" >
+                  {shop?.shop_name}
+                </Subtitle3>
+              </Link>
+              <Link href={`/products/${encodeURIComponent(slug)}`}>
+                <CardTitle className="line-clamp-2">{title}</CardTitle>
+              </Link>
+            </div>
             <span onClick={handleToggleWishlist} className="cursor-pointer">
               {wishlistExists ? (
                 <AiFillHeart size={24} color="red" />
@@ -109,33 +115,15 @@ const ProductCard = ({
                 <AiOutlineHeart size={24} />
               )}
             </span>
-
-            <span onClick={() => setIsModalOpen(!isModalOpen)}>
-              <AiOutlineEye
-                className="cursor-pointer"
-                size={24}
-                color="#231f20"
-              />
-            </span>
-
-            <span onClick={handleAddCart} className="cursor-pointer">
-              <Cart className="size-[24px] cursor-pointer" />
-            </span>
           </div>
-        </div>
-        <div className="mt-3 flex flex-col lg:min-h-[150px] ">
-          <Link href={`/shop/${shop?.slug}`}>
-            <Subtitle3 className="text-blue-400">{shop?.shop_name}</Subtitle3>
-          </Link>
-          <Link href={`/products/${encodeURIComponent(slug)}`}>
-            <CardTitle className="line-clamp-2 mt-3 mb-2">{title}</CardTitle>
-          </Link>
 
-          <GenerateRatingStar rating={product.rating ?? 0} />
-          {/* <GenerateRatingStar rating={Math.floor(rating.rate)} /> */}
-
-          <div className="flex justify-between items-center mt-auto">
-            <div className="flex items-center gap-2">
+          {rating > 0 ? (
+            <GenerateRatingStar rating={rating ?? 0} />
+          ) : (
+            <Content className="line-clamp-2">{description}</Content>
+          )}
+          <div className="flex flex-col justify-between mt-auto gap-y-3 items-center">
+            <div className="flex justify-start text-start w-full items-center gap-2">
               <Subtitle2 className="!font-semibold">{price}$</Subtitle2>
               {discount ? (
                 <Subtitle3 className="line-through text-tomato-red mb-1">
@@ -145,9 +133,14 @@ const ProductCard = ({
                 ""
               )}
             </div>
-            <Subtitle2 className="text-green-500">
-              {product.sold_out} sold
-            </Subtitle2>
+
+            <Button
+              onClick={handleAddCart}
+              className="flex justify-center items-center gap-x-1  rounded-full"
+            >
+              <Cart className="size-[24px] text-white " />
+              Add to cart
+            </Button>
           </div>
         </div>
       </div>
@@ -156,3 +149,4 @@ const ProductCard = ({
 };
 
 export default ProductCard;
+

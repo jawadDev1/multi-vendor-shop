@@ -31,7 +31,7 @@ const Wishlist = ({}: WishlistProps) => {
   return (
     <>
       <CountIconWrapper onClick={handleWishlist} count={wishlist.length}>
-        <AiOutlineHeart className="size-[22px]   lg:size-[28px] text-primary md:text-white" />
+        <AiOutlineHeart className="size-[22px]   lg:size-[28px] text-white" />
       </CountIconWrapper>
       <div
         className={cn(
