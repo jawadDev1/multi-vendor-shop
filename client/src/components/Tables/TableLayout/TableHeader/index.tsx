@@ -5,7 +5,7 @@ interface TableHeaderProps {
 
 const TableHeader = ({ fields, actions }: TableHeaderProps) => {
   return (
-    <thead className="text-justify bg-blue-50">
+    <thead className="text-justify bg-blue-gray/10">
       {fields && (
         <tr>
           {Object.values(fields).map((field, i) => (

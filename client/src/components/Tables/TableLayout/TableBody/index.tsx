@@ -20,7 +20,7 @@ const TableBody = ({
         data.length > 0 &&
         data.map((item: Record<string, any>, i) => (
           <tr
-            className="px-5 h-[70px] hover:bg-blue-50/70 even:bg-blue-50/50"
+            className="px-5 h-[70px] hover:bg-blue-gray/10 even:bg-blue-gray/10"
             key={i}
           >
             {Object.keys(fields).map((key: string) => {

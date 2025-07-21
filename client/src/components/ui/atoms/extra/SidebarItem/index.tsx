@@ -26,15 +26,15 @@ const SidebarItem = ({
     >
       <Icon
         className={cn(
-          "size-7 lg:size-8 text-charcoal-gray group-hover:text-azure-blue",
+          "size-7 lg:size-8 text-white group-hover:text-primary",
           {
-            "text-azure-blue": isActive,
+            "text-primary": isActive,
           }
         )}
       />
       <Content
-        className={cn(" hidden md:block group-hover:text-azure-blue", {
-          "text-azure-blue ": isActive,
+        className={cn(" hidden text-white md:block group-hover:text-primary", {
+          "text-primary ": isActive,
         })}
       >
         {title}

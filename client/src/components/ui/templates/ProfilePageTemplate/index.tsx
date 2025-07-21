@@ -97,17 +97,17 @@ const ProfilePageTemplate = ({}: ProfilePageTemplateProps) => {
           >
             <Icon
               className={cn(
-                "size-[28px] text-charcoal-gray group-hover:text-azure-blue ",
+                "size-[28px] text-charcoal-gray group-hover:text-primary ",
                 {
-                  "text-azure-blue": activeSection === id,
+                  "text-primary": activeSection === id,
                 }
               )}
             />
             <Subtitle2
               className={cn(
-                "hidden md:block text-charcoal-gray group-hover:text-azure-blue",
+                "hidden md:block text-charcoal-gray group-hover:text-primary",
                 {
-                  "text-azure-blue": activeSection === id,
+                  "text-primary": activeSection === id,
                 }
               )}
             >

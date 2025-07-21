@@ -3,11 +3,12 @@ import { ErrorHandler } from "#utils/ErrorHandle.js";
 import { NextFunction, Request, Response } from "express";
 import bcrypt from "bcrypt";
 import { IUserBody } from "#types/controllers.js";
-import { UserModel } from "#models/user.meodel.js";
+import { UserModel } from "#models/user.model.js";
 import { sanitizeUser, validateBody } from "#utils/index.js";
 import { generateActivationToken, sendToken, verifyToken } from "#utils/jwt.js";
 import { sendMail } from "#utils/sendmail.js";
 import mongoose from "mongoose";
+import { ShopModel } from "#models/shop.model.js";
 
 const handleSignup = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -370,6 +371,8 @@ const handleChangePassword = asyncHandler(
     }
   }
 );
+
+
 
 export {
   handleSignup,

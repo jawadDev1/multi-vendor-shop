@@ -28,6 +28,10 @@ const defaultInitialState: UserState = {
 export const useUserStore = create<UserStore>((set, get) => ({
   ...defaultInitialState,
   updateUser: (user) => {
+      if(!user) {
+        set((_) => ({ user, isAuthenticated: false }));
+        return;
+      }
       set((_) => ({ user, isAuthenticated: true }));
   },
   loadUser: async () => {

@@ -1,4 +1,4 @@
-import { UserModel } from "#models/user.meodel.js";
+import { UserModel } from "#models/user.model.js";
 import { ErrorHandler } from "#utils/ErrorHandle.js";
 import { verifyToken } from "#utils/jwt.js";
 import asyncHandler from "./asyncHandler.js";

@@ -49,6 +49,22 @@ const shopSchema = new Schema<IShop>(
       type: Number,
       default: 0,
     },
+    status: {
+      type: String,
+      enum: ["ACTIVE", "INACTIVE"],
+      default: "ACTIVE"
+    },
+    stripe_payment: {
+      status: {
+        type: String,
+        enum: ["PENDING", "REQUESTED", "ACTIVATED"],
+        default: "PENDING",
+      },
+      account_id: {
+        type: String,
+        default: null,
+      },
+    },
   },
   { timestamps: true }
 );

@@ -16,6 +16,7 @@ import { uploadImageToAppwrite } from "@/utils/uploadFile";
 import TextareaWithLabel from "../../molecules/form/TextareaWithLabel";
 import { useRouter } from "next/navigation";
 import { useShopStore } from "@/stores/shop-store";
+import { useUserStore } from "@/stores/user-store";
 
 const RegisterSellerPageTemplate = () => {
   const router = useRouter();
@@ -31,6 +32,7 @@ const RegisterSellerPageTemplate = () => {
   });
 
   const { updateShop} = useShopStore();
+  const { updateUser, user} = useUserStore();
 
   const onSubmit = async (data: ShopSchemaData) => {
     setIsLoading(true);
@@ -55,7 +57,7 @@ const RegisterSellerPageTemplate = () => {
     }
 
     updateShop(result?.data)
-
+    updateUser({...user!, role: "SELLER"});
     notifySuccess(result?.message);
     router.push("/");
     router.refresh();

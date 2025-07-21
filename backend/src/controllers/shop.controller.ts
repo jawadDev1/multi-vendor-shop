@@ -438,6 +438,25 @@ const handleGetShopReviews = asyncHandler(
   }
 );
 
+
+// Get Seller for the admin
+const handleGetSellers = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+  try {
+   
+      const sellers = await ShopModel.find({}).populate({path: "owner", select: "name email "}).select("shop_name logo slug owner totalProducts rating totalReviews");
+
+
+      return res.status(200).json({
+        success: true,
+        message: "shops fetched successfully",
+        data: sellers
+      })
+  } catch (error) {
+    console.log("Error ln handleGetSellers ::  ", error);
+    return next(new ErrorHandler("Something went wrong", 400));
+  }
+})
+
 export {
   handleRegisterShop,
   handleGetShop,
@@ -446,4 +465,5 @@ export {
   handleGetShopStates,
   handleUpdateSellerSettings,
   handleGetShopReviews,
+  handleGetSellers
 };

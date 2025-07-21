@@ -103,6 +103,12 @@ export interface IShop extends Document {
   rating: number;
   totalReviews: number;
   totalProducts: number;
+  stripe_payment: {
+    status: "PENDING" | "REQUESTED" | "ACTIVATED";
+    account_id: string;
+  };
+  status: "ACTIVE" | "INACTIVE"
+
 }
 
 export interface IUser extends Document {

@@ -32,11 +32,11 @@ const UserLogout = () => {
     >
       <CgLogOut
         className={cn(
-          "size-[28px] text-charcoal-gray group-hover:text-azure-blue "
+          "size-[28px] text-charcoal-gray group-hover:text-primary "
         )}
       />
       <Subtitle2
-        className={cn("text-charcoal-gray group-hover:text-azure-blue")}
+        className={cn("text-charcoal-gray group-hover:text-primary")}
       >
         Logout
       </Subtitle2>
