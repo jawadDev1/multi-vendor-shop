@@ -21,14 +21,14 @@ const Select = <TFieldValues extends FieldValues>({
       {...register(name)}
       {...props}
       className={cn(
-        `w-full mt-1 h-[44px] bg-white text-primary lg:h-[45px] px-2 py-2 border border-gray-border rounded-md focus:border-blue-500 focus:outline-0`,
+        `w-full mt-1 h-[44px] bg-white text-charcoal lg:h-[45px] px-2 py-2 border border-gray-border rounded-md focus:border-blue-500 focus:outline-0`,
         className
       )}
     >
       {options &&
         options.length > 0 &&
-        options.map(({ label, value }) => (
-          <option key={value} value={value}>
+        options.map(({ label, value }, i) => (
+          <option key={`${value}-${i}`} value={value}>
             {label}
           </option>
         ))}

@@ -17,3 +17,5 @@ export { default as orderRouter } from "./order.route.js";
 export { default as conversationRouter } from "./conversation.route.js";
 
 export { default as messageRouter } from "./message.route.js";
+
+export { default as webhookRouter } from "./webhook.route.js";

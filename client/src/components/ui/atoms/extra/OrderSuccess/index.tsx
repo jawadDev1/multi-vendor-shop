@@ -1,4 +1,5 @@
 import Lottie from "react-lottie";
+import animation from '@/assets/animations/order-success.json';
 
 const OrderSuccess = () => {
   return (
@@ -6,7 +7,7 @@ const OrderSuccess = () => {
       <Lottie
         options={{
           loop: true,
-          animationData: "animations/order-success.json",
+          animationData: animation,
           autoplay: true,
           rendererSettings: { preserveAspectRatio: "xMidYMid " },
         }}

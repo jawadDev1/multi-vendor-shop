@@ -10,44 +10,44 @@ const CheckoutSteps = ({ step }: CheckoutStepsProps) => {
   return (
     <div className="grid grid-cols-[26%,10%,26%,10%,26%] max-w-[500px] mx-auto items-center ">
       <div
-        className={cn("px-6 py-2.5 border border-primary-green rounded-full", {
-          "bg-primary-green border-transparent": step > 0,
+        className={cn("px-6 py-2.5 border border-primary rounded-full", {
+          "bg-primary border-transparent": step > 0,
         })}
       >
         <Subtitle2
-          className={cn("text-primary-green", { "!text-white": step > 0 })}
+          className={cn("text-primary", { "!text-white": step > 0 })}
         >
           1.Shipping
         </Subtitle2>
       </div>
       <div
-        className={cn("w-full h-[4px] bg-primary-green/40 ", {
-          "bg-primary-green": step > 1,
+        className={cn("w-full h-[4px] bg-primary/40 ", {
+          "bg-primary": step > 1,
         })}
       />
       <div
-        className={cn("px-6 py-2.5 border border-primary-green rounded-full", {
-          "bg-primary-green border-transparent": step > 1,
+        className={cn("px-6 py-2.5 border border-primary rounded-full", {
+          "bg-primary border-transparent": step > 1,
         })}
       >
         <Subtitle2
-          className={cn("text-primary-green", { "!text-white": step > 1 })}
+          className={cn("text-primary", { "!text-white": step > 1 })}
         >
           2.Payment
         </Subtitle2>
       </div>
       <div
-        className={cn("w-full h-[4px] bg-primary-green/40 ", {
-          "bg-primary-green": step > 1,
+        className={cn("w-full h-[4px] bg-primary/40 ", {
+          "bg-primary": step > 1,
         })}
       />
       <div
-        className={cn("px-6 py-2.5 border border-primary-green rounded-full", {
-          "bg-primary-green border-transparent": step === 3,
+        className={cn("px-6 py-2.5 border border-primary rounded-full", {
+          "bg-primary border-transparent": step === 3,
         })}
       >
         <Subtitle2
-          className={cn("text-primary-green", { "!text-white": step === 3 })}
+          className={cn("text-primary", { "!text-white": step === 3 })}
         >
           3.Success
         </Subtitle2>

@@ -1,9 +1,14 @@
 "use client";
+import SellerPageWrapper from "@/components/ui/atoms/SellerPageWrapper";
+import SectionTitle from "@/components/ui/atoms/typography/SectionTitle";
+import Subtitle3 from "@/components/ui/atoms/typography/Subtitle3";
 import { apiRequest } from "@/utils/api";
 import { notifyError } from "@/utils/toast";
+import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
 const StripeReturnPage = ({ id }: { id: string }) => {
+  const router = useRouter();
   useEffect(() => {
     if (id) {
       (async () => {
@@ -16,32 +21,23 @@ const StripeReturnPage = ({ id }: { id: string }) => {
           notifyError(result?.message);
           return;
         }
+
+        router.refresh();
+
       })();
     }
   }, [id]);
 
   return (
-    <div className="container">
-      <div className="banner">
-        <h2>Nexora</h2>
-      </div>
-      <div className="content">
-        <h2>Details submitted</h2>
-        <p>That's everything we need for now</p>
-      </div>
-      <div className="info-callout">
-        <p>
-          This is a sample app for Stripe-hosted Connect onboarding.{" "}
-          <a
-            href="https://docs.stripe.com/connect/onboarding/quickstart?connect-onboarding-surface=hosted"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            View docs
-          </a>
-        </p>
-      </div>
-    </div>
+    <SellerPageWrapper className="text-center">
+      <SectionTitle className="text-primary mb-4">
+        Congratulations!
+      </SectionTitle>
+
+      <Subtitle3>
+        Your stripe account is connected successfully now you can sell products
+      </Subtitle3>
+    </SellerPageWrapper>
   );
 };
 

@@ -1,4 +1,7 @@
 "use client";
+import SellerPageWrapper from "@/components/ui/atoms/SellerPageWrapper";
+import SectionTitle from "@/components/ui/atoms/typography/SectionTitle";
+import Subtitle3 from "@/components/ui/atoms/typography/Subtitle3";
 import React, { useState } from "react";
 
 const StripeRefreshPage = ({
@@ -40,28 +43,11 @@ const StripeRefreshPage = ({
   }, [connectedAccountId]);
 
   return (
-    <div className="container">
-      <div className="banner">
-        <h2>Nexora</h2>
-      </div>
-      <div className="content">
-        <h2>Add information to start accepting money</h2>
-        <p>
-          Nexora is the world's leading air travel platform: join our team of
-          pilots to help people travel faster.
-        </p>
-        {error && <p className="error">Something went wrong!</p>}
-      </div>
-      <div className="dev-callout">
-        {connectedAccountId && (
-          <p>
-            Your connected account ID is:{" "}
-            <code className="bold">{connectedAccountId}</code>
-          </p>
-        )}
-        {accountLinkCreatePending && <p>Creating a new Account Link...</p>}
-      </div>
-    </div>
+    <SellerPageWrapper className="text-center">
+      <SectionTitle className="text-primary mb-4">
+        Wait Account is Connecting....
+      </SectionTitle>
+    </SellerPageWrapper>
   );
 };
 

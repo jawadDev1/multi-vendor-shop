@@ -34,6 +34,10 @@ export interface IAPIShopDetails {
   totalProducts: number;
   totalOrders: number;
   rating: number;
+  stripe_payment: {
+    status: "PENDING" | "REQUESTED" | "ACTIVATED";
+    account_id: string;
+  };
 }
 export interface IAPIShop {
   _id?: string | null;
@@ -108,7 +112,7 @@ export interface IAPICoupoun {
   type: string;
   limit: number;
   products: string[];
-  shop: string
+  shop: string;
 }
 
 export interface IAPISellerCoupounResponse extends IAPIResponse {

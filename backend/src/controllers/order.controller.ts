@@ -1,9 +1,18 @@
 import asyncHandler from "#middleware/asyncHandler.js";
 import { OrderModel } from "#models/order.model.js";
 import { ProductModel } from "#models/product.model.js";
+import { ShopModel } from "#models/shop.model.js";
 import { CartItem } from "#types/controllers.js";
 import { ErrorHandler } from "#utils/ErrorHandle.js";
-import { validateBody, validateOrderBody } from "#utils/index.js";
+import {
+  calculatePriceAfterDiscount,
+  validateBody,
+  validateOrderBody,
+} from "#utils/index.js";
+import {
+  calculateAmountAfterPlatformFee,
+  transferAmount,
+} from "#utils/transferAmount.js";
 import { Request, Response, NextFunction } from "express";
 
 const handleCreateOrder = asyncHandler(

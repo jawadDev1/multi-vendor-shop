@@ -6,6 +6,7 @@ import {
   CardNumberElement,
 } from "@stripe/react-stripe-js";
 import SpinnerButton from "@/components/ui/atoms/buttons/SpinnerButton";
+import { useUserStore } from "@/stores/user-store";
 
 const INPUT_STYLE =
   "w-full mt-1 h-[44px] placeholder:text-light-gray text-charcoal-gray lg:h-[45px] px-2 py-2 border border-gray-border rounded-md focus:border-blue-500 focus:outline-0";
@@ -38,9 +39,10 @@ const PaymentForm = ({
   loading,
   handleCashOnDelivery,
 }: PaymentFormProps) => {
+  const {user} = useUserStore()
   const [activeMenthod, setActiveMenthod] = useState<number>(1);
 
-  const [name, setName] = useState<string>("");
+  const [name, setName] = useState<string>(user?.name ?? "");
 
   return (
     <div className="bg-white shadow-md rounded-xl px-4 py-5">
@@ -50,15 +52,16 @@ const PaymentForm = ({
           onClick={() => setActiveMenthod(1)}
         >
           <input
+            onChange={() => {}}
             type="radio"
             className="hidden peer"
             name={"method"}
             checked={activeMenthod == 1}
           />
-          <div className="w-4 h-4 lg:w-5 lg:h-5 rounded-full border border-[#CBD0DD] peer-checked:border-4 peer-checked:bg-azure-blue peer-checked:border-azure-blue flex items-center justify-center">
+          <div className="w-4 h-4 lg:w-5 lg:h-5 rounded-full border border-[#CBD0DD] peer-checked:border-4 peer-checked:bg-primary peer-checked:border-primary flex items-center justify-center">
             <div className="size-1 bg-white rounded-full"></div>
           </div>
-          <span className="lg:text-lg text-primary/70 font-[500]">
+          <span className="lg:text-lg text-charcoal/70 font-[500]">
             Pay with Debit/Credit card
           </span>
         </label>
@@ -120,15 +123,16 @@ const PaymentForm = ({
           onClick={() => setActiveMenthod(2)}
         >
           <input
+            onChange={() => {}}
             type="radio"
             className="hidden peer"
             name={"method"}
             checked={activeMenthod == 2}
           />
-          <div className="w-4 h-4 lg:w-5 lg:h-5 rounded-full border border-[#CBD0DD] peer-checked:border-4 peer-checked:bg-azure-blue peer-checked:border-azure-blue flex items-center justify-center">
+          <div className="w-4 h-4 lg:w-5 lg:h-5 rounded-full border border-[#CBD0DD] peer-checked:border-4 peer-checked:bg-primary peer-checked:border-primary flex items-center justify-center">
             <div className="size-1 bg-white rounded-full"></div>
           </div>
-          <span className="lg:text-lg text-primary/70 font-[500]">
+          <span className="lg:text-lg text-charcoal/70 font-[500]">
             Cash on deleivery
           </span>
         </label>

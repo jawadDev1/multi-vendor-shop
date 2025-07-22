@@ -35,6 +35,7 @@ export interface IOrder {
       qty: number;
       shop: string;
       title: string;
+      discount: number
     },
   ];
   shipping_address: IShippingAddress;
@@ -42,6 +43,10 @@ export interface IOrder {
     id: string;
     status: string;
     type: string;
+  };
+  funds_transfer: {
+    status: "SUCCESS" | "PENDING" | "FAILED";
+    transfer_id: string;
   };
   user: ObjectId;
   totalPrice: number;
@@ -107,8 +112,7 @@ export interface IShop extends Document {
     status: "PENDING" | "REQUESTED" | "ACTIVATED";
     account_id: string;
   };
-  status: "ACTIVE" | "INACTIVE"
-
+  status: "ACTIVE" | "INACTIVE";
 }
 
 export interface IUser extends Document {

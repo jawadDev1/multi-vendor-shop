@@ -29,6 +29,8 @@ export const convertStringToDate = (date: string) => {
   return new Date(date).toISOString().slice(0, 10);
 };
 
+
+// Calculate price after the discount
 export const calculatePriceAfterDiscount = (
   originalPrice: number,
   discount: number

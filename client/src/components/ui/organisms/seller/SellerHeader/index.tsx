@@ -11,8 +11,6 @@ const logo = "/images/logo.png";
 const SellerHeader = () => {
   const { shop, error, loadShop } = useShopStore();
 
-
-
   useEffect(() => {
     loadShop();
     if (error) {
@@ -27,7 +25,9 @@ const SellerHeader = () => {
       </div>
 
       <div className="flex gap-3 items-center">
-        <ConnectStripe />
+        {shop && shop.stripe_payment.status !== "ACTIVATED" && (
+          <ConnectStripe />
+        )}
         {shop && (
           <Link
             className=" size-[30px] shrink-0 lg:size-[50px] rounded-full overflow-hidden"

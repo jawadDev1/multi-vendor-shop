@@ -46,7 +46,7 @@ const CartItem = ({ item }: CartItemProps) => {
         >
           +
         </button>
-        <div className="text-sm text-primary">{qty}</div>
+        <div className="text-sm text-charcoal">{qty}</div>
         <button
           onClick={() => handleCartItem("dec")}
           className="size-6 rounded-full outline-none bg-green-500 text-white flex items-center justify-center leading-none"
@@ -71,7 +71,7 @@ const CartItem = ({ item }: CartItemProps) => {
         onClick={handleRemoveCartItem}
         className="flex items-center cursor-pointer"
       >
-        <CgClose className="size-[18px] lg:size-[22px] text-primary" />
+        <CgClose className="size-[18px] lg:size-[22px] text-charcoal" />
       </div>
     </div>
   );

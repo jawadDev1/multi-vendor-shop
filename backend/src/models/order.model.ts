@@ -13,6 +13,10 @@ const orderModel = new Schema<IOrder>(
           type: Number,
           required: true,
         },
+        discount: {
+          type: Number,
+          required: true,
+        },
         product: {
           type: String,
           required: true,
@@ -104,6 +108,17 @@ const orderModel = new Schema<IOrder>(
       default: Date.now(),
     },
     delieverd_at: { type: Date, default: Date.now() },
+    funds_transfer: {
+      status: {
+        type: String,
+        enum: ["SUCCESS", "PENDING", "FAILED"],
+        default: "PENDING",
+      },
+      transfer_id: {
+        type: String,
+        default: null,
+      },
+    },
   },
   { timestamps: true }
 );

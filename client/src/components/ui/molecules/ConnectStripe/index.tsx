@@ -21,7 +21,6 @@ const ConnectStripe = () => {
     });
 
     setIsLoading(false);
-    console.log("result ======> ", result);
     if (!result?.success) {
       notifyError(result?.message);
       return;

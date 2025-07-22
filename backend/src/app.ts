@@ -14,11 +14,16 @@ import {
   productRouter,
   shopRouter,
   userRouter,
+  webhookRouter,
 } from "#routers/route.js";
 import cors from "cors";
 import mongoSanitize from "express-mongo-sanitize";
 
 const app = express();
+
+// Stripe Web Hook
+app.use("/api/v1/webhook", webhookRouter)
+
 
 // Middlewares
 app.use(express.json({ limit: "10mb" }));

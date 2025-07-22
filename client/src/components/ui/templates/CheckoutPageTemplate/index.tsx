@@ -74,13 +74,14 @@ const {cart: cartItems, clearCart} = useCartStore();
     setIsLoading(true);
     const order = {
       cart: cartItems.map(
-        ({ image, price, id: product, qty, shop, title }) => ({
+        ({ image, price, id: product, qty, shop, title, discount }) => ({
           image,
           price,
           product,
           shop,
           qty,
           title,
+          discount
         })
       ),
       shipping_address: formData,
@@ -105,18 +106,21 @@ const {cart: cartItems, clearCart} = useCartStore();
     setIsLoading(false);
   };
 
+  
+    // Handle Stripe Payment
   const paymentHandler = async () => {
     setIsLoading(true);
     const amount = Math.round(totalAmount * 100);
     const order = {
       cart: cartItems.map(
-        ({ image, price, id: product, qty, shop, title }) => ({
+        ({ image, price, id: product, qty, shop, title, discount }) => ({
           image,
           price,
           product,
           shop,
           qty,
           title,
+          discount
         })
       ),
       shipping_address: formData,

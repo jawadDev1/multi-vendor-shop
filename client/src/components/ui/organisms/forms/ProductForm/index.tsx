@@ -7,6 +7,7 @@ import SelectWithLabel from "@/components/ui/molecules/form/SelectWithLabel";
 import TagsInputWithLabel from "@/components/ui/molecules/form/TagsInputWithLabel";
 import TextareaWithLabel from "@/components/ui/molecules/form/TextareaWithLabel";
 import { productSchema, type ProductFormData } from "@/schemas/product.schema";
+import { useShopStore } from "@/stores/shop-store";
 
 import { apiRequest } from "@/utils/api";
 import { notifyError, notifySuccess } from "@/utils/toast";
@@ -37,6 +38,10 @@ const ProductForm = ({
   tags = [],
   images = [],
 }: Props) => {
+
+
+
+
   const {
     register,
     handleSubmit,
@@ -52,6 +57,14 @@ const ProductForm = ({
   const [defaultImages, setDefaultImages] = useState<string[]>(images);
   const [productImages, setProductImages] = useState<File[]>([]);
   const [productImagesError, setProductImagesError] = useState<string>("");
+
+  const { shop} = useShopStore();
+
+  if(shop?.stripe_payment.status !== "ACTIVATED") {
+    notifyError("Create stripe account to create products");
+    router.push("/seller");
+    return;
+  }
 
   const handleImages = (img: File) => {
     setProductImages((prev) => [...prev, img]);
