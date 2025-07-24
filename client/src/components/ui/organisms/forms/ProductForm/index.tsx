@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import Button from "@/components/ui/atoms/buttons/Button";
 import Spinner from "@/components/ui/atoms/extra/Spinner";
 import InputWithLabel from "@/components/ui/molecules/form/InputWithLabel";
@@ -15,7 +15,7 @@ import { uploadImageToAppwrite } from "@/utils/uploadFile";
 import { DevTool } from "@hookform/devtools";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import type { FieldError } from "react-hook-form";
 
@@ -38,10 +38,6 @@ const ProductForm = ({
   tags = [],
   images = [],
 }: Props) => {
-
-
-
-
   const {
     register,
     handleSubmit,
@@ -58,13 +54,7 @@ const ProductForm = ({
   const [productImages, setProductImages] = useState<File[]>([]);
   const [productImagesError, setProductImagesError] = useState<string>("");
 
-  const { shop} = useShopStore();
-
-  if(shop?.stripe_payment.status !== "ACTIVATED") {
-    notifyError("Create stripe account to create products");
-    router.push("/seller");
-    return;
-  }
+  const { shop } = useShopStore();
 
   const handleImages = (img: File) => {
     setProductImages((prev) => [...prev, img]);
@@ -129,12 +119,19 @@ const ProductForm = ({
       setIsLoading(false);
 
       router.push("/seller/products");
-      router.refresh()
+      router.refresh();
     } catch (err) {
       setIsLoading(false);
       console.error("Create product failed:", err);
     }
   };
+
+  useEffect(() => {
+    if (shop?.stripe_payment?.status !== "ACTIVATED") {
+      notifyError("Create stripe account to create products");
+      router.push("/seller");
+    }
+  }, [shop]);
 
   return (
     <>

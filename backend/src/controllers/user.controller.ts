@@ -375,8 +375,8 @@ const handleChangePassword = asyncHandler(
 const handleGetUsersForAdmin = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const users = await UserModel.find({})
-        .select("name email profile role ")
+      const users = await UserModel.find({ role: {$ne: "ADMIN"}})
+        .select("name email profile role createdAt")
         .sort({ createdAt: -1 });
 
 

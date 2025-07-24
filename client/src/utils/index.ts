@@ -35,7 +35,7 @@ export const calculatePriceAfterDiscount = (
   originalPrice: number,
   discount: number
 ): number => {
-  return originalPrice - (1 - discount / 100);
+  return Number((originalPrice - (1 - discount / 100)).toFixed(2));
 };
 
 export const formatMessageTime = (dateString: string) => {

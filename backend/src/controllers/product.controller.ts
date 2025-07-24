@@ -50,7 +50,7 @@ const handleGetShopProducts = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const id = req.user?.id;
 
-    const products = await ProductModel.find({ created_by: id });
+    const products = await ProductModel.find({ created_by: id }).select("_id title images price discount stock sold_out rating");
 
     return res.status(200).json({
       success: true,

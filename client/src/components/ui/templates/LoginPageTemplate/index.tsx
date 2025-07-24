@@ -60,7 +60,7 @@ const LoginPageTemplate: React.FC = () => {
       <div className="max-w-[600px] mx-auto w-full px-5 lg:px-0">
         <SectionTitle className="text-center">Login</SectionTitle>
 
-        <div className="bg-card-bg py-5 lg:py-7 px-4 rounded-lg border border-light-gray shadow mt-7 w-full">
+        <div className="bg-card-bg py-5 lg:py-7 px-4 rounded-lg border border-light-gray bg-white  shadow-xl mt-7 w-full">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className=" space-y-5 lg:space-y-6 "

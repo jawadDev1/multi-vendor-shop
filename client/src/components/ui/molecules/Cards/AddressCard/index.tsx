@@ -46,20 +46,20 @@ const AddressCard = ({ addr }: AddressCardProps) => {
           handleModal={toggleModal}
         />
       )}
-      <div className="bg-white shadow rounded-md py-3 px-3 items-center grid grid-cols-[10%,1fr,1fr,10%] ">
+      <div className="bg-white shadow rounded-md py-3 px-3 items-center grid grid-cols-[10%,15%,1fr,10%] ">
         <Subtitle2 className="capitalize">{addr.address_type}</Subtitle2>
 
         <CardTitle>{addr.country}</CardTitle>
 
         <Content>
-          {addr.address1} {addr.address2}
+          {addr.address1}, {addr.address2}
         </Content>
 
         <div className="flex items-center gap-x-2">
           <BiEdit
             onClick={toggleModal}
             size={28}
-            className="cursor-pointer text-azure-blue "
+            className="cursor-pointer text-green-600 "
           />
           <CgTrash
             onClick={handleDelete}

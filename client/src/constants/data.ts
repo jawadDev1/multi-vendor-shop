@@ -93,21 +93,21 @@ export const PROFILE_MENU = [
     Icon: CgShoppingBag,
     title: "Orders",
   },
-  {
-    id: "refunds",
-    Icon: RefundIcon,
-    title: "Refunds",
-  },
+  // {
+  //   id: "refunds",
+  //   Icon: RefundIcon,
+  //   title: "Refunds",
+  // },
   {
     id: "inbox",
     Icon: IoIosChatboxes,
     title: "Inbox",
   },
-  {
-    id: "track_orders",
-    Icon: CgTrack,
-    title: "Track Order",
-  },
+  // {
+  //   id: "track_orders",
+  //   Icon: CgTrack,
+  //   title: "Track Order",
+  // },
   {
     id: "change_password",
     Icon: RiLockPasswordLine,

@@ -29,6 +29,8 @@ router.post("/register", isAuthenticated, handleRegisterShop);
 
 router.get("/get-shop", isAuthenticated, handleGetShop);
 
+router.get("/states", isSeller, handleGetShopStates)
+
 // Admin Routes
 router.get("/get-all-shops", isAdmin, handleGetShops);
 

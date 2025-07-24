@@ -274,12 +274,11 @@ const handleGetShopEvents = asyncHandler(
 const handleGetShopStates = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { slug } = req.params;
-
+      const userId = new mongoose.mongo.ObjectId(req.user?.id);
       const pipeline = [
         {
           $match: {
-            slug,
+            owner: userId,
           },
         },
         {
@@ -301,14 +300,64 @@ const handleGetShopStates = asyncHandler(
         {
           $addFields: {
             totalProducts: { $size: "$products" },
+            inStockProducts: {
+              $size: {
+                $filter: {
+                  input: "$products",
+                  as: "p",
+                  cond: { $gt: ["$$p.stock", 0] },
+                },
+              },
+            },
+            outOfStockProducts: {
+              $size: {
+                $filter: {
+                  input: "$products",
+                  as: "p",
+                  cond: { $lte: ["$$p.stock", 0] },
+                },
+              },
+            },
             totalOrders: { $size: "$orders" },
+            processingOrders: {
+              $size: {
+                $filter: {
+                  input: "$orders",
+                  as: "o",
+                  cond: { $eq: ["$$o.status", "Processing"] },
+                },
+              },
+            },
+            deliveredOrders: {
+              $size: {
+                $filter: {
+                  input: "$orders",
+                  as: "o",
+                  cond: { $eq: ["$$o.status", "Delivered"] },
+                },
+              },
+            },
+            shippedOrders: {
+              $size: {
+                $filter: {
+                  input: "$orders",
+                  as: "o",
+                  cond: { $eq: ["$$o.status", "Shipped"] },
+                },
+              },
+            },
           },
         },
         {
           $project: {
-            totalProducts: 1,
-            totalOrders: 1,
             _id: 0,
+            totalProducts: 1,
+            inStockProducts: 1,
+            outOfStockProducts: 1,
+            totalOrders: 1,
+            processingOrders: 1,
+            deliveredOrders: 1,
+            shippedOrders: 1,
           },
         },
       ];
@@ -318,7 +367,7 @@ const handleGetShopStates = asyncHandler(
       return res.status(200).json({
         success: true,
         message: "state fetched successfully",
-        data: shopStates,
+        data: shopStates[0],
       });
     } catch (error) {
       console.log("Error in handleGetShopStates :: ", error);
@@ -468,7 +517,7 @@ const handleGetShops = asyncHandler(
           },
         },
         {
-          $unwind: "$owner", 
+          $unwind: "$owner",
         },
         {
           $addFields: {
@@ -487,16 +536,12 @@ const handleGetShops = asyncHandler(
             totalProducts: 1,
             rating: 1,
             totalReviews: 1,
-            createdAt: 1
+            createdAt: 1,
           },
         },
       ];
 
       const shops = await ShopModel.aggregate(pipeline);
-
-      // const sellers = await ShopModel.find({})
-      //   .populate({ path: "owner", select: "name email " })
-      //   .select("shop_name logo slug owner totalProducts rating totalReviews");
 
       return res.status(200).json({
         success: true,

@@ -1,3 +1,4 @@
+'use client';
 import Button from "@/components/ui/atoms/buttons/Button";
 
 import SectionTitle from "@/components/ui/atoms/typography/SectionTitle";
@@ -5,11 +6,12 @@ import SectionTitle from "@/components/ui/atoms/typography/SectionTitle";
 import CreateAddressModal from "../../Modals/CreateAddressModal";
 import { useState } from "react";
 import AddressCard from "@/components/ui/molecules/Cards/AddressCard";
+import { useUserStore } from "@/stores/user-store";
 
 const AddressSection = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const { user } = useAppSelector((state) => state.user);
+  const { user } = useUserStore();
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);

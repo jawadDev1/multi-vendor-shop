@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useCartStore } from "@/stores/cart-store";
 import { useUserStore } from "@/stores/user-store";
 import React, { useEffect } from "react";
@@ -13,7 +13,11 @@ const AuthUser = () => {
     initializeCartState();
   }, []);
 
-  return isAuthenticated && user?.role === "SELLER" ? (
+  if (!isAuthenticated) {
+    return <div />;
+  }
+
+  return user?.role === "SELLER" ? (
     <LinkButton href="/seller" className="max-w-[250px]">
       Dashboard
     </LinkButton>

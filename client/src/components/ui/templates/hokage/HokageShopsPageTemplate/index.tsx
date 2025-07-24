@@ -1,6 +1,5 @@
 import TableShell from "@/components/Tables";
 import ShopActions from "@/components/Tables/elements/shop/ShopActions";
-import PageWrapper from "@/components/ui/atoms/PageWrapper";
 import SellerPageWrapper from "@/components/ui/atoms/SellerPageWrapper";
 import { SHOPS_ELEMENTS, SHOPS_FIELDS } from "@/constants/tables_data";
 import React from "react";

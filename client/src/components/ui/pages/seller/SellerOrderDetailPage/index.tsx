@@ -1,8 +1,8 @@
 import { getServerApiRequest } from "@/actions/api";
-import OrderDetailPageTemplate from "../../templates/OrderDetailPageTemplate";
+import SellerOrderDetailPageTemplate from "@/components/ui/templates/seller/SellerOrderDetailPageTemplate";
 import { notFound } from "next/navigation";
 
-const OrderDetailPage = async ({id}: {id: string}) => {
+const SellerOrderDetailPage = async ({id}: {id: string}) => {
   const result = await getServerApiRequest(`order/order-details/${id}`);
 
   if (!result?.success) {
@@ -13,9 +13,9 @@ const OrderDetailPage = async ({id}: {id: string}) => {
 
   return (
     <>
-      <OrderDetailPageTemplate id={id ?? ""} order={data!} />
+      <SellerOrderDetailPageTemplate id={id ?? ""} order={data!} />
     </>
   );
 };
 
-export default OrderDetailPage;
+export default SellerOrderDetailPage;

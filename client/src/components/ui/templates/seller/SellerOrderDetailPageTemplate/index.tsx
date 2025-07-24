@@ -1,29 +1,38 @@
+"use client";
 import { BsFillBagCheckFill } from "react-icons/bs";
-import PageWrapper from "../../atoms/PageWrapper";
-import Subtitle2 from "../../atoms/typography/Subtitle2";
-import Subtitle from "../../atoms/typography/Subtitle";
-import Content from "../../atoms/typography/Content";
 import { calculatePriceAfterDiscount, formateDateTime } from "@/utils";
-import Title from "../../atoms/typography/Title";
 import type { IOrderDetail } from "@/types/api";
-import NextImage from "../../atoms/common/NextImage";
-import ReviewModal from "../../organisms/Modals/ReviewModal";
+import { useShopStore } from "@/stores/shop-store";
+import SellerPageWrapper from "@/components/ui/atoms/SellerPageWrapper";
+import Subtitle from "@/components/ui/atoms/typography/Subtitle";
+import Content from "@/components/ui/atoms/typography/Content";
+import NextImage from "@/components/ui/atoms/common/NextImage";
+import Title from "@/components/ui/atoms/typography/Title";
+import Subtitle2 from "@/components/ui/atoms/typography/Subtitle2";
+import { notFound } from "next/navigation";
+import OrderStatusForm from "@/components/ui/molecules/form/OrderStatusForm";
 
 interface OrderDetailPageTemplateProps {
   order: IOrderDetail;
   id: string;
 }
 
-const OrderDetailPageTemplate = ({
+const SellerOrderDetailPageTemplate = ({
   order,
   id,
 }: OrderDetailPageTemplateProps) => {
   if (!order) return;
+  const { shop } = useShopStore();
+  const isSeller = shop && shop._id === order.shop;
 
   const { cart, shipping_address, status: orderStatus, totalPrice } = order;
 
+  if (shop && !isSeller) {
+    return notFound();
+  }
+
   return (
-    <PageWrapper className="flex flex-col gap-y-7 md:gap-y-8 max-w-[1200px] mx-auto">
+    <SellerPageWrapper className="flex flex-col gap-y-7 md:gap-y-8 max-w-[1200px] mx-auto">
       <div className="flex flex-col md:flex-row md:items-center gap-3 justify-between">
         <div className="flex  items-center gap-x-4">
           <BsFillBagCheckFill size={30} className="text-primary" />
@@ -61,20 +70,14 @@ const OrderDetailPageTemplate = ({
                 <div>
                   <Title>{item.title}</Title>
                   <Content className="mt-1">
-                    ${item?.discount
+                    $
+                    {item?.discount
                       ? calculatePriceAfterDiscount(item.price, item.discount)
                       : item.price}
                     x {item.qty}
                   </Content>
                 </div>
               </div>
-              {order.status === "Delivered" && (
-                <ReviewModal
-                  id={item.product}
-                  image={item.image}
-                  title={item.title}
-                />
-              )}
             </div>
           ))}
       </div>
@@ -117,8 +120,10 @@ const OrderDetailPageTemplate = ({
           </div>
         </div>
       </div>
-    </PageWrapper>
+
+      <OrderStatusForm id={id} orderStatus={orderStatus} />
+    </SellerPageWrapper>
   );
 };
 
-export default OrderDetailPageTemplate;
+export default SellerOrderDetailPageTemplate;

@@ -99,7 +99,7 @@ const SellerUpdateForm = ({
     >
       <label
         htmlFor="profile"
-        className="size-28 rounded-full lg:size-32  mx-auto border-2 border-green-500 col-span-full mb-6 lg:mb-8 relative cursor-pointer "
+        className="size-28 rounded-full lg:size-32  mx-auto border-2 border-primary col-span-full mb-6 lg:mb-8 relative cursor-pointer "
       >
         <input
           id="profile"

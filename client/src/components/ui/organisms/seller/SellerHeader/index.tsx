@@ -33,12 +33,12 @@ const SellerHeader = () => {
 
   return (
     <header className="bg-blue-gray py-3 px-4 flex justify-between items-center shadow-2xl z-10 relative">
-      <div className=" w-[4rem] overflow-hidden">
+      <Link href={"/"} className=" w-[4rem] overflow-hidden">
         <NextImage src={logo} className="object-cover" />
-      </div>
+      </Link>
 
       <div className="flex gap-3 items-center">
-        {shop && shop.stripe_payment.status !== "ACTIVATED" && (
+        {shop && shop.stripe_payment?.status !== "ACTIVATED" && (
           <ConnectStripe />
         )}
         {shop && (

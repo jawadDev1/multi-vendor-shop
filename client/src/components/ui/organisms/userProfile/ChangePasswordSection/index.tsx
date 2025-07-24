@@ -1,8 +1,5 @@
-import VisaIcon from "@/components/icons/VisaIcon";
-import Button from "@/components/ui/atoms/buttons/Button";
+'use client';
 import SpinnerButton from "@/components/ui/atoms/buttons/SpinnerButton";
-import CardTitle from "@/components/ui/atoms/typography/CardTitle";
-import Content from "@/components/ui/atoms/typography/Content";
 import SectionTitle from "@/components/ui/atoms/typography/SectionTitle";
 import InputWithLabel from "@/components/ui/molecules/form/InputWithLabel";
 import {

@@ -13,7 +13,7 @@ const ShopActions = ({ id, record }: ActionProps) => {
 
   return (
     <TD className=" flex gap-x-3 items-center  justify-end h-[70px] ">
-     <Link className="w-fit bg-primary px-2 py-1 rounded h-fit" href={`/shops/${record?.slug}`}>
+     <Link className="w-fit bg-primary px-2 py-1 rounded h-fit" href={`/shop/${record?.slug}`}>
         <BsEye size={20} className="text-white" />
      </Link> 
     </TD>

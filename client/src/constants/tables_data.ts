@@ -3,7 +3,9 @@ import TableDateTime from "@/components/Tables/elements/common/TableDateTime";
 import TableImage from "@/components/Tables/elements/common/TableImage";
 import TableSr from "@/components/Tables/elements/common/TableSr";
 import TableTitle from "@/components/Tables/elements/common/TableTitle";
+import TableProductDiscount from "@/components/Tables/elements/products/ProdcutDiscount";
 import TableProductImage from "@/components/Tables/elements/products/ProductImage";
+import TableProductStock from "@/components/Tables/elements/products/ProductStock";
 import OrderId from "@/components/Tables/elements/userOrder/OrderId";
 import OrderProduct from "@/components/Tables/elements/userOrder/OrderProducts";
 
@@ -12,6 +14,10 @@ export const PRODUCTS_FIELDS = {
   title: "Title",
   originalPrice: "Price",
   images: "Image",
+  discount: "Discount",
+  stock: "Stock",
+  sold_out: "Sold",
+  rating: "Rating"
 };
 
 export const PRODUCTS_ELEMENTS = {
@@ -19,6 +25,11 @@ export const PRODUCTS_ELEMENTS = {
   title: TableTitle,
   originalPrice: TableTitle,
   images: TableProductImage,
+  discount: TableProductDiscount,
+  stock: TableProductStock,
+  sold_out: TableTitle,
+  rating: TableTitle,
+
 };
 
 export const Event_FIELDS = {
@@ -101,5 +112,25 @@ export const SHOPS_ELEMENTS = {
   totalProducts: TableTitle,
   rating: TableTitle,
   totalReviews: TableTitle,
+  createdAt: TableDate,
+};
+
+export const USERS_FIELDS = {
+  _id: "Sr#",
+  name: "Name",
+  email: "Email",
+  profile: "Profile",
+  role: "Role",
+  // orders: "Orders",
+  createdAt: "Joined On",
+};
+
+export const USERS_ELEMENTS = {
+  _id: TableSr,
+  name: TableTitle,
+  email: TableTitle,
+    profile: TableImage,
+  role: TableTitle,
+  // orders: TableTitle,
   createdAt: TableDate,
 };

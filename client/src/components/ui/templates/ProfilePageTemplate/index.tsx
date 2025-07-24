@@ -20,7 +20,7 @@ import UserLogout from "../../molecules/UserProfileActions";
 enum ALLOWED_MENU_ITEMS {
   profile = "profile",
   orders = "orders",
-  refunds = "refunds",
+  // refunds = "refunds",
   track_orders = "track_orders",
   change_password = "change_password",
   address = "address",
@@ -44,10 +44,10 @@ const getActiveSection = (section: ALLOWED_MENU_ITEMS) => {
       Tab: OrdersSection,
       props: {},
     },
-    refunds: {
-      Tab: RefundsSection,
-      props: {},
-    },
+    // refunds: {
+    //   Tab: RefundsSection,
+    //   props: {},
+    // },
     track_orders: {
       Tab: TrackOrderSection,
       props: {},
@@ -116,7 +116,6 @@ const ProfilePageTemplate = ({}: ProfilePageTemplateProps) => {
           </div>
         ))}
 
-        
         <UserLogout />
       </div>
 

@@ -271,6 +271,7 @@ export interface IOrderDetail {
       qty: number;
       shop: string;
       title: string;
+      discount: number;
     }
   ];
   shipping_address: IShippingAddress;

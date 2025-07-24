@@ -1,3 +1,4 @@
+'use client';
 import Button from "@/components/ui/atoms/buttons/Button";
 import SpinnerButton from "@/components/ui/atoms/buttons/SpinnerButton";
 import NextImage from "@/components/ui/atoms/common/NextImage";
