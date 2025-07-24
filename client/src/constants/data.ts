@@ -4,7 +4,7 @@ import { CgCreditCard, CgShoppingBag, CgTrack } from "react-icons/cg";
 import { IoIosChatboxes, IoMdPerson } from "react-icons/io";
 import { RxDashboard } from "react-icons/rx";
 import { FiPackage, FiShoppingBag } from "react-icons/fi";
-import { AiOutlineFolderAdd, AiOutlineGift } from "react-icons/ai";
+import { AiFillShop, AiOutlineFolderAdd, AiOutlineGift, AiOutlineUsergroupAdd } from "react-icons/ai";
 import { VscNewFile } from "react-icons/vsc";
 import { CiMoneyBill, CiSettings } from "react-icons/ci";
 import { BiMessageSquareDetail } from "react-icons/bi";
@@ -187,4 +187,29 @@ export const SHOP_SIDEBAR_ITEMS = [
     link: "/seller/settings",
     Icon: CiSettings,
   },
+];
+
+
+
+// Admin Sidebar Items
+export const ADMIN_SIDEBAR_ITEMS = [
+  {
+    title: "Dashboard",
+    slug: "dashboard",
+    link: "/hokage",
+    Icon: RxDashboard,
+  },
+  {
+    title: "All Shops",
+    slug: "shops",
+    link: "/hokage/shops",
+    Icon: AiFillShop,
+  },
+  {
+    title: "All Users",
+    slug: "users",
+    link: "/hokage/users",
+    Icon: AiOutlineUsergroupAdd,
+  },
+  
 ];

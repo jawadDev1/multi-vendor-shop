@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useState } from "react";
 import PageWrapper from "../../atoms/PageWrapper";
 import Subtitle2 from "../../atoms/typography/Subtitle2";
@@ -15,7 +15,7 @@ import TrackOrderSection from "../../organisms/userProfile/TrackOrder";
 import AddressSection from "../../organisms/userProfile/Address";
 import ChangePasswordSection from "../../organisms/userProfile/ChangePasswordSection";
 import InboxSection from "../../organisms/userProfile/Inbox";
-import UserLogout from "../../molecules/UserLogout";
+import UserLogout from "../../molecules/UserProfileActions";
 
 enum ALLOWED_MENU_ITEMS {
   profile = "profile",
@@ -115,6 +115,8 @@ const ProfilePageTemplate = ({}: ProfilePageTemplateProps) => {
             </Subtitle2>
           </div>
         ))}
+
+        
         <UserLogout />
       </div>
 

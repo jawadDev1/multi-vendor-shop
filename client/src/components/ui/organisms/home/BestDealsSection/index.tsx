@@ -14,20 +14,18 @@ const BestDealsSection = async () => {
   );
 
   if (!best_deals_response?.success) {
-    return notFound();
+    return null;
   }
+  
   const best_deals = best_deals_response.data;
 
-  // const { best_deals } = useAppSelector((state) => state.product);
-  // const dispatch = useAppDispatch();
+  if(best_deals?.length === 0) {
+    return null
+  }
 
-  // useEffect(() => {
-  //   if (!best_deals || best_deals?.length == 0) {
-  //     dispatch(loadBestDeals());
-  //   }
-  // }, []);
 
-  return (
+ return (
+
     <>
       <SectionWrapper>
         <SectionTitle className="mb-7 lg:mb-8">Best Deals</SectionTitle>

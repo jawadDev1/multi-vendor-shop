@@ -10,8 +10,8 @@ const FeaturedProductsSection = async () => {
     "product/featured"
   );
 
-  if (!response?.success) {
-    return notFound();
+  if (!response?.success || response.data?.length === 0) {
+    return null;
   }
   const featured_products = response.data;
 

@@ -4,12 +4,14 @@ import {
   handleCreateAddress,
   handleDeleteAddress,
   handleGetUser,
+  handleGetUsersForAdmin,
   handleLogout,
   handleSignin,
   handleSignup,
   handleUpdateAddress,
   handleUpdateUserProfile,
 } from "#controllers/user.controller.js";
+import { isAdmin } from "#middleware/isAdmin.js";
 import { isAuthenticated } from "#middleware/isAuthenticated.js";
 import { Router } from "express";
 
@@ -34,5 +36,8 @@ router.put("/update-address/:id", isAuthenticated, handleUpdateAddress);
 router.delete("/delete-address/:id", isAuthenticated, handleDeleteAddress);
 
 router.put("/change-password", isAuthenticated, handleChangePassword);
+
+
+router.get("/get-all-users", handleGetUsersForAdmin)
 
 export default router;

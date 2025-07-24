@@ -1,5 +1,6 @@
 import TableDate from "@/components/Tables/elements/common/TableDate";
 import TableDateTime from "@/components/Tables/elements/common/TableDateTime";
+import TableImage from "@/components/Tables/elements/common/TableImage";
 import TableSr from "@/components/Tables/elements/common/TableSr";
 import TableTitle from "@/components/Tables/elements/common/TableTitle";
 import TableProductImage from "@/components/Tables/elements/products/ProductImage";
@@ -75,5 +76,30 @@ export const ORDER_ELEMENTS = {
   status: TableTitle,
   cart: OrderProduct,
   totalPrice: TableTitle,
+  createdAt: TableDate,
+};
+
+// Admin Tables
+export const SHOPS_FIELDS = {
+  _id: "Sr#",
+  shop_name: "Shop Name",
+  logo: "Logo",
+  owner: "Owner",
+  email: "Email",
+  totalProducts: "Total Products",
+  rating: "Rating",
+  totalReviews: "Total Reviews",
+  createdAt: "Created On",
+};
+
+export const SHOPS_ELEMENTS = {
+  _id: TableSr,
+  shop_name: TableTitle,
+  logo: TableImage,
+  owner: TableTitle,
+  email: TableTitle,
+  totalProducts: TableTitle,
+  rating: TableTitle,
+  totalReviews: TableTitle,
   createdAt: TableDate,
 };

@@ -3,10 +3,12 @@ import {
   handleGetShopDetails,
   handleGetShopEvents,
   handleGetShopReviews,
+  handleGetShops,
   handleGetShopStates,
   handleRegisterShop,
   handleUpdateSellerSettings,
 } from "#controllers/shop.controller.js";
+import { isAdmin } from "#middleware/isAdmin.js";
 import { isAuthenticated } from "#middleware/isAuthenticated.js";
 import { isSeller } from "#middleware/isSeller.js";
 import { Router } from "express";
@@ -23,10 +25,11 @@ router.get("/states/:slug", handleGetShopStates);
 
 router.put("/update-settings/:shopId", isSeller, handleUpdateSellerSettings);
 
-router.use(isAuthenticated);
+router.post("/register", isAuthenticated, handleRegisterShop);
 
-router.post("/register", handleRegisterShop);
+router.get("/get-shop", isAuthenticated, handleGetShop);
 
-router.get("/get-shop", handleGetShop);
+// Admin Routes
+router.get("/get-all-shops", isAdmin, handleGetShops);
 
 export default router;

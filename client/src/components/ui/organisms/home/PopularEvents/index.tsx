@@ -11,8 +11,8 @@ const PopularEvents = async () => {
     "event/popular"
   );
 
-  if (!response?.success) {
-    return notFound();
+  if (!response?.success || !response?.data) {
+    return null;
   }
   const popular_event = response.data;
 

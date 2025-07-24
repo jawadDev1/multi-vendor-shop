@@ -3,7 +3,11 @@ import { ShopModel } from "#models/shop.model.js";
 
 import { IShopBody } from "#types/controllers.js";
 import { ErrorHandler } from "#utils/ErrorHandle.js";
-import { generateSlug, sanitizeMongoObject, validateBody } from "#utils/index.js";
+import {
+  generateSlug,
+  sanitizeMongoObject,
+  validateBody,
+} from "#utils/index.js";
 import { Request, Response, NextFunction } from "express";
 import mongoose from "mongoose";
 
@@ -438,24 +442,73 @@ const handleGetShopReviews = asyncHandler(
   }
 );
 
+// Get Shops for the admin
+const handleGetShops = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const pipeline = [
+        {
+          $match: {},
+        },
+        {
+          $lookup: {
+            from: "users",
+            localField: "owner",
+            foreignField: "_id",
+            as: "owner",
+            pipeline: [
+              {
+                $project: {
+                  _id: 0,
+                  name: 1,
+                  email: 1,
+                },
+              },
+            ],
+          },
+        },
+        {
+          $unwind: "$owner", 
+        },
+        {
+          $addFields: {
+            owner: "$owner.name",
+            email: "$owner.email",
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            shop_name: 1,
+            logo: 1,
+            slug: 1,
+            owner: 1,
+            email: 1,
+            totalProducts: 1,
+            rating: 1,
+            totalReviews: 1,
+            createdAt: 1
+          },
+        },
+      ];
 
-// Get Seller for the admin
-const handleGetSellers = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-  try {
-   
-      const sellers = await ShopModel.find({}).populate({path: "owner", select: "name email "}).select("shop_name logo slug owner totalProducts rating totalReviews");
+      const shops = await ShopModel.aggregate(pipeline);
 
+      // const sellers = await ShopModel.find({})
+      //   .populate({ path: "owner", select: "name email " })
+      //   .select("shop_name logo slug owner totalProducts rating totalReviews");
 
       return res.status(200).json({
         success: true,
         message: "shops fetched successfully",
-        data: sellers
-      })
-  } catch (error) {
-    console.log("Error ln handleGetSellers ::  ", error);
-    return next(new ErrorHandler("Something went wrong", 400));
+        data: shops,
+      });
+    } catch (error) {
+      console.log("Error ln handleGetSellers ::  ", error);
+      return next(new ErrorHandler("Something went wrong", 400));
+    }
   }
-})
+);
 
 export {
   handleRegisterShop,
@@ -465,5 +518,5 @@ export {
   handleGetShopStates,
   handleUpdateSellerSettings,
   handleGetShopReviews,
-  handleGetSellers
+  handleGetShops,
 };

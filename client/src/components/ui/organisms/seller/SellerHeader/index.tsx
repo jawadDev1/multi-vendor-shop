@@ -2,8 +2,10 @@
 import NextImage from "@/components/ui/atoms/common/NextImage";
 import ConnectStripe from "@/components/ui/molecules/ConnectStripe";
 import { useShopStore } from "@/stores/shop-store";
+import { useUserStore } from "@/stores/user-store";
 import { notifyError } from "@/utils/toast";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { useEffect } from "react";
 
 const logo = "/images/logo.png";
@@ -11,12 +13,23 @@ const logo = "/images/logo.png";
 const SellerHeader = () => {
   const { shop, error, loadShop } = useShopStore();
 
+  const { isAuthenticated, user, userLoaded, loadUser } = useUserStore();
+
   useEffect(() => {
-    loadShop();
+    if (!user) {
+      loadUser();
+    }
+    if (user) loadShop();
     if (error) {
       notifyError(error);
     }
-  }, []);
+  }, [user?.name]);
+
+  if(!userLoaded) return null;
+
+  if ((userLoaded && !isAuthenticated) || user?.role !== "SELLER") {
+    return notFound();
+  }
 
   return (
     <header className="bg-blue-gray py-3 px-4 flex justify-between items-center shadow-2xl z-10 relative">

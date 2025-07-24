@@ -372,7 +372,26 @@ const handleChangePassword = asyncHandler(
   }
 );
 
+const handleGetUsersForAdmin = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const users = await UserModel.find({})
+        .select("name email profile role ")
+        .sort({ createdAt: -1 });
 
+
+        return res.status(200).json({
+          success: true,
+          message: "users fetched successfully",
+          data: users
+        })
+
+    } catch (error) {
+      console.log("Error in handleGetUsersForAdmin :: ", error);
+      return next(new ErrorHandler("Something went wrong", 500));
+    }
+  }
+);
 
 export {
   handleSignup,
@@ -385,4 +404,5 @@ export {
   handleDeleteAddress,
   handleUpdateAddress,
   handleChangePassword,
+  handleGetUsersForAdmin
 };

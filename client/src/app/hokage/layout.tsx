@@ -1,8 +1,8 @@
-import SellerHeader from "@/components/ui/organisms/seller/SellerHeader";
-import SellerSidebar from "@/components/ui/organisms/seller/SellerSidebar";
+import HokageHeader from "@/components/ui/organisms/hokage/HokageHeader";
+import HokageSidebar from "@/components/ui/organisms/hokage/HokageSidebar";
 import React from "react";
 
-const SellerLayout = ({
+const HokageLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -12,9 +12,9 @@ const SellerLayout = ({
 
   return (
     <>
-      <SellerHeader />
+      <HokageHeader />
       <main className="grid grid-cols-[16%,1fr] bg-gray-bg ">
-        <SellerSidebar />
+        <HokageSidebar />
         <div className="max-h-[calc(100vh-88px)] overflow-y-auto bg-white mx-5 mt-5 rounded ">
           {children}
         </div>
@@ -23,4 +23,4 @@ const SellerLayout = ({
   );
 };
 
-export default SellerLayout;
+export default HokageLayout;

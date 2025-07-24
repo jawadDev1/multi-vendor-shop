@@ -124,7 +124,7 @@ export interface IUser extends Document {
   profile: string;
   reset_password_time: Date;
   reset_password_token: string;
-  role: string;
+  role: "USER" | "SELLER" | "ADMIN";
   verified: boolean;
 }
 
