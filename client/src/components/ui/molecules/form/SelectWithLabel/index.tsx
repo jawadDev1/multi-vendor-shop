@@ -1,6 +1,5 @@
 import React from "react";
 import Label from "../../../atoms/form/Label";
-import Input from "../../../atoms/form/Input";
 import type {
   FieldError,
   FieldValues,

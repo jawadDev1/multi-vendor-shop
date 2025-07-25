@@ -9,7 +9,6 @@ import cn from "@/utils/cn";
 import OrdersSection from "../../organisms/userProfile/Orders";
 import SectionWrapper from "../../atoms/SectionWrapper";
 
-import RefundsSection from "../../organisms/userProfile/Refunds";
 import TrackOrderSection from "../../organisms/userProfile/TrackOrder";
 
 import AddressSection from "../../organisms/userProfile/Address";
@@ -28,50 +27,19 @@ enum ALLOWED_MENU_ITEMS {
 }
 
 type MENU_ITEMS = {
-  [key in ALLOWED_MENU_ITEMS]: {
-    Tab: React.ComponentType<any>;
-    props: { [key: string]: unknown };
-  };
+  [key in ALLOWED_MENU_ITEMS]: React.ComponentType<any>;
 };
 
-const getActiveSection = (section: ALLOWED_MENU_ITEMS) => {
-  const menu: MENU_ITEMS = {
-    profile: {
-      Tab: ProfileInfo,
-      props: {},
-    },
-    orders: {
-      Tab: OrdersSection,
-      props: {},
-    },
-    // refunds: {
-    //   Tab: RefundsSection,
-    //   props: {},
-    // },
-    track_orders: {
-      Tab: TrackOrderSection,
-      props: {},
-    },
-    change_password: {
-      Tab: ChangePasswordSection,
-      props: {},
-    },
-    address: {
-      Tab: AddressSection,
-      props: {},
-    },
-    inbox: {
-      Tab: InboxSection,
-      props: {},
-    },
-  };
-
-  return menu[section];
+const menu: MENU_ITEMS = {
+  profile: ProfileInfo,
+  orders: OrdersSection,
+  track_orders: TrackOrderSection,
+  change_password: ChangePasswordSection,
+  address: AddressSection,
+  inbox: InboxSection,
 };
 
-interface ProfilePageTemplateProps {}
-
-const ProfilePageTemplate = ({}: ProfilePageTemplateProps) => {
+const ProfilePageTemplate = () => {
   const [activeSection, setActiveSection] = useState<ALLOWED_MENU_ITEMS>(
     ALLOWED_MENU_ITEMS.profile
   );
@@ -80,7 +48,7 @@ const ProfilePageTemplate = ({}: ProfilePageTemplateProps) => {
     setActiveSection(section);
   };
 
-  const { Tab, props } = getActiveSection(activeSection);
+  const Tab = menu[activeSection];
 
   return (
     <PageWrapper className="grid grid-cols-1 md:grid-cols-[20%,1fr] px-5 lg:px-0 max-w-[1200px] mx-auto">
@@ -120,7 +88,7 @@ const ProfilePageTemplate = ({}: ProfilePageTemplateProps) => {
       </div>
 
       <SectionWrapper className="lg:px-10 mt-10 lg:mt-0">
-        <Tab {...props} />
+        <Tab  />
       </SectionWrapper>
     </PageWrapper>
   );

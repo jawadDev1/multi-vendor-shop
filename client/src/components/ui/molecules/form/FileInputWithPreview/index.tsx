@@ -7,12 +7,12 @@ import type {
   UseFormSetValue,
 } from "react-hook-form";
 import FileInput from "@/components/ui/atoms/form/FileInput/Index";
+import NextImage from "@/components/ui/atoms/common/NextImage";
 
 type InputWithLabelProps<TFieldValues extends FieldValues> = {
   className?: string;
   register: UseFormRegister<TFieldValues>;
   name: Path<TFieldValues>;
-  required?: boolean;
   error: FieldError | undefined;
   setValue: UseFormSetValue<TFieldValues>;
   defaultPreview?: string;
@@ -22,7 +22,6 @@ const previewAavatar = "/images/avatar-preview.png";
 
 const FileInputWithPreview = <TFieldValues extends FieldValues>({
   className,
-  required = false,
   name,
   register,
   setValue,
@@ -30,9 +29,7 @@ const FileInputWithPreview = <TFieldValues extends FieldValues>({
   defaultPreview,
   ...props
 }: InputWithLabelProps<TFieldValues>) => {
-  const [preview, setPreview] = useState<string | undefined>(
-    defaultPreview ?? previewAavatar
-  );
+  const [preview, setPreview] = useState<string | undefined>(defaultPreview ?? previewAavatar);
 
   const handleAvatar = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target?.files && e.target.files[0];
@@ -45,11 +42,13 @@ const FileInputWithPreview = <TFieldValues extends FieldValues>({
   return (
     <>
       <span>
-        <img
-          src={preview}
-          alt="react"
-          className="size-9 rounded-full object-cover"
-        />
+        {preview && (
+          <NextImage
+            src={preview}
+            alt="react"
+            className="size-10 rounded-full object-cover"
+          />
+        )}
       </span>
       <FileInput
         {...{ className, register, name, onChange: handleAvatar, ...props }}

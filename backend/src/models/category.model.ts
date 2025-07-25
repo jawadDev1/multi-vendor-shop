@@ -1,4 +1,4 @@
-import { ICategory, IUser } from "#types/models.js";
+import { ICategory } from "#types/models.js";
 import { model, Schema } from "mongoose";
 
 const categorySchema = new Schema<ICategory>(

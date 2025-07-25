@@ -7,10 +7,9 @@ import UserProfile from "@/components/ui/molecules/UserProfile";
 import Wishlist from "@/components/ui/molecules/Wishlist";
 import { useUserStore } from "@/stores/user-store";
 
-interface UserMobileMenuProps {}
 
-const UserMobileMenu = ({}: UserMobileMenuProps) => {
-  const { isAuthenticated, user, loading } = useUserStore();
+const UserMobileMenu = () => {
+  const { isAuthenticated, user  } = useUserStore();
 
   return (
     <header className="flex items-center justify-between px-4 py-2 bg-charcoal shadow sticky top-0 z-20 md:hidden">
@@ -23,7 +22,7 @@ const UserMobileMenu = ({}: UserMobileMenuProps) => {
       <div className="flex items-center gap-x-3">
         <UserCart />
         <Wishlist />
-        <UserProfile {...{ isAuthenticated, user, loading }} />
+        <UserProfile  />
       </div>
     </header>
   );

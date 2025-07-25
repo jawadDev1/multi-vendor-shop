@@ -3,7 +3,6 @@ import SectionTitle from "@/components/ui/atoms/typography/SectionTitle";
 import ProductCard from "@/components/ui/molecules/Cards/ProductCard";
 import type { IAPIUserProductResponse } from "@/types/api";
 import { getApiRequest } from "@/utils/api";
-import { notFound } from "next/navigation";
 
 const FeaturedProductsSection = async () => {
   const response: IAPIUserProductResponse = await getApiRequest(

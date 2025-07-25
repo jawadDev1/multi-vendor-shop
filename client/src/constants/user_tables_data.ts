@@ -1,5 +1,4 @@
 import TableDate from "@/components/Tables/elements/common/TableDate";
-import TableSr from "@/components/Tables/elements/common/TableSr";
 import TableTitle from "@/components/Tables/elements/common/TableTitle";
 import OrderId from "@/components/Tables/elements/userOrder/OrderId";
 import OrderProduct from "@/components/Tables/elements/userOrder/OrderProducts";

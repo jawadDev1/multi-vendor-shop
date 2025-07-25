@@ -26,17 +26,85 @@ const handleRegisterShop = asyncHandler(
       ...body,
       slug: generateSlug(body?.shop_name),
       owner: req.user?._id,
+      request_status: "REQUESTED",
     });
-
-    req.user.role = "SELLER";
-
-    await req.user.save();
 
     return res.status(201).json({
       success: true,
-      message: "Shop registered successfully",
+      message: "Shop register request submitted successfully",
       data: sanitizeMongoObject(shop),
     });
+  }
+);
+
+const handleApproveShop = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      if (!req.user)
+        return next(new ErrorHandler("Login to access this feature", 400));
+
+      const shop = await ShopModel.findOneAndUpdate(
+        { owner: req.user.id },
+        {
+          request_status: "APPROVED",
+        }
+      );
+
+      req.user.role = "SELLER";
+
+      await req.user.save();
+
+      return res.status(201).json({
+        success: true,
+        message: "Shop request approved successfully",
+        data: shop,
+      });
+    } catch (error) {
+      console.log("Error in handleApproveShop :: ", error);
+      return next(new ErrorHandler("Something went wrong", 400));
+    }
+  }
+);
+
+const handleGetShopRequests = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const shops = await ShopModel.find({ request_status: "REQUESTED" });
+
+      return res.status(201).json({
+        success: true,
+        message: "Shop fetched successfully",
+        data: shops,
+      });
+    } catch (error) {
+      console.log("Error in handleGetShopRequests :: ", error);
+      return next(new ErrorHandler("Something went wrong", 400));
+    }
+  }
+);
+
+const handleRejectShop = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      if (!req.user)
+        return next(new ErrorHandler("Login to access this feature", 400));
+
+      const shop = await ShopModel.findOneAndUpdate(
+        { owner: req.user.id },
+        {
+          request_status: "REJECTED",
+        }
+      );
+
+      return res.status(201).json({
+        success: true,
+        message: "Shop request rejected successfully",
+        data: shop,
+      });
+    } catch (error) {
+      console.log("Error in handleRejectShop :: ", error);
+      return next(new ErrorHandler("Something went wrong", 400));
+    }
   }
 );
 
@@ -564,4 +632,7 @@ export {
   handleUpdateSellerSettings,
   handleGetShopReviews,
   handleGetShops,
+  handleApproveShop,
+  handleRejectShop,
+  handleGetShopRequests
 };

@@ -135,7 +135,13 @@ export interface IAPICategory {
   title: string;
   slug: string;
 }
-
+export interface IAPIHokageCategory {
+  _id: string;
+  title: string;
+  description: string;
+  slug: string;
+  image
+}
 // ======================= {{ Front end  Types }} ============================================================================
 
 export interface IAPIUserCategory {

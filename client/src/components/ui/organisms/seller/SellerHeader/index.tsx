@@ -1,5 +1,6 @@
 "use client";
 import NextImage from "@/components/ui/atoms/common/NextImage";
+import SellerHeaderSkeleton from "@/components/ui/atoms/skelatons/SellerHeaderSkelaton";
 import ConnectStripe from "@/components/ui/molecules/ConnectStripe";
 import { useShopStore } from "@/stores/shop-store";
 import { useUserStore } from "@/stores/user-store";
@@ -25,7 +26,7 @@ const SellerHeader = () => {
     }
   }, [user?.name]);
 
-  if(!userLoaded) return null;
+  if (!userLoaded) return <SellerHeaderSkeleton />;
 
   if ((userLoaded && !isAuthenticated) || user?.role !== "SELLER") {
     return notFound();
@@ -53,5 +54,7 @@ const SellerHeader = () => {
     </header>
   );
 };
+
+
 
 export default SellerHeader;

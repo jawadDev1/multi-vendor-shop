@@ -12,7 +12,6 @@ import { useShopStore } from "@/stores/shop-store";
 import { apiRequest } from "@/utils/api";
 import { notifyError, notifySuccess } from "@/utils/toast";
 import { uploadImageToAppwrite } from "@/utils/uploadFile";
-import { DevTool } from "@hookform/devtools";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -42,7 +41,6 @@ const ProductForm = ({
     register,
     handleSubmit,
     setValue,
-    control,
     formState: { errors },
   } = useForm<ProductFormData>({
     resolver: zodResolver(productSchema),
@@ -226,7 +224,6 @@ const ProductForm = ({
             />
           </div>
 
-          <DevTool control={control} />
 
           <div className="col-span-full">
             <MultiFileInputWithPreview

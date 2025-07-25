@@ -4,9 +4,7 @@ import Subtitle from "@/components/ui/atoms/typography/Subtitle";
 import Subtitle2 from "@/components/ui/atoms/typography/Subtitle2";
 import Title from "@/components/ui/atoms/typography/Title";
 import DoughnutChart from "@/components/ui/molecules/charts/DoughnutChart";
-import type { IAPIShopDetails } from "@/types/api";
 import Link from "next/link";
-import { AiOutlineMoneyCollect } from "react-icons/ai";
 import { FaJediOrder } from "react-icons/fa";
 import { GiBorderedShield } from "react-icons/gi";
 
@@ -69,24 +67,31 @@ const DashboardPageTemplate = ({ shop }: DashboardPageTemplateProps) => {
         </div>
       </div>
 
-
       <div className="w-full mt-8 md:mt-16 grid grid-cols-2 gap-3">
-        <div>
-          <Subtitle className="">Products States</Subtitle>
-          <DoughnutChart
-            labels={productChartLabels}
-            data={productChartData}
-            backgroundColors={productbackgroundColors}
-          />
-        </div>
-        <div>
-          <Subtitle>Orders States</Subtitle>
-          <DoughnutChart
-            labels={orderChartLabels}
-            data={orderChartData}
-            backgroundColors={orderBackgroundColors}
-          />
-        </div>
+        { inStockProducts || outOfStockProducts ? (
+          <div>
+            <Subtitle className="">Products States</Subtitle>
+            <DoughnutChart
+              labels={productChartLabels}
+              data={productChartData}
+              backgroundColors={productbackgroundColors}
+            />
+          </div>
+        ) : (
+          ""
+        )}
+        {processingOrders || shippedOrders || deliveredOrders ? (
+          <div>
+            <Subtitle>Orders States</Subtitle>
+            <DoughnutChart
+              labels={orderChartLabels}
+              data={orderChartData}
+              backgroundColors={orderBackgroundColors}
+            />
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </SellerPageWrapper>
   );

@@ -18,20 +18,20 @@ const TagsInput = <TFieldValues extends FieldValues>({
   const [tags, setTags] = useState<Array<Tag>>(defaultTags);
 
   const handleDelete = (index: number) => {
-    let newTags = tags.filter((_, i) => i !== index);
+    const newTags = tags.filter((_, i) => i !== index);
     setTags(newTags);
 
-    let filteredTags = newTags.map((tag) => tag.text);
+    const filteredTags = newTags.map((tag) => tag.text);
     setValue(name, filteredTags as TFieldValues[typeof name], {
       shouldValidate: filteredTags.length > 0,
     });
   };
 
   const handleAddition = (tag: Tag) => {
-    let newTags = [...tags, tag];
+    const newTags = [...tags, tag];
     setTags(newTags);
 
-    let filteredTags = newTags.map((tag) => tag.text);
+    const filteredTags = newTags.map((tag) => tag.text);
 
     setValue(name, filteredTags as TFieldValues[typeof name], {
       shouldValidate: true,

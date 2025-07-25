@@ -58,7 +58,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
       set(() => ({ cart: updatedCart }));
     }
 
-    let total = updatedCart.reduce((acc, curr) => {
+    const total = updatedCart.reduce((acc, curr) => {
       const price: number = calculatePriceAfterDiscount(
         curr.price,
         curr.discount
@@ -77,7 +77,7 @@ export const useCartStore = create<CartStore>((set, get) => ({
     const cart = get().cart;
     const updatedCart = cart?.filter((item) => item.id !== cartItem.id)!;
 
-    let total = updatedCart.reduce((acc, curr) => {
+    const total = updatedCart.reduce((acc, curr) => {
       const price: number = calculatePriceAfterDiscount(
         curr.price,
         curr.discount

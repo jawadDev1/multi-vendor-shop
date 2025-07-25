@@ -25,24 +25,24 @@ const defaultInitialState: UserState = {
   userLoaded: false,
 };
 
-export const useUserStore = create<UserStore>((set, get) => ({
+export const useUserStore = create<UserStore>((set ) => ({
   ...defaultInitialState,
   updateUser: (user) => {
       if(!user) {
-        set((_) => ({ user, isAuthenticated: false }));
+        set(() => ({ user, isAuthenticated: false }));
         return;
       }
-      set((_) => ({ user, isAuthenticated: true }));
+      set(() => ({ user, isAuthenticated: true }));
   },
   loadUser: async () => {
-    set((_) => ({ loading: true }));
+    set(() => ({ loading: true }));
     const result = await getApiRequest("user/getuser");
-    set((_) => ({ loading: false, userLoaded: true }));
+    set(() => ({ loading: false, userLoaded: true }));
 
     if (!result.success) {
       return;
     }
 
-    set((_) => ({ user: result?.data, isAuthenticated: true }));
+    set(() => ({ user: result?.data, isAuthenticated: true }));
   },
 }));

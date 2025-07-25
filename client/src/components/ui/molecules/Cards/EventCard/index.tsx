@@ -9,8 +9,6 @@ import Subtitle3 from "@/components/ui/atoms/typography/Subtitle3";
 import Countdown from "@/components/ui/molecules/Countdown";
 import type { IAPIUserEvent } from "@/types/api";
 import { calculatePriceAfterDiscount } from "@/utils";
-import Link from "next/link";
-import { AiOutlineArrowRight } from "react-icons/ai";
 
 interface EventCardProps {
   event: IAPIUserEvent;

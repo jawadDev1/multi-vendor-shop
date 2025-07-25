@@ -21,7 +21,6 @@ const SellerOrderDetailPageTemplate = ({
   order,
   id,
 }: OrderDetailPageTemplateProps) => {
-  if (!order) return;
   const { shop } = useShopStore();
   const isSeller = shop && shop._id === order.shop;
 

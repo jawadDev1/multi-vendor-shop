@@ -10,16 +10,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { AiOutlineEdit } from "react-icons/ai";
 import { useEffect, useState } from "react";
-import type { IAPIUser } from "@/types/api";
 import { notifyError, notifySuccess } from "@/utils/toast";
 import { uploadImageToAppwrite } from "@/utils/uploadFile";
 import { apiRequest } from "@/utils/api";
 import SpinnerButton from "@/components/ui/atoms/buttons/SpinnerButton";
 import { useUserStore } from "@/stores/user-store";
 
-interface ProfileInfoProps {}
 
-const ProfileInfo = ({}: ProfileInfoProps) => {
+const ProfileInfo = () => {
   const [newProfile, setNewProfile] = useState<File | null>(null);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -49,7 +47,7 @@ const ProfileInfo = ({}: ProfileInfoProps) => {
   const onSubmit = async (data: UserProfileData) => {
     setIsLoading(true);
     try {
-      let payload: {
+      const payload: {
         profile?: string;
         email: string;
         name: string;
@@ -99,7 +97,7 @@ const ProfileInfo = ({}: ProfileInfoProps) => {
       >
         <label
           htmlFor="profile"
-          className="size-28 rounded-full lg:size-32  mx-auto border-2 border-green-500 col-span-full mb-6 lg:mb-8 relative cursor-pointer "
+          className="size-28 rounded-full lg:size-32  mx-auto border-2 border-primary col-span-full mb-6 lg:mb-8 relative cursor-pointer "
         >
           <input
             id="profile"

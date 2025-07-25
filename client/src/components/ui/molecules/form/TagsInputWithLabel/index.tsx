@@ -26,7 +26,7 @@ const TagsInputWithLabel = <TFieldValues extends FieldValues>({
   error,
   defaultTags = [],
 }: InputWithLabelProps<TFieldValues>) => {
-  let refactoredTags: Tag[] =
+  const refactoredTags: Tag[] =
     defaultTags?.length > 0
       ? defaultTags.map((tag) => ({ id: tag, text: tag, className: "" }))
       : [];

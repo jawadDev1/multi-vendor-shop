@@ -1,6 +1,5 @@
 import AddressIcon from "@/components/icons/AddressIcon";
-import RefundIcon from "@/components/icons/RefuncIcon";
-import { CgCreditCard, CgShoppingBag, CgTrack } from "react-icons/cg";
+import {  CgShoppingBag } from "react-icons/cg";
 import { IoIosChatboxes, IoMdPerson } from "react-icons/io";
 import { RxDashboard } from "react-icons/rx";
 import { FiPackage, FiShoppingBag } from "react-icons/fi";
@@ -10,6 +9,7 @@ import { CiMoneyBill, CiSettings } from "react-icons/ci";
 import { BiMessageSquareDetail } from "react-icons/bi";
 import { HiOutlineReceiptRefund, HiOutlineTag } from "react-icons/hi";
 import { RiLockPasswordLine } from "react-icons/ri";
+import { GiStaticGuard } from "react-icons/gi";
 
 interface NavItems {
   title: string;
@@ -200,16 +200,22 @@ export const ADMIN_SIDEBAR_ITEMS = [
     Icon: RxDashboard,
   },
   {
-    title: "All Shops",
+    title: "Shops",
     slug: "shops",
     link: "/hokage/shops",
     Icon: AiFillShop,
   },
   {
-    title: "All Users",
+    title: "Users",
     slug: "users",
     link: "/hokage/users",
     Icon: AiOutlineUsergroupAdd,
+  },
+  {
+    title: "Categories",
+    slug: "categories",
+    link: "/hokage/categories",
+    Icon: GiStaticGuard,
   },
   
 ];

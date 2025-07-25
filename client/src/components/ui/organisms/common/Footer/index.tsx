@@ -1,4 +1,3 @@
-import NewsLetter from "@/components/ui/molecules/NewsLetter";
 import Subtitle2 from "@/components/ui/atoms/typography/Subtitle2";
 import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 import Subtitle3 from "@/components/ui/atoms/typography/Subtitle3";

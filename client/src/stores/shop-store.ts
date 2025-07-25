@@ -26,19 +26,19 @@ export const useShopStore = create<Store>((set, get) => ({
   ...defaultInitialState,
   updateShop: (shop) => {
     if (shop?.slug) {
-      set((_) => ({ shop}));
+      set(() => ({ shop}));
     }
   },
   loadShop: async () => {
-    set((_) => ({ loading: true }));
+    set(() => ({ loading: true }));
     const result = await getApiRequest("shop/get-shop");
-    set((_) => ({ loading: false}));
+    set(() => ({ loading: false}));
 
     if (!result.success) {
       set(() => ({error: result?.message}))
       return;
     }
 
-    set((_) => ({shop: result?.data}));
+    set(() => ({shop: result?.data}));
   },
 }));

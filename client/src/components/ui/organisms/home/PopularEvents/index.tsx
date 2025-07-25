@@ -4,7 +4,6 @@ import SectionTitle from "@/components/ui/atoms/typography/SectionTitle";
 import EventCard from "@/components/ui/molecules/Cards/EventCard";
 import { IAPIUserPopularEventResponse } from "@/types/api";
 import { getApiRequest } from "@/utils/api";
-import { notFound } from "next/navigation";
 
 const PopularEvents = async () => {
   const response: IAPIUserPopularEventResponse = await getApiRequest(

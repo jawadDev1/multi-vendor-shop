@@ -1,12 +1,12 @@
 import type { ButtonHTMLAttributes, HTMLAttributes, ReactNode } from "react";
 
 export type BaseProps = {
-  children: React.ReactNode | string;
+  children: ReactNode | string;
   className?: string;
 } & HTMLAttributes<HTMLDivElement | HTMLButtonElement>;
 
 export type BaseButtonProps = {
-  children: React.ReactNode | string;
+  children: ReactNode | string;
   className?: string;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 

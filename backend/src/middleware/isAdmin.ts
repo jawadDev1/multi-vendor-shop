@@ -15,7 +15,6 @@ export const isAdmin = asyncHandler(
     if (!data) return next(new ErrorHandler("Unauthorized", 403));
 
     const user = await UserModel.findOne({ email: data.email });
-
     if (!(user?.role === "ADMIN"))
       return next(new ErrorHandler("Unauthorized", 403));
 

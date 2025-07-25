@@ -14,7 +14,6 @@ interface ShopInboxPageTemplateProps {
 const ShopInboxPageTemplate = ({
   conversations,
 }: ShopInboxPageTemplateProps) => {
-  if (!conversations) return;
 
   if (conversations.length === 0) {
     <Content className="text-center">No chats</Content>;

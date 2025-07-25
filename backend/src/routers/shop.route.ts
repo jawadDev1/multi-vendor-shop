@@ -1,11 +1,14 @@
 import {
+  handleApproveShop,
   handleGetShop,
   handleGetShopDetails,
   handleGetShopEvents,
+  handleGetShopRequests,
   handleGetShopReviews,
   handleGetShops,
   handleGetShopStates,
   handleRegisterShop,
+  handleRejectShop,
   handleUpdateSellerSettings,
 } from "#controllers/shop.controller.js";
 import { isAdmin } from "#middleware/isAdmin.js";
@@ -29,9 +32,16 @@ router.post("/register", isAuthenticated, handleRegisterShop);
 
 router.get("/get-shop", isAuthenticated, handleGetShop);
 
-router.get("/states", isSeller, handleGetShopStates)
+router.get("/states", isSeller, handleGetShopStates);
 
 // Admin Routes
-router.get("/get-all-shops", isAdmin, handleGetShops);
+router.use(isAdmin);
+
+router.get("/get-all-shops", handleGetShops);
+
+router.put("/approve-request", handleApproveShop);
+router.put("/reject-request", handleRejectShop);
+
+router.get("/requests", handleGetShopRequests);
 
 export default router;

@@ -65,3 +65,10 @@ export interface CartItem {
   shop: string;
   title: string;
 }
+
+export interface ICategoryBody {
+  title: string;
+  description: string;
+  image: string;
+  slug: string;
+}

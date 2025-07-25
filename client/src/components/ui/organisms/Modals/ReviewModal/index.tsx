@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import Button from "@/components/ui/atoms/buttons/Button";
 import SpinnerButton from "@/components/ui/atoms/buttons/SpinnerButton";
 import NextImage from "@/components/ui/atoms/common/NextImage";
@@ -93,7 +93,7 @@ const ReviewModal = ({ id, title, image }: Props) => {
 
           <div className="flex items-center gap-3 my-5 mr-auto">
             <div className="size-[60px] md:size-[100px]">
-             <NextImage src={image} />
+              <NextImage src={image} />
             </div>
             <Title>{title}</Title>
           </div>
@@ -110,6 +110,7 @@ const ReviewModal = ({ id, title, image }: Props) => {
                   if (rating > i) {
                     return (
                       <AiFillStar
+                        key={i}
                         onClick={() => setValue("rating", i + 1)}
                         size={33}
                         color="#efe909"
@@ -119,6 +120,7 @@ const ReviewModal = ({ id, title, image }: Props) => {
                   } else {
                     return (
                       <AiOutlineStar
+                        key={i}
                         onClick={() => setValue("rating", i + 1)}
                         size={33}
                         color="#efe909"

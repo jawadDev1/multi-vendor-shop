@@ -1,6 +1,5 @@
 'use client'
 import SectionWrapper from "@/components/ui/atoms/SectionWrapper";
-import CardTitle from "@/components/ui/atoms/typography/CardTitle";
 import Subtitle2 from "@/components/ui/atoms/typography/Subtitle2";
 import ProductReviewTab from "@/components/ui/molecules/productDetail/ProductReviewTab";
 import SellerInfoTab from "@/components/ui/molecules/productDetail/SellerInfoTab";

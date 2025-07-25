@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import {  Poppins } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import NextTopLoader from "nextjs-toploader";
-
-
 
 const popins = Poppins({
   weight: ["100", "400", "500", "600", "700"],
@@ -23,17 +21,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={` ${popins.className} antialiased bg-light-gray`}
-      >
+      <body className={` ${popins.className} antialiased bg-light-gray`}>
         <NextTopLoader
           color="#FF8A65"
           height={3}
           showSpinner={false}
           easing="ease"
           speed={200}
-          />
-       <Toaster closeButton={true} richColors={true} position="top-right" />
+        />
+        <Toaster closeButton={true} richColors={true} position="top-right" />
         {children}
       </body>
     </html>

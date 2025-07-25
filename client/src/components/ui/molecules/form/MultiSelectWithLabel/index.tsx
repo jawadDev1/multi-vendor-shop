@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Label from "../../../atoms/form/Label";
-import Input from "../../../atoms/form/Input";
 import type {
   FieldError,
   FieldValues,
@@ -24,7 +23,6 @@ type Props<TFieldValues extends FieldValues> = {
 };
 
 const MultiSelectWithLabel = <TFieldValues extends FieldValues>({
-  className,
   label,
   required = false,
   name,
@@ -38,7 +36,7 @@ const MultiSelectWithLabel = <TFieldValues extends FieldValues>({
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleSelect = (option: string, remove: boolean = false) => {
-    let newOptions = remove
+    const newOptions = remove
       ? selectedOptions.filter((item) => item !== option)
       : [...selectedOptions, option];
 

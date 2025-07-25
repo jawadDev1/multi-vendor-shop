@@ -10,7 +10,7 @@ interface Props {
 const TableImage = ({ value }: Props) => {
 
   return (
-    <TD className="size-16 rounded overflow-hidden">
+    <TD className="size-16  overflow-hidden">
     {value && <NextImage src={value} className="object-cover" />}
     </TD>
   );

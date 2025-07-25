@@ -13,10 +13,6 @@ const DashboardPage = async () => {
 
   const data = result?.data;
 
-  console.log("data ========> ",data)
-  
-  // return null;
- 
 
   return (
     <>

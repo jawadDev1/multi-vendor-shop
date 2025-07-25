@@ -1,8 +1,4 @@
-import NextImage from "@/components/ui/atoms/common/NextImage";
-
-import GenerateRatingStar from "@/components/ui/atoms/GenerateRatingStars";
 import Content from "@/components/ui/atoms/typography/Content";
-import Subtitle2 from "@/components/ui/atoms/typography/Subtitle2";
 import type { IReview } from "@/types/api";
 import ReviewCard from "../../Cards/ReviewCard";
 
@@ -15,8 +11,9 @@ const ProductReviewTab = ({ reviews }: ProductReviewTabProps) => {
     <div>
       {reviews && reviews.length > 0 && (
         <div className="space-y-5 max-h-[400px] overflow-y-auto">
-          {reviews.map((rev) => (
+          {reviews.map((rev, i) => (
             <ReviewCard
+              key={i}
               {...{
                 comment: rev.comment,
                 rating: rev.rating,

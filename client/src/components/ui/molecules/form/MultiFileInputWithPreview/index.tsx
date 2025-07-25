@@ -44,8 +44,8 @@ const MultiFileInputWithPreview = <TFieldValues extends FieldValues>({
   };
 
   const handleRemoveAvatar = (index: number) => {
-    let shouldRemoveFromDefault = !previewImages[index].includes("blob");
-    let filteredImages = previewImages.filter((_, i) => i !== index);
+    const shouldRemoveFromDefault = !previewImages[index].includes("blob");
+    const filteredImages = previewImages.filter((_, i) => i !== index);
     setPreviewImages(filteredImages);
 
     handleRemoveImages(index, shouldRemoveFromDefault);

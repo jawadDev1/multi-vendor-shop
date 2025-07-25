@@ -113,6 +113,7 @@ export interface IShop extends Document {
     account_id: string;
   };
   status: "ACTIVE" | "INACTIVE";
+  request_status: "APPROVED"  | "REQUESTED" | "REJECTED" 
 }
 
 export interface IUser extends Document {

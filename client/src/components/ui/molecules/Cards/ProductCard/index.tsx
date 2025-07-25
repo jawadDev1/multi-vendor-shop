@@ -8,7 +8,6 @@ import NextImage from "@/components/ui/atoms/common/NextImage";
 
 import GenerateRatingStar from "@/components/ui/atoms/GenerateRatingStars";
 import { useEffect, useState, type HTMLAttributes } from "react";
-import ProductDetailsModal from "@/components/ui/organisms/Modals/ProductDetailsModal";
 import type { IAPIUserProduct } from "@/types/api";
 import { calculatePriceAfterDiscount } from "@/utils";
 import type { ICartItem, IWishlistItem } from "@/types/common";

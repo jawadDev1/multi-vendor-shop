@@ -1,16 +1,18 @@
-'use client'
+"use client";
 
 import TD from "@/components/Tables/TableLayout/TD";
 import DeleteButton from "@/components/ui/atoms/buttons/DeleteButton";
 import EditButton from "@/components/ui/atoms/buttons/EditButton";
 import { deleteApiRequest } from "@/utils/api";
 import { notifyError, notifySuccess } from "@/utils/toast";
+import { useRouter } from "next/navigation";
 
 interface Props {
   id: string;
 }
 
 const TableProductActions = ({ id }: Props) => {
+  const router = useRouter();
   const handleDelete = async () => {
     const result = await deleteApiRequest(`product/product/${id}`);
 
@@ -20,7 +22,8 @@ const TableProductActions = ({ id }: Props) => {
     }
 
     notifySuccess(result?.message);
-    window.location.reload();
+
+    router.refresh();
   };
 
   return (

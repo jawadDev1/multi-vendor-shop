@@ -8,9 +8,8 @@ import Subtitle from "../../atoms/typography/Subtitle";
 import WishlistItem from "../../atoms/extra/WishlistItem";
 import { useCartStore } from "@/stores/cart-store";
 
-interface WishlistProps {}
 
-const Wishlist = ({}: WishlistProps) => {
+const Wishlist = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
  const { wishlist} = useCartStore();
  

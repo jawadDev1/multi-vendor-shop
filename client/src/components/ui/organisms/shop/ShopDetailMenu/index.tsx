@@ -7,7 +7,7 @@ import ShopProductsSection from "@/components/ui/organisms/shopDetail/ShopProduc
 import ShopReviewsSection from "@/components/ui/organisms/shopDetail/ShopReviews";
 
 import cn from "@/utils/cn";
-import { IAPIProduct, IAPIShopDetails, IAPIUserEvent, IAPIUserProduct } from "@/types/api";
+import {  IAPIUserEvent, IAPIUserProduct } from "@/types/api";
 
 enum ALLOWED_MENU_ITEMS {
   products = "products",

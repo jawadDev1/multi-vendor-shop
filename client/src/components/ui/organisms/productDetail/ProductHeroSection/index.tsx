@@ -14,7 +14,6 @@ import useSendMessage from "@/hooks/useSendMessage";
 import type { IAPIUserProduct } from "@/types/api";
 import Link from "next/link";
 
-import { useState } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 interface Props {

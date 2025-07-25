@@ -50,3 +50,16 @@ export const calculatePriceAfterDiscount = (
 ): number => {
   return originalPrice - (1 - discount / 100);
 };
+
+
+// For query params
+export const getStringParam = (param: unknown): string | undefined =>
+  typeof param === 'string' && param.trim() !== '' ? param.trim() : undefined;
+
+export const getNumberParam = (param: unknown): number | undefined => {
+  if (typeof param === 'string') {
+    const num = Number(param);
+    return !isNaN(num) ? num : undefined;
+  }
+  return undefined;
+};

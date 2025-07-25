@@ -3,13 +3,12 @@
 
 import { ActionProps } from "@/components/Tables";
 import TD from "@/components/Tables/TableLayout/TD";
-import LinkButton from "@/components/ui/atoms/buttons/LinkButton";
 import Link from "next/link";
 import { BsEye } from "react-icons/bs";
 
 
 
-const ShopActions = ({ id, record }: ActionProps) => {
+const ShopActions = ({  record }: ActionProps) => {
 
   return (
     <TD className=" flex gap-x-3 items-center  justify-end h-[70px] ">

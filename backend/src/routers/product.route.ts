@@ -5,6 +5,7 @@ import {
   handleGetBestDealProducts,
   handleGetBestSellingProducts,
   handleGetFeaturedProducts,
+  handleGetFilterProducts,
   handleGetProductDetails,
   handleGetProducts,
   handleGetProductsForForm,
@@ -26,6 +27,8 @@ router.get("/all-products", handleGetProducts);
 router.get("/best-selling", handleGetBestSellingProducts);
 
 router.get("/featured", handleGetFeaturedProducts);
+
+router.get("/get-products", handleGetFilterProducts);
 
 router.get("/product-details/:slug", handleGetProductDetails);
 

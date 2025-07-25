@@ -1,7 +1,4 @@
 import BestSellingPageTemplate from "../../templates/BestSellingPageTemplate";
-import type { IAPIUserProduct } from "@/types/api";
-import useGetData from "@/hooks/useGetData";
-import Loader from "../../atoms/extra/Loader";
 import { getApiRequest } from "@/utils/api";
 import { notFound } from "next/navigation";
 

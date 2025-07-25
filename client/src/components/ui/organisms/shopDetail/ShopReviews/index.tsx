@@ -2,7 +2,7 @@ import Loader from "@/components/ui/atoms/extra/Loader";
 import Content from "@/components/ui/atoms/typography/Content";
 import ReviewCard from "@/components/ui/molecules/Cards/ReviewCard";
 import useGetData from "@/hooks/useGetData";
-import type { IAPIReviews, IAPIUserProduct } from "@/types/api";
+import type { IAPIReviews } from "@/types/api";
 
 interface ShopReviewsSectionProps {
   slug: string;
@@ -23,8 +23,9 @@ const ShopReviewsSection = ({ slug }: ShopReviewsSectionProps) => {
       {data && data.length > 0 && (
         <div className="space-y-5 max-h-[400px] overflow-y-auto">
           {data.map((product) =>
-            product.map((rev) => (
+            product.map((rev, i) => (
               <ReviewCard
+                key={i}
                 {...{
                   comment: rev.comment,
                   rating: rev.rating,

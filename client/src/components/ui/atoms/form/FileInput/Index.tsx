@@ -18,7 +18,7 @@ const FileInput = <TFieldValues extends FieldValues>({
 }: InputProps<TFieldValues>) => {
   return (
     <label
-      className="w-fit px-2 py-2 cursor-pointer  bg-gray-100 text-sm text-primary block "
+      className="w-fit px-2 py-2 cursor-pointer  bg-gray-100 text-sm text-charcoal block "
       htmlFor={name}
     >
       {children ?? <p>Upload a file</p>}

@@ -3,7 +3,7 @@ import CardTitle from "../../atoms/typography/CardTitle";
 import { AiOutlineSend } from "react-icons/ai";
 import { GrGallery } from "react-icons/gr";
 import useSocket from "@/hooks/useSocket";
-import { InputEvent, useEffect, useRef, useState, type FormEvent } from "react";
+import {  useEffect, useRef, useState, type FormEvent } from "react";
 import { BiChevronLeft } from "react-icons/bi";
 import { getApiRequest } from "@/utils/api";
 import { notifyError } from "@/utils/toast";
@@ -11,7 +11,6 @@ import MessageItem from "../../atoms/extra/MessageItem";
 import { useUserStore } from "@/stores/user-store";
 import NextImage from "../../atoms/common/NextImage";
 import { CgClose } from "react-icons/cg";
-import Button from "../../atoms/buttons/Button";
 import { uploadImageToAppwrite } from "@/utils/uploadFile";
 import SpinnerButton from "../../atoms/buttons/SpinnerButton";
 

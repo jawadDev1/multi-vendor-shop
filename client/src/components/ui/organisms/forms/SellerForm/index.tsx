@@ -52,7 +52,7 @@ const SellerUpdateForm = ({
   const onSubmit = async (data: ShopUpdateSchemaData) => {
     setIsLoading(true);
 
-    let payload: {
+    const payload: {
       shop_name: string;
       zip_code: number;
       contact: number;

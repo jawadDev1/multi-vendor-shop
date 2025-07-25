@@ -17,7 +17,7 @@ export const PRODUCTS_FIELDS = {
   discount: "Discount",
   stock: "Stock",
   sold_out: "Sold",
-  rating: "Rating"
+  rating: "Rating",
 };
 
 export const PRODUCTS_ELEMENTS = {
@@ -29,7 +29,6 @@ export const PRODUCTS_ELEMENTS = {
   stock: TableProductStock,
   sold_out: TableTitle,
   rating: TableTitle,
-
 };
 
 export const Event_FIELDS = {
@@ -129,8 +128,24 @@ export const USERS_ELEMENTS = {
   _id: TableSr,
   name: TableTitle,
   email: TableTitle,
-    profile: TableImage,
+  profile: TableImage,
   role: TableTitle,
   // orders: TableTitle,
+  createdAt: TableDate,
+};
+
+export const CATEGORIES_FIELDS = {
+  _id: "Sr#",
+  title: "Title",
+  image: "Image",
+  totalProducts: "Total Products",
+  createdAt: "Created On",
+};
+
+export const CATEGORIES_ELEMENTS = {
+  _id: TableSr,
+  title: TableTitle,
+  image: TableImage,
+  totalProducts: TableTitle,
   createdAt: TableDate,
 };

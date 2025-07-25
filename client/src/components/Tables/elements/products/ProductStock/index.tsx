@@ -1,6 +1,5 @@
 
 import TD from "@/components/Tables/TableLayout/TD";
-import NextImage from "@/components/ui/atoms/common/NextImage";
 import cn from "@/utils/cn";
 
 

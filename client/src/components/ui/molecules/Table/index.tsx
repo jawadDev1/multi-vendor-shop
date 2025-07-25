@@ -1,4 +1,5 @@
 import Subtitle3 from "@/components/ui/atoms/typography/Subtitle3";
+import Link from "next/link";
 import { CgArrowRight, CgChevronLeft, CgChevronRight } from "react-icons/cg";
 
 interface TableProps {

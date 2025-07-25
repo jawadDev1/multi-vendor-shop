@@ -1,5 +1,6 @@
 "use client";
 import NextImage from "@/components/ui/atoms/common/NextImage";
+import SellerHeaderSkeleton from "@/components/ui/atoms/skelatons/SellerHeaderSkelaton";
 import { useUserStore } from "@/stores/user-store";
 import { notFound } from "next/navigation";
 import { useEffect } from "react";
@@ -15,7 +16,7 @@ const HokageHeader = () => {
     }
   }, []);
 
-  if (!userLoaded) return null;
+  if (!userLoaded) return <SellerHeaderSkeleton />;
 
   if ((userLoaded && !isAuthenticated) || user?.role !== "ADMIN") {
     return notFound();

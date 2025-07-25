@@ -52,7 +52,12 @@ const shopSchema = new Schema<IShop>(
     status: {
       type: String,
       enum: ["ACTIVE", "INACTIVE"],
-      default: "ACTIVE"
+      default: "ACTIVE",
+    },
+    request_status: {
+      type: String,
+      enum: ["APPROVED", "REJECTED", "REQUESTED"],
+      default: null,
     },
     stripe_payment: {
       status: {

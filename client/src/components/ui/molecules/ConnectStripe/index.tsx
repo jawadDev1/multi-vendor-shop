@@ -1,15 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import { useUserStore } from "@/stores/user-store";
-import { apiRequest, getApiRequest } from "@/utils/api";
-import Button from "@/components/ui/atoms/buttons/Button";
+import { apiRequest  } from "@/utils/api";
 import { notifyError } from "@/utils/toast";
 import SpinnerButton from "../../atoms/buttons/SpinnerButton";
-import { useRouter } from "next/navigation";
 
 const ConnectStripe = () => {
   const { user } = useUserStore();
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [accoutId, setAccountId] = useState<string | null>(null);
 

@@ -49,7 +49,7 @@ const UserMobileNav = ({ user, isAuthenticated }: UserMobileNavProps) => {
             <CgClose size={26} color="white" />
           </span>
           <div className="mt-5 flex flex-col gap-y-10">
-            <SearchProducts />
+            <SearchProducts handleNav={handleNav} />
 
             <NavMenu />
 

@@ -6,13 +6,11 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { CgClose, CgShoppingBag } from "react-icons/cg";
 import Subtitle from "../../atoms/typography/Subtitle";
 import CartItem from "../../atoms/extra/CartItem";
-import Button from "../../atoms/buttons/Button";
 import LinkButton from "../../atoms/buttons/LinkButton";
 import { useCartStore } from "@/stores/cart-store";
 
-interface UserCartProps {}
 
-const UserCart = ({}: UserCartProps) => {
+const UserCart = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 const { totalAmount, cart} = useCartStore();
 

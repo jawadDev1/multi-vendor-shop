@@ -1,5 +1,4 @@
-import React, { type ReactSVGElement } from "react";
-import Subtitle2 from "../../typography/Subtitle2";
+import React  from "react";
 import cn from "@/utils/cn";
 import Content from "../../typography/Content";
 import Link from "next/link";

@@ -1,11 +1,20 @@
-import ProductsPage from '@/components/ui/pages/ProductsPage'
-import React from 'react'
+import ProductsPage from "@/components/ui/pages/ProductsPage";
+import React from "react";
 
-const Products = async ({searchParams}: {searchParams: {category?: string}}) => {
-  const {category}  = await searchParams;
-  return (
-  <ProductsPage category={category} />
-  )
+export interface ProductSearchParams {
+  category?: string;
+  min_price?: string;
+  max_price?: string;
+  search?: string;
 }
 
-export default Products
+interface ProductsProps {
+  searchParams: ProductSearchParams;
+}
+
+const Products = async ({ searchParams }: ProductsProps) => {
+  const params = await searchParams;
+  return <ProductsPage  params={params} />;
+};
+
+export default Products;

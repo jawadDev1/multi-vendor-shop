@@ -6,6 +6,8 @@ import { ErrorHandler } from "#utils/ErrorHandle.js";
 import {
   generateRandomString,
   generateSlug,
+  getNumberParam,
+  getStringParam,
   validateBody,
 } from "#utils/index.js";
 import { Request, Response, NextFunction } from "express";
@@ -50,7 +52,9 @@ const handleGetShopProducts = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const id = req.user?.id;
 
-    const products = await ProductModel.find({ created_by: id }).select("_id title images price discount stock sold_out rating");
+    const products = await ProductModel.find({ created_by: id }).select(
+      "_id title images price discount stock sold_out rating"
+    );
 
     return res.status(200).json({
       success: true,
@@ -253,7 +257,8 @@ const handleGetProductDetails = asyncHandler(
           { path: "category", select: "_id title slug description image" },
           {
             path: "shop",
-            select: "_id shop_name logo about totalProducts totalReviews rating createdAt slug description",
+            select:
+              "_id shop_name logo about totalProducts totalReviews rating createdAt slug description",
           },
           {
             path: "reviews.user",
@@ -406,6 +411,53 @@ const handleAddProductReview = asyncHandler(
   }
 );
 
+const handleGetFilterProducts = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { category, min_price, max_price, search } = req.query;
+
+      if (Array.isArray(category) || Array.isArray(search)) {
+        return next(new ErrorHandler("Invalid filters", 400));
+      }
+
+      const filter: Record<string, any> = {};
+
+      const parsedCategory = getStringParam(category);
+      const parsedSearch = getStringParam(search);
+      const parsedMinPrice = getNumberParam(min_price);
+      const parsedMaxPrice = getNumberParam(max_price);
+
+      if (parsedCategory) {
+        filter.category = parsedCategory;
+      }
+
+      if (parsedSearch) {
+        filter.$or = [
+          { title: { $regex: parsedSearch, $options: "i" } },
+        ];
+      }
+
+      
+      if (parsedMinPrice !== undefined || parsedMaxPrice !== undefined) {
+        filter.originalPrice = {};
+        if (parsedMinPrice !== undefined) filter.originalPrice.$gte = parsedMinPrice;
+        if (parsedMaxPrice !== undefined) filter.originalPrice.$lte = parsedMaxPrice;
+      }
+
+      const products = await ProductModel.find(filter).sort({ createdAt: -1 });
+
+      return res.status(200).json({
+        success: true,
+        message: "Products fetched successfully",
+        data: products,
+      });
+    } catch (error) {
+      console.log("Error in handleGetFilterProducts :: ", error);
+      return next(new ErrorHandler("Something went wrong", 500));
+    }
+  }
+);
+
 export {
   handleCreateProduct,
   handleGetShopProducts,
@@ -419,4 +471,5 @@ export {
   handleGetProductDetails,
   handleGetProducts,
   handleAddProductReview,
+  handleGetFilterProducts,
 };

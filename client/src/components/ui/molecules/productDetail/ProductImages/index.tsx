@@ -9,7 +9,7 @@ const ProductImages = ({ images }: { images: string[] }) => {
   };
   return (
     <div className={cn("grid grid-cols-1   md:justify-between overflow-hidden", {"md:grid-cols-[20%,3%,77%]": images?.length > 1})}>
-      <div className="order-3 md:order-1">
+      <div className="order-1 md:order-1">
         {images && images.length > 1 && (
           <div className="flex md:flex-col gap-3 ">
             {images.map(
@@ -27,8 +27,8 @@ const ProductImages = ({ images }: { images: string[] }) => {
           </div>
         )}
       </div>
-      <div className="hidden md:block order-2 bg-transparent"></div>
-      <div className="w-full rounded-xl order-3 md:order-1 overflow-hidden  h-[300px] md:h-[600px] ">
+      <div className="hidden md:block order-2 bg-transparent" />
+      <div className="w-full rounded-xl order-3 md:order-3 overflow-hidden  h-[300px] md:h-[600px] ">
         <NextImage src={images[slectedImage]} className="object-ccover object-center" />
       </div>
     </div>

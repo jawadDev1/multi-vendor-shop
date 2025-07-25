@@ -3,7 +3,7 @@ import Loader from "../../atoms/extra/Loader";
 import { useUserStore } from "@/stores/user-store";
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const { isAuthenticated, userLoaded } = useUserStore(); 
+  const {  userLoaded } = useUserStore(); 
 
   if (!userLoaded) return <Loader />;
 

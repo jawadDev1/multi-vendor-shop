@@ -15,7 +15,7 @@ const FAQsPageTemplate = () => {
 
   return (
     <PageWrapper>
-      <SectionTitle>FAQ's</SectionTitle>
+      <SectionTitle>FAQ&apos;s</SectionTitle>
 
       <div className="flex flex-col gap-y-6 lg:gap-y-4 mt-6 lg:mt-7 bg-white shadow rounded px-5 lg:px-2 py-4 ">
         {FAQS.map(({ id, question, answer }, i) => (

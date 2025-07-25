@@ -20,7 +20,7 @@ const ActivateAccountModal = ({
         <Content className="max-w-[500px]">
           Thank you for registering with us.
           <br />
-          We've sent a verification email to your registered email address.
+          We&apos;ve sent a verification email to your registered email address.
           Please check your inbox and follow the activation link to verify your
           account. If you do not see the email within a few minutes, please
           check your spam or junk folder.
