@@ -18,7 +18,7 @@ const ShopRequestModal = ({ isOpen, handleModal }: ShopRequestModalProps) => {
           Thank you for submitting your shop registration request. Our team has
           received your application and it is currently under review.
           <br />
-          An administrator will carefully review the details you've provided.
+          An administrator will carefully review the details you&apos;ve provided.
           Once your request is approved, you will be notified via email .
           <br />
           We appreciate your patience during this process.

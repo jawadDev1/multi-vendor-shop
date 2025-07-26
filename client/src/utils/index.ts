@@ -84,3 +84,8 @@ export const isPriceFilterActive = (
     String(currentFilter.max_price) == param_value.max_price
   );
 };
+
+
+export const trimStringText = (string: string, length: number = 50) => {
+  return string.length > length ? string.slice(0, length) : string
+}

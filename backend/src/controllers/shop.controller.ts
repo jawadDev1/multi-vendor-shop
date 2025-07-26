@@ -235,7 +235,6 @@ const handleGetShopDetails = asyncHandler(
             },
             {
               $project: {
-                _id: 0,
                 title: 1,
                 slug: 1,
                 originalPrice: 1,
@@ -243,6 +242,7 @@ const handleGetShopDetails = asyncHandler(
                 images: 1,
                 shop: 1,
                 rating: 1,
+                description: 1,
                 totalReviews: 1,
                 totalProducts: 1,
               },
@@ -311,6 +311,8 @@ const handleGetShopDetails = asyncHandler(
 
     if (!data || data.length == 0)
       return next(new ErrorHandler("shop not found", 404));
+
+
 
     return res.status(200).json({
       success: true,
@@ -610,7 +612,7 @@ const handleGetShops = asyncHandler(
       const pipeline = [
         {
           $match: {
-            request_status: "APPROVED"
+            request_status: "APPROVED",
           },
         },
         {
@@ -668,6 +670,138 @@ const handleGetShops = asyncHandler(
     }
   }
 );
+const handleGetPlatformStates = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const pendingShopRequests = await ShopModel.countDocuments({
+        request_status: "REQUESTED",
+      });
+
+      const pipeline = [
+        {
+          $match: { request_status: "APPROVED" },
+        },
+        {
+          $lookup: {
+            from: "products",
+            localField: "_id",
+            foreignField: "shop",
+            as: "products",
+          },
+        },
+        {
+          $lookup: {
+            from: "orders",
+            localField: "_id",
+            foreignField: "shop",
+            as: "orders",
+          },
+        },
+        {
+          $project: {
+            totalProducts: { $size: "$products" },
+            inStockProducts: {
+              $size: {
+                $filter: {
+                  input: "$products",
+                  as: "p",
+                  cond: { $gt: ["$$p.stock", 0] },
+                },
+              },
+            },
+            outOfStockProducts: {
+              $size: {
+                $filter: {
+                  input: "$products",
+                  as: "p",
+                  cond: { $lte: ["$$p.stock", 0] },
+                },
+              },
+            },
+            totalOrders: { $size: "$orders" },
+            processingOrders: {
+              $size: {
+                $filter: {
+                  input: "$orders",
+                  as: "o",
+                  cond: { $eq: ["$$o.status", "Processing"] },
+                },
+              },
+            },
+            deliveredOrders: {
+              $size: {
+                $filter: {
+                  input: "$orders",
+                  as: "o",
+                  cond: { $eq: ["$$o.status", "Delivered"] },
+                },
+              },
+            },
+            shippedOrders: {
+              $size: {
+                $filter: {
+                  input: "$orders",
+                  as: "o",
+                  cond: { $eq: ["$$o.status", "Shipped"] },
+                },
+              },
+            },
+          },
+        },
+        {
+          $group: {
+            _id: null,
+            totalProducts: { $sum: "$totalProducts" },
+            inStockProducts: { $sum: "$inStockProducts" },
+            outOfStockProducts: { $sum: "$outOfStockProducts" },
+            totalOrders: { $sum: "$totalOrders" },
+            processingOrders: { $sum: "$processingOrders" },
+            deliveredOrders: { $sum: "$deliveredOrders" },
+            shippedOrders: { $sum: "$shippedOrders" },
+            totalApprovedShops: { $sum: 1 },
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            totalProducts: 1,
+            inStockProducts: 1,
+            outOfStockProducts: 1,
+            totalOrders: 1,
+            processingOrders: 1,
+            deliveredOrders: 1,
+            shippedOrders: 1,
+            totalApprovedShops: 1,
+          },
+        },
+      ];
+
+      const result = await ShopModel.aggregate(pipeline);
+      const platformStates = result[0] || {
+        totalProducts: 0,
+        inStockProducts: 0,
+        outOfStockProducts: 0,
+        totalOrders: 0,
+        processingOrders: 0,
+        deliveredOrders: 0,
+        shippedOrders: 0,
+        totalApprovedShops: 0,
+      };
+
+      return res.status(200).json({
+        success: true,
+        message: "Platform state fetched successfully",
+        data: {
+          ...platformStates,
+          pendingShopRequests,
+        },
+      });
+    } catch (error) {
+      console.log("Error in handleGetPlatformStates :: ", error);
+      return next(new ErrorHandler("Something went wrong", 500));
+    }
+  }
+);
 
 export {
   handleRegisterShop,
@@ -681,4 +815,5 @@ export {
   handleApproveShop,
   handleRejectShop,
   handleGetShopRequests,
+  handleGetPlatformStates,
 };

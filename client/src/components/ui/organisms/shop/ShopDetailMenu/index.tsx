@@ -71,26 +71,26 @@ const ShopDetailMenu = ({events, products, slug}: ShopDetailMenuProps) => {
 
   return (
     <div className="px-5">
-      <div className="flex items-center gap-x-8 mb-5 ">
+      <div className="flex items-center overflow-x-auto hide-scrollbar gap-x-8 mb-5 ">
         <Subtitle2
-          className={cn("!font-semibold cursor-pointer", {
-            "text-primary": activeSection === ALLOWED_MENU_ITEMS.products,
+          className={cn("!font-semibold border border-primary rounded-full w-fit px-2 py-1 text-primary lg:text-charcoal whitespace-nowrap lg:border-none cursor-pointer", {
+            "text-white lg:text-primary bg-primary lg:bg-transparent ": activeSection === ALLOWED_MENU_ITEMS.products,
           })}
           onClick={() => handleActiveSection(ALLOWED_MENU_ITEMS.products)}
         >
           Shop Products
         </Subtitle2>
         <Subtitle2
-          className={cn("!font-semibold cursor-pointer", {
-            "text-primary": activeSection === ALLOWED_MENU_ITEMS.events,
+          className={cn("!font-semibold border border-primary text-primary lg:text-charcoal rounded-full w-fit px-2 py-1 whitespace-nowrap lg:border-none cursor-pointer", {
+            "text-white lg:text-primary bg-primary lg:bg-transparent ": activeSection === ALLOWED_MENU_ITEMS.events,
           })}
           onClick={() => handleActiveSection(ALLOWED_MENU_ITEMS.events)}
         >
           Running Events
         </Subtitle2>
         <Subtitle2
-          className={cn("!font-semibold cursor-pointer", {
-            "text-primary": activeSection === ALLOWED_MENU_ITEMS.reviews,
+          className={cn("!font-semibold border border-primary text-primary lg:text-charcoal rounded-full w-fit px-2 py-1 whitespace-nowrap lg:border-none cursor-pointer", {
+            "text-white lg:text-primary bg-primary lg:bg-transparent ": activeSection === ALLOWED_MENU_ITEMS.reviews,
           })}
           onClick={() => handleActiveSection(ALLOWED_MENU_ITEMS.reviews)}
         >

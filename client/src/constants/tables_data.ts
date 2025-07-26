@@ -7,15 +7,14 @@ import TableProductDiscount from "@/components/Tables/elements/products/ProdcutD
 import TableProductImage from "@/components/Tables/elements/products/ProductImage";
 import TableProductStock from "@/components/Tables/elements/products/ProductStock";
 import TableShopStatus from "@/components/Tables/elements/shop/ShopStatus";
-import TableShopAbout from "@/components/Tables/elements/shop/ShopStatus";
 import OrderId from "@/components/Tables/elements/userOrder/OrderId";
 import OrderProduct from "@/components/Tables/elements/userOrder/OrderProducts";
 
 export const PRODUCTS_FIELDS = {
   _id: "Sr#",
   title: "Title",
-  originalPrice: "Price",
   images: "Image",
+  originalPrice: "Original Price",
   discount: "Discount",
   stock: "Stock",
   sold_out: "Sold",
@@ -25,8 +24,8 @@ export const PRODUCTS_FIELDS = {
 export const PRODUCTS_ELEMENTS = {
   _id: TableSr,
   title: TableTitle,
-  originalPrice: TableTitle,
   images: TableProductImage,
+  originalPrice: TableTitle,
   discount: TableProductDiscount,
   stock: TableProductStock,
   sold_out: TableTitle,

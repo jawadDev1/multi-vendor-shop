@@ -8,6 +8,7 @@ import type {
 } from "react-hook-form";
 import FileInput from "@/components/ui/atoms/form/FileInput/Index";
 import Label from "@/components/ui/atoms/form/Label";
+import NextImage from "@/components/ui/atoms/common/NextImage";
 
 type InputWithLabelProps<TFieldValues extends FieldValues> = {
   className?: string;
@@ -52,7 +53,7 @@ const FileInputWithPreview = <TFieldValues extends FieldValues>({
         {" "}
         <span>
           {preview && (
-            <img
+            <NextImage
               src={preview}
               alt="react"
               className="size-10 rounded-full object-cover"

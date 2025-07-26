@@ -8,29 +8,36 @@ const ProductImages = ({ images }: { images: string[] }) => {
     setSlectedImage(index);
   };
   return (
-    <div className={cn("grid grid-cols-1   md:justify-between overflow-hidden", {"md:grid-cols-[20%,3%,77%]": images?.length > 1})}>
-      <div className="order-1 md:order-1">
+    <div
+      className={cn("flex flex-col justify items-start  gap-5 overflow-hidden", {
+        "mmd:grid-cols-[20%,3%,77%]": images?.length > 1,
+      })}
+    >
+      <div className="w-full  rounded-xl overflow-hidden  h-[300px] md:h-[400px] max-h-fit ">
+        <NextImage
+          src={images[slectedImage]}
+          className="object-contain object-center"
+        />
+      </div>
+      <div className="">
         {images && images.length > 1 && (
-          <div className="flex md:flex-col gap-3 ">
+          <div className="flex gap-3 items-center overflow-x-auto max-w-full ">
             {images.map(
               (src, i) =>
                 i !== slectedImage && (
                   <div
                     key={i}
                     onClick={() => handleImageChange(i)}
-                    className="w-full h-full shrink-0 rounded-md overflow-hidden max-h-[200px] lg:h-[180px] cursor-pointer "
+                    className="w-fit h-full shrink-0 rounded-md overflow-hidden max-h-[200px] lg:h-[180px] cursor-pointer "
                   >
-                    <NextImage src={src} className="object-ccover" />
+                    <NextImage src={src} className="object-contain" />
                   </div>
                 )
             )}
           </div>
         )}
       </div>
-      <div className="hidden md:block order-2 bg-transparent" />
-      <div className="w-full rounded-xl order-3 md:order-3 overflow-hidden  h-[300px] md:h-[600px] ">
-        <NextImage src={images[slectedImage]} className="object-ccover object-center" />
-      </div>
+      {/* <div className="hidden md:block order-2 bg-transparent" /> */}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useState } from "react";
 import PageWrapper from "../../atoms/PageWrapper";
 import CheckoutSteps from "../../molecules/CheckoutSteps";
@@ -36,8 +36,7 @@ const intialState = {
 
 const CheckoutPageTemplate = () => {
   // Redux
-const {cart: cartItems, clearCart} = useCartStore();
-
+  const { cart: cartItems, clearCart } = useCartStore();
 
   // Stripe
   const stripe = useStripe();
@@ -62,7 +61,7 @@ const {cart: cartItems, clearCart} = useCartStore();
 
   const formData = watch();
 
-  const onSubmit = async (_: ShippingFormData) => {
+  const onSubmit = async () => {
     setStep(2);
   };
 
@@ -81,7 +80,7 @@ const {cart: cartItems, clearCart} = useCartStore();
           shop,
           qty,
           title,
-          discount
+          discount,
         })
       ),
       shipping_address: formData,
@@ -99,15 +98,14 @@ const {cart: cartItems, clearCart} = useCartStore();
       return;
     }
 
-    (clearCart());
+    clearCart();
 
     setStep(3);
     setTimeout(() => router.push("/"), 2000);
     setIsLoading(false);
   };
 
-  
-    // Handle Stripe Payment
+  // Handle Stripe Payment
   const paymentHandler = async () => {
     setIsLoading(true);
     const amount = Math.round(totalAmount * 100);
@@ -120,7 +118,7 @@ const {cart: cartItems, clearCart} = useCartStore();
           shop,
           qty,
           title,
-          discount
+          discount,
         })
       ),
       shipping_address: formData,
@@ -169,6 +167,7 @@ const {cart: cartItems, clearCart} = useCartStore();
         };
       }
 
+      console.log("order =====> ", { order, cartItems });
       const orderRes = await apiRequest({
         endpoint: "order/create",
         body: order,
@@ -179,7 +178,7 @@ const {cart: cartItems, clearCart} = useCartStore();
         return;
       }
 
-      (clearCart());
+      clearCart();
 
       setStep(3);
       setTimeout(() => router.push("/"), 2000);
@@ -191,7 +190,7 @@ const {cart: cartItems, clearCart} = useCartStore();
     <PageWrapper>
       <CheckoutSteps step={step} />
 
-      <div className="grid grid-cols-[65%,35%] gap-7 justify-between   mt-8 ">
+      <div className="grid grid-cols-1 lg:grid-cols-[65%,35%] gap-7 justify-between   mt-8 ">
         <div>
           {step == 1 && (
             <ShippingForm

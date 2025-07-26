@@ -1,11 +1,7 @@
 import SectionWrapper from "@/components/ui/atoms/SectionWrapper";
 import SectionTitle from "@/components/ui/atoms/typography/SectionTitle";
 import ProductCard from "@/components/ui/molecules/Cards/ProductCard";
-import ProductDetailsModal from "../../Modals/ProductDetailsModal";
-import useHandleProductModal from "@/hooks/useHandleProductModal";
-import { useEffect } from "react";
 import { getApiRequest } from "@/utils/api";
-import { notFound } from "next/navigation";
 import { IAPIUserProductResponse } from "@/types/api";
 
 const BestDealsSection = async () => {

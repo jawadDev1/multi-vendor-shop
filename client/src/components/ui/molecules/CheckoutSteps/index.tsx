@@ -8,9 +8,9 @@ interface CheckoutStepsProps {
 
 const CheckoutSteps = ({ step }: CheckoutStepsProps) => {
   return (
-    <div className="grid grid-cols-[26%,10%,26%,10%,26%] max-w-[500px] mx-auto items-center ">
+    <div className="grid grid-cols-[28%,8%,28%,8%,26%] lg:grid-cols-[26%,10%,26%,10%,26%] max-w-[500px] mx-auto items-center ">
       <div
-        className={cn("px-6 py-2.5 border border-primary rounded-full", {
+        className={cn("px-1 lg:px-6 py-2.5 border border-primary rounded-full", {
           "bg-primary border-transparent": step > 0,
         })}
       >
@@ -26,7 +26,7 @@ const CheckoutSteps = ({ step }: CheckoutStepsProps) => {
         })}
       />
       <div
-        className={cn("px-6 py-2.5 border border-primary rounded-full", {
+        className={cn(" px-1 lg:px-6 py-2.5 border border-primary rounded-full", {
           "bg-primary border-transparent": step > 1,
         })}
       >
@@ -42,7 +42,7 @@ const CheckoutSteps = ({ step }: CheckoutStepsProps) => {
         })}
       />
       <div
-        className={cn("px-6 py-2.5 border border-primary rounded-full", {
+        className={cn("px-1 lg:px-6 py-2.5 border border-primary rounded-full", {
           "bg-primary border-transparent": step === 3,
         })}
       >

@@ -46,7 +46,6 @@ const handleGetCategories = asyncHandler(
     try {
       const categories = await CategoryModel.find({})
         .select("title slug image")
-        .select("-_id");
 
       return res.status(200).json({
         success: true,

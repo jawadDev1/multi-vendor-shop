@@ -1,7 +1,6 @@
 "use client";
 import SellerPageWrapper from "@/components/ui/atoms/SellerPageWrapper";
 import SectionTitle from "@/components/ui/atoms/typography/SectionTitle";
-import Subtitle3 from "@/components/ui/atoms/typography/Subtitle3";
 import React, { useState } from "react";
 
 const StripeRefreshPage = ({
@@ -45,7 +44,7 @@ const StripeRefreshPage = ({
   return (
     <SellerPageWrapper className="text-center">
       <SectionTitle className="text-primary mb-4">
-        Wait Account is Connecting....
+        {accountLinkCreatePending && "Wait Account is Connecting...."}
       </SectionTitle>
     </SellerPageWrapper>
   );

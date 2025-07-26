@@ -2,6 +2,7 @@
 import NextImage from "@/components/ui/atoms/common/NextImage";
 import SellerHeaderSkeleton from "@/components/ui/atoms/skelatons/SellerHeaderSkelaton";
 import { useUserStore } from "@/stores/user-store";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { useEffect } from "react";
 
@@ -24,9 +25,9 @@ const HokageHeader = () => {
 
   return (
     <header className="bg-blue-gray py-3 px-4 flex justify-between items-center shadow-2xl z-10 relative">
-      <div className=" w-[4rem] overflow-hidden">
+      <Link href={"/"} className=" w-[4rem] overflow-hidden">
         <NextImage src={logo} className="object-cover" />
-      </div>
+      </Link>
     </header>
   );
 };

@@ -74,6 +74,7 @@ export interface IProduct extends Document {
   sold_out: number;
   stock: number;
   tags: string[];
+  featured: boolean;
   title: string;
   reviews: [
     {

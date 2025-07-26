@@ -9,7 +9,7 @@ interface ShopReviewsSectionProps {
 }
 
 const ShopReviewsSection = ({ slug }: ShopReviewsSectionProps) => {
-  const { data, error, loading } = useGetData<IAPIReviews[][]>({
+  const { data,  loading } = useGetData<IAPIReviews[][]>({
     endpoint: `shop/reviews/${slug}`,
   });
 

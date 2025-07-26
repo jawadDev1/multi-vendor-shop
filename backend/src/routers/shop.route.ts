@@ -1,5 +1,6 @@
 import {
   handleApproveShop,
+  handleGetPlatformStates,
   handleGetShop,
   handleGetShopDetails,
   handleGetShopEvents,
@@ -17,6 +18,7 @@ import { isSeller } from "#middleware/isSeller.js";
 import { Router } from "express";
 
 const router = Router();
+
 
 router.get("/get-shop-details/:slug", handleGetShopDetails);
 
@@ -39,6 +41,7 @@ router.use(isAdmin);
 
 router.get("/get-all-shops", handleGetShops);
 
+router.get("/hokage/states", handleGetPlatformStates)
 router.put("/approve-request/:id", handleApproveShop);
 router.put("/reject-request/:id", handleRejectShop);
 

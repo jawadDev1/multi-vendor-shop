@@ -47,6 +47,10 @@ const productSchema = new Schema<IProduct>(
       type: String,
       default: "",
     },
+    featured: {
+      type: Boolean,
+      default: false 
+    },
     reviews: [
       {
         rating: {

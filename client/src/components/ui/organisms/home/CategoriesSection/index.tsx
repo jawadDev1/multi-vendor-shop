@@ -15,10 +15,10 @@ const CategoriesSection = async () => {
   const categories: IAPIUserCategory[] = result?.data;
 
   return (
-    <SectionWrapper className="flex overflow-x-auto overflow-y-hidden  gap-x-7 py-3 px-2 rounded">
-      {categories.map(({ title, slug, image }) => (
+    <SectionWrapper className="flex overflow-x-auto overflow-y-hidden hide-scrollbar  gap-x-7 py-3 px-2 rounded">
+      {categories.map(({ title, slug, _id, image }) => (
         <Link
-          href={`/categories/${slug}`}
+          href={`/products?category=${_id}`}
           key={slug}
           className=" max-w-[230px] shrink-0  w-full "
         >
@@ -30,20 +30,6 @@ const CategoriesSection = async () => {
           </Subtitle2>
         </Link>
       ))}
-      <Link
-        href={`/categories/others`}
-        className=" max-w-[200px] shrink-0 max-h-[200px] h-full w-full md:h-[230px] overflow-hidden md:max-w-[230px] md:max-h-[230px]"
-      >
-        <div className="w-full h-full rounded-full overflow-hidden">
-          <NextImage
-            src={
-              "https://fra.cloud.appwrite.io/v1/storage/buckets/684e96b80016377e4125/files/686e11000030713702e1/view?project=684e94f90013f10e113b"
-            }
-            className="object-cover"
-          />
-        </div>
-        <Subtitle2 className="mt-2 text-center !font-[500]">Others</Subtitle2>
-      </Link>
     </SectionWrapper>
   );
 };

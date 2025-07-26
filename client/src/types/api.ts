@@ -141,11 +141,12 @@ export interface IAPIHokageCategory {
   title: string;
   description: string;
   slug: string;
-  image
+  image;
 }
 // ======================= {{ Front end  Types }} ============================================================================
 
 export interface IAPIUserCategory {
+  _id: string;
   title: string;
   slug: string;
   description: string;
@@ -168,7 +169,7 @@ export interface IAPIUserShop {
   totalReviews: number;
 }
 
-interface IReview {
+export interface IReview {
   rating: number;
   comment: string;
   user: { name: string; email?: string; profile: string };

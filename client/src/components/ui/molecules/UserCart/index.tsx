@@ -57,7 +57,7 @@ const { totalAmount, cart} = useCartStore();
           <div className="mt-8 space-y-3 max-h-full overflow-x-hidden overflow-y-auto ">
             {cart &&
               cart.length > 0 &&
-              cart.map((item) => <CartItem key={item.id} item={item} />)}
+              cart.map((item, i) => <CartItem key={i} item={item} />)}
           </div>
 
           {cart.length > 0 && (

@@ -2,7 +2,6 @@
 import { getServerApiRequest } from "@/actions/api";
 import Content from "@/components/ui/atoms/typography/Content";
 import HokageShopRequestsPageTemplate from "@/components/ui/templates/hokage/HokageShopRequestsPageTemplate";
-import HokageShopsPageTemplate from "@/components/ui/templates/hokage/HokageShopsPageTemplate";
 import React from "react";
 
 const HokageShopRequestsPage = async () => {

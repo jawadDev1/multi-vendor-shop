@@ -144,7 +144,7 @@ const ChatBox = ({ chat, handleChatClose }: ChatBoxProps) => {
     return () => {
       setMessages([]);
     };
-  }, []);
+  }, [conversationId]);
 
   useEffect(() => {
     if (!socket || !conversationId) return;
@@ -171,7 +171,7 @@ const ChatBox = ({ chat, handleChatClose }: ChatBoxProps) => {
       socket.off("receive_message");
       socket.off("online_users");
     };
-  }, [conversationId, isConnected]);
+  }, [conversationId, isConnected, chatUser?.email]);
 
   if (!chatUser) return;
 

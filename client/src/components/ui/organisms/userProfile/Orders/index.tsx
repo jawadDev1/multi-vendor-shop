@@ -10,7 +10,7 @@ import type { IUserOrderTable } from "@/types/user_profile";
 
 
 const OrdersSection = () => {
-  const { data, error, loading } = useGetData<IUserOrderTable>({
+  const { data,  loading } = useGetData<IUserOrderTable>({
     endpoint: "order/get-user-orders",
   });
 

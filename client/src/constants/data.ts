@@ -163,12 +163,12 @@ export const SHOP_SIDEBAR_ITEMS = [
     link: "/seller/events/create",
     Icon: VscNewFile,
   },
-  {
-    title: "Withdraw Money",
-    slug: "withdraw-money",
-    link: "/seller/withdraw-money",
-    Icon: CiMoneyBill,
-  },
+  // {
+  //   title: "Withdraw Money",
+  //   slug: "withdraw-money",
+  //   link: "/seller/withdraw-money",
+  //   Icon: CiMoneyBill,
+  // },
   {
     title: "Shop Inbox",
     slug: "inbox",
@@ -181,12 +181,12 @@ export const SHOP_SIDEBAR_ITEMS = [
     link: "/seller/coupouns",
     Icon: AiOutlineGift,
   },
-  {
-    title: "Refunds",
-    slug: "refunds",
-    link: "/seller/refunds",
-    Icon: HiOutlineReceiptRefund,
-  },
+  // {
+  //   title: "Refunds",
+  //   slug: "refunds",
+  //   link: "/seller/refunds",
+  //   Icon: HiOutlineReceiptRefund,
+  // },
   {
     title: "Settings",
     slug: "settings",

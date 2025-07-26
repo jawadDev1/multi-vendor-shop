@@ -1,7 +1,7 @@
 import UpdateCategoryPage from '@/components/ui/pages/hokage/UpdateCategoryPage';
 import React from 'react'
 
-const UpdateCategory = async ({params}: {params: {id: string}}) => {
+const UpdateCategory = async ({params}: {params: Promise<{id: string}>}) => {
     const {id} = await params;
   return (
     <UpdateCategoryPage  id={id} />

@@ -5,12 +5,9 @@ import { useShopRequestStore } from "@/stores/shop-request-store";
 import { CgClose } from "react-icons/cg";
 import {
   HiOutlineUser,
-  HiOutlinePhone,
   HiOutlineMapPin,
   HiOutlineCalendar,
   HiOutlineDocumentText,
-  HiOutlineCheckCircle,
-  HiOutlineXCircle,
   HiBuildingStorefront,
 } from "react-icons/hi2";
 import { useState } from "react";
@@ -19,7 +16,6 @@ import { formateDate } from "@/utils";
 
 const ShopRequestReviewModal = () => {
   const { isOpen, shop, handleCloseModal } = useShopRequestStore();
-  const [isLoading, setIsLoading] = useState(false);
 
   if (!shop) return null;
 
@@ -46,7 +42,6 @@ const ShopRequestReviewModal = () => {
           <button
             onClick={handleCloseModal}
             className="absolute top-4 right-4 p-2 hover:bg-white/20 rounded-full transition-all duration-200 z-10"
-            disabled={isLoading}
           >
             <CgClose size={24} className="text-white" />
           </button>
