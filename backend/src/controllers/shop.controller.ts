@@ -1,5 +1,6 @@
 import asyncHandler from "#middleware/asyncHandler.js";
 import { ShopModel } from "#models/shop.model.js";
+import { UserModel } from "#models/user.model.js";
 
 import { IShopBody } from "#types/controllers.js";
 import { ErrorHandler } from "#utils/ErrorHandle.js";
@@ -40,19 +41,15 @@ const handleRegisterShop = asyncHandler(
 const handleApproveShop = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
+      const { id } = req.params;
       if (!req.user)
         return next(new ErrorHandler("Login to access this feature", 400));
 
-      const shop = await ShopModel.findOneAndUpdate(
-        { owner: req.user.id },
-        {
-          request_status: "APPROVED",
-        }
-      );
+      const shop = await ShopModel.findByIdAndUpdate(id, {
+        request_status: "APPROVED",
+      });
 
-      req.user.role = "SELLER";
-
-      await req.user.save();
+      await UserModel.findByIdAndUpdate(shop?.owner, { role: "SELLER" });
 
       return res.status(201).json({
         success: true,
@@ -69,11 +66,60 @@ const handleApproveShop = asyncHandler(
 const handleGetShopRequests = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const shops = await ShopModel.find({ request_status: "REQUESTED" });
+      const pipeline = [
+        {
+          $match: {
+            request_status: { $ne: "APPROVED" },
+          },
+        },
+        {
+          $lookup: {
+            from: "users",
+            localField: "owner",
+            foreignField: "_id",
+            as: "owner",
+            pipeline: [
+              {
+                $project: {
+                  _id: 0,
+                  name: 1,
+                  email: 1,
+                },
+              },
+            ],
+          },
+        },
+        {
+          $unwind: "$owner",
+        },
+        {
+          $addFields: {
+            owner: "$owner.name",
+            email: "$owner.email",
+          },
+        },
+        {
+          $project: {
+            shop_name: 1,
+            logo: 1,
+            slug: 1,
+            owner: 1,
+            email: 1,
+            contact: 1,
+            address: 1,
+            about: 1,
+            zip_code: 1,
+            request_status: 1,
+            createdAt: 1,
+          },
+        },
+      ];
+
+      const shops = await ShopModel.aggregate(pipeline);
 
       return res.status(201).json({
         success: true,
-        message: "Shop fetched successfully",
+        message: "Shop requests fetched successfully",
         data: shops,
       });
     } catch (error) {
@@ -86,15 +132,13 @@ const handleGetShopRequests = asyncHandler(
 const handleRejectShop = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
+      const { id } = req.params;
       if (!req.user)
         return next(new ErrorHandler("Login to access this feature", 400));
 
-      const shop = await ShopModel.findOneAndUpdate(
-        { owner: req.user.id },
-        {
-          request_status: "REJECTED",
-        }
-      );
+      const shop = await ShopModel.findByIdAndUpdate(id, {
+        request_status: "REJECTED",
+      });
 
       return res.status(201).json({
         success: true,
@@ -565,7 +609,9 @@ const handleGetShops = asyncHandler(
     try {
       const pipeline = [
         {
-          $match: {},
+          $match: {
+            request_status: "APPROVED"
+          },
         },
         {
           $lookup: {
@@ -634,5 +680,5 @@ export {
   handleGetShops,
   handleApproveShop,
   handleRejectShop,
-  handleGetShopRequests
+  handleGetShopRequests,
 };

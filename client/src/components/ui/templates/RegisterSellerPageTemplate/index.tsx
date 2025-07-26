@@ -53,7 +53,7 @@ const RegisterSellerPageTemplate = () => {
       return;
     }
 
-   setIsModalOpen(true);
+    setIsModalOpen(true);
     setIsLoading(false);
   };
 
@@ -120,7 +120,7 @@ const RegisterSellerPageTemplate = () => {
             />
           </div>
 
-          <div>
+          <div className="col-span-full">
             <TextareaWithLabel
               placeholder="Write about your shop"
               label="About"
@@ -131,12 +131,13 @@ const RegisterSellerPageTemplate = () => {
             />
           </div>
 
-          <div className="flex items-center gap-x-5">
+          <div className="">
             <FileInputWithPreview
               name="logo"
               error={errors?.logo}
               register={register}
               setValue={setValue}
+              label="Shop Logo"
               required
               id="logo"
               accept=".jpg,.jpeg,.png"

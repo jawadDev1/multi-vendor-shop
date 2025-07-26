@@ -60,6 +60,7 @@ const SignupPageTemplate: React.FC = () => {
    router.push("/login");
   };
 
+
   return (
     <>
       <ActivateAccountModal isOpen={isModalOpen} handleModal={handleModal} />
@@ -107,13 +108,14 @@ const SignupPageTemplate: React.FC = () => {
               />
             </div>
 
-            <div className="flex items-center gap-x-5">
+            <div className="">
               <FileInputWithPreview
                 name="profile"
                 error={errors?.profile}
                 register={register}
                 setValue={setValue}
-                required
+                required={true}
+                label="Profile"
                 id="profile"
                 accept=".jpg,.jpeg,.png"
               />

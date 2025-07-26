@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 import LinkButton from "../../buttons/LinkButton";
 
 const AuthUser = () => {
-  const { loadUser, isAuthenticated, user  } = useUserStore();
+  const { loadUser, isAuthenticated, user } = useUserStore();
   const { initializeCartState } = useCartStore();
 
   useEffect(() => {
@@ -15,6 +15,14 @@ const AuthUser = () => {
 
   if (!isAuthenticated) {
     return <div />;
+  }
+
+  if (user?.role === "ADMIN") {
+    return (
+      <LinkButton href="/hokage" className="max-w-[250px]">
+        Dashboard
+      </LinkButton>
+    );
   }
 
   return user?.role === "SELLER" ? (

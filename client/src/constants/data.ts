@@ -1,15 +1,21 @@
 import AddressIcon from "@/components/icons/AddressIcon";
-import {  CgShoppingBag } from "react-icons/cg";
+import { CgShoppingBag } from "react-icons/cg";
 import { IoIosChatboxes, IoMdPerson } from "react-icons/io";
 import { RxDashboard } from "react-icons/rx";
 import { FiPackage, FiShoppingBag } from "react-icons/fi";
-import { AiFillShop, AiOutlineFolderAdd, AiOutlineGift, AiOutlineUsergroupAdd } from "react-icons/ai";
+import {
+  AiFillShop,
+  AiOutlineFolderAdd,
+  AiOutlineGift,
+  AiOutlineUsergroupAdd,
+} from "react-icons/ai";
 import { VscNewFile } from "react-icons/vsc";
 import { CiMoneyBill, CiSettings } from "react-icons/ci";
 import { BiMessageSquareDetail } from "react-icons/bi";
 import { HiOutlineReceiptRefund, HiOutlineTag } from "react-icons/hi";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { GiStaticGuard } from "react-icons/gi";
+import { FaStore } from "react-icons/fa";
 
 interface NavItems {
   title: string;
@@ -189,8 +195,6 @@ export const SHOP_SIDEBAR_ITEMS = [
   },
 ];
 
-
-
 // Admin Sidebar Items
 export const ADMIN_SIDEBAR_ITEMS = [
   {
@@ -206,6 +210,12 @@ export const ADMIN_SIDEBAR_ITEMS = [
     Icon: AiFillShop,
   },
   {
+    title: "Shop Requests",
+    slug: "shop-requests",
+    link: "/hokage/shop-requests",
+    Icon: FaStore,
+  },
+  {
     title: "Users",
     slug: "users",
     link: "/hokage/users",
@@ -217,5 +227,4 @@ export const ADMIN_SIDEBAR_ITEMS = [
     link: "/hokage/categories",
     Icon: GiStaticGuard,
   },
-  
 ];

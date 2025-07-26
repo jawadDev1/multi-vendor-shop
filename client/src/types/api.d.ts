@@ -39,6 +39,7 @@ export interface IAPIShopDetails {
     account_id: string;
   };
 }
+
 export interface IAPIShop {
   _id?: string | null;
   slug: string;

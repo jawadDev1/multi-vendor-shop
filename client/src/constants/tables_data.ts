@@ -6,6 +6,8 @@ import TableTitle from "@/components/Tables/elements/common/TableTitle";
 import TableProductDiscount from "@/components/Tables/elements/products/ProdcutDiscount";
 import TableProductImage from "@/components/Tables/elements/products/ProductImage";
 import TableProductStock from "@/components/Tables/elements/products/ProductStock";
+import TableShopStatus from "@/components/Tables/elements/shop/ShopStatus";
+import TableShopAbout from "@/components/Tables/elements/shop/ShopStatus";
 import OrderId from "@/components/Tables/elements/userOrder/OrderId";
 import OrderProduct from "@/components/Tables/elements/userOrder/OrderProducts";
 
@@ -111,6 +113,26 @@ export const SHOPS_ELEMENTS = {
   totalProducts: TableTitle,
   rating: TableTitle,
   totalReviews: TableTitle,
+  createdAt: TableDate,
+};
+
+export const SHOP_REQUEST_FIELDS = {
+  _id: "Sr#",
+  shop_name: "Shop Name",
+  logo: "Logo",
+  owner: "Owner",
+  email: "Email",
+  request_status: "Status",
+  createdAt: "Request On",
+};
+
+export const SHOP_REQUEST_ELEMENTS = {
+  _id: TableSr,
+  shop_name: TableTitle,
+  logo: TableImage,
+  owner: TableTitle,
+  email: TableTitle,
+  request_status: TableShopStatus,
   createdAt: TableDate,
 };
 

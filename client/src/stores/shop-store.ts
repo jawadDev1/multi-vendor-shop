@@ -1,4 +1,4 @@
-import type { IAPIShopDetails, IAPIUser } from "@/types/api";
+import type { IAPIShopDetails  } from "@/types/api";
 import { getApiRequest } from "@/utils/api";
 import { create } from "zustand";
 
@@ -22,7 +22,7 @@ const defaultInitialState: StoreState = {
   error: null,
 };
 
-export const useShopStore = create<Store>((set, get) => ({
+export const useShopStore = create<Store>((set ) => ({
   ...defaultInitialState,
   updateShop: (shop) => {
     if (shop?.slug) {

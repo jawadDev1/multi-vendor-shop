@@ -39,8 +39,8 @@ router.use(isAdmin);
 
 router.get("/get-all-shops", handleGetShops);
 
-router.put("/approve-request", handleApproveShop);
-router.put("/reject-request", handleRejectShop);
+router.put("/approve-request/:id", handleApproveShop);
+router.put("/reject-request/:id", handleRejectShop);
 
 router.get("/requests", handleGetShopRequests);
 
