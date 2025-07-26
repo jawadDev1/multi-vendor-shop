@@ -26,7 +26,7 @@ const useSendMessage = ({ created_by }: UseSendMessageProps) => {
       return;
     }
 
-   router.push(`/converstion/${result?.data._id}`);
+   router.push(`/profile?${result?.data._id}`);
   };
 
   return { handleSendMessage };

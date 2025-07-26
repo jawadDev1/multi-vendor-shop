@@ -1,4 +1,5 @@
 import PageWrapper from "@/components/ui/atoms/PageWrapper";
+import SellerPageWrapper from "@/components/ui/atoms/SellerPageWrapper";
 import SectionTitle from "@/components/ui/atoms/typography/SectionTitle";
 import ProductForm from "@/components/ui/organisms/forms/ProductForm";
 import type { IAPIProduct } from "@/types/api";
@@ -24,7 +25,7 @@ const UpdateProductPageTemplate = ({
   };
 
   return (
-    <PageWrapper className="px-2 lg:px-8">
+    <SellerPageWrapper className="px-2 lg:px-8">
       <SectionTitle className="text-center">Update Product</SectionTitle>
       <ProductForm
         categories={categories}
@@ -33,7 +34,7 @@ const UpdateProductPageTemplate = ({
         slug={product.slug}
         images={product.images}
       />
-    </PageWrapper>
+    </SellerPageWrapper>
   );
 };
 

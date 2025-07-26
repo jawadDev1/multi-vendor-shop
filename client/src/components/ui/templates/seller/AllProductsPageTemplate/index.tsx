@@ -1,6 +1,6 @@
 import TableShell from "@/components/Tables";
 import TableProductActions from "@/components/Tables/elements/products/ProdcutActions";
-import PageWrapper from "@/components/ui/atoms/PageWrapper";
+import SellerPageWrapper from "@/components/ui/atoms/SellerPageWrapper";
 import { PRODUCTS_ELEMENTS, PRODUCTS_FIELDS } from "@/constants/tables_data";
 import type { IAPIProduct } from "@/types/api";
 
@@ -10,14 +10,14 @@ interface AllProductsPageTemplateProps {
 
 const AllProductsPageTemplate = ({ data }: AllProductsPageTemplateProps) => {
   return (
-    <PageWrapper>
+    <SellerPageWrapper>
       <TableShell
         fields={PRODUCTS_FIELDS}
         elements={PRODUCTS_ELEMENTS}
         data={data}
         actions={TableProductActions}
       />
-    </PageWrapper>
+    </SellerPageWrapper>
   );
 };
 

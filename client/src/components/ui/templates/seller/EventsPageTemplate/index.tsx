@@ -1,6 +1,6 @@
 import TableShell from "@/components/Tables";
 import TableEventActions from "@/components/Tables/elements/event/EventActions";
-import PageWrapper from "@/components/ui/atoms/PageWrapper";
+import SellerPageWrapper from "@/components/ui/atoms/SellerPageWrapper";
 import { Event_ELEMENTS, Event_FIELDS } from "@/constants/tables_data";
 import type { IAPISellerEvent } from "@/types/api";
 
@@ -10,14 +10,14 @@ interface EventPageTemplateProps {
 
 const SellerEventPageTemplate = ({ data }: EventPageTemplateProps) => {
   return (
-    <PageWrapper>
+    <SellerPageWrapper>
       <TableShell
         fields={Event_FIELDS}
         elements={Event_ELEMENTS}
         data={data}
         actions={TableEventActions}
       />
-    </PageWrapper>
+    </SellerPageWrapper>
   );
 };
 

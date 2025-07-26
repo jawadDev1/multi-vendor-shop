@@ -1,4 +1,5 @@
 import PageWrapper from "@/components/ui/atoms/PageWrapper";
+import SellerPageWrapper from "@/components/ui/atoms/SellerPageWrapper";
 import SectionTitle from "@/components/ui/atoms/typography/SectionTitle";
 import EventForm from "@/components/ui/organisms/forms/EventForm";
 import { convertStringToDate } from "@/utils";
@@ -16,14 +17,14 @@ const UpdateSellerEventPageTemplate = ({ products, event }: Props) => {
   };
 
   return (
-    <PageWrapper className="px-2 lg:px-8">
+    <SellerPageWrapper className="px-2 lg:px-8">
       <SectionTitle className="text-center">Update Event</SectionTitle>
       <EventForm
         products={products}
         defaultValues={defaultValues}
         id={event?._id}
       />
-    </PageWrapper>
+    </SellerPageWrapper>
   );
 };
 

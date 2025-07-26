@@ -36,7 +36,7 @@ const ProductCard = ({ product, className }: ProductCardProps) => {
     description,
     rating,
   } = product;
-  console.log("desc =====> ", description)
+  console.log("desc =====> ", description);
   const [wishlistExists, setWishlistExists] = useState<boolean>(false);
 
   // Cart Store
@@ -87,22 +87,37 @@ const ProductCard = ({ product, className }: ProductCardProps) => {
     <>
       <div
         className={cn(
-          "rounded-3xl hover:shadow-xl group transition-all duration-200 shadow-md overflow-hidden shrink-0 min-h-[422px] h-full relative",
+          "rounded-3xl bg-white hover:shadow-xl group transition-all duration-200 shadow-md overflow-hidden shrink-0 min-h-[422px] h-full max-h-fit ",
           className
         )}
       >
-        <div className="w-full px-2 h-[55%] group-hover:scale-105 transition-all duration-300">
-          <NextImage src={images[0]} className="object-contain" />
+        <div className="relative h-64 bg-white from-light-gray to-ultra-light overflow-hidden">
+          <div className="w-full h-full p-4 group-hover:scale-110 transition-transform duration-500 ease-out">
+            <NextImage
+              src={images[0]}
+              className="object-contain w-full h-full"
+              alt={title}
+            />
+          </div>
+
+          {/* Overlay gradient on hover */}
+          <div
+            className={cn(
+              "absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            )}
+          />
         </div>
 
-        <div className="absolute -bbottom-[10%] -translate-y-[10%]  z-10 left-0 flex flex-col w-full h-[50%] gap-y-3 bg-white px-3 py-4 rounded-3xl">
+        <div className=" pb-5 -translate-y-[10%]  z-10 left-0 flex flex-col w-full h-fit gap-y-3 bg-white px-3 py-4 rounded-3xl">
           <div className="flex justify-between items-center">
             <div>
               <Link href={`/shop/${shop?.slug}`}>
                 <Subtitle3 className="mb-1 ">{shop?.shop_name}</Subtitle3>
               </Link>
               <Link href={`/products/${encodeURIComponent(slug)}`}>
-                <CardTitle className="line-clamp-2 !font-medium">{title}</CardTitle>
+                <CardTitle className="line-clamp-2 !font-medium">
+                  {title}
+                </CardTitle>
               </Link>
             </div>
             <span onClick={handleToggleWishlist} className="cursor-pointer">
@@ -114,8 +129,11 @@ const ProductCard = ({ product, className }: ProductCardProps) => {
             </span>
           </div>
 
-          {rating && <GenerateRatingStar rating={rating ?? 0} />}
-
+          {rating ? (
+            <GenerateRatingStar rating={rating ?? 0} />
+          ) : (
+            <Content>{trimStringText(description)}</Content>
+          )}
 
           <div className="flex flex-col justify-between mt-auto gap-y-3 items-center">
             <div className="flex justify-start text-start w-full items-center gap-2">

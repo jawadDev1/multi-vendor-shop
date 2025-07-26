@@ -1,5 +1,6 @@
 'use client'
 import PageWrapper from "@/components/ui/atoms/PageWrapper";
+import SellerPageWrapper from "@/components/ui/atoms/SellerPageWrapper";
 import CoupounModal from "@/components/ui/organisms/Modals/CoupounModal";
 import type { IAPICoupoun } from "@/types/api";
 import { useRouter } from "next/navigation";
@@ -18,14 +19,14 @@ const UpdateCoupounPageTemplate = ({
   };
 
   return (
-    <PageWrapper className="px-2 lg:px-8">
+    <SellerPageWrapper className="px-2 lg:px-8">
       { coupoun && <CoupounModal
         isOpen={true}
         handleModal={handleModal}
         defaultValues={coupoun}
         id={coupoun?._id}
       /> }
-    </PageWrapper>
+    </SellerPageWrapper>
   );
 };
 

@@ -1,6 +1,6 @@
 import TableShell from "@/components/Tables";
 import TableCoupounActions from "@/components/Tables/elements/coupoun/CoupounActions";
-import PageWrapper from "@/components/ui/atoms/PageWrapper";
+import SellerPageWrapper from "@/components/ui/atoms/SellerPageWrapper";
 import CreateCoupoun from "@/components/ui/organisms/forms/CreateCoupoun";
 import { COUPOUN_ELEMENTS, COUPOUN_FIELDS } from "@/constants/tables_data";
 
@@ -11,7 +11,7 @@ interface Props {
 const CoupounsPageTemplate = ({ data }: Props) => {
   return (
     <>
-      <PageWrapper>
+      <SellerPageWrapper>
         <div className="mb-7 flex justify-end">
           <CreateCoupoun />
         </div>
@@ -22,7 +22,7 @@ const CoupounsPageTemplate = ({ data }: Props) => {
           data={data}
           actions={TableCoupounActions}
         />
-      </PageWrapper>
+      </SellerPageWrapper>
     </>
   );
 };
