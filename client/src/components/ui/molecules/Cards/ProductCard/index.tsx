@@ -36,7 +36,6 @@ const ProductCard = ({ product, className }: ProductCardProps) => {
     description,
     rating,
   } = product;
-  console.log("desc =====> ", description);
   const [wishlistExists, setWishlistExists] = useState<boolean>(false);
 
   // Cart Store
@@ -112,7 +111,7 @@ const ProductCard = ({ product, className }: ProductCardProps) => {
           <div className="flex justify-between items-center">
             <div>
               <Link href={`/shop/${shop?.slug}`}>
-                <Subtitle3 className="mb-1 ">{shop?.shop_name}</Subtitle3>
+                <Subtitle3 className="mb-1 text-primary">{shop?.shop_name}</Subtitle3>
               </Link>
               <Link href={`/products/${encodeURIComponent(slug)}`}>
                 <CardTitle className="line-clamp-2 !font-medium">

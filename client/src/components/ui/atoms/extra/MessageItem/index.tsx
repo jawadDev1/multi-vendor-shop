@@ -18,12 +18,13 @@ const MessageItem = ({
   type = "TEXT",
   images = [],
 }: MessageItemProps) => {
-  if(type === "IMAGE")
-  console.log("message =======>LL ", isSender,  )
+  if(type === "IMAGE") {
+    console.log("msg ======+> ", text)
+  }
   return (
     <div
       className={cn("rounded pb-1.5 px-2 text-white bg-gray-400  max-w-fit", {
-        "bg-primary-green ml-auto": isSender,
+        "bg-green-500 ml-auto": isSender,
       })}
     >
       {type === "IMAGE" && images?.length > 0 ? (

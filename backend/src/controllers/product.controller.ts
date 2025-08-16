@@ -432,19 +432,23 @@ const handleGetFilterProducts = asyncHandler(
       }
 
       if (parsedSearch) {
-        filter.$or = [
-          { title: { $regex: parsedSearch, $options: "i" } },
-        ];
+        filter.$or = [{ title: { $regex: parsedSearch, $options: "i" } }];
       }
 
-      
       if (parsedMinPrice !== undefined || parsedMaxPrice !== undefined) {
         filter.originalPrice = {};
-        if (parsedMinPrice !== undefined) filter.originalPrice.$gte = parsedMinPrice;
-        if (parsedMaxPrice !== undefined) filter.originalPrice.$lte = parsedMaxPrice;
+        if (parsedMinPrice !== undefined)
+          filter.originalPrice.$gte = parsedMinPrice;
+        if (parsedMaxPrice !== undefined)
+          filter.originalPrice.$lte = parsedMaxPrice;
       }
 
-      const products = await ProductModel.find(filter).sort({ createdAt: -1 });
+      const products = await ProductModel.find(filter)
+        .populate({
+          path: "shop",
+          select: " _id shop_name logo about createdAt slug description",
+        })
+        .sort({ createdAt: -1 });
 
       return res.status(200).json({
         success: true,

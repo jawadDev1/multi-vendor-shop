@@ -74,7 +74,7 @@ if (conversations.length === 0) {
       )}
 
       {isChatOpen && activeChat && (
-        <ChatBox chat={activeChat} handleChatClose={handleChatClose} />
+        <ChatBox className="max-h-[80vh]" chat={activeChat} handleChatClose={handleChatClose} />
       )}
     </div>
   );

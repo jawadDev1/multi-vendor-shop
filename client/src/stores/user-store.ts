@@ -36,6 +36,7 @@ export const useUserStore = create<UserStore>((set ) => ({
   },
   loadUser: async () => {
     set(() => ({ loading: true }));
+    console.log("request goen ============>")
     const result = await getApiRequest("user/getuser");
     set(() => ({ loading: false, userLoaded: true }));
 

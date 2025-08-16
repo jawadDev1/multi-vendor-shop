@@ -8,6 +8,8 @@ export const isAuthenticated = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { token } = req.cookies;
 
+    console.log("Cookies =======> ", token);
+    // const token = req.cookies["next-auth.session-token"];
     if (!token) return next(new ErrorHandler("Unauthorized", 403));
 
     const data = verifyToken(token);

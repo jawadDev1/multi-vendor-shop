@@ -33,9 +33,21 @@ const LoginPageTemplate: React.FC = () => {
 
   const onSubmit = async (data: LoginFormData) => {
     setIsLoading(true);
-    const result = await apiRequest({ endpoint: "user/login", body: data });
+    // const response = await signIn("credentials", {
+    //   redirect: false,
+    //   ...data,
+    // });
+
+    const response = await fetch("/api/auth/signin", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+    const result = await response.json();
+    console.log("result  =======> ", result);
+
     setIsLoading(false);
-    if (!result.success) {
+
+    if (!result?.success) {
       notifyError(result?.message);
       return;
     }
@@ -48,7 +60,6 @@ const LoginPageTemplate: React.FC = () => {
     notifySuccess(result?.message);
     updateUser(result?.data);
     router.push("/");
-
   };
 
   return (

@@ -25,10 +25,12 @@ export const verifyToken = (token: string): IActivationToken => {
 
     const isValid = jwt.verify(token, secret) as IActivationToken;
 
+    // console.log("Cookies =======> ", isValid);
     if (!isValid) throw new ErrorHandler("Invalid token", 400);
 
     return isValid;
   } catch (error) {
+    console.log("Cookies Error  =======> ", error);
     throw new ErrorHandler(error as string, 400);
   }
 };
@@ -45,18 +47,17 @@ export const sendToken = async (
     name: user.name,
     profile: user.profile,
   });
-  const options = {
-    expires: new Date(Date.now() + days * 24 * 60 * 60 * 1000),
-    httpOnly: true,
-  };
-const userObject = user?.toObject();
-  return res
-    .status(statusCode)
-    .cookie("token", token, options)
-    .json({
-      success: true,
-      verified: true,
-      message: "Logged in successfully",
-      data: { ...userObject, password: "" },
-    });
+  // const options = {
+  //   expires: new Date(Date.now() + days * 24 * 60 * 60 * 1000),
+  //   httpOnly: true,
+  // };
+  const userObject = user?.toObject();
+  // console.log("token ============> ", token)
+  return res.status(statusCode).json({
+    success: true,
+    verified: true,
+    message: "Logged in successfully",
+    data: { ...userObject, password: "" },
+    token,
+  });
 };

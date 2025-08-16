@@ -230,7 +230,7 @@ const ProductForm = ({
               label="Images"
               id="images"
               name="images"
-              accept=".jpg,.jpeg,.png"
+              accept=".jpg,.jpeg,.png,.webp"
               error={productImagesError}
               handleImages={handleImages}
               required

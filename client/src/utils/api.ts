@@ -30,12 +30,28 @@ export const apiRequest = async ({
   }
 };
 
+function getCookie(name) {
+  console.log("cookies ", document.cookie)
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`) ?? [];
+  if (!parts || parts.length === 0) return "";
+  if (parts.length === 2) return parts.pop().split(";").shift();
+}
+
 // Get API
-export const getApiRequest = async (endpoint: string, headers?: HeadersInit) => {
+export const getApiRequest = async (
+  endpoint: string,
+  headers?: HeadersInit
+) => {
   try {
+    const token = getCookie("token");
+    console.log("cookie =========> ", token)
     const res = await fetch(`${API_URL}/${endpoint}`, {
       credentials: "include",
-      headers
+
+      headers: {
+        Cookie: `token=${token}`,
+      },
     });
 
     return await res.json();
@@ -43,7 +59,6 @@ export const getApiRequest = async (endpoint: string, headers?: HeadersInit) => 
     return { success: false, message: error };
   }
 };
-
 
 export const deleteApiRequest = async (endpoint: string) => {
   try {

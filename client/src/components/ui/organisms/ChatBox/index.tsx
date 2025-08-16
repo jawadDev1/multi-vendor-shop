@@ -3,7 +3,7 @@ import CardTitle from "../../atoms/typography/CardTitle";
 import { AiOutlineSend } from "react-icons/ai";
 import { GrGallery } from "react-icons/gr";
 import useSocket from "@/hooks/useSocket";
-import {  useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { BiChevronLeft } from "react-icons/bi";
 import { getApiRequest } from "@/utils/api";
 import { notifyError } from "@/utils/toast";
@@ -32,6 +32,7 @@ interface ChatBoxProps {
     group_title: string;
   };
   handleChatClose: () => void;
+  className?: string;
 }
 
 interface Message {
@@ -44,7 +45,7 @@ interface Message {
   type: string;
 }
 
-const ChatBox = ({ chat, handleChatClose }: ChatBoxProps) => {
+const ChatBox = ({ chat, handleChatClose, className }: ChatBoxProps) => {
   const { user } = useUserStore();
   const { isConnected, socket } = useSocket({
     email: user?.email!,
@@ -93,7 +94,7 @@ const ChatBox = ({ chat, handleChatClose }: ChatBoxProps) => {
 
   const handlePreview = () => {
     setIsPreviewOpen(!isPreviewOpen);
-    setChatImage(null)
+    setChatImage(null);
   };
 
   const handleImageSend = async () => {
@@ -155,6 +156,7 @@ const ChatBox = ({ chat, handleChatClose }: ChatBoxProps) => {
     });
 
     socket.on("receive_message", (message) => {
+      console.log("recieved =======> ", message);
       setMessages((prev) => [...prev, message]);
       setTimeout(() => {
         if (messageBoxRef.current) {
@@ -176,13 +178,18 @@ const ChatBox = ({ chat, handleChatClose }: ChatBoxProps) => {
   if (!chatUser) return;
 
   return (
-    <div className="flex flex-col justify-between max-h-full h-full">
+    <div
+      className={cn(
+        "flex flex-col justify-between max-h-full h-full",
+        className
+      )}
+    >
       <div
         className={cn(
           "flex gap-x-2 items-center bg-transparent px-5 py-2 cursor-pointer bg-blue-50 "
         )}
       >
-          <div onClick={handleChatClose}>
+        <div onClick={handleChatClose}>
           <BiChevronLeft size={33} />
         </div>
 
@@ -226,7 +233,7 @@ const ChatBox = ({ chat, handleChatClose }: ChatBoxProps) => {
         className="relative px-3 pb-2 flex gap-x-3 items-center"
       >
         {isPreviewOpen && (
-          <div className="absolute -top-full -translate-y-[90%] left-0 w-[50vw] h-[70vh] bg-primary/90 z-20 px-5 py-3 rounded">
+          <div className="absolute -top-full -translate-y-[90%] left-0 w-[50vw] h-[70vh] bg-charcoal/90 z-20 px-5 py-3 rounded">
             <div onClick={handlePreview} className="cursor-pointer">
               <CgClose size={28} className="text-white ml-auto" />
             </div>
@@ -240,9 +247,10 @@ const ChatBox = ({ chat, handleChatClose }: ChatBoxProps) => {
               {chatImage?.file && (
                 <div className="flex justify-end  w-full ">
                   <SpinnerButton
+                    type="button"
                     isLoading={isImageLoading}
                     onClick={handleImageSend}
-                    className="max-w-52 bg-primary-green "
+                    className="max-w-52 bg-primary "
                   >
                     Send
                   </SpinnerButton>
@@ -261,13 +269,13 @@ const ChatBox = ({ chat, handleChatClose }: ChatBoxProps) => {
             onChange={handleChatImageChange}
           />
         </label>
-        <div className="border border-dim-gray rounded-md  w-full focus:border-blue-500 relative h-fit ">
+        <div className="border border-charcoal-gray/50 rounded-md  w-full focus:border-blue-500 relative h-fit ">
           <input
             value={text}
             onChange={(e) => setText(e.target.value)}
             type="text"
             className={cn(
-              `w-full mt-1 h-full placeholder:text-light-gray text-primary  px-2 py-2  rounded-md  focus:outline-0`
+              `w-full mt-1 h-full placeholder:text-light-gray text-charcoal  px-2 py-2  rounded-md  focus:outline-0`
             )}
             required
             placeholder="message"

@@ -1,8 +1,8 @@
-import type { BaseProps } from "@/types/common";
+import type { BaseButtonProps, BaseProps } from "@/types/common";
 import Spinner from "../../extra/Spinner";
 import cn from "@/utils/cn";
 
-interface Props extends BaseProps {
+interface Props extends BaseButtonProps {
   isLoading: boolean;
 }
 

@@ -375,17 +375,15 @@ const handleChangePassword = asyncHandler(
 const handleGetUsersForAdmin = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const users = await UserModel.find({ role: {$ne: "ADMIN"}})
+      const users = await UserModel.find({ role: { $ne: "ADMIN" } })
         .select("name email profile role createdAt")
         .sort({ createdAt: -1 });
 
-
-        return res.status(200).json({
-          success: true,
-          message: "users fetched successfully",
-          data: users
-        })
-
+      return res.status(200).json({
+        success: true,
+        message: "users fetched successfully",
+        data: users,
+      });
     } catch (error) {
       console.log("Error in handleGetUsersForAdmin :: ", error);
       return next(new ErrorHandler("Something went wrong", 500));
@@ -404,5 +402,5 @@ export {
   handleDeleteAddress,
   handleUpdateAddress,
   handleChangePassword,
-  handleGetUsersForAdmin
+  handleGetUsersForAdmin,
 };
