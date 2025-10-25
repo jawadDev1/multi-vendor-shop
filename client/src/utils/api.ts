@@ -30,12 +30,19 @@ export const apiRequest = async ({
   }
 };
 
-function getCookie(name) {
-  console.log("cookies ", document.cookie)
+function getCookie(name: string): string {
+  if (typeof document === "undefined") return ""; // SSR safety
+
   const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`) ?? [];
-  if (!parts || parts.length === 0) return "";
-  if (parts.length === 2) return parts.pop().split(";").shift();
+  const parts = value.split(`; ${name}=`);
+
+  if (parts.length < 2) return ""; // cookie not found
+
+  const lastPart = parts.pop();
+  if (!lastPart) return "";
+
+  const cookieValue = lastPart.split(";").shift();
+  return cookieValue ?? "";
 }
 
 // Get API
@@ -45,7 +52,7 @@ export const getApiRequest = async (
 ) => {
   try {
     const token = getCookie("token");
-    console.log("cookie =========> ", token)
+    console.log("cookie =========> ", token);
     const res = await fetch(`${API_URL}/${endpoint}`, {
       credentials: "include",
 

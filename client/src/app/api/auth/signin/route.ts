@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
     body: { email, password },
   });
 
-  let res_payload = {
+  const res_payload = {
     success: result?.success,
     message: result?.message,
     data: result?.data,
@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
     httpOnly: false,
     secure: true,
     path: "/",
-    maxAge: maxAge,
+    maxAge: days * 24 * 60 * 60 * 1000,
     sameSite: "lax",
   });
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import { unstable_noStore as noStore } from "next/cache";
 import "./globals.css";
 import { Toaster } from "sonner";
 import NextTopLoader from "nextjs-toploader";
@@ -19,6 +20,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  noStore();
   return (
     <html lang="en">
       <body className={` ${popins.className} antialiased bg-light-gray`}>
